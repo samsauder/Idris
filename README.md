@@ -1,2 +1,2 @@
-# idriseus
-An improvement engine for the modern polymath
+# IdriseusEngine
+An improvement engine for the modern polymath.
