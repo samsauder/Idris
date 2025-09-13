@@ -8,8 +8,8 @@
 - get insights to optimize your performance
 
 ## Mechanism 
-Skill development is achieved through a loop of completing *four* distinct types of objectives.
-- *foundation building* with **todos**
-- *limit pushing* with **challenges**
-- *information gathering* with **tests**
-- *creative application* with **artifacts**
+Skill development is achieved through a loop of completing four distinct types of objectives.
+- **todos** for *foundation building* 
+- **challenges** for *limits pushing*
+- **tests** for *information gathering* 
+- **artifacts** for *creative application*
