@@ -29,6 +29,37 @@ class Flow() {
     var planList: MutableList<Plan> = mutableListOf()
     var objectiveList: MutableList<Objective> = mutableListOf()
 
+    fun loadSamChess() {
+        chessStudyDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        chessStudyDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
+        // chessStudyDay.objectives.addAll(chessOpChallenges)  // add Opening challenges
+        // chessStudyDay.objectives.addAll(chessStChallenges)  // add Strategy challenges
+
+        chessRapidDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        chessRapidDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
+        chessRapidDay.objectives.addAll(chessRaChallenges)  // add Rapid challenges
+        // chessRapidDay.objectives.addAll(chessAnChallenges)  // add Analysis challenges
+
+        chessGuessDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        chessGuessDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
+        chessGuessDay.objectives.addAll(chessGuChallenges)  // add Guess challenges
+        // chessGuessDay.objectives.addAll(chessAnChallenges)  // add Analysis challenges
+
+        chess7D.subplans = mutableListOf(chessStudyDay,
+                                         chessRapidDay,
+                                         chessRapidDay,
+                                         chessStudyDay,
+                                         chessRapidDay,
+                                         chessRapidDay,
+                                         chessGuessDay)
+
+        objectiveList.addAll(chessViChallenges)
+        objectiveList.addAll(chessTaChallenges)
+        objectiveList.addAll(chessRaChallenges)
+        objectiveList.addAll(chessGuChallenges)
+
+        planList.addAll(mutableListOf(chessStudyDay, chessRapidDay, chessGuessDay, chess7D))  // load plans
+    }
 
     // Load data into planList and objectiveList
     fun loadSam() {
@@ -69,7 +100,8 @@ class Flow() {
 
     fun begin() {
         // loadSam()  // load sample data for Sam
-        loadWill() // load sample data for Will
+        // loadWill() // load sample data for Will
+        loadSamChess()  // load sample chess data for Sam
 
         println("Beginning flow...")
 
