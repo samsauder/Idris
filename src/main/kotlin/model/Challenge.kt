@@ -14,7 +14,7 @@ import java.time.LocalDate
 import kotlin.math.round
 
 
-class Challenge(id: String, skill: Skill, val description: String, minutes: Int, var odds: Double) : Objective(id, skill, minutes) {
+class Challenge(id: String, skill: Skill, val description: String, minutes: Double, var odds: Double) : Objective(id, skill, minutes) {
     override val objectiveType = ObjectiveType.CHALLENGE
 
     val et = EloTool()

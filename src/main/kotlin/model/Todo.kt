@@ -5,7 +5,7 @@ import model.auxiliary.ObjectiveType
 
 // model.Task
 
-class Todo(id: String, skill: Skill, val description: String, minutes: Int) : Objective(id, skill, minutes) {
+class Todo(id: String, skill: Skill, val description: String, minutes: Double) : Objective(id, skill, minutes) {
     override val objectiveType = ObjectiveType.TODO
 
     var done: Boolean = false

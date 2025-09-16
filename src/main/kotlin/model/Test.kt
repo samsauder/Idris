@@ -5,7 +5,7 @@ import model.auxiliary.ObjectiveType
 
 // model.Test
 
-class Test(id: String, skill: Skill, val description: String, minutes: Int) : Objective(id, skill, minutes) {
+class Test(id: String, skill: Skill, val description: String, minutes: Double) : Objective(id, skill, minutes) {
     override val objectiveType = ObjectiveType.TEST
     var passed: Boolean = false
 
