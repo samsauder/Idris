@@ -11,6 +11,11 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(libs.exposed.core)  // for Exposed
+    implementation(libs.exposed.dao)   // for Exposed
+    implementation(libs.exposed.jdbc)  // for Exposed
+    implementation(libs.h2)            // for Exposed
+    implementation("ch.qos.logback:logback-classic:1.5.13")  // Logging provider
 }
 
 tasks.test {
