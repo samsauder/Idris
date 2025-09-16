@@ -10,5 +10,14 @@ val pull = Skill("pull", null)
 val core = Skill("core", null)
 val antagonist = Skill("antagonist", null)
 
+val chess = Skill("chess", null)
+val rapid = Skill("rapid", null)
+val guess = Skill("guess", null)
+val opening = Skill("opening", null)
+val tactics = Skill("tactics", null)
+val strategy = Skill("strategy", null)
+val visualization = Skill("visualization", null)
+val analysis = Skill("analysis", null)
+
 // Will
 val karate = Skill("karate", null)
