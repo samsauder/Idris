@@ -8,6 +8,24 @@ object Descriptions {
     const val PROJECT_V8 = "Complete a never before seen V8 within 4 60-min sessions."
     const val THREE_V5_NINE_V6 = "Complete 3 V5s and 9 V6s within 1 90-min session."
 
+    const val COLOR_RECALL = "Recall the color of a random square in 3 seconds."
+    const val STATIC_RECALL_100 = "Recall 100% of a random board position after 15 seconds of memorization."
+    const val STATIC_RECALL_90 = "Recall 90%+ of a random board position after 15 seconds of memorization."
+    const val STATIC_RECALL_80 = "Recall 80%+ of a random board position after 15 seconds of memorization."
+    const val STATIC_RECALL_70 = "Recall 70%+ of a random board position after 15 seconds of memorization."
+
+    const val PUZZLE_1M_2100 = "Solve a 2100 Lichess puzzle in under 1 minute."
+    const val PUZZLE_1M_2200 = "Solve a 2200 Lichess puzzle in under 1 minute."
+    const val PUZZLE_1M_2300 = "Solve a 2300 Lichess puzzle in under 1 minute."
+    const val PUZZLE_1M_2500 = "Solve a 2500 Lichess puzzle in under 1 minute."
+
+    const val RAPID_2000 = "Beat a 2000 Rapid player on Lichess."
+    const val RAPID_2100 = "Beat a 2100 Rapid player on Lichess."
+    const val RAPID_2200 = "Beat a 2200 Rapid player on Lichess."
+    const val RAPID_2300 = "Beat a 2300 Rapid player on Lichess."
+
+    const val GUESS_8PT6 = "Achieve an 8.6+ average Guess-the-Move score on ChessTempo."
+
     // Todos
     const val PULLUP_85MAX = "Complete 5 sets of 3 reps of 85% 2RM weighted pullups (3m rests)."
     const val HANGING_KNEE_RAISES = "Complete 3 sets of 10 reps of hanging knee raises to chest."
