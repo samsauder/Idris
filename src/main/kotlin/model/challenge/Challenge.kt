@@ -1,18 +1,15 @@
-package model// model.Benchmark
+// Challenge
+// TODO: structure a Challenge as <core><constraintList>
+
+package model.challenge
 
 import constants.Styles
 import elo.EloTool
-import constants.Styles.BLUE
-import constants.Styles.BOLD
-import constants.Styles.GREEN
-import constants.Styles.ITALIC
-import constants.Styles.RED
-import constants.Styles.RESET
-import constants.Styles.YELLOW
+import model.Objective
+import model.Skill
 import model.auxiliary.ObjectiveType
 import java.time.LocalDate
 import kotlin.math.round
-
 
 class Challenge(id: String, skill: Skill, val description: String, minutes: Double, var odds: Double) : Objective(id, skill, minutes) {
     override val objectiveType = ObjectiveType.CHALLENGE
@@ -36,12 +33,12 @@ class Challenge(id: String, skill: Skill, val description: String, minutes: Doub
 
         when (value) {
             1.0 -> {
-                print("$GREEN[+]$RESET")
+                print("${Styles.GREEN}[+]${Styles.RESET}")
                 sU = 1.0
                 sB = 0.0
             }  // user won
             0.0 -> {
-                print("${RED}[-]$RESET")
+                print("${Styles.RED}[-]${Styles.RESET}")
                 sU = 0.0
                 sB = 1.0
             }  // benchmark won
@@ -61,10 +58,10 @@ class Challenge(id: String, skill: Skill, val description: String, minutes: Doub
         challengeElo = et.newRating(challengeElo, 20, sB, eB)
         odds = et.expectedOutcome(userElo, challengeElo)
 
-        println(" $BOLD${this.id}$RESET on ${LocalDate.now()}")
-        println("    ${ITALIC}bELO$RESET | $benchmarkEloOld -> $RED${getChallengeEloString()}$RESET")
-        println("    ${ITALIC}uELO$RESET | $userEloOld -> $BLUE${getUserEloString()}$RESET")
-        println("    ${ITALIC}ODDS$RESET |  ${(oddsOld * 100).toInt()}% -> $YELLOW${(odds * 100).toInt()}%$RESET")
+        println(" ${Styles.BOLD}${this.id}${Styles.RESET} on ${LocalDate.now()}")
+        println("    ${Styles.ITALIC}bELO${Styles.RESET} | $benchmarkEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
+        println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
+        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.YELLOW}${(odds * 100).toInt()}%${Styles.RESET}")
     }
 
     var color = Styles.YELLOW  // desired benchmark color

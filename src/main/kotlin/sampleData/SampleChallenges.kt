@@ -1,7 +1,7 @@
 package sampleData
 
 import constants.Descriptions
-import model.Challenge
+import model.challenge.Challenge
 
 
 // Sam
