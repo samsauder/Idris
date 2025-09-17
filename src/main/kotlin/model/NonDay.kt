@@ -4,13 +4,10 @@ import model.auxiliary.Type
 
 // model.NonDayPlan
 
-class NonDayPlan : Plan {
+class NonDay : Plan {
     constructor(id: String, type: Type, skill: Skill, subskills: List<Skill>?, startDate: String?) : super(id, type, skill, subskills, startDate)
 
     var subplans: MutableList<Plan> = mutableListOf()
-        set(value) {
-            field = value
-        }
 
     fun printNonDayPlan() {
         printPlan(0)
@@ -20,7 +17,7 @@ class NonDayPlan : Plan {
             p.printPlan(2)
 
             if (p.type == Type.day) {  // day plan components
-                val dp = p as DayPlan
+                val dp = p as Day
                 print("    ".repeat(3))
                 println("OBJECTIVES")
 
@@ -28,7 +25,7 @@ class NonDayPlan : Plan {
                     b.printShort(4)
                 }
             } else { // non day plans components
-                val ndp = p as NonDayPlan
+                val ndp = p as NonDay
                 for (p2 in ndp.subplans) {
                     p2.printPlan(2)
                 }

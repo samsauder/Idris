@@ -4,8 +4,8 @@
 import sampleData.*
 
 import model.Plan
-import model.DayPlan
-import model.NonDayPlan
+import model.Day
+import model.NonDay
 
 import model.Objective
 import model.auxiliary.ObjectiveType
@@ -147,13 +147,13 @@ class Flow() {
 
                     when (type) {
                         Type.day -> {
-                            val dayPlan = planList[input.toInt() - 1] as DayPlan
+                            val day = planList[input.toInt() - 1] as Day
                             println()
-                            dayPlan.printDayPlan()
+                            day.printDayPlan()
                         }
 
                         Type.week -> {
-                            val weekPlan = planList[input.toInt() - 1] as NonDayPlan
+                            val weekPlan = planList[input.toInt() - 1] as NonDay
                             println()
                             weekPlan.printNonDayPlan()
                         }

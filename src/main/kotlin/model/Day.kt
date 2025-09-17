@@ -4,7 +4,7 @@ import model.auxiliary.Type
 
 // model.DayPlan
 
-class DayPlan(id: String, skill: Skill, subskills: List<Skill>?, startDate: String?) : Plan(id, Type.day, skill, subskills, startDate) {
+class Day(id: String, skill: Skill, subskills: List<Skill>?, startDate: String?) : Plan(id, Type.day, skill, subskills, startDate) {
     var objectives: MutableList<Objective> = mutableListOf()
         // get() = field
         set(value) {
