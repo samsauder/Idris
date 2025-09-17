@@ -16,13 +16,13 @@ import constants.Styles.RESET
 
 import constants.MenuComponents.BAR
 import constants.MenuComponents.BOTTOM
+import constants.MenuComponents.EDITOR
 import constants.MenuComponents.EXIT
-import constants.MenuComponents.LOG_OBJECTIVE
-import constants.MenuComponents.OBJECTIVE_EDITOR
-import constants.MenuComponents.PLAN_EDITOR
+import constants.MenuComponents.OBJECTIVES
+import constants.MenuComponents.PLANS
 import constants.MenuComponents.PROMPT_SYM
+import constants.MenuComponents.STATS
 import constants.MenuComponents.TOP
-import constants.MenuComponents.VIEW_PLANS
 
 
 class Flow() {
@@ -107,10 +107,10 @@ class Flow() {
 
         while (true) {
             println(TOP)
-            println(PLAN_EDITOR)
-            println(OBJECTIVE_EDITOR)
-            println(VIEW_PLANS)
-            println(LOG_OBJECTIVE)
+            println(EDITOR)
+            println(STATS)
+            println(PLANS)
+            println(OBJECTIVES)
             println(EXIT)
             println(BOTTOM)
             print(PROMPT_SYM)
@@ -119,15 +119,15 @@ class Flow() {
 
             when (choice) {
                 "1" -> {
-                    println("\nCREATE A PLAN")
+                    println("\nEDITOR")
                 }
 
                 "2" -> {
-                    println("\nCREATE AN OBJECTIVE (BENCHMARK, PLAN, or TEST)")
+                    println("\nSTATS")
                 }
 
                 "3" -> {
-                    println("\nSELECT A PLAN")
+                    println("\nPLANS")
 
                     var i = 0
                     for (p in planList) {
@@ -166,7 +166,7 @@ class Flow() {
                 }
 
                 "4" -> {
-                    println("\nLOG AN OBJECTIVE")
+                    println("\nOBJECTIVES")
                     println("|$BAR|")
                     var i = 1
                     for (o in objectiveList) {
