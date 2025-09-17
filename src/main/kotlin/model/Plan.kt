@@ -12,7 +12,7 @@ abstract class Plan (val id: String, val type: Type, val skill: Skill, val subsk
 
     fun start() {
         println("(start)")
-        startDate = LocalDate.now() as String?
+        startDate = LocalDate.now().toString()
         active = true
 
     }
