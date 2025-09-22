@@ -1,17 +1,30 @@
 package sampleData
 
 import constants.Descriptions
+import jdk.jfr.Description
 import model.challenge.Challenge
 
 
 // Sam
 // Bouldering
+/*
 val newV7 = Challenge("newV7", limit, Descriptions.NEW_V7, 15.0, 0.25)
 val projectV7 = Challenge("projectV7", limit, Descriptions.PROJECT_V7, 15.0, 0.60)
 val projectV8 = Challenge("projectV8", limit, Descriptions.PROJECT_V7, 45.0, 0.05)
 val threeV5nineV6 = Challenge("threeV5nineV6", volume, Descriptions.THREE_V5_NINE_V6, 90.0, 0.10)
-val boulderingPlan1Challenges = mutableListOf(projectV8, newV7)
-val boulderingPlan2Challenges = mutableListOf(threeV5nineV6)
+
+val boulderingLiChallenges = mutableListOf(projectV8, newV7)
+val boulderingVoChallenges = mutableListOf(threeV5nineV6)
+*/
+
+val projectBlack = Challenge("projectBlack", limit, Descriptions.PROJECT_BLACK, 60.0, 0.05)
+val newPurple = Challenge("newPurple", limit, Descriptions.NEW_PURPLE, 60.0, 0.25)
+val new3x3Reds = Challenge("new3x3Reds", volume, Descriptions.NEW_3X3_REDS, 90.0, 0.20)
+val new4x3Reds = Challenge("new4x3Reds", volume, Descriptions.NEW_4X3_REDS, 90.0, 0.10)
+val new5x3Reds = Challenge("new5x3Reds", volume, Descriptions.NEW_5X3_REDS, 90.0, 0.05)
+val new7Reds120 = Challenge("new7Reds120", volume, Descriptions.NEW_7_REDS_120, 120.0, 0.50)
+val boulderingLiChallenges = mutableListOf(projectBlack, newPurple)
+val boulderingVoChallenges = mutableListOf(new3x3Reds, new4x3Reds, new5x3Reds, new7Reds120)
 
 // Visualization
 val colorRecall = Challenge("colorRecall", visualization, Descriptions.COLOR_RECALL, 0.10, 0.50)
@@ -22,9 +35,9 @@ val staticRecall100 = Challenge("staticRecall100", visualization, Descriptions.S
 val chessViChallenges = mutableListOf(colorRecall, staticRecall70, staticRecall80, staticRecall90, staticRecall100)
 
 // Tactics
-val puzzle1m2100 = Challenge("puzzle1m2100", tactics, Descriptions.PUZZLE_1M_2100, 1.0, 0.92)
-val puzzle1m2200 = Challenge("puzzle1m2200", tactics, Descriptions.PUZZLE_1M_2200, 1.0, 0.50)
-val puzzle1m2300 = Challenge("puzzle1m2300", tactics, Descriptions.PUZZLE_1M_2300, 1.0, 0.33)
+val puzzle1m2100 = Challenge("puzzle1m2100", tactics, Descriptions.PUZZLE_1M_2100, 1.0, 0.93)
+val puzzle1m2200 = Challenge("puzzle1m2200", tactics, Descriptions.PUZZLE_1M_2200, 1.0, 0.62)
+val puzzle1m2300 = Challenge("puzzle1m2300", tactics, Descriptions.PUZZLE_1M_2300, 1.0, 0.39)
 val puzzle1m2500 = Challenge("puzzle1m2500", tactics, Descriptions.PUZZLE_1M_2500, 1.0, 0.07)
 val chessTaChallenges = mutableListOf(puzzle1m2100, puzzle1m2200, puzzle1m2300, puzzle1m2500)
 

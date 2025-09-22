@@ -4,22 +4,63 @@
 package model.challenge
 
 import constants.Styles
+import constants.Styles.BLUE
+import constants.Styles.BOLD
+import constants.Styles.GREEN
+import constants.Styles.ITALIC
+import constants.Styles.RED
+import constants.Styles.RESET
+import constants.Styles.YELLOW
+import database.ChallengeE
+import database.ChallengesT
 import elo.EloTool
 import model.Objective
 import model.Skill
 import model.auxiliary.ObjectiveType
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.Database
+import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.math.BigDecimal
+import java.sql.Connection
 import java.time.LocalDate
 import kotlin.math.round
+import kotlin.math.roundToInt
 
-class Challenge(id: String, skill: Skill, val description: String, minutes: Double, var odds: Double) : Objective(id, skill, minutes) {
+class Challenge : Objective {
+    // Elo Determining Constructor
+    constructor(name: String,
+                skill: Skill,
+                description: String,
+                minutes: Double,
+                userOdds: Double) : super(name, skill, description, minutes) {  // userElo and challengeElo are determined
+        this.userOdds = userOdds
+        this.userElo = 1500.00
+        this.challengeElo = et.opponentRating(userElo, userOdds)
+    }
+
+    // Elo Supplying Constructor
+    constructor(name: String,
+                skill: Skill,
+                description: String,
+                minutes: Double,
+                challengeElo: Double,
+                userElo: Double,
+                userOdds: Double) : super(name, skill, description, minutes) {  // userElo and challengeElo are given
+        this.userOdds = userOdds
+        this.userElo = userElo
+        this.challengeElo = challengeElo
+    }
+
     override val objectiveType = ObjectiveType.CHALLENGE
 
     val et = EloTool()
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
+    var userOdds: Double = 0.0
 
     init {
-        challengeElo = et.opponentRating(userElo, odds)
+        challengeElo = et.opponentRating(userElo, userOdds)
     }
 
 
@@ -52,26 +93,55 @@ class Challenge(id: String, skill: Skill, val description: String, minutes: Doub
 
         val userEloOld = getUserEloString()
         val benchmarkEloOld = getChallengeEloString()
-        val oddsOld = odds
+        val oddsOld = userOdds
 
         userElo = et.newRating(userElo, 40, sU, eU)
         challengeElo = et.newRating(challengeElo, 20, sB, eB)
-        odds = et.expectedOutcome(userElo, challengeElo)
+        userOdds = et.expectedOutcome(userElo, challengeElo)
 
-        println(" ${Styles.BOLD}${this.id}${Styles.RESET} on ${LocalDate.now()}")
+        println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
         println("    ${Styles.ITALIC}bELO${Styles.RESET} | $benchmarkEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
         println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
-        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.YELLOW}${(odds * 100).toInt()}%${Styles.RESET}")
+        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
+
+        /*
+        // Connect to database and write changes
+        Database.connect("jdbc:sqlite:data/realData.db", "org.sqlite.JDBC")
+        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
+
+
+        transaction {
+            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
+                it.cElo = BigDecimal.valueOf(challengeElo)
+                it.uElo = BigDecimal.valueOf(userElo)
+                it.uOdds = BigDecimal.valueOf(userOdds)
+            }
+        }
+        */
+    }
+
+    // writes cElo, uElo and uOdds to the database at /data/<dbFile>.db
+    fun writeToDB(dbFile: String) {
+        Database.connect("jdbc:sqlite:data/${dbFile}", "org.sqlite.JDBC")
+        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
+
+        transaction {
+            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
+                it.cElo = BigDecimal.valueOf(challengeElo)
+                it.uElo = BigDecimal.valueOf(userElo)
+                it.uOdds = BigDecimal.valueOf(userOdds)
+            }
+        }
     }
 
     var color = Styles.YELLOW  // desired benchmark color
-    val coloredBenchmark = "$color[CHALLENGE ●]${Styles.RESET}"
+    val coloredChallenge = "$color[CHALLENGE ●]${Styles.RESET}"
 
 
     fun print(startLevel: Int) {
         val lvl0: String = " ".repeat(startLevel * 4)
 
-        println("$lvl0$coloredBenchmark ${Styles.RED}${getChallengeEloString()}${Styles.RESET} ${Styles.BLUE}${getUserEloString()}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $id")
+        println("$lvl0$coloredChallenge ${Styles.RED}${getChallengeEloString()}${Styles.RESET} ${Styles.BLUE}${getUserEloString()}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name $ITALIC${userOdds}$RESET")
 
         /* Detailed benchmark information
         val coloredBenchmarkIndented: String = "$lvl0$coloredBenchmark"
@@ -87,13 +157,30 @@ class Challenge(id: String, skill: Skill, val description: String, minutes: Doub
         */
     }
 
+    fun style(s: String, style: String) : String{
+        return "$style$s$RESET"
+    }
+
+    // Returns a whitespace-padded version of the given string
+    fun pad(s: String, padLen: Int) : String {
+        return s.padEnd(padLen, ' ')
+    }
+
+    // Returns an ansi-styled and whitespace-padded version of the given string
+    fun styleAndPad(s: String, style: String?, padLen: Int) : String {
+        return "$style${s.padEnd(padLen, ' ')}$RESET"
+    }
 
     override fun printShort(startLevel: Int) {
-        val lvl = " ".repeat(startLevel * 4)
-        val benchEloStr = getChallengeEloString() // benchmark elo
-        val userEloStr = getUserEloString()
+        val lvl = " ".repeat(startLevel * 4)                                          // indent level
+        val nameStr = pad(name,  18)                                          // name + style + padding
+        val skillStr = styleAndPad(skill.id, BOLD, 10)               // skill + style + padding
+        val minsStr = styleAndPad("${minutes.toInt()}m", ITALIC, 5)             // mins + style + padding
+        val chEloStr = styleAndPad(getChallengeEloString(), RED, 5)  // challenge elo + style + padding
+        val usEloStr = styleAndPad(getUserEloString(), BLUE, 5)      // user elo + style + padding
+        val usOddsStr = style("${(100*userOdds).roundToInt()}%", GREEN)        // user odds + style
 
-        println("$lvl$coloredBenchmark ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.RED}$benchEloStr ${Styles.BLUE}$userEloStr${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $id")
+        println("$lvl$coloredChallenge $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr")
     }
 
 

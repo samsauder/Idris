@@ -19,30 +19,42 @@ import constants.MenuComponents.BOTTOM
 import constants.MenuComponents.EDITOR
 import constants.MenuComponents.EXIT
 import constants.MenuComponents.OBJECTIVES
+import constants.MenuComponents.CHALLENGES_TOP
 import constants.MenuComponents.PLANS
 import constants.MenuComponents.PROMPT_SYM
 import constants.MenuComponents.STATS
-import constants.MenuComponents.TOP
+import constants.MenuComponents.TITLE_TOP
+import database.ChallengeE
+import database.ChallengesT
+import model.challenge.Challenge
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.Database
+import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.math.BigDecimal
+import java.sql.Connection
+import kotlin.system.exitProcess
 
 
 class Flow() {
+    var dbFile = ""
     var planList: MutableList<Plan> = mutableListOf()
     var objectiveList: MutableList<Objective> = mutableListOf()
 
     fun loadSamChess() {
-        chessStudyDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        ///chessStudyDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
         chessStudyDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
         // chessStudyDay.objectives.addAll(chessOpChallenges)  // add Opening challenges
         // chessStudyDay.objectives.addAll(chessStChallenges)  // add Strategy challenges
 
-        chessRapidDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        ///chessRapidDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
         chessRapidDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
-        chessRapidDay.objectives.addAll(chessRaChallenges)  // add Rapid challenges
+        ///chessRapidDay.objectives.addAll(chessRaChallenges)  // add Rapid challenges
         // chessRapidDay.objectives.addAll(chessAnChallenges)  // add Analysis challenges
 
-        chessGuessDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
+        ///chessGuessDay.objectives.addAll(chessViChallenges)  // add Visualization challenges
         chessGuessDay.objectives.addAll(chessTaChallenges)  // add Tactics challenges
-        chessGuessDay.objectives.addAll(chessGuChallenges)  // add Guess challenges
+        ///chessGuessDay.objectives.addAll(chessGuChallenges)  // add Guess challenges
         // chessGuessDay.objectives.addAll(chessAnChallenges)  // add Analysis challenges
 
         chess7D.subplans = mutableListOf(chessStudyDay,
@@ -53,41 +65,52 @@ class Flow() {
                                          chessRapidDay,
                                          chessGuessDay)
 
-        objectiveList.addAll(chessViChallenges)
+        ///objectiveList.addAll(chessViChallenges)
         objectiveList.addAll(chessTaChallenges)
-        objectiveList.addAll(chessRaChallenges)
-        objectiveList.addAll(chessGuChallenges)
+        ///objectiveList.addAll(chessRaChallenges)
+        ///objectiveList.addAll(chessGuChallenges)
 
         planList.addAll(mutableListOf(chessStudyDay, chessRapidDay, chessGuessDay, chess7D))  // load plans
     }
 
     // Load data into planList and objectiveList
-    fun loadSam() {
-        // Bouldering data
-        boulderingD1Limit.objectives.addAll(boulderingPlan1Challenges)
-        boulderingD1Limit.objectives.addAll(boulderingPlan1Tasks)
-        boulderingD1Limit.objectives.addAll(boulderingPlan1Tests)
+    fun loadSamBouldering() {
+        // Bouldering Week (Version 1a)
 
-        boulderingD3Volume.objectives.addAll(boulderingPlan2Challenges)
-        boulderingD3Volume.objectives.addAll(boulderingPlan2Tasks)
-        boulderingD3Volume.objectives.addAll(boulderingPlan2Tests)
+        // D1
+        boulderingD1Limit.objectives.add(hang20mm90max)  // todo
+        boulderingD1Limit.objectives.add(projectBlack)   // challenge
+        boulderingD1Limit.objectives.add(newPurple)      // challenge
+        boulderingD1Limit.objectives.add(pullup85max)    // todo
 
-        boulderingD6Limit.objectives.addAll(boulderingPlan1Challenges)
-        boulderingD6Limit.objectives.addAll(boulderingPlan1Tasks)
-        boulderingD6Limit.objectives.addAll(boulderingPlan1Tests)
+        // D2
+        boulderingD2Volume.objectives.add(new7Reds120)      // challenge
+        boulderingD2Volume.objectives.add(new3x3Reds)    // challenge
+        boulderingD2Volume.objectives.add(new4x3Reds)    // challenge
+        boulderingD2Volume.objectives.add(new5x3Reds)    // challenge
 
-        boulderingWeekPlan1.subplans = mutableListOf(boulderingD1Limit, boulderingD3Volume, boulderingD6Limit)
+        // D4
+        boulderingD4Limit.objectives.add(hang20mm90max)  // todo
+        boulderingD4Limit.objectives.add(projectBlack)   // challenge
+        boulderingD4Limit.objectives.add(newPurple)      // challenge
+        boulderingD4Limit.objectives.add(pullup85max)    // todo
+
+        // D5
+        boulderingD5Volume.objectives.add(new7Reds120)   // challenge
+        boulderingD5Volume.objectives.add(new3x3Reds)    // challenge
+        boulderingD5Volume.objectives.add(new4x3Reds)    // challenge
+        boulderingD5Volume.objectives.add(new5x3Reds)    // challenge
+
+
+        boulderingWeek1a.subplans = mutableListOf(boulderingD1Limit, boulderingD2Volume, boulderingD4Limit, boulderingD5Volume)
 
         // load into objectiveList
-        objectiveList.addAll(boulderingPlan1Challenges)
-        objectiveList.addAll(boulderingPlan2Challenges)
-        objectiveList.addAll(boulderingPlan1Tasks)
-        objectiveList.addAll(boulderingPlan2Tasks)
-        objectiveList.addAll(boulderingPlan1Tests)
-        objectiveList.addAll(boulderingPlan2Tests)
+        objectiveList.addAll(boulderingLiTodos)
+        objectiveList.addAll(boulderingLiChallenges)
+        objectiveList.addAll(boulderingVoChallenges)
 
         // load into planList
-        planList.addAll(mutableListOf(boulderingD1Limit, boulderingD3Volume, boulderingD6Limit, boulderingWeekPlan1))
+        planList.addAll(mutableListOf(boulderingD1Limit, boulderingD2Volume, boulderingD4Limit, boulderingD5Volume, boulderingWeek1a))
     }
 
 
@@ -97,16 +120,68 @@ class Flow() {
         objectiveList.addAll(karateTests)
     }
 
+    // Connects to the SQLite database specified by dbFile
+    fun connectToSQLiteDB() {
+        Database.connect("jdbc:sqlite:data/${dbFile}", "org.sqlite.JDBC")
+        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
+    }
+
+    // Loads all challenges from the real database into the objectiveList
+    fun loadChallengesFromRealDatabase() {
+        dbFile = "realData.db"
+        connectToSQLiteDB()
+
+        transaction {
+            for (challengeE in ChallengeE.all()) {
+                val challenge = challengeE.toChallenge()
+                objectiveList.add(challenge)  // add the Challenge to the objectiveList
+
+                // if cElo is -0000.00, calculate it from the uElo and uOdds and write it to the database
+                if (challengeE.cElo == BigDecimal("-0000.00")) {
+                    updateCElo(challengeE.name, challenge.challengeElo)
+                }
+            }
+        }
+    }
+
+
+    // Loads all challenges from the test database into the objectiveList
+    fun loadChallengesFromTestDatabase() {
+        dbFile = "testData.db"
+        connectToSQLiteDB()
+
+        transaction {
+            for (challengeE in ChallengeE.all()) {
+                val challenge = challengeE.toChallenge()
+                objectiveList.add(challenge)  // add the Challenge to the objectiveList
+
+                // if cElo is -0000.00, calculate it from the uElo and uOdds and write it to the database
+                if (challengeE.cElo == BigDecimal("-0000.00")) {
+                    updateCElo(challengeE.name, challenge.challengeElo)
+                }
+            }
+        }
+    }
+
+
+    // Finds the ChallengeE with the given name and updates its cElo to newElo
+    fun updateCElo(name: String, newElo: Double) {
+        transaction {
+            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
+                it.cElo = BigDecimal.valueOf(newElo)
+            }
+        }
+    }
+
 
     fun begin() {
-        // loadSam()  // load sample data for Sam
-        // loadWill() // load sample data for Will
-        loadSamChess()  // load sample chess data for Sam
+        // loadChallengesFromRealDatabase()
+        loadChallengesFromTestDatabase()
 
         println("Beginning flow...")
 
         while (true) {
-            println(TOP)
+            println(TITLE_TOP)
             println(EDITOR)
             println(STATS)
             println(PLANS)
@@ -166,13 +241,12 @@ class Flow() {
                 }
 
                 "4" -> {
-                    println("\nOBJECTIVES")
-                    println("|$BAR|")
+                    println(CHALLENGES_TOP)
+
                     var i = 1
                     for (o in objectiveList) {
                         print("[$i] ")
                         o.printShort(0)
-                        // println("[$i] $YELLOW${b.id}$RESET $RED${b.getBenchmarkEloString()}$RESET ${(b.odds * 100).toInt()}%")
                         i++
                     }
                     println("[b] back")
@@ -182,9 +256,9 @@ class Flow() {
                     if (input == "b") {continue}
                     val obj: Objective = objectiveList[input.toInt() - 1]
                     //val idInput: String = objectives[input.toInt() - 1].id
-                    val idInput: String = obj.id
+                    val nameInput: String = obj.name
 
-                    val ob: Objective = objectiveList.find {it.id == idInput} as Objective
+                    val ob: Objective = objectiveList.find {it.name == nameInput} as Objective
 
                     if (ob.objectiveType == ObjectiveType.CHALLENGE || ob.objectiveType == ObjectiveType.TEST) {
                         println("\nDid you succeed? y/n")
@@ -202,6 +276,8 @@ class Flow() {
                             else -> {}
                         }
                         println()
+                        val ch: Challenge = ob as Challenge
+                        ch.writeToDB(dbFile)  // write changes to the specified database file
                     } else if (ob.objectiveType == ObjectiveType.TODO) {
                         TODO("should prompt for either 'Complete' or 'Error'")
                     }

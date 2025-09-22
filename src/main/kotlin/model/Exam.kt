@@ -5,7 +5,7 @@ import model.auxiliary.ObjectiveType
 
 // model.Test
 
-class Exam(id: String, skill: Skill, val description: String, minutes: Double) : Objective(id, skill, minutes) {
+class Exam(id: String, skill: Skill, description: String, minutes: Double) : Objective(id, skill, description, minutes) {
     override val objectiveType = ObjectiveType.TEST
     var passed: Boolean = false
 
@@ -17,7 +17,7 @@ class Exam(id: String, skill: Skill, val description: String, minutes: Double) :
             false -> {""}
         }
 
-        println("$lvl${Styles.YELLOW}[TEST ▶]${Styles.RESET} ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $id $passedText")
+        println("$lvl${Styles.YELLOW}[TEST ▶]${Styles.RESET} ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name $passedText")
     }
 
     override fun log(value: Double) {

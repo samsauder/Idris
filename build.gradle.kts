@@ -16,6 +16,9 @@ dependencies {
     implementation(libs.exposed.jdbc)  // for Exposed
     implementation(libs.h2)            // for Exposed
     implementation("ch.qos.logback:logback-classic:1.5.13")  // Logging provider
+    implementation("org.xerial:sqlite-jdbc:3.49.1.0")
+    //implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.61.0")
+    //implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
 }
 
 tasks.test {
