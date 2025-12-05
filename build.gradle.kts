@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.1.20"
 }
 
-group = "com.idriseus"
+group = "com.idris"
 version = "1.0-SNAPSHOT"
 
 repositories {
