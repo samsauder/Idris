@@ -122,7 +122,7 @@ class Flow() {
 
     // Connects to the SQLite database specified by dbFile
     fun connectToSQLiteDB() {
-        Database.connect("jdbc:sqlite:data/${dbFile}", "org.sqlite.JDBC")
+        Database.connect("jdbc:sqlite:sdata/${dbFile}", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     }
 
@@ -175,8 +175,8 @@ class Flow() {
 
 
     fun begin() {
-        loadChallengesFromRealDatabase()
-        // loadChallengesFromTestDatabase()
+        // loadChallengesFromRealDatabase()
+        loadChallengesFromTestDatabase()
         // loadSamBouldering()
 
         println("Beginning flow...")

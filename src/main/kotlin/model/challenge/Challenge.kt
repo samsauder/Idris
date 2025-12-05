@@ -122,7 +122,7 @@ class Challenge : Objective {
 
     // writes cElo, uElo and uOdds to the database at /data/<dbFile>.db
     fun writeToDB(dbFile: String) {
-        Database.connect("jdbc:sqlite:data/${dbFile}", "org.sqlite.JDBC")
+        Database.connect("jdbc:sqlite:sdata/${dbFile}", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
 
         transaction {
