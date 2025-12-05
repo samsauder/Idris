@@ -5,7 +5,7 @@
 
 ## Features
 - build and execute plans of advancement across your areas of interest
-- hone your skills and apply them to produce artifacts of beauty and utility 
+- hone your skills and apply them to make artifacts of beauty and utility 
 - visualize your progress with quantitative and qualitative metrics
 - get feedback to optimize your progression
 
