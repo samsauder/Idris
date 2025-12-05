@@ -1,11 +1,11 @@
 # Idris
-*the polymaths' domain monitor*
+*the polymath domain monitor*
 
 **Idris** facilitates advancement in your desired set of skills by serving you increasingly difficult challenges, empirically measuring your progress, and giving you actionable insights from your data.
 
 ## Features
 - build and execute plans of advancement across your areas of interest
-- hone your skills and apply them to produce artifacts of beauty and utility 
+- hone your skills and apply them to make artifacts of beauty and utility 
 - visualize your progress with quantitative and qualitative metrics
 - get feedback to optimize your progression
 
