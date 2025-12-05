@@ -17,7 +17,7 @@ class Exam(id: String, skill: Skill, description: String, minutes: Double) : Obj
             false -> {""}
         }
 
-        println("$lvl${Styles.YELLOW}[TEST ▶]${Styles.RESET} ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name $passedText")
+        println("$lvl${Styles.YELLOW}[▶]${Styles.RESET} ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name $passedText")
     }
 
     override fun log(value: Double) {

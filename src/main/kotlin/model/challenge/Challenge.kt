@@ -135,7 +135,7 @@ class Challenge : Objective {
     }
 
     var color = Styles.YELLOW  // desired benchmark color
-    val coloredChallenge = "$color[CHALLENGE ●]${Styles.RESET}"
+    val coloredChallenge = "$color[●]${Styles.RESET}"
 
 
     fun print(startLevel: Int) {
