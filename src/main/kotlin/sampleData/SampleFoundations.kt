@@ -1,10 +1,10 @@
 package sampleData
 
 import constants.Descriptions
-import model.Todo
+import model.Foundation
 
-val hang20mm90max = Todo("hang20mm90max", hang, Descriptions.HANG_20MM_90MAX, 20.0)
-val pullup85max = Todo("pullup85max", pull, Descriptions.PULLUP_85MAX, 20.0)
+val hang20mm90max = Foundation("hang20mm90max", hang, Descriptions.HANG_20MM_90MAX, 20.0)
+val pullup85max = Foundation("pullup85max", pull, Descriptions.PULLUP_85MAX, 20.0)
 
 /// val hangingKneeRaises = Todo("hangingKneeRaises", core, Descriptions.HANGING_KNEE_RAISES, 10.0)
 
