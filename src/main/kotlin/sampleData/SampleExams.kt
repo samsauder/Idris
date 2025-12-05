@@ -4,10 +4,11 @@ import constants.Descriptions
 import model.Exam
 
 // Sam
-val pullup2RMplus50lb = Exam("plus50pullup2RM", pull, Descriptions.PULLUP_2RM_PLUS_50LB , 1.0)
-/// val bench1RM80lb = Exam("bench1RM80lb", antagonist, Descriptions.BENCH_1RM_80LB , 1.0)
+val pull2RM = Exam("pull2RM", pull, "" , 1.0)
+val hang20mm7sec1RM = Exam("hang20mm7sec1RM", hang, "", 1.0)
 
-val boulderingLiExams = mutableListOf(pullup2RMplus50lb)
+/// val bench1RM80lb = Exam("bench1RM80lb", antagonist, Descriptions.BENCH_1RM_80LB , 1.0)
+val boulderingLiExams = mutableListOf(pull2RM)
 // val boulderingVoExams = mutableListOf(bench1RM80lb)
 
 
