@@ -2,6 +2,10 @@ package constants
 
 object Descriptions {
     // Sam
+    // Experiments
+    const val LIVOHAPU0 = "The goal of livohapu0 is to increase the max bouldering grade of the user."
+
+
     // Bouldering
     /// const val NEW_V7 = "Complete a never before seen V7 within four 60-min session."
     /// const val PROJECT_V7 = "Complete a never before seen V7 within four 60-min sessions."
