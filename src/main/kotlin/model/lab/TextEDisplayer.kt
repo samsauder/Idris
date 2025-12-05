@@ -4,8 +4,9 @@ class TextEDisplayer : EDisplayer() {
 
     // Display a text-based dashboard to the user
     override fun dashboardOf(e: Experiment) {
+        println("\n\n========================================================================================")
         // title
-        println("\nTITLE        ${e.title}")
+        println("TITLE        ${e.title}")
 
         // description
         println("\nDESCRIPTION  ${e.description}")
@@ -27,5 +28,6 @@ class TextEDisplayer : EDisplayer() {
         for (e in e.exams) {
             e.printShort(0);
         }
+        println("========================================================================================\n")
     }
 }
