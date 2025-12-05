@@ -14,12 +14,12 @@ Proficiency in a skill is developed through a cycle of completing four complemen
 
 ### Foundations
 fundamentals for a skill (100% chance of success)  
-
+  
 ### Challenges
 difficult practical trials designed to push your limits (25%-50% chance of success)  
-
+  
 ### Exams
 controlled tests of your maximum capacity (unknown chance of success)  
-
+  
 ### Artifacts
 creative products of one of one or more of your skills  
