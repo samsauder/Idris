@@ -16,7 +16,7 @@ import model.challenge.Challenge
 // + practiceSegmentCt |  # of practice segments in the entire experiment
 // + measureSegmentCt  |  1
 // + segmentDuration   |  length of practiceSegment (days)
-// + practiceSegment   |  an array of Objective lists for each day in a segment (may have gaps)
+// + practiceSegment   |  an array of Skill lists for each day in a segment (may have gaps)
 // + measureSegment    |  an array of Exam lists for each day in the segment    (may have gaps)
 // + foundations       |  an array of all Foundations
 // + challenges        |  an array of all Challenges
@@ -32,10 +32,5 @@ class Experiment(var title: String,
                  var exams: Array<Exam>) {
 
     // private var adherence: Double
-
     // start date
-
-    // adherence: double
-
-    // FUNCTIONS
 }
