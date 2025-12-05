@@ -175,8 +175,9 @@ class Flow() {
 
 
     fun begin() {
-        // loadChallengesFromRealDatabase()
-        loadChallengesFromTestDatabase()
+        loadChallengesFromRealDatabase()
+        // loadChallengesFromTestDatabase()
+        // loadSamBouldering()
 
         println("Beginning flow...")
 
