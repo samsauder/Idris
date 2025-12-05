@@ -9,17 +9,17 @@
 - visualize your progress with quantitative and qualitative metrics
 - get feedback to optimize your progression
 
-## Mechanism 
+## **Mechanism**
 Proficiency in a skill is developed through a cycle of completing four complementary types of objectives.
 
-#### Foundations
+### **Foundations**
 fundamentals for a skill (100% chance of success)    
   
-#### Challenges
+### **Challenges**
 difficult practical trials designed to push your limits (25%-50% chance of success)    
   
-#### Exams
+### **Exams**
 controlled tests of your maximum capacity (unknown chance of success)    
   
-#### Artifacts
+### **Artifacts**
 creative products of one of one or more of your skills    
