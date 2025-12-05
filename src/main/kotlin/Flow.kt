@@ -122,13 +122,13 @@ class Flow() {
 
     // Connects to the SQLite database specified by dbFile
     fun connectToSQLiteDB() {
-        Database.connect("jdbc:sqlite:sdata/${dbFile}", "org.sqlite.JDBC")
+        Database.connect("jdbc:sqlite:${dbFile}", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     }
 
     // Loads all challenges from the real database into the objectiveList
     fun loadChallengesFromRealDatabase() {
-        dbFile = "realData.db"
+        dbFile = "sdata/realData.db"
         connectToSQLiteDB()
 
         transaction {
@@ -147,7 +147,7 @@ class Flow() {
 
     // Loads all challenges from the test database into the objectiveList
     fun loadChallengesFromTestDatabase() {
-        dbFile = "testData.db"
+        dbFile = "testdata/testData.db"
         connectToSQLiteDB()
 
         transaction {

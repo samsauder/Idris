@@ -10,7 +10,6 @@ import constants.Styles.GREEN
 import constants.Styles.ITALIC
 import constants.Styles.RED
 import constants.Styles.RESET
-import constants.Styles.YELLOW
 import database.ChallengeE
 import database.ChallengesT
 import elo.EloTool
@@ -120,9 +119,10 @@ class Challenge : Objective {
         */
     }
 
-    // writes cElo, uElo and uOdds to the database at /data/<dbFile>.db
-    fun writeToDB(dbFile: String) {
-        Database.connect("jdbc:sqlite:sdata/${dbFile}", "org.sqlite.JDBC")
+    // writes cElo, uElo and uOdds to the database at <dbFilePath>.db
+    // the dbFilePath is of the form /directory/filename.db
+    fun writeToDB(dbFilePath: String) {
+        Database.connect("jdbc:sqlite:${dbFilePath}", "org.sqlite.JDBC")
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
 
         transaction {

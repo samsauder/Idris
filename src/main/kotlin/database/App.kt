@@ -151,7 +151,7 @@ fun setupRealDatabase() {
 
 // Sets up a database populated with test data for a random user
 fun setupTestDatabase() {
-    Database.connect("jdbc:sqlite:sdata/testData.db", "org.sqlite.JDBC")
+    Database.connect("jdbc:sqlite:testdata/testData.db", "org.sqlite.JDBC")
     TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
 
     transaction {
