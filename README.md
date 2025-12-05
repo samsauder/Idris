@@ -1,17 +1,17 @@
-# IdriseusEngine
-**IdriseusEngine** is the gamified skill monitor for modern polymaths.
+# Idris
+*the polymaths' domain monitor*
 
+**Idris** facilitates advancement in your desired set of skills by serving you increasingly difficult challenges, empirically measuring your progress, and giving you actionable insights from your data.
 
 ## Features
 - build and execute plans of advancement across your areas of interest
-- hone your specific skills and apply them to produce creative artifacts 
+- hone your skills and apply them to produce artifacts of beauty and utility 
 - visualize your progress with quantitative and qualitative metrics
-- get insights to optimize your performance
-
+- get feedback to optimize your progression
 
 ## Mechanism 
-Skill development is achieved through a loop of completing four distinct types of objectives.
-- **todos** for *foundation building* 
-- **challenges** for *limits pushing*
-- **tests** for *information gathering* 
-- **artifacts** for *creative application*
+Skill is developed through a cycle of completing four complementary types of objectives.
+- **foundations** | fundamentals for a skill (100% chance of success)
+- **challenges**  | difficult practical trials designed to push your limits (25%-50% chance of success)
+- **exams** | controlled tests of your maximum capacity (unknown chance of success)
+- **artifacts** | creative products of one of one or more of your skills
