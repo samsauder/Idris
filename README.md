@@ -1,5 +1,5 @@
 # Idris
-*the polymaths' domain monitor*
+*the polymath domain monitor*
 
 **Idris** facilitates advancement in your desired set of skills by serving you increasingly difficult challenges, empirically measuring your progress, and giving you actionable insights from your data.
 
