@@ -6,6 +6,7 @@ import sampleData.*
 import model.Plan
 import model.Day
 import model.NonDay
+import model.lab.Experiment;
 
 import model.Objective
 import model.auxiliary.ObjectiveType
@@ -27,6 +28,8 @@ import constants.MenuComponents.TITLE_TOP
 import database.ChallengeE
 import database.ChallengesT
 import model.challenge.Challenge
+import model.lab.EDisplayer
+import model.lab.TextEDisplayer
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
@@ -34,7 +37,8 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.sql.Connection
 import kotlin.system.exitProcess
-
+import constants.Descriptions
+import model.Skill
 
 class Flow() {
     var dbFile = ""
@@ -173,6 +177,30 @@ class Flow() {
         }
     }
 
+    // Create a sample Experiment and return it
+    fun buildExperiment(): Experiment {
+
+        val hlp = listOf(hang, limit, pull)
+        val v = listOf(volume)
+
+        val experiment: Experiment = Experiment(
+            "livohapu0",
+            Descriptions.LIVOHAPU0,
+            arrayOf(hlp, v, null, hlp, v, null, null) as Array<List<Skill>>,
+            4,
+            arrayOf(hang20mm90max, pullup85max),
+            arrayOf(isolateV7in5, projectV7in5, isolateV8in7, projectV8in7),
+            arrayOf(pull2RM, hang20mm7sec1RM))
+        return experiment
+    }
+
+    // Entry point into the command line interface version
+    fun beginAlt() {
+        val e: Experiment = buildExperiment();
+        val displayer: EDisplayer = TextEDisplayer()
+
+        displayer.dashboardOf(e)
+    }
 
     fun begin() {
         // loadChallengesFromRealDatabase()
