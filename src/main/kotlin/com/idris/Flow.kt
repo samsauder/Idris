@@ -6,7 +6,10 @@ import com.idris.constants.MenuComponents
 import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
+import com.idris.database.FoundationE
+import com.idris.database.FoundationsT
 import com.idris.model.Day
+import com.idris.model.Foundation
 import com.idris.model.NonDay
 import com.idris.model.Objective
 import com.idris.model.Plan
@@ -17,8 +20,6 @@ import com.idris.model.challenge.Challenge
 
 import com.idris.model.lab.Experiment;
 
-import com.idris.model.lab.EDisplayer
-import com.idris.model.lab.TextEDisplayer
 import com.idris.sampleData.boulderingD1Limit
 import com.idris.sampleData.boulderingD2Volume
 import com.idris.sampleData.boulderingD4Limit
@@ -58,6 +59,9 @@ import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.sql.Connection
+import java.util.Scanner
+
+val BAR = "======================================"
 
 class Flow() {
     var dbFile = ""
@@ -230,16 +234,183 @@ class Flow() {
     // Entry point into the command line interface version
     fun beginAlt(args: Array<String>) {
         // Connect to the test database
-        dbFile = "testdata/testData.db"
+        // dbFile = "../../sdata/realData.db"
+        dbFile = "../../testdata/testData.db"
         connectToSQLiteDB()
+
         // =============================================================================
-        val e: Experiment = buildExperiment();
-        val displayer: EDisplayer = TextEDisplayer()
-        displayer.dashboardOf(e)
+        // val e: Experiment = buildExperiment();
+        // val displayer: EDisplayer = TextEDisplayer()
+        // displayer.dashboardOf(e)
         // =============================================================================
 
+        var command = ""
+        var option = ""
+        var param = ""
 
+        println()
+
+        if (args.size == 0) {
+            println("ERROR: no Idris command given")
+        }
+        if (args.size >= 1) {
+            command = args[0];
+        }
+        if (args.size >= 2) {
+            option = args[1];
+        }
+        if (args.size == 3) {
+            param = args[2];
+        }
+        if (args.size > 3){
+            println("ERROR: too many arguments given (1 to 3 expected)")
+        }
+
+        println()
+        when(command) {
+            "list" -> list(option)
+            "create" -> create(option)
+            "delete" -> delete(option, param)
+        }
+        println("\n")
     }
+
+
+    // Lists all objects in the database specified by one of the following options.
+    // -x | Experiment
+    // -f | Foundation
+    // -c | Challenge
+    // -e | Exam
+    fun list(option: String) {
+        transaction {
+            when(option) {
+                "-f" -> {  // print all Foundations
+                    println("             FOUNDATIONS")
+                    println(BAR)
+                    for (foundationEntity in FoundationE.Companion.all()) {
+                        val foundation = foundationEntity.toFoundation()
+                        foundation.printShort(0);
+                    }
+                }
+                "-c" -> {  // print all Challenges
+                    println("             CHALLENGES")
+                    println(BAR)
+                    for (challengeEntity in ChallengeE.Companion.all()) {
+                        val challenge = challengeEntity.toChallenge()
+                        challenge.printShort(0)
+                    }
+                }
+            }
+        }
+    }
+
+
+    // Delete the object in the database with the given name (assume that the name is unique)
+    // -x | Experiment
+    // -f | Foundation
+    // -c | Challenge
+    // -e | Exam
+    fun delete(option: String, name: String) {
+        transaction {
+            when(option) {
+                "-f" -> {  // delete the named Foundation
+                    val fIterator =  FoundationE.find { FoundationsT.name eq name }.iterator()
+                    val f = fIterator.next()
+                    f.delete()
+                    println("\nDeleted '${f.name}' from the Foundation table.")
+                }
+                "-c" -> {  // delete the named Challenge
+                    val cIterator =  ChallengeE.find { ChallengesT.name eq name }.iterator()
+                    val c = cIterator.next()
+                    c.delete()
+                    println("\nDeleted '${c.name}' from the Challenge table.")
+                }
+            }
+        }
+    }
+
+
+    // Adds an object to the database specified by one of the following options.
+    // -x | Experiment
+    // -f | Foundation
+    // -c | Challenge
+    // -e | Exam
+    fun create(option: String) {
+        when (option) {
+            "-f" -> createFoundation()
+            "-c" -> createChallenge()
+        }
+    }
+
+    
+    // Makes a Foundation from standard input and adds it to the database
+    fun createFoundation() {
+        val f = Foundation("",null,"",-1.0)
+        this.fillObjectiveCore(f)
+
+        val skillName = f.skill?.id
+
+        transaction {
+            FoundationE.new {
+                name = f.name
+                if (skillName != null) skill = skillName;
+                description = f.description
+
+                minutes = f.minutes.toBigDecimal()
+            }
+            println("\nAdded '${f.name}' to the Foundation table.")
+        }
+    }
+
+
+    fun createChallenge() {
+        val c = Challenge("",null,"",-1.0, 0.01)
+        this.fillObjectiveCore(c)
+        val s = Scanner(System.`in`)
+
+        print("ODDS  ")
+        c.userOdds = s.nextDouble()
+        c.generateChallengeElo()
+
+        val skillName = c.skill?.id
+
+        transaction {
+            ChallengeE.new {
+                name = c.name
+                if (skillName != null) skill = skillName;
+                description = c.description
+
+                minutes = c.minutes.toBigDecimal()
+                cElo = c.challengeElo.toBigDecimal()
+                uElo = c.userElo.toBigDecimal()
+                uOdds = c.userOdds.toBigDecimal()
+            }
+            println("\nAdded '${c.name}' to the Challenge table.")
+        }
+    }
+
+    
+    // Return a filled Objective object storing common attributes for Foundations and Challenges (stdin)
+    fun fillObjectiveCore(emptyObj: Objective): Objective {
+        val s = Scanner(System.`in`)
+        
+        print("NAME  ")
+        emptyObj.name = s.next()
+        
+        print("SKILL  ")
+        emptyObj.skill = Skill(s.next(), null)
+        
+        print("DESCRIPTION  ")
+        val z = Scanner(System.`in`)
+        emptyObj.description = z.nextLine()
+
+        print("MINUTES  ")
+        val w = Scanner(System.`in`)
+        emptyObj.minutes = z.nextDouble()
+
+        return emptyObj
+    }
+
 
     fun begin() {
         // loadChallengesFromRealDatabase()
