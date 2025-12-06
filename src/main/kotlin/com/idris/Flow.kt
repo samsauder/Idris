@@ -179,7 +179,6 @@ class Flow() {
 
     // Create a sample Experiment and return it
     fun buildExperiment(): Experiment {
-
         val hlp = listOf(hang, limit, pull)
         val v = listOf(volume)
 
@@ -194,12 +193,19 @@ class Flow() {
         return experiment
     }
 
+
     // Entry point into the command line interface version
-    fun beginAlt() {
+    fun beginAlt(args: Array<String>) {
+        // Connect to the test database
+        dbFile = "testdata/testData.db"
+        connectToSQLiteDB()
+        // =============================================================================
         val e: Experiment = buildExperiment();
         val displayer: EDisplayer = TextEDisplayer()
-
         displayer.dashboardOf(e)
+        // =============================================================================
+
+
     }
 
     fun begin() {

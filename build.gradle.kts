@@ -24,6 +24,17 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.jar.configure {
+    manifest {
+        attributes(mapOf("Main-Class" to "com.idris.MainKt"))
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 kotlin {
     jvmToolchain(21)
 }
