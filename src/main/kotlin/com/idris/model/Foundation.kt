@@ -13,7 +13,7 @@ class Foundation : Objective {
                 minutes: Double) : super(name, skill, description, minutes) {
         this.symbol = "◯"
         this.symbolHolder = "$symbolColor[$symbol]$RESET"
-        this.objectiveType = ObjectiveType.TODO
+        this.objectiveType = ObjectiveType.FOUNDATION
     }
 
 

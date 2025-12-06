@@ -499,7 +499,7 @@ class Flow() {
 
                     val ob: Objective = objectiveList.find {it.name == nameInput} as Objective
 
-                    if (ob.objectiveType == ObjectiveType.CHALLENGE || ob.objectiveType == ObjectiveType.TEST) {
+                    if (ob.objectiveType == ObjectiveType.CHALLENGE || ob.objectiveType == ObjectiveType.EXAM) {
                         println("\nDid you succeed? y/n")
                         print(": ")
 
@@ -517,7 +517,7 @@ class Flow() {
                         println()
                         val ch: Challenge = ob as Challenge
                         ch.writeToDB(dbFile)  // write changes to the specified database file
-                    } else if (ob.objectiveType == ObjectiveType.TODO) {
+                    } else if (ob.objectiveType == ObjectiveType.FOUNDATION) {
                         TODO("should prompt for either 'Complete' or 'Error'")
                     }
                 }

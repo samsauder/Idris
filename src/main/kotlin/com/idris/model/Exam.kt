@@ -1,6 +1,5 @@
 package com.idris.model
 
-import com.idris.constants.Styles
 import com.idris.constants.Styles.RESET
 import com.idris.model.auxiliary.ObjectiveType
 
@@ -16,7 +15,7 @@ class Exam : Objective {
                 minutes: Double) : super(name, skill, description, minutes) {
         this.symbol = "▶"
         this.symbolHolder = "$symbolColor[$symbol]$RESET"
-        this.objectiveType = ObjectiveType.TEST
+        this.objectiveType = ObjectiveType.EXAM
     }
 
 
