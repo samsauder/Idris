@@ -27,16 +27,38 @@ import kotlin.math.round
 import kotlin.math.roundToInt
 
 class Challenge : Objective {
-    // Elo Determining Constructor
-    constructor(name: String,
-                skill: Skill,
-                description: String,
-                minutes: Double,
-                userOdds: Double) : super(name, skill, description, minutes) {  // userElo and challengeElo are determined
+    val et = EloTool()
+    var userElo: Double = 1500.0
+    var challengeElo: Double = 0.0
+    var userOdds: Double = 0.0
+
+
+    // General Constructor (just makes the core Objective attributes)
+    constructor(
+        name: String,
+        skill: Skill?,
+        description: String,
+        minutes: Double
+    ) : super(name, skill, description, minutes) {
+        this.symbol = "●"
+        this.symbolHolder = "$symbolColor[$symbol]$RESET"
+        this.objectiveType = ObjectiveType.CHALLENGE
+    }
+
+
+    // Elo Determining Constructor (given user odds)
+    constructor(
+        name: String,
+        skill: Skill?,
+        description: String,
+        minutes: Double,
+        userOdds: Double
+    ) : this(name, skill, description, minutes) {  // userElo and challengeElo are determined
         this.userOdds = userOdds
         this.userElo = 1500.00
         this.challengeElo = et.opponentRating(userElo, userOdds)
     }
+
 
     // Elo Supplying Constructor
     constructor(name: String,
@@ -45,21 +67,31 @@ class Challenge : Objective {
                 minutes: Double,
                 challengeElo: Double,
                 userElo: Double,
-                userOdds: Double) : super(name, skill, description, minutes) {  // userElo and challengeElo are given
-        this.userOdds = userOdds
-        this.userElo = userElo
+                userOdds: Double) : this(name, skill, description, minutes) {  // userElo and challengeElo are given
         this.challengeElo = challengeElo
+        this.userElo = userElo
+        this.userOdds = userOdds
     }
 
-    override val objectiveType = ObjectiveType.CHALLENGE
-
-    val et = EloTool()
-    var userElo: Double = 1500.0
-    var challengeElo: Double = 0.0
-    var userOdds: Double = 0.0
 
     init {
+        // challengeElo = et.opponentRating(userElo, userOdds)
+        generateChallengeElo()
+    }
+
+
+    fun generateChallengeElo() {
         challengeElo = et.opponentRating(userElo, userOdds)
+    }
+
+
+    override fun printShort(startLevel: Int) {
+        val lvl = " ".repeat(startLevel * 4)                                          // indent level
+        val chEloStr = styleAndPad(getChallengeEloString(), Styles.RED, 5)  // challenge elo + style + padding
+        val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
+        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.GREEN, 5)        // user odds + style
+
+        println("$lvl$symbolHolder $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
     }
 
 
@@ -102,22 +134,8 @@ class Challenge : Objective {
         println("    ${ITALIC}bELO${RESET} | $benchmarkEloOld -> ${RED}${getChallengeEloString()}${RESET}")
         println("    ${ITALIC}uELO${RESET} | $userEloOld -> ${BLUE}${getUserEloString()}${RESET}")
         println("    ${ITALIC}ODDS${RESET} |  ${(oddsOld * 100).toInt()}% -> ${GREEN}${(userOdds * 100).toInt()}%${RESET}")
-
-        /*
-        // Connect to database and write changes
-        Database.connect("jdbc:sqlite:data/realData.db", "org.sqlite.JDBC")
-        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-
-
-        transaction {
-            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
-                it.cElo = BigDecimal.valueOf(challengeElo)
-                it.uElo = BigDecimal.valueOf(userElo)
-                it.uOdds = BigDecimal.valueOf(userOdds)
-            }
-        }
-        */
     }
+
 
     // writes cElo, uElo and uOdds to the database at <dbFilePath>.db
     // the dbFilePath is of the form /directory/filename.db
@@ -134,58 +152,9 @@ class Challenge : Objective {
         }
     }
 
-    var color = Styles.YELLOW  // desired benchmark color
-    val coloredChallenge = "$color[●]${RESET}"
-
-
-    fun print(startLevel: Int) {
-        val lvl0: String = " ".repeat(startLevel * 4)
-
-        println("$lvl0$coloredChallenge ${RED}${getChallengeEloString()}${RESET} ${BLUE}${getUserEloString()}${RESET} ${GREEN}${minutes}m${RESET} $name ${Styles.ITALIC}${userOdds}${Styles.RESET}")
-
-        /* Detailed benchmark information
-        val coloredBenchmarkIndented: String = "$lvl0$coloredBenchmark"
-
-        println(coloredBenchmarkIndented)
-        println("${lvl1}ID             ${ITALIC}$id${RESET}")
-        println("${lvl1}DESCRIPTION    $description")
-        println("${lvl1}SKILL          ${skill.id}")
-        println("${lvl1}MINUTES        $GREEN$minutes$RESET")
-        println("${lvl1}BENCHMARK ELO  ${RED}${getBenchmarkEloString()}${RESET}")
-        println("${lvl1}USER ELO       ${BLUE}${getUserEloString()}${RESET}")
-        println("${lvl1}ODDS           ${(odds*100).toInt()}%")
-        */
-    }
-
-    fun style(s: String, style: String) : String{
-        return "$style$s${Styles.RESET}"
-    }
-
-    // Returns a whitespace-padded version of the given string
-    fun pad(s: String, padLen: Int) : String {
-        return s.padEnd(padLen, ' ')
-    }
-
-    // Returns an ansi-styled and whitespace-padded version of the given string
-    fun styleAndPad(s: String, style: String?, padLen: Int) : String {
-        return "$style${s.padEnd(padLen, ' ')}${Styles.RESET}"
-    }
-
-    override fun printShort(startLevel: Int) {
-        val lvl = " ".repeat(startLevel * 4)                                          // indent level
-        val nameStr = pad(name,  18)                                          // name + style + padding
-        val skillStr = styleAndPad(skill.id, Styles.BOLD, 10)               // skill + style + padding
-        val minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)             // mins + style + padding
-        val chEloStr = styleAndPad(getChallengeEloString(), Styles.RED, 5)  // challenge elo + style + padding
-        val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
-        val usOddsStr = style("${(100*userOdds).roundToInt()}%", Styles.GREEN)        // user odds + style
-
-        println("$lvl$coloredChallenge $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr")
-    }
-
 
     // Returns a string of the elo (turns -Infinity to 0000.0)
-    fun getChallengeEloString() : String {
+    private fun getChallengeEloString() : String {
         var benchElo: String = round(challengeElo).toInt().toString()
         if (challengeElo == Double.NEGATIVE_INFINITY) {
             benchElo = "0000"
@@ -194,7 +163,8 @@ class Challenge : Objective {
     }
 
 
-    fun getUserEloString() : String {
+    private fun getUserEloString() : String {
         return round(userElo).toInt().toString()
     }
+
 }

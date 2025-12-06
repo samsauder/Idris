@@ -1,29 +1,34 @@
 package com.idris.model
-
-import com.idris.constants.Styles
+import com.idris.constants.Styles.RESET
 import com.idris.model.auxiliary.ObjectiveType
 
-// model.Task
 
-class Foundation(id: String, skill: Skill, description: String, minutes: Double) : Objective(id, skill, description, minutes) {
-    override val objectiveType = ObjectiveType.TODO
-
+class Foundation : Objective {
     var done: Boolean = false
 
-    override fun printShort(startLevel: Int) {
-        val lvl = " ".repeat(startLevel * 4)
 
-        println("$lvl${Styles.YELLOW}[◯]${Styles.RESET} ${Styles.BOLD}${skill.id}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name")
+    constructor(name: String,
+                skill: Skill?,
+                description: String,
+                minutes: Double) : super(name, skill, description, minutes) {
+        this.symbol = "◯"
+        this.symbolHolder = "$symbolColor[$symbol]$RESET"
+        this.objectiveType = ObjectiveType.TODO
     }
+
+
+    override fun printShort(startLevel: Int) {
+        val lvl = " ".repeat(startLevel * 4)                                          // indent level
+        println("$lvl$symbolHolder $nameStr $skillStr $minsStr $descriptionStr")
+    }
+
 
     // 1.0 = done, -1 = error
     override fun log(value: Double) {
         when(value) {
-            1.0 -> {
-                done = true
-            }
-
+            1.0 -> { done = true }
             else -> {}
         }
     }
+
 }
