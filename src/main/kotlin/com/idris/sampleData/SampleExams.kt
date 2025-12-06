@@ -1,10 +1,10 @@
-package sampleData
+package com.idris.sampleData
 
-import constants.Descriptions
-import model.Exam
+import com.idris.constants.Descriptions
+import com.idris.model.Exam
 
 // Sam
-val pull2RM = Exam("pull2RM", pull, "" , 1.0)
+val pull2RM = Exam("pull2RM", pull, "", 1.0)
 val hang20mm7sec1RM = Exam("hang20mm7sec1RM", hang, "", 1.0)
 
 /// val bench1RM80lb = Exam("bench1RM80lb", antagonist, Descriptions.BENCH_1RM_80LB , 1.0)

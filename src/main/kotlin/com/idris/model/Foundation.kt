@@ -1,7 +1,7 @@
-package model
+package com.idris.model
 
-import constants.Styles
-import model.auxiliary.ObjectiveType
+import com.idris.constants.Styles
+import com.idris.model.auxiliary.ObjectiveType
 
 // model.Task
 

@@ -1,19 +1,11 @@
-package database
+package com.idris.database
 
-import constants.Descriptions
-import database.ChAttemptE.Companion.findById
-import model.challenge.Challenge
-import org.jetbrains.exposed.v1.core.StdOutSqlLogger
-import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.core.or
+import com.idris.constants.Descriptions
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.deleteAll
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import sampleData.puzzle1m2100
-import sampleData.rapid
-import sampleData.tactics
 import java.math.BigDecimal
 import java.sql.Connection
 

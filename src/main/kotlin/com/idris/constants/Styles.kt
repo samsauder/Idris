@@ -1,4 +1,4 @@
-package constants
+package com.idris.constants
 
 object Styles {
     const val GREEN: String = "\u001b[32m"

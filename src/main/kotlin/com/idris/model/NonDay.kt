@@ -1,6 +1,6 @@
-package model
+package com.idris.model
 
-import model.auxiliary.Type
+import com.idris.model.auxiliary.Type
 
 // model.NonDayPlan
 

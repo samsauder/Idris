@@ -1,6 +1,6 @@
-package sampleData
+package com.idris.sampleData
 
-import model.Day
+import com.idris.model.Day
 
 /*
 val boulderingD1Limit = Day("boulderingD1Limit", bouldering, mutableListOf(hang, limit, pull), "2025-09-01")

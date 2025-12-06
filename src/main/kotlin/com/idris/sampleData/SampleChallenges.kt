@@ -1,8 +1,7 @@
-package sampleData
+package com.idris.sampleData
 
-import constants.Descriptions
-import jdk.jfr.Description
-import model.challenge.Challenge
+import com.idris.constants.Descriptions
+import com.idris.model.challenge.Challenge
 
 
 // Sam
@@ -65,5 +64,5 @@ val chessGuChallenges = mutableListOf(guess8pt6)
 val fiveForty = Challenge("fiveForty", karate, Descriptions.FIVE_FORTY, 1.0, 0.80)
 val reverseCrescent = Challenge("reverseCrescent", karate, Descriptions.REVERSE_CRESCENT, 1.0, 0.80)
 val tornado = Challenge("tornado", karate, Descriptions.TORNADO, 1.0, 0.60)
-val spinningTornado = Challenge("spinningTornado",karate, Descriptions.SPINNING_TORNADO, 1.0, 0.30)
+val spinningTornado = Challenge("spinningTornado", karate, Descriptions.SPINNING_TORNADO, 1.0, 0.30)
 val karateChallenges = mutableListOf(fiveForty, reverseCrescent, tornado, spinningTornado)

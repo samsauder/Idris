@@ -1,10 +1,8 @@
-package model.lab
-import com.sun.jdi.IntegerType
-import model.Exam
-import model.Foundation
-import model.Objective
-import model.Skill
-import model.challenge.Challenge
+package com.idris.model.lab
+import com.idris.model.Exam
+import com.idris.model.Foundation
+import com.idris.model.Skill
+import com.idris.model.challenge.Challenge
 
 
 // Sam Sauder

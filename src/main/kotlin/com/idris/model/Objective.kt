@@ -1,9 +1,8 @@
-package model
+package com.idris.model
 
-import model.auxiliary.ObjectiveType
-import java.math.BigDecimal
+import com.idris.model.auxiliary.ObjectiveType
 
-// model.Objective
+// com.idris.Objective
 
 abstract class Objective (val name: String, val skill: Skill, val description: String, val minutes: Double)  {
     abstract val objectiveType: ObjectiveType

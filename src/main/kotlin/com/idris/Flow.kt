@@ -1,44 +1,63 @@
-// Flow
+package com.idris// com.idris.Flow
 // Description: for loading data and controlling the text interface
 
-import sampleData.*
+import com.idris.constants.Descriptions
+import com.idris.constants.MenuComponents
+import com.idris.constants.Styles
+import com.idris.database.ChallengeE
+import com.idris.database.ChallengesT
+import com.idris.model.Day
+import com.idris.model.NonDay
+import com.idris.model.Objective
+import com.idris.model.Plan
+import com.idris.model.Skill
+import com.idris.model.auxiliary.ObjectiveType
+import com.idris.model.auxiliary.Type
+import com.idris.model.challenge.Challenge
 
-import model.Plan
-import model.Day
-import model.NonDay
-import model.lab.Experiment;
+import com.idris.model.lab.Experiment;
 
-import model.Objective
-import model.auxiliary.ObjectiveType
-import model.auxiliary.Type
-
-import constants.Styles.GREEN
-import constants.Styles.RESET
-
-import constants.MenuComponents.BAR
-import constants.MenuComponents.BOTTOM
-import constants.MenuComponents.EDITOR
-import constants.MenuComponents.EXIT
-import constants.MenuComponents.OBJECTIVES
-import constants.MenuComponents.CHALLENGES_TOP
-import constants.MenuComponents.PLANS
-import constants.MenuComponents.PROMPT_SYM
-import constants.MenuComponents.STATS
-import constants.MenuComponents.TITLE_TOP
-import database.ChallengeE
-import database.ChallengesT
-import model.challenge.Challenge
-import model.lab.EDisplayer
-import model.lab.TextEDisplayer
+import com.idris.model.lab.EDisplayer
+import com.idris.model.lab.TextEDisplayer
+import com.idris.sampleData.boulderingD1Limit
+import com.idris.sampleData.boulderingD2Volume
+import com.idris.sampleData.boulderingD4Limit
+import com.idris.sampleData.boulderingD5Volume
+import com.idris.sampleData.boulderingLiChallenges
+import com.idris.sampleData.boulderingLiTodos
+import com.idris.sampleData.boulderingVoChallenges
+import com.idris.sampleData.boulderingWeek1a
+import com.idris.sampleData.chess7D
+import com.idris.sampleData.chessGuessDay
+import com.idris.sampleData.chessRapidDay
+import com.idris.sampleData.chessStudyDay
+import com.idris.sampleData.chessTaChallenges
+import com.idris.sampleData.hang
+import com.idris.sampleData.hang20mm7sec1RM
+import com.idris.sampleData.hang20mm90max
+import com.idris.sampleData.isolateV7in5
+import com.idris.sampleData.isolateV8in7
+import com.idris.sampleData.karateChallenges
+import com.idris.sampleData.karateTests
+import com.idris.sampleData.limit
+import com.idris.sampleData.new3x3Reds
+import com.idris.sampleData.new4x3Reds
+import com.idris.sampleData.new5x3Reds
+import com.idris.sampleData.new7Reds120
+import com.idris.sampleData.newPurple
+import com.idris.sampleData.projectBlack
+import com.idris.sampleData.projectV7in5
+import com.idris.sampleData.projectV8in7
+import com.idris.sampleData.pull
+import com.idris.sampleData.pull2RM
+import com.idris.sampleData.pullup85max
+import com.idris.sampleData.volume
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.sql.Connection
-import kotlin.system.exitProcess
-import constants.Descriptions
-import model.Skill
 
 class Flow() {
     var dbFile = ""
@@ -61,13 +80,15 @@ class Flow() {
         ///chessGuessDay.objectives.addAll(chessGuChallenges)  // add Guess challenges
         // chessGuessDay.objectives.addAll(chessAnChallenges)  // add Analysis challenges
 
-        chess7D.subplans = mutableListOf(chessStudyDay,
-                                         chessRapidDay,
-                                         chessRapidDay,
-                                         chessStudyDay,
-                                         chessRapidDay,
-                                         chessRapidDay,
-                                         chessGuessDay)
+        chess7D.subplans = mutableListOf(
+            chessStudyDay,
+            chessRapidDay,
+            chessRapidDay,
+            chessStudyDay,
+            chessRapidDay,
+            chessRapidDay,
+            chessGuessDay
+        )
 
         ///objectiveList.addAll(chessViChallenges)
         objectiveList.addAll(chessTaChallenges)
@@ -106,7 +127,12 @@ class Flow() {
         boulderingD5Volume.objectives.add(new5x3Reds)    // challenge
 
 
-        boulderingWeek1a.subplans = mutableListOf(boulderingD1Limit, boulderingD2Volume, boulderingD4Limit, boulderingD5Volume)
+        boulderingWeek1a.subplans = mutableListOf(
+            boulderingD1Limit,
+            boulderingD2Volume,
+            boulderingD4Limit,
+            boulderingD5Volume
+        )
 
         // load into objectiveList
         objectiveList.addAll(boulderingLiTodos)
@@ -114,7 +140,13 @@ class Flow() {
         objectiveList.addAll(boulderingVoChallenges)
 
         // load into planList
-        planList.addAll(mutableListOf(boulderingD1Limit, boulderingD2Volume, boulderingD4Limit, boulderingD5Volume, boulderingWeek1a))
+        planList.addAll(mutableListOf(
+            boulderingD1Limit,
+            boulderingD2Volume,
+            boulderingD4Limit,
+            boulderingD5Volume,
+            boulderingWeek1a
+        ))
     }
 
 
@@ -136,7 +168,7 @@ class Flow() {
         connectToSQLiteDB()
 
         transaction {
-            for (challengeE in ChallengeE.all()) {
+            for (challengeE in ChallengeE.Companion.all()) {
                 val challenge = challengeE.toChallenge()
                 objectiveList.add(challenge)  // add the Challenge to the objectiveList
 
@@ -155,7 +187,7 @@ class Flow() {
         connectToSQLiteDB()
 
         transaction {
-            for (challengeE in ChallengeE.all()) {
+            for (challengeE in ChallengeE.Companion.all()) {
                 val challenge = challengeE.toChallenge()
                 objectiveList.add(challenge)  // add the Challenge to the objectiveList
 
@@ -171,7 +203,7 @@ class Flow() {
     // Finds the ChallengeE with the given name and updates its cElo to newElo
     fun updateCElo(name: String, newElo: Double) {
         transaction {
-            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
+            val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
                 it.cElo = BigDecimal.valueOf(newElo)
             }
         }
@@ -189,7 +221,8 @@ class Flow() {
             4,
             arrayOf(hang20mm90max, pullup85max),
             arrayOf(isolateV7in5, projectV7in5, isolateV8in7, projectV8in7),
-            arrayOf(pull2RM, hang20mm7sec1RM))
+            arrayOf(pull2RM, hang20mm7sec1RM)
+        )
         return experiment
     }
 
@@ -216,14 +249,14 @@ class Flow() {
         println("Beginning flow...")
 
         while (true) {
-            println(TITLE_TOP)
-            println(EDITOR)
-            println(STATS)
-            println(PLANS)
-            println(OBJECTIVES)
-            println(EXIT)
-            println(BOTTOM)
-            print(PROMPT_SYM)
+            println(MenuComponents.TITLE_TOP)
+            println(MenuComponents.EDITOR)
+            println(MenuComponents.STATS)
+            println(MenuComponents.PLANS)
+            println(MenuComponents.OBJECTIVES)
+            println(MenuComponents.EXIT)
+            println(MenuComponents.BOTTOM)
+            print(MenuComponents.PROMPT_SYM)
 
             val choice = readln()
 
@@ -241,12 +274,12 @@ class Flow() {
 
                     var i = 0
                     for (p in planList) {
-                        println("[${i+1}] $GREEN${p.id}$RESET")
+                        println("[${i+1}] ${Styles.GREEN}${p.id}${Styles.RESET}")
                         i++
                     }
                     println("[b] back")
 
-                    println("|$BAR|")
+                    println("|${MenuComponents.BAR}|")
                     // println("==============================================")
                     print(": ")
                     val input: String = readln()
@@ -268,15 +301,15 @@ class Flow() {
                             weekPlan.printNonDayPlan()
                         }
 
-                        // model.auxiliary.Type.month -> {}
-                        // model.auxiliary.Type.year -> {}
+                        // com.idris.Type.month -> {}
+                        // com.idris.Type.year -> {}
 
                         else -> {}
                     }
                 }
 
                 "4" -> {
-                    println(CHALLENGES_TOP)
+                    println(MenuComponents.CHALLENGES_TOP)
 
                     var i = 1
                     for (o in objectiveList) {

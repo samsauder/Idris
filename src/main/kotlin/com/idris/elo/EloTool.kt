@@ -1,6 +1,8 @@
-package elo
+package com.idris.elo
 
+import kotlin.math.ln
 import kotlin.math.pow
+import kotlin.math.round
 
 // Implementing Elo rating
 
@@ -48,8 +50,8 @@ class EloTool() {
        rA: rating for player A
        eA: expected outcome for player A */
     fun opponentRating(rA: Double, eA: Double): Double{
-        val numer = kotlin.math.ln((1/eA) - 1)
-        val denom = kotlin.math.ln(10.0)
+        val numer = ln((1/eA) - 1)
+        val denom = ln(10.0)
         return 400 * (numer / denom) + rA
     }
 
@@ -65,6 +67,6 @@ class EloTool() {
 
     // Round decimal to the nearest integer
     fun roundToInt(value: Double): Int {
-        return kotlin.math.round(value).toInt()
+        return round(value).toInt()
     }
 }

@@ -1,4 +1,4 @@
-package model.lab
+package com.idris.model.lab
 
 class TextEDisplayer : EDisplayer() {
 

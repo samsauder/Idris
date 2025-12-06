@@ -1,7 +1,7 @@
 // Constraint
 // Description: a restriction on a Challenge
 
-package model.challenge
+package com.idris.model.challenge
 
 abstract class Constraint () {
 

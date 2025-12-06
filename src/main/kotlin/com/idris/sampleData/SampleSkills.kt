@@ -1,5 +1,5 @@
-package sampleData
-import model.Skill
+package com.idris.sampleData
+import com.idris.model.Skill
 
 // Sam
 val bouldering = Skill("bouldering", null)

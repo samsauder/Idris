@@ -1,4 +1,4 @@
-package constants
+package com.idris.constants
 
 object Descriptions {
     // Sam

@@ -1,21 +1,21 @@
 // Challenge
 // TODO: structure a Challenge as <core><constraintList>
 
-package model.challenge
+package com.idris.model.challenge
 
-import constants.Styles
-import constants.Styles.BLUE
-import constants.Styles.BOLD
-import constants.Styles.GREEN
-import constants.Styles.ITALIC
-import constants.Styles.RED
-import constants.Styles.RESET
-import database.ChallengeE
-import database.ChallengesT
-import elo.EloTool
-import model.Objective
-import model.Skill
-import model.auxiliary.ObjectiveType
+import com.idris.constants.Styles
+import com.idris.database.ChallengeE
+import com.idris.database.ChallengesT
+import com.idris.elo.EloTool
+import com.idris.model.Objective
+import com.idris.model.Skill
+import com.idris.model.auxiliary.ObjectiveType
+import com.idris.constants.Styles.BLUE
+import com.idris.constants.Styles.BOLD
+import com.idris.constants.Styles.GREEN
+import com.idris.constants.Styles.ITALIC
+import com.idris.constants.Styles.RED
+import com.idris.constants.Styles.RESET
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
@@ -73,12 +73,12 @@ class Challenge : Objective {
 
         when (value) {
             1.0 -> {
-                print("${Styles.GREEN}[+]${Styles.RESET}")
+                print("${GREEN}[+]${RESET}")
                 sU = 1.0
                 sB = 0.0
             }  // user won
             0.0 -> {
-                print("${Styles.RED}[-]${Styles.RESET}")
+                print("${RED}[-]${RESET}")
                 sU = 0.0
                 sB = 1.0
             }  // benchmark won
@@ -98,10 +98,10 @@ class Challenge : Objective {
         challengeElo = et.newRating(challengeElo, 20, sB, eB)
         userOdds = et.expectedOutcome(userElo, challengeElo)
 
-        println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
-        println("    ${Styles.ITALIC}bELO${Styles.RESET} | $benchmarkEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
-        println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
-        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
+        println(" ${BOLD}${name}${RESET} on ${LocalDate.now()}")
+        println("    ${ITALIC}bELO${RESET} | $benchmarkEloOld -> ${RED}${getChallengeEloString()}${RESET}")
+        println("    ${ITALIC}uELO${RESET} | $userEloOld -> ${BLUE}${getUserEloString()}${RESET}")
+        println("    ${ITALIC}ODDS${RESET} |  ${(oddsOld * 100).toInt()}% -> ${GREEN}${(userOdds * 100).toInt()}%${RESET}")
 
         /*
         // Connect to database and write changes
@@ -126,7 +126,7 @@ class Challenge : Objective {
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
 
         transaction {
-            val challengeE = ChallengeE.findSingleByAndUpdate(ChallengesT.name eq name) {
+            val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
                 it.cElo = BigDecimal.valueOf(challengeElo)
                 it.uElo = BigDecimal.valueOf(userElo)
                 it.uOdds = BigDecimal.valueOf(userOdds)
@@ -135,13 +135,13 @@ class Challenge : Objective {
     }
 
     var color = Styles.YELLOW  // desired benchmark color
-    val coloredChallenge = "$color[●]${Styles.RESET}"
+    val coloredChallenge = "$color[●]${RESET}"
 
 
     fun print(startLevel: Int) {
         val lvl0: String = " ".repeat(startLevel * 4)
 
-        println("$lvl0$coloredChallenge ${Styles.RED}${getChallengeEloString()}${Styles.RESET} ${Styles.BLUE}${getUserEloString()}${Styles.RESET} ${Styles.GREEN}${minutes}m${Styles.RESET} $name $ITALIC${userOdds}$RESET")
+        println("$lvl0$coloredChallenge ${RED}${getChallengeEloString()}${RESET} ${BLUE}${getUserEloString()}${RESET} ${GREEN}${minutes}m${RESET} $name ${Styles.ITALIC}${userOdds}${Styles.RESET}")
 
         /* Detailed benchmark information
         val coloredBenchmarkIndented: String = "$lvl0$coloredBenchmark"
@@ -158,7 +158,7 @@ class Challenge : Objective {
     }
 
     fun style(s: String, style: String) : String{
-        return "$style$s$RESET"
+        return "$style$s${Styles.RESET}"
     }
 
     // Returns a whitespace-padded version of the given string
@@ -168,17 +168,17 @@ class Challenge : Objective {
 
     // Returns an ansi-styled and whitespace-padded version of the given string
     fun styleAndPad(s: String, style: String?, padLen: Int) : String {
-        return "$style${s.padEnd(padLen, ' ')}$RESET"
+        return "$style${s.padEnd(padLen, ' ')}${Styles.RESET}"
     }
 
     override fun printShort(startLevel: Int) {
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
         val nameStr = pad(name,  18)                                          // name + style + padding
-        val skillStr = styleAndPad(skill.id, BOLD, 10)               // skill + style + padding
-        val minsStr = styleAndPad("${minutes.toInt()}m", ITALIC, 5)             // mins + style + padding
-        val chEloStr = styleAndPad(getChallengeEloString(), RED, 5)  // challenge elo + style + padding
-        val usEloStr = styleAndPad(getUserEloString(), BLUE, 5)      // user elo + style + padding
-        val usOddsStr = style("${(100*userOdds).roundToInt()}%", GREEN)        // user odds + style
+        val skillStr = styleAndPad(skill.id, Styles.BOLD, 10)               // skill + style + padding
+        val minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)             // mins + style + padding
+        val chEloStr = styleAndPad(getChallengeEloString(), Styles.RED, 5)  // challenge elo + style + padding
+        val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
+        val usOddsStr = style("${(100*userOdds).roundToInt()}%", Styles.GREEN)        // user odds + style
 
         println("$lvl$coloredChallenge $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr")
     }

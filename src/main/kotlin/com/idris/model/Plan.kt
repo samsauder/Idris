@@ -1,10 +1,10 @@
-package model
+package com.idris.model
 
-import constants.Styles
-import model.auxiliary.Type
+import com.idris.constants.Styles
+import com.idris.model.auxiliary.Type
 import java.time.LocalDate
 
-// model.Plan
+// com.idris.Plan
 
 abstract class Plan (val id: String, val type: Type, val skill: Skill, val subskills: List<Skill>?, var startDate: String?) {
     var active: Boolean = false
@@ -27,8 +27,8 @@ abstract class Plan (val id: String, val type: Type, val skill: Skill, val subsk
         when (type) {
             Type.day -> {planSymbol = "▲"}
             Type.week -> {planSymbol = "■"}
-            // model.auxiliary.Type.month -> {planSymbol = ""}
-            // model.auxiliary.Type.year -> {planSymbol = ""}
+            // com.idris.Type.month -> {planSymbol = ""}
+            // com.idris.Type.year -> {planSymbol = ""}
             else -> {}
         }
 
