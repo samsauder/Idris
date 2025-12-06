@@ -131,6 +131,7 @@ fun setupRealDatabase() {
         ChallengesT.deleteAll()
         SchemaUtils.create(ChallengesT)
         SchemaUtils.create(ChAttemptsT)
+        SchemaUtils.create(FoundationsT)
 
         println("Created ChallengesT table and ChAttemptsT table for the real database.")
 
@@ -152,8 +153,9 @@ fun setupTestDatabase() {
         // ChallengesT.deleteAll()
         SchemaUtils.create(ChallengesT)
         SchemaUtils.create(ChAttemptsT)
+        SchemaUtils.create(FoundationsT)
 
-        println("Created ChallengesT table and ChAttemptsT table for the test database.")
+        println("Created ChallengesT table, ChAttemptsT, and FoundationsT table for the test database.")
 
         insertExampleChallenge()
     }
