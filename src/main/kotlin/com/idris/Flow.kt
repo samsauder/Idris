@@ -5,10 +5,13 @@ import com.idris.constants.Descriptions
 import com.idris.constants.MenuComponents
 import com.idris.constants.Styles
 import com.idris.database.ChallengeE
+import com.idris.database.ExamE
 import com.idris.database.ChallengesT
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
+import com.idris.database.ExamsT
 import com.idris.model.Day
+import com.idris.model.Exam
 import com.idris.model.Foundation
 import com.idris.model.NonDay
 import com.idris.model.Objective
@@ -288,7 +291,7 @@ class Flow() {
                     println("             FOUNDATIONS")
                     println(BAR)
                     for (foundationEntity in FoundationE.Companion.all()) {
-                        val foundation = foundationEntity.toFoundation()
+                        val foundation = foundationEntity.deEntify()
                         foundation.printShort(0);
                     }
                 }
@@ -298,6 +301,15 @@ class Flow() {
                     for (challengeEntity in ChallengeE.Companion.all()) {
                         val challenge = challengeEntity.toChallenge()
                         challenge.printShort(0)
+                    }
+                }
+
+                "-e" -> {  // print all Exams
+                    println("             EXAMS")
+                    println(BAR)
+                    for (examEntity in ExamE.Companion.all()) {
+                        val exam = examEntity.deEntify();
+                        exam.printShort(0)
                     }
                 }
             }
@@ -325,6 +337,14 @@ class Flow() {
                     c.delete()
                     println("\nDeleted '${c.name}' from the Challenge table.")
                 }
+
+                "-e" -> {
+                    val eIterator =  ExamE.find { ExamsT.name eq name }.iterator()
+                    val e = eIterator.next()
+                    e.delete()
+                    println("\nDeleted '${e.name}' from the Exam table.")
+                }
+
             }
         }
     }
@@ -339,6 +359,7 @@ class Flow() {
         when (option) {
             "-f" -> createFoundation()
             "-c" -> createChallenge()
+            "-e" -> createExam()
         }
     }
 
@@ -361,6 +382,27 @@ class Flow() {
             println("\nAdded '${f.name}' to the Foundation table.")
         }
     }
+
+
+    fun createExam() {
+        val e  = Exam("", null, "", -1.0, false)
+        this.fillObjectiveCore(e)
+
+        val skillName = e.skill?.id
+
+        transaction {
+            ExamE.new {
+                name = e.name
+                if (skillName != null) skill = skillName;
+                description = e.description
+
+                minutes = e.minutes.toBigDecimal()
+                passed = false
+            }
+            println("\nAdded '${e.name}' to the Exam table.")
+        }
+    }
+
 
 
     fun createChallenge() {
