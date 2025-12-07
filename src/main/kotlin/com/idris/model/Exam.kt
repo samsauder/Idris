@@ -9,14 +9,26 @@ class Exam : Objective {
     var passed: Boolean = false
 
 
-    constructor(name: String,
-                skill: Skill,
-                description: String,
-                minutes: Double) : super(name, skill, description, minutes) {
+    constructor(
+        name: String,
+        skill: Skill?,
+        description: String,
+        minutes: Double
+    ) : super(name, skill, description, minutes) {
         this.symbol = "▶"
         this.symbolHolder = "$symbolColor[$symbol]$RESET"
         this.objectiveType = ObjectiveType.EXAM
     }
+
+    constructor(
+        name: String,
+        skill: Skill?,
+        description: String,
+        minutes: Double,
+        passed: Boolean
+    ) : this(name, skill, description, minutes) {
+                this.passed = passed
+                }
 
 
     override fun printShort(startLevel: Int) {
