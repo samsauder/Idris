@@ -1,20 +1,27 @@
 package com.idris.database
 
+import com.idris.database.ChAttemptsT.decimal
+import com.idris.database.ChAttemptsT.varchar
 import com.idris.model.Foundation
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import java.util.Objects
+
+// IntIdTable("foundationsT")
 
 
-// The table of Foundations
+
 object FoundationsT : IntIdTable("foundationsT") {
     val name = varchar("name", 50)
     val skill = varchar("skill", 50)
     val description = varchar("description", 200)
     val minutes = decimal("minutes",5, 2)
 }
+
+
 
 class FoundationE(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<FoundationE>(FoundationsT) {
@@ -26,6 +33,16 @@ class FoundationE(id: EntityID<Int>) : IntEntity(id) {
     var description by FoundationsT.description
     var minutes by FoundationsT.minutes
 
+    // Turn the FoundationE into a Foundation
+    fun deEntify() : Foundation {
+        return Foundation(
+            name,
+            Skill(skill, null),
+            description,
+            minutes.toDouble())
+    }
+
+    /*
     // Returns the Foundation version of the current FoundationE
     fun toFoundation() : Foundation{
         return Foundation(
@@ -35,4 +52,5 @@ class FoundationE(id: EntityID<Int>) : IntEntity(id) {
             minutes.toDouble()
         )
     }
+    */
 }
