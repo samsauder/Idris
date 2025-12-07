@@ -176,7 +176,7 @@ fun setupTestDatabase() {
 //    Database.connect("jdbc:sqlite:testdata/testData.db", "org.sqlite.JDBC")
   //  TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     connectToSQLiteDB("testdata/testData.db")
-    // setupTables(false)
+    setupTables(false)
     // insertExampleChallenge()
 
     /*
@@ -199,5 +199,5 @@ fun setupTestDatabase() {
 
 fun main() {
     // setupRealDatabase()
-    // setupTestDatabase()
+    setupTestDatabase()
 }

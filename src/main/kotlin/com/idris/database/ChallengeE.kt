@@ -44,7 +44,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
                 Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
             }
 
-            else -> {  // cElo is initialized, use the supplying constructor
+            else -> {  // cElo is initialized, use the suppling constructor
                 Challenge(
                     name,
                     Skill(skill, null),
