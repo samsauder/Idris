@@ -167,12 +167,8 @@ class Flow() {
         objectiveList.addAll(karateTests)
     }
 
-    // Connects to the SQLite database specified by dbFile
-    fun connectToSQLiteDB() {
-        Database.connect("jdbc:sqlite:${dbFile}", "org.sqlite.JDBC")
-        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-    }
 
+    /*
     // Loads all challenges from the real database into the objectiveList
     fun loadChallengesFromRealDatabase() {
         dbFile = "sdata/realData.db"
@@ -190,8 +186,10 @@ class Flow() {
             }
         }
     }
+    */
 
 
+    /*
     // Loads all challenges from the test database into the objectiveList
     fun loadChallengesFromTestDatabase() {
         dbFile = "testdata/testData.db"
@@ -209,8 +207,9 @@ class Flow() {
             }
         }
     }
+    */
 
-
+    /*
     // Finds the ChallengeE with the given name and updates its cElo to newElo
     fun updateCElo(name: String, newElo: Double) {
         transaction {
@@ -219,6 +218,7 @@ class Flow() {
             }
         }
     }
+    */
 
     // Create a sample Experiment and return it
     fun buildExperiment(): Experiment {
@@ -237,10 +237,14 @@ class Flow() {
         return experiment
     }
 
-
+    // Connects to the SQLite database specified by dbFile
+    fun connectToSQLiteDB() {
+        Database.connect("jdbc:sqlite:${dbFile}", "org.sqlite.JDBC")
+        TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
+    }
 
     // Entry point into the command line interface version
-    fun beginAlt(args: Array<String>) {
+    fun begin(args: Array<String>) {
         // Connect to the test database
 
         // dbFile = "../../sdata/realData.db"
@@ -265,10 +269,10 @@ class Flow() {
         if (args.isNotEmpty()) {  // command
             command = args[0];
         }
-        if (args.size >= 2) {  // command + option + dbFile
+        if (args.size >= 2) {  // command + option
             option = args[1];
         }
-        if (args.size == 3) {  // command + option + param + dbFile
+        if (args.size == 3) {  // command + option + param
             param = args[2];
         }
 
@@ -285,6 +289,7 @@ class Flow() {
         }
         println("\n")
     }
+
 
 
     // Log the given Foundation, Challenge, or Exam
@@ -375,6 +380,25 @@ class Flow() {
                         val exam = examEntity.deEntify();
                         exam.printShort(0)
                     }
+                }
+            }
+        }
+    }
+
+
+    // Modify the specified object in the database
+    fun modify(option: String) {
+        transaction {
+            when(option) {
+                "-f" -> {
+                    val f = Foundation("",null,"",-1.0)
+
+                }
+                "-c" -> {
+
+                }
+                "-e" -> {
+
                 }
             }
         }
@@ -495,7 +519,33 @@ class Flow() {
         }
     }
 
-    
+    /*
+    // Modify one or more common attributes for Foundations and Challenges (stdin)
+    fun changeObjectiveCore(emptyObj: Objective): Objective {
+        /*
+        val s = Scanner(System.`in`)
+        print("Enter ")
+
+        print("NAME  ")
+        emptyObj.name = s.next()
+
+        print("SKILL  ")
+        emptyObj.skill = Skill(s.next(), null)
+
+        print("DESCRIPTION  ")
+        val z = Scanner(System.`in`)
+        emptyObj.description = z.nextLine()
+
+        print("MINUTES  ")
+        val w = Scanner(System.`in`)
+        emptyObj.minutes = z.nextDouble()
+
+        return emptyObj
+        */
+
+    }
+    */
+
     // Return a filled Objective object storing common attributes for Foundations and Challenges (stdin)
     fun fillObjectiveCore(emptyObj: Objective): Objective {
         val s = Scanner(System.`in`)
@@ -517,7 +567,7 @@ class Flow() {
         return emptyObj
     }
 
-
+    /*
     fun begin() {
         // loadChallengesFromRealDatabase()
         loadChallengesFromTestDatabase()
@@ -634,5 +684,5 @@ class Flow() {
             }
         }
     }
-
+    */
 }
