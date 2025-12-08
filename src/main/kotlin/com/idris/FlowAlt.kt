@@ -11,7 +11,7 @@ class FlowAlt {
         val d = Database(path)
         d.connect()
 
-        println("(Idris REPL)        SYNTAX: [list/create/delete/log] -[x/f/c/e] <name>")
+        println("(Idris REPL)        SYNTAX: [list/create/delete/log] -[x/f/c/e]")
         var input = ""
 
         while (true) {
