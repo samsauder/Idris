@@ -1,15 +1,47 @@
 package com.idris.database.helpers
 
+import com.idris.database.ChallengeE
+import com.idris.database.ChallengesT
+import com.idris.database.ExamE
+import com.idris.database.ExamsT
+import com.idris.database.FoundationE
+import com.idris.database.FoundationsT
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+
+// Call the Idris 'delete' operation for Foundation, Challenge, or Exam
+
+
 object DeleteHelper : Helper() {
+    // ======================================================================
     override fun f() {
-        TODO("Not yet implemented")
+        transaction {
+            val name = inputName()
+            val fIterator =  FoundationE.find { FoundationsT.name eq name }.iterator()
+            val f = fIterator.next()
+            f.delete()
+            println("\nDeleted '${f.name}' from the Foundation table.")
+        }
     }
-
+    // ======================================================================
     override fun c() {
-        TODO("Not yet implemented")
+        transaction {
+            val name = inputName()
+            val cIterator =  ChallengeE.find { ChallengesT.name eq name }.iterator()
+            val c = cIterator.next()
+            c.delete()
+            println("\nDeleted '${c.name}' from the Challenge table.")
+        }
     }
-
+    // ======================================================================
     override fun e() {
-        TODO("Not yet implemented")
+        transaction {
+            val name = inputName()
+            val eIterator =  ExamE.find { ExamsT.name eq name }.iterator()
+            val e = eIterator.next()
+            e.delete()
+            println("\nDeleted '${e.name}' from the Exam table.")
+        }
     }
+    // ======================================================================
 }
