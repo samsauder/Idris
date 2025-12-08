@@ -1,6 +1,8 @@
 package com.idris.database
 
 import com.idris.constants.Descriptions
+import com.idris.model.Exam
+import com.idris.model.Foundation
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.deleteAll
@@ -123,7 +125,10 @@ fun insertExampleChallenge() {
 // Set up the tables for the real/test database
 fun setupTables(isReal: Boolean) {
     transaction {
-        // ChallengesT.deleteAll()
+        ChallengesT.deleteAll()
+        ChAttemptsT.deleteAll()
+        FoundationsT.deleteAll()
+        ExamsT.deleteAll()
         SchemaUtils.create(ChallengesT)
         SchemaUtils.create(ChAttemptsT)
         SchemaUtils.create(FoundationsT)
@@ -142,62 +147,24 @@ fun connectToSQLiteDB(filepath: String) {
 }
 
 
-// Sets up a database populated with real data for Sam
+// Sets up a database populated with real data for Sam (overwrites all current data)
 fun setupRealDatabase() {
-    // Database.connect("jdbc:sqlite:sdata/realData.db", "org.sqlite.JDBC")
-    // TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     connectToSQLiteDB("sdata/realData.db")
-    /*
-    transaction {
-        // addLogger(StdOutSqlLogger)
-
-        // ChallengesT.deleteAll()
-        SchemaUtils.create(ChallengesT)
-        SchemaUtils.create(ChAttemptsT)
-        SchemaUtils.create(FoundationsT)
-        SchemaUtils.create(ExamsT)
-
-        println("Created ChallengesT, ChAttemptsT, FoundationsT, ExamsT tables for the test database.")
-
-        insertTacticsChallenges()
-        insertRapidChallenges()
-    }
-    */
-
-
     setupTables(true)
-    // insertTacticsChallenges()
-    // insertRapidChallenges()
+    insertTacticsChallenges()
+    insertRapidChallenges()
 }
 
 
-// Sets up a database populated with test data for a random user
+// Sets up a database populated with test data for a random user (overwrites all current data)
 fun setupTestDatabase() {
-//    Database.connect("jdbc:sqlite:testdata/testData.db", "org.sqlite.JDBC")
-  //  TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
     connectToSQLiteDB("testdata/testData.db")
     setupTables(false)
-    // insertExampleChallenge()
-
-    /*
-    transaction {
-        // addLogger(StdOutSqlLogger)
-
-        // ChallengesT.deleteAll()
-        SchemaUtils.create(ChallengesT)
-        SchemaUtils.create(ChAttemptsT)
-        SchemaUtils.create(FoundationsT)
-        SchemaUtils.create(ExamsT)
-
-        println("Created ChallengesT, ChAttemptsT, FoundationsT, ExamsT tables for the test database.")
-
-        insertExampleChallenge()
-    }
-    */
+    insertExampleChallenge()
 }
 
 
 fun main() {
-    // setupRealDatabase()
-    setupTestDatabase()
+    setupRealDatabase()
+    // setupTestDatabase()
 }
