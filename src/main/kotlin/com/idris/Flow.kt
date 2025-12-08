@@ -64,7 +64,8 @@ import java.math.BigDecimal
 import java.sql.Connection
 import java.util.Scanner
 
-val BAR = "======================================"
+val BAR = "======================================="
+val BARC = "$BAR===================="
 
 class Flow() {
     var dbFile = ""
@@ -288,7 +289,7 @@ class Flow() {
         transaction {
             when(option) {
                 "-f" -> {  // print all Foundations
-                    println("             FOUNDATIONS")
+                    println("FOUNDATIONS")
                     println(BAR)
                     for (foundationEntity in FoundationE.Companion.all()) {
                         val foundation = foundationEntity.deEntify()
@@ -296,8 +297,8 @@ class Flow() {
                     }
                 }
                 "-c" -> {  // print all Challenges
-                    println("             CHALLENGES")
-                    println(BAR)
+                    println("CHALLENGES")
+                    println(BARC)
                     for (challengeEntity in ChallengeE.Companion.all()) {
                         val challenge = challengeEntity.toChallenge()
                         challenge.printShort(0)
@@ -305,7 +306,7 @@ class Flow() {
                 }
 
                 "-e" -> {  // print all Exams
-                    println("             EXAMS")
+                    println("EXAMS")
                     println(BAR)
                     for (examEntity in ExamE.Companion.all()) {
                         val exam = examEntity.deEntify();

@@ -10,7 +10,7 @@ abstract class Objective(var name: String,
                          var minutes: Double) {
     lateinit var objectiveType: ObjectiveType
     var symbol = ""
-    val symbolColor = Styles.YELLOW
+    val symbolColor = Styles.GREEN
     var symbolHolder = ""
     var nameStr = ""
     var skillStr = ""
@@ -19,12 +19,15 @@ abstract class Objective(var name: String,
 
 
     init {
-        nameStr = pad(name,  18)                                                  // name + style + padding
+        nameStr = styleAndPad(name, Styles.BOLD,  20)                                                  // name + style + padding
         var skillName = ""
         skill?.let { skillName = it.id };
-        skillStr = styleAndPad(skillName, Styles.BOLD, 10)  // skill + style + padding
-        descriptionStr = style(description, Styles.CYAN)
+        skillStr = pad(skillName,  10)
+        // skillStr = styleAndPad(skillName, Styles.ITALIC, 10)  // skill + style + padding
+        // descriptionStr = description  // uncomment if wanted
+        // descriptionStr = style(description, Styles.ITALIC)
         minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)            // mins + style + padding
+        // minsStr = pad("${minutes.toInt()}m",  10)
     }
 
 

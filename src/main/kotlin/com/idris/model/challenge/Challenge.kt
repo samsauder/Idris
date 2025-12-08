@@ -89,7 +89,7 @@ class Challenge : Objective {
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
         val chEloStr = styleAndPad(getChallengeEloString(), Styles.RED, 5)  // challenge elo + style + padding
         val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
-        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.GREEN, 5)        // user odds + style
+        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.YELLOW, 5)        // user odds + style
 
         println("$lvl$symbolHolder $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
     }
