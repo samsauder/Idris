@@ -20,7 +20,6 @@ object ChallengesT : IntIdTable("challengesT") {
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
 }
 
-
 class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<ChallengeE>(ChallengesT) {
         // Return the ChallengeE with the specified name
