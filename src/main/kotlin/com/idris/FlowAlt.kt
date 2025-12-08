@@ -23,7 +23,7 @@ class FlowAlt {
             if (args[0] == "q") break  // Quit the REPL on q
             if (args.size !in 2..3) println("ERROR: invalid argument count")
 
-            when (args[0]) {  // args: <command> <option> <parameter>
+            when (args[0]) {  // args: <command> <option>
                 "list" -> ListHelper.choose(args[1])
                 "create" -> CreateHelper.choose(args[1])
                 "delete" -> DeleteHelper.choose(args[1])
