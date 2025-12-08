@@ -242,9 +242,7 @@ class Flow() {
     fun beginAlt(args: Array<String>) {
         // Connect to the test database
 
-        //dbFile = "../../sdata/realData.db"
-        dbFile = "../../testdata/testData.db"
-        connectToSQLiteDB()
+        // connectToSQLiteDB()
 
         // =============================================================================
         // val e: Experiment = buildExperiment();
@@ -255,28 +253,36 @@ class Flow() {
         var command = ""
         var option = ""
         var param = ""
+        var database = ""
 
         println()
 
-        if (args.size == 0) {
+        if (args.isEmpty()) {
             println("ERROR: no Idris command given")
         }
-        if (args.size >= 1) {
+        if (args.isNotEmpty()) {  // command
             command = args[0];
         }
-        if (args.size >= 2) {
+        if (args.size == 3) {  // command + option + dbFile
             option = args[1];
+            database = args[2]
         }
-        if (args.size == 3) {
+        if (args.size == 4) {  // command + option + param + dbFile
             param = args[2];
+            database = args[3]
         }
 
-        if (args.size == 4){
-            dbFile = args[3]
-        }
         if (args.size > 4){
             println("ERROR: too many arguments given (1 to 4 expected)")
         }
+
+        if (database == "real") {
+            dbFile = "../../sdata/realData.db"
+        } else if (database == "test"){
+            dbFile = "../../testdata/testData.db"
+        }
+        
+        connectToSQLiteDB()
 
         println()
         when(command) {
