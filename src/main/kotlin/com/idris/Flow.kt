@@ -4,6 +4,8 @@ package com.idris// com.idris.Flow
 import com.idris.constants.Descriptions
 import com.idris.constants.MenuComponents
 import com.idris.constants.Styles
+import com.idris.database.ChAttemptE
+import com.idris.database.ChAttemptsT
 import com.idris.database.ChallengeE
 import com.idris.database.ExamE
 import com.idris.database.ChallengesT
@@ -62,6 +64,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.sql.Connection
+import java.time.LocalDate
 import java.util.Scanner
 
 val BAR = "========================================"
@@ -177,7 +180,7 @@ class Flow() {
 
         transaction {
             for (challengeE in ChallengeE.Companion.all()) {
-                val challenge = challengeE.toChallenge()
+                val challenge = challengeE.deEntify()
                 objectiveList.add(challenge)  // add the Challenge to the objectiveList
 
                 // if cElo is -0000.00, calculate it from the uElo and uOdds and write it to the database
@@ -196,7 +199,7 @@ class Flow() {
 
         transaction {
             for (challengeE in ChallengeE.Companion.all()) {
-                val challenge = challengeE.toChallenge()
+                val challenge = challengeE.deEntify()
                 objectiveList.add(challenge)  // add the Challenge to the objectiveList
 
                 // if cElo is -0000.00, calculate it from the uElo and uOdds and write it to the database
@@ -238,8 +241,8 @@ class Flow() {
     // Entry point into the command line interface version
     fun beginAlt(args: Array<String>) {
         // Connect to the test database
-        // dbFile = "../../sdata/realData.db"
-        dbFile = "../../testdata/testData.db"
+        dbFile = "../../sdata/realData.db"
+        // dbFile = "../../testdata/testData.db"
         connectToSQLiteDB()
 
         // =============================================================================
@@ -275,8 +278,65 @@ class Flow() {
             "list" -> list(option)
             "create" -> create(option)
             "delete" -> delete(option, param)
+            "log" -> log(option, param)
         }
         println("\n")
+    }
+
+
+    // Log the given Foundation, Challenge, or Exam
+    fun log(option: String, name: String) {
+        val s = Scanner(System.`in`)
+
+        // print("NAME  ")
+        // val name = s.next()
+
+        transaction {
+            when(option) {
+                "-f" -> {
+                    /*
+                    val fIterator = FoundationE.find { FoundationsT.name eq name}.iterator()
+                    val fE = fIterator.next()
+                    val f = fE.deEntify()
+                    f.log(1.0)  // success
+                    FoundationE.Companion.findSingleByAndUpdate(FoundationsT.name eq name) {
+
+                    }*/
+                    //println("\nCompleted '${name}'.")
+                    TODO()
+                    // add an entry to the FoundationAttempts table
+                }
+                "-c" -> {
+                    print("RESULT  ")  // win/loss
+                    val result = s.next()
+                    println()
+
+                    val cIterator = ChallengeE.find { ChallengesT.name eq name }.iterator()
+                    val cE = cIterator.next()
+                    val c = cE.deEntify()
+                    val resultDouble = if (result.equals("win")) 1.0 else 0.0
+                    c.log(resultDouble)
+
+                    val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
+                        it.cElo = BigDecimal.valueOf(c.challengeElo)
+                        it.uElo = BigDecimal.valueOf(c.userElo)
+                        it.uOdds = BigDecimal.valueOf(c.userOdds)
+                    }
+
+                    /*
+                    // add an entry to the ChallengeAttempts table
+                    ChAttemptE.new {
+                        challenge = challengeE!!
+                        result
+                        LocalDate.now()
+                    }*/
+                }
+                "-e" -> {
+                    TODO()
+                    // add an entry to the ExamAttempts table
+                }
+            }
+        }
     }
 
 
@@ -300,7 +360,7 @@ class Flow() {
                     println("CHALLENGES")
                     println(BARC)
                     for (challengeEntity in ChallengeE.Companion.all()) {
-                        val challenge = challengeEntity.toChallenge()
+                        val challenge = challengeEntity.deEntify()
                         challenge.printShort(0)
                     }
                 }
