@@ -296,8 +296,7 @@ class Flow() {
     fun log(option: String, name: String) {
         val s = Scanner(System.`in`)
 
-        // print("NAME  ")
-        // val name = s.next()
+
 
         transaction {
             when(option) {

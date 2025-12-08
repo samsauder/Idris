@@ -1,10 +1,9 @@
 package com.idris
 
-import com.idris.database.CreateHelper
-import com.idris.database.ListHelper
-import org.jetbrains.exposed.v1.jdbc.Database
-import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
-import java.sql.Connection
+import com.idris.database.helpers.*
+
+// The REPL command line interface
+
 
 class FlowAlt {
 
@@ -13,9 +12,8 @@ class FlowAlt {
         val d = Database(path)
         d.connect()
 
-        println("(Idris REPL)")
+        println("(Idris REPL)        SYNTAX : [list/create/delete/log] -[x/f/c/e] <name>")
         var input = ""
-        println("SYNTAX  [list/create/delete/log] -[x/f/c/e] <name>")
 
         while (true) {
             println()
@@ -30,7 +28,7 @@ class FlowAlt {
                 "list" -> ListHelper.choose(args[1])
                 "create" -> CreateHelper.choose(args[1])
                 // "delete" -> // DeleteHelper.choose(args[1])
-                //"log" -> // LogHelper.choose(args[1])
+                "log" -> LogHelper.choose(args[1])
             }
 
             println()
