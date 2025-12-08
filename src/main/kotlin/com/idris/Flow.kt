@@ -64,8 +64,8 @@ import java.math.BigDecimal
 import java.sql.Connection
 import java.util.Scanner
 
-val BAR = "======================================="
-val BARC = "$BAR===================="
+val BAR = "========================================"
+val BARC = "$BAR==================="
 
 class Flow() {
     var dbFile = ""
