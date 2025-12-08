@@ -1,7 +1,4 @@
-package com.idris.database
-
-// Helper functions for the 'delete' Idris command
-
+package com.idris.database.helpers
 
 object DeleteHelper : Helper() {
     override fun f() {

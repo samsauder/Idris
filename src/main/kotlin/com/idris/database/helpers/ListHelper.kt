@@ -1,9 +1,9 @@
-package com.idris.database
+package com.idris.database.helpers
 
+import com.idris.database.ChallengeE
+import com.idris.database.ExamE
+import com.idris.database.FoundationE
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-
-// Helper functions for the 'list' Idris command
-
 
 object ListHelper : Helper() {
     // ======================================================================

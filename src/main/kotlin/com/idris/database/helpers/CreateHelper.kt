@@ -1,13 +1,13 @@
-package com.idris.database
+package com.idris.database.helpers
 
+import com.idris.database.ChallengeE
+import com.idris.database.ExamE
+import com.idris.database.FoundationE
 import com.idris.model.Exam
 import com.idris.model.Foundation
 import com.idris.model.challenge.Challenge
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
-
-// Helper functions for the 'create' Idris command
-
 
 object CreateHelper : Helper() {
     // ======================================================================
@@ -16,12 +16,13 @@ object CreateHelper : Helper() {
             "",
             null,
             "",
-            -1.0)
+            -1.0
+        )
         this.fillObjectiveCore(f)
         val skillName = f.skill?.id
 
         transaction {
-            FoundationE.new {
+            FoundationE.Companion.new {
                 name = f.name
                 if (skillName != null) skill = skillName;
                 description = f.description
@@ -43,7 +44,7 @@ object CreateHelper : Helper() {
         c.generateChallengeElo()
 
         transaction {
-            ChallengeE.new {
+            ChallengeE.Companion.new {
                 name = c.name
                 // skill = (c.skill?.id ?: String) as String
                 if (skillName != null) skill = skillName;
@@ -64,12 +65,13 @@ object CreateHelper : Helper() {
             null,
             "",
             -1.0,
-            false)
+            false
+        )
         this.fillObjectiveCore(e)
         val skillName = e.skill?.id
 
         transaction {
-            ExamE.new {
+            ExamE.Companion.new {
                 name = e.name
                 if (skillName != null) skill = skillName;
                 description = e.description

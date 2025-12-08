@@ -1,19 +1,14 @@
-package com.idris.database
+package com.idris.database.helpers
 
 import com.idris.model.Objective
 import com.idris.model.Skill
 import java.util.Scanner
 
-// Each Helper provides helper methods for one of the following database operations:
-// - create
-// - list
-// - delete
-// - log
-
 abstract class Helper {
+    val scanner = Scanner(System.`in`)
     val bar = "========================================"
     val barc = "$bar==================="
-    
+
     // Input an option and call its appropriate function
     fun choose(option: String) {
         when(option) {
@@ -30,6 +25,7 @@ abstract class Helper {
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective) {
+        /*
         val s = Scanner(System.`in`)
 
         print("NAME  ")
@@ -44,7 +40,35 @@ abstract class Helper {
 
         print("MINUTES  ")
         val w = Scanner(System.`in`)
-        o.minutes = z.nextDouble()
+        o.minutes = z.nextDouble()*/
+
+        o.name = inputName()
+        o.skill = Skill(inputSkill(), null)
+        o.description = inputDescription()
+        o.minutes = inputMinutes()
     }
 
+    fun inputName() : String {
+        // val s = Scanner(System.`in`)
+        print("NAME  ")
+        return scanner.next()
+    }
+
+    private fun inputSkill() : String {
+        // val s = Scanner(System.`in`)
+        print("SKILL  ")
+        return scanner.next()
+    }
+
+    private fun inputDescription() : String {
+        // val s = Scanner(System.`in`)
+        print("DESCRIPTION  ")
+        return scanner.nextLine()
+    }
+
+    private fun inputMinutes() : Double {
+        // val s = Scanner(System.`in`)
+        print("MINUTES  ")
+        return scanner.nextDouble()
+    }
 }
