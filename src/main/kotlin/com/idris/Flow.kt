@@ -241,8 +241,9 @@ class Flow() {
     // Entry point into the command line interface version
     fun beginAlt(args: Array<String>) {
         // Connect to the test database
-        dbFile = "../../sdata/realData.db"
-        // dbFile = "../../testdata/testData.db"
+
+        //dbFile = "../../sdata/realData.db"
+        dbFile = "../../testdata/testData.db"
         connectToSQLiteDB()
 
         // =============================================================================
@@ -269,8 +270,12 @@ class Flow() {
         if (args.size == 3) {
             param = args[2];
         }
-        if (args.size > 3){
-            println("ERROR: too many arguments given (1 to 3 expected)")
+
+        if (args.size == 4){
+            dbFile = args[3]
+        }
+        if (args.size > 4){
+            println("ERROR: too many arguments given (1 to 4 expected)")
         }
 
         println()
