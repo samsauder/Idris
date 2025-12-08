@@ -7,6 +7,6 @@ fun main(args: Array<String>) {
     // f.beginAlt(args);
 
     val fa = FlowAlt()
-    // fa.begin(args)
+    // fa.repl("../../sdata/realData.db")
     fa.repl("../../testdata/testData.db")
 }
