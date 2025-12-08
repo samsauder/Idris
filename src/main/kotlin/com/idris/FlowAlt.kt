@@ -6,7 +6,6 @@ import com.idris.database.helpers.*
 
 
 class FlowAlt {
-
     // Start an Idris REPL
     fun repl(path: String) {
         val d = Database(path)
@@ -27,12 +26,11 @@ class FlowAlt {
             when (args[0]) {  // args: <command> <option> <parameter>
                 "list" -> ListHelper.choose(args[1])
                 "create" -> CreateHelper.choose(args[1])
-                // "delete" -> // DeleteHelper.choose(args[1])
+                "delete" -> DeleteHelper.choose(args[1])
                 "log" -> LogHelper.choose(args[1])
             }
 
             println()
         }
     }
-
 }
