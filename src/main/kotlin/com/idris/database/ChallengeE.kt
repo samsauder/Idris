@@ -38,7 +38,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
     var uOdds by ChallengesT.uOdds
 
     // Returns the Challenge version of the current ChallengeE
-    fun toChallenge() : Challenge {
+    fun deEntify() : Challenge {
         return when (cElo) {
             BigDecimal("-0000.00") -> {  // cElo is uninitialized, use the determining constructor
                 Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
