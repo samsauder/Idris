@@ -5,6 +5,9 @@ import com.idris.database.ExamE
 import com.idris.database.FoundationE
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
+// Call the Idris 'list' operation for Foundation, Challenge, or Exam
+
+
 object ListHelper : Helper() {
     // ======================================================================
     override fun f() {

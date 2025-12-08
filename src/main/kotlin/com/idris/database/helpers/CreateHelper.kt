@@ -9,6 +9,9 @@ import com.idris.model.challenge.Challenge
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
+// Call the Idris 'create' operation for Foundation, Challenge, or Exam
+
+
 object CreateHelper : Helper() {
     // ======================================================================
     override fun f() {  // add a FoundationE to the database

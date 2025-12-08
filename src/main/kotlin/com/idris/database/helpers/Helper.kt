@@ -4,12 +4,14 @@ import com.idris.model.Objective
 import com.idris.model.Skill
 import java.util.Scanner
 
+// Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
+
 abstract class Helper {
     val scanner = Scanner(System.`in`)
     val bar = "========================================"
     val barc = "$bar==================="
 
-    // Input an option and call its appropriate function
+    // Input an operation option and call its appropriate function
     fun choose(option: String) {
         when(option) {
             "-f" -> f()
@@ -19,9 +21,9 @@ abstract class Helper {
         }
     }
 
-    abstract fun f();  // call the operation for a Foundation
-    abstract fun c();  // call the operation for a Challenge
-    abstract fun e();  // call the operation for an Exam
+    abstract fun f();  // call the operation for Foundation
+    abstract fun c();  // call the operation for Challenge
+    abstract fun e();  // call the operation for Exam
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective) {
@@ -61,14 +63,14 @@ abstract class Helper {
     }
 
     private fun inputDescription() : String {
-        // val s = Scanner(System.`in`)
+        val s = Scanner(System.`in`)
         print("DESCRIPTION  ")
-        return scanner.nextLine()
+        return s.nextLine()
     }
 
     private fun inputMinutes() : Double {
-        // val s = Scanner(System.`in`)
+        val s = Scanner(System.`in`)
         print("MINUTES  ")
-        return scanner.nextDouble()
+        return s.nextDouble()
     }
 }
