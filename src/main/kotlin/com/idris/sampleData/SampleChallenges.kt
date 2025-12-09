@@ -1,7 +1,7 @@
 package com.idris.sampleData
 
 import com.idris.constants.Descriptions
-import com.idris.model.challenge.Challenge
+import com.idris.model.objective.Challenge
 
 
 // Sam

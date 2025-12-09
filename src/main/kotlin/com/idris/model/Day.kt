@@ -1,6 +1,7 @@
 package com.idris.model
 
 import com.idris.model.auxiliary.Type
+import com.idris.model.objective.Objective
 
 // model.DayPlan
 

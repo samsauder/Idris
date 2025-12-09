@@ -1,8 +1,8 @@
 package com.idris.model.lab
-import com.idris.model.Exam
-import com.idris.model.Foundation
+import com.idris.model.objective.Exam
+import com.idris.model.objective.Foundation
 import com.idris.model.Skill
-import com.idris.model.challenge.Challenge
+import com.idris.model.objective.Challenge
 
 
 // Sam Sauder

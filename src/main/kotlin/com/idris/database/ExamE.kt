@@ -1,6 +1,6 @@
 package com.idris.database
 
-import com.idris.model.Exam
+import com.idris.model.objective.Exam
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable

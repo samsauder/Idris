@@ -2,7 +2,7 @@ package com.idris.database
 
 import com.idris.database.ChAttemptsT.decimal
 import com.idris.database.ChAttemptsT.varchar
-import com.idris.model.Foundation
+import com.idris.model.objective.Foundation
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable

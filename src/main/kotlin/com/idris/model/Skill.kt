@@ -1,6 +1,6 @@
 package com.idris.model
 
-import com.idris.model.challenge.Challenge
+import com.idris.model.objective.Challenge
 
 // Subdomain
 

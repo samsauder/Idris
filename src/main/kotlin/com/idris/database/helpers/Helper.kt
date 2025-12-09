@@ -1,6 +1,6 @@
 package com.idris.database.helpers
 
-import com.idris.model.Objective
+import com.idris.model.objective.Objective
 import com.idris.model.Skill
 import java.util.Scanner
 

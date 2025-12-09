@@ -3,9 +3,9 @@ package com.idris.database.helpers
 import com.idris.database.ChallengeE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
-import com.idris.model.Exam
-import com.idris.model.Foundation
-import com.idris.model.challenge.Challenge
+import com.idris.model.objective.Exam
+import com.idris.model.objective.Foundation
+import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 

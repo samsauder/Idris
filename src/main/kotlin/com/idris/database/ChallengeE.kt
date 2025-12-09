@@ -1,7 +1,7 @@
 package com.idris.database
 
 import com.idris.model.Skill
-import com.idris.model.challenge.Challenge
+import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq

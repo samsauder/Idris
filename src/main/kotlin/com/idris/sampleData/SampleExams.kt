@@ -1,7 +1,7 @@
 package com.idris.sampleData
 
 import com.idris.constants.Descriptions
-import com.idris.model.Exam
+import com.idris.model.objective.Exam
 
 // Sam
 val pull2RM = Exam("pull2RM", pull, "", 1.0)
