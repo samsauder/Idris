@@ -56,21 +56,21 @@ abstract class Helper {
         return scanner.next()
     }
 
-    private fun inputSkill() : String {
+    fun inputSkill() : String {
         // val s = Scanner(System.`in`)
         print("SKILL  ")
         return scanner.next()
     }
 
-    private fun inputDescription() : String {
+    fun inputDescription() : String {
         val s = Scanner(System.`in`)
         print("DESCRIPTION  ")
         return s.nextLine()
     }
 
-    private fun inputMinutes() : Double {
+    fun inputMinutes() : Double {
         val s = Scanner(System.`in`)
         print("MINUTES  ")
-        return s.nextDouble()
+        return s.nextInt().toDouble()
     }
 }
