@@ -1,8 +1,6 @@
 package com.idris.database
 
 import com.idris.constants.Descriptions
-import com.idris.model.Exam
-import com.idris.model.Foundation
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.deleteAll
