@@ -8,7 +8,7 @@ import java.util.Scanner
 
 abstract class Helper {
     val scanner = Scanner(System.`in`)
-    val bar = "========================================"
+    val bar = "===================================================="
     val barc = "$bar==================="
 
     // Input an operation option and call its appropriate function
