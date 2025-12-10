@@ -29,6 +29,7 @@ class FlowAlt {
                 "delete" -> DeleteHelper.choose(args[1])
                 "log" -> LogHelper.choose(args[1])
                 "modify" -> ModifyHelper.choose(args[1])
+                // "dash" -> DashHelper.choose(args[1])
             }
 
             println()
