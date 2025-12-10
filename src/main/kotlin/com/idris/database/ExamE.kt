@@ -3,16 +3,11 @@ package com.idris.database
 import com.idris.model.objective.Exam
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
-import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
 
-object ExamsT : IntIdTable("examsT") {
-    val name = varchar("name", 50)
-    val skill = varchar("skill", 50)
-    val description = varchar("description", 200)
-    val minutes = decimal("minutes",5, 2)
+object ExamsT : ObjectivesT("examsT") {
     val passed = bool("passed")
 }
 
