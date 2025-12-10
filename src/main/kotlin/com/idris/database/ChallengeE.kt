@@ -9,18 +9,15 @@ import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
 
-
-object ChallengesT : IntIdTable("challengesT") {
-    val name = varchar("name", 50)
-    val skill = varchar("skill", 50)
-    val description = varchar("description", 200)
-    val minutes = decimal("minutes",5, 2)
+// A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
+object ChallengesT : ObjectiveTable("challengesT") {
     val cElo = decimal("cElo",6, 2)     // challenge elo
     val uElo = decimal("uElo", 6, 2)    // user elo
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
     val attempts = integer("attempts")  // how many times has the user attempted
     val wins = integer("wins")  // how many times has the user won
 }
+
 
 class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<ChallengeE>(ChallengesT) {
@@ -66,7 +63,6 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
             }
         }
     }
-
 
     override fun toString(): String {
         return "Challenge(id=$id, name=$name, skill=$skill)"  // Print a partial representation
