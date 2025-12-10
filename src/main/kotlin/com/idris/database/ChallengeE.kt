@@ -2,7 +2,6 @@ package com.idris.database
 
 import com.idris.model.Skill
 import com.idris.model.objective.Challenge
-import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntity
@@ -10,7 +9,7 @@ import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
 
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
-object ChallengesT : ObjectiveTable("challengesT") {
+object ChallengesT : ObjectivesT("challengesT") {
     val cElo = decimal("cElo",6, 2)     // challenge elo
     val uElo = decimal("uElo", 6, 2)    // user elo
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
