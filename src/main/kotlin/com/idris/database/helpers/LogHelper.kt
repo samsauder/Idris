@@ -33,6 +33,8 @@ object LogHelper : Helper() {
                 it.cElo = BigDecimal.valueOf(c.challengeElo)
                 it.uElo = BigDecimal.valueOf(c.userElo)
                 it.uOdds = BigDecimal.valueOf(c.userOdds)
+                it.attempts++
+                it.wins += resultDouble.toInt()
             }
 
             // add an entry to the challenge attempts table

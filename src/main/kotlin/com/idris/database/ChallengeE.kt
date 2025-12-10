@@ -18,6 +18,8 @@ object ChallengesT : IntIdTable("challengesT") {
     val cElo = decimal("cElo",6, 2)     // challenge elo
     val uElo = decimal("uElo", 6, 2)    // user elo
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
+    val attempts = integer("attempts")  // how many times has the user attempted
+    val wins = integer("wins")  // how many times has the user won
 }
 
 class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
@@ -30,21 +32,26 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
 
     var name by ChallengesT.name
     var skill by ChallengesT.skill
-    var description by ChallengesT.description
+    var description: String by ChallengesT.description
     var minutes by ChallengesT.minutes
     var cElo by ChallengesT.cElo
     var uElo by ChallengesT.uElo
     var uOdds by ChallengesT.uOdds
+    var attempts by ChallengesT.attempts
+    var wins by ChallengesT.wins
 
     // Returns the Challenge version of the current ChallengeE
     fun deEntify() : Challenge {
         return when (cElo) {
             BigDecimal("-0000.00") -> {  // cElo is uninitialized, use the determining constructor
-                Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
+                val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
+                c.attempts = attempts
+                c.wins = wins
+                c
             }
 
             else -> {  // cElo is initialized, use the suppling constructor
-                Challenge(
+                val c = Challenge(
                     name,
                     Skill(skill, null),
                     description,
@@ -53,9 +60,13 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
                     uElo.toDouble(),
                     uOdds.toDouble()
                 )
+                c.attempts = attempts
+                c.wins = wins
+                return c
             }
         }
     }
+
 
     override fun toString(): String {
         return "Challenge(id=$id, name=$name, skill=$skill)"  // Print a partial representation

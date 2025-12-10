@@ -64,9 +64,11 @@ fun insertRapidChallenges() {
             skill = "rapid"
             description = Descriptions.RAPID_2000
             minutes = BigDecimal("30.00")
-            cElo = BigDecimal("-0000.00")
+            cElo = BigDecimal("1500.00")
             uElo = BigDecimal("1500.00")
-            uOdds = BigDecimal("0.50")
+            uOdds = BigDecimal("0.0")
+            attempts = 0
+            wins = 0
         }
 
         val challenge2 = ChallengeE.new {
@@ -74,9 +76,11 @@ fun insertRapidChallenges() {
             skill = "rapid"
             description = Descriptions.RAPID_2100
             minutes = BigDecimal("30.00")
-            cElo = BigDecimal("-0000.00")
+            cElo = BigDecimal("1500.00")
             uElo = BigDecimal("1500.00")
-            uOdds = BigDecimal("0.40")
+            uOdds = BigDecimal("0.0")
+            attempts = 0
+            wins = 0
         }
 
         val challenge3 = ChallengeE.new {
@@ -84,9 +88,11 @@ fun insertRapidChallenges() {
             skill = "rapid"
             description = Descriptions.RAPID_2200
             minutes = BigDecimal("30.00")
-            cElo = BigDecimal("-0000.00")
+            cElo = BigDecimal("1500.00")
             uElo = BigDecimal("1500.00")
-            uOdds = BigDecimal("0.25")
+            uOdds = BigDecimal("0.0")
+            attempts = 0
+            wins = 0
         }
 
         val challenge4 = ChallengeE.new {
@@ -94,9 +100,11 @@ fun insertRapidChallenges() {
             skill = "rapid"
             description = Descriptions.RAPID_2300
             minutes = BigDecimal("30.00")
-            cElo = BigDecimal("-0000.00")
+            cElo = BigDecimal("1500.00")
             uElo = BigDecimal("1500.00")
-            uOdds = BigDecimal("0.10")
+            uOdds = BigDecimal("0.0")
+            attempts = 0
+            wins = 0
         }
 
         println("Added Rapid challenges to the real database.")
@@ -147,9 +155,11 @@ fun connectToSQLiteDB(filepath: String) {
 
 // Sets up a database populated with real data for Sam (overwrites all current data)
 fun setupRealDatabase() {
-    connectToSQLiteDB("sdata/realData.db")
+    // connectToSQLiteDB("sdata/realData.db")
+    connectToSQLiteDB("sdata/real.db")
+
     setupTables(true)
-    insertTacticsChallenges()
+    // insertTacticsChallenges()
     insertRapidChallenges()
 }
 

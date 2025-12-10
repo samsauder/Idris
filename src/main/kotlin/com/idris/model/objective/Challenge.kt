@@ -6,6 +6,7 @@ import com.idris.database.ChallengesT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
+import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
@@ -21,6 +22,10 @@ class Challenge : Objective {
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
+
+    // for keeping track of provisional challenge elo (no updating user elo)
+    var attempts: Int = 0  // how many times has the user attempted
+    var wins: Int = 0  // how many times has the user won
 
 
     // General Constructor (just makes the core Objective attributes)
@@ -74,10 +79,23 @@ class Challenge : Objective {
         challengeElo = et.opponentRating(userElo, userOdds)
     }
 
+    // Calculate the challenge elo from the record so far (for provisional challenge elo)
+    fun regenerateChallengeElo() {
+        challengeElo = if (wins == attempts) {
+            0000.0
+        } else if (wins == 0 && attempts > 0) {
+            3000.0
+        } else {
+            et.opponentRating(1500.0, wins/(attempts*1.0))
+        }
+    }
+
 
     override fun printShort(startLevel: Int) {
+        val provSym = if (attempts < 20) "?" else ""  // provisional symbol (?)
+
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
-        val chEloStr = styleAndPad(getChallengeEloString(), Styles.RED, 5)  // challenge elo + style + padding
+        val chEloStr = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
         val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
         val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.BOLD, 5)        // user odds + style
 
@@ -98,6 +116,7 @@ class Challenge : Objective {
                 print("${Styles.GREEN}[+]${Styles.RESET}")
                 sU = 1.0
                 sB = 0.0
+                wins++
             }  // user won
             0.0 -> {
                 print("${Styles.RED}[-]${Styles.RESET}")
@@ -111,18 +130,29 @@ class Challenge : Objective {
             } // no winner
             else -> {}
         }
+        attempts++
+
+        // println("wins/attempts now: $wins/$attempts")
 
         val userEloOld = getUserEloString()
-        val benchmarkEloOld = getChallengeEloString()
+        val challengeEloOld = getChallengeEloString()
         val oddsOld = userOdds
 
-        userElo = et.newRating(userElo, 40, sU, eU)
-        challengeElo = et.newRating(challengeElo, 20, sB, eB)
-        userOdds = et.expectedOutcome(userElo, challengeElo)
-
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
-        println("    ${Styles.ITALIC}bELO${Styles.RESET} | $benchmarkEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
-        println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
+
+        if (attempts < 20) {  // provisional (update just the challenge elo)
+            userOdds = wins / (attempts * 1.0)
+            regenerateChallengeElo()
+            println("    ${Styles.ITALIC}cELO${Styles.RESET} | ${challengeEloOld}? -> ${Styles.RED}${getChallengeEloString()}?${Styles.RESET}")
+        } else {  // update both ratings
+            userElo = et.newRating(userElo, 40, sU, eU)
+            challengeElo = et.newRating(challengeElo, 40, sB, eB)
+            userOdds = et.expectedOutcome(userElo, challengeElo)
+
+            println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
+            println("    ${Styles.ITALIC}cELO${Styles.RESET} | $challengeEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
+        }
+
         println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
     }
 

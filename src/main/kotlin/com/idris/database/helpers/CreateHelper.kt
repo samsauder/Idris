@@ -56,6 +56,8 @@ object CreateHelper : Helper() {
                 cElo = c.challengeElo.toBigDecimal()
                 uElo = c.userElo.toBigDecimal()
                 uOdds = c.userOdds.toBigDecimal()
+                attempts = 0
+                wins = 0
             }
         }
 
