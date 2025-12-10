@@ -43,5 +43,9 @@ object DeleteHelper : Helper() {
             println("\nDeleted '${e.name}' from the Exam table.")
         }
     }
+
+    override fun x() {
+        TODO("Not yet implemented")
+    }
     // ======================================================================
 }

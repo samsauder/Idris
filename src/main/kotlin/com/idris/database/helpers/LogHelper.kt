@@ -46,6 +46,10 @@ object LogHelper : Helper() {
             TODO("Not yet implemented")
         }
     }
+
+    override fun x() {
+        TODO("Not yet implemented")
+    }
     // ======================================================================
 
     private fun inputResult() : String {
