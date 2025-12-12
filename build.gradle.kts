@@ -1,5 +1,8 @@
 plugins {
-    kotlin("jvm") version "2.1.20"
+    // kotlin("jvm") version "2.1.20"
+    // Added the following two for serializing Experiment objects
+    kotlin("jvm") version "2.2.0" // or kotlin("multiplatform") or any other kotlin plugin
+    kotlin("plugin.serialization") version "2.2.0"
 }
 
 group = "com.idris"
@@ -19,7 +22,9 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.49.1.0")
     //implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.61.0")
     //implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 }
+
 
 tasks.test {
     useJUnitPlatform()
