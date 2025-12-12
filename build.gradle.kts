@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.idris"
-version = "0.1"
+version = "0.05"
 
 repositories {
     mavenCentral()
