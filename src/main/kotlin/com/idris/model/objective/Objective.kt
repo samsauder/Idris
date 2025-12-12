@@ -4,6 +4,7 @@ import com.idris.constants.Styles
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
 
+
 abstract class Objective(var name: String,
                          var skill: Skill?,
                          var description: String,

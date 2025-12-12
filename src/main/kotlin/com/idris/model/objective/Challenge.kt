@@ -6,7 +6,6 @@ import com.idris.database.ChallengesT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
-import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
@@ -16,6 +15,7 @@ import java.sql.Connection
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt
+
 
 class Challenge : Objective {
     val et = EloTool()

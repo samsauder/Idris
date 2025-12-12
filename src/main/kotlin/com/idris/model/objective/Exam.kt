@@ -4,6 +4,7 @@ import com.idris.constants.Styles
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
 
+
 class Exam : Objective {
     var passed: Boolean = false
 
