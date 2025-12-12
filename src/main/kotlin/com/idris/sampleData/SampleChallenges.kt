@@ -22,7 +22,10 @@ val projectV7in5 = Challenge("projectV7in5", limit, "", -1.0, -1.0);
 val isolateV8in7 = Challenge("isolateV8in7", limit, "", -1.0, -1.0);
 val projectV8in7 = Challenge("projectV8in7", limit, "", -1.0, -1.0);
 
-val nineRepsV6for90 = Challenge("nineRepsV6for90", limit, "", -1.0, -1.0)
+val nineRepsV6for90 = Challenge("nineRepsV6for90", limit, "", 90.0, -1.0)
+val twelveRepsV6for90 = Challenge("twelveRepsV6for90", limit, "", 90.0, -1.0)
+val fifteenRepsV6for90 = Challenge("fifteenRepsV6for90", limit, "", 90.0, -1.0)
+val eighteenRepsV6for90 = Challenge("eighteenRepsV6for90", limit, "", 90.0, -1.0)
 
 val projectBlack = Challenge("projectBlack", limit, Descriptions.PROJECT_BLACK, 60.0, 0.05)
 val newPurple = Challenge("newPurple", limit, Descriptions.NEW_PURPLE, 60.0, 0.25)
