@@ -8,6 +8,10 @@ import java.sql.Connection
 
 class Database(var path: String) {  // specify a valid .db file with path
 
+    init {
+        connect()
+    }
+
     // Connect to the SQLITE database at path
     fun connect() {
         Database.connect("jdbc:sqlite:$path", "org.sqlite.JDBC")
