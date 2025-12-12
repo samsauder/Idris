@@ -20,13 +20,15 @@ object LogHelper : Helper() {
     override fun c() {
         transaction {
             val name = inputName()
-            val result = inputResult()
+            val resultString = inputResult()
             println()
 
-            val cIterator = ChallengeE.Companion.find { ChallengesT.name eq name }.iterator()
-            val cE = cIterator.next()
-            val c = cE.deEntify()
-            val resultDouble = if (result == "win") 1.0 else 0.0
+            // val cIterator = ChallengeE.Companion.find { ChallengesT.name eq name }.iterator()
+            // val cE = cIterator.next()
+            // val c = cE.deEntify()
+            val result = if (resultString == "win") 1.0 else 0.0
+            cManual(name, result)
+            /*
             c.log(resultDouble)
 
             val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
@@ -38,6 +40,25 @@ object LogHelper : Helper() {
             }
 
             // add an entry to the challenge attempts table
+            */
+        }
+    }
+
+    fun cManual(name: String, result: Double) {
+        transaction {
+            val cIterator = ChallengeE.Companion.find { ChallengesT.name eq name }.iterator()
+            val cE = cIterator.next()
+            val c = cE.deEntify()
+
+            c.log(result)
+
+            val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
+                it.cElo = BigDecimal.valueOf(c.challengeElo)
+                it.uElo = BigDecimal.valueOf(c.userElo)
+                it.uOdds = BigDecimal.valueOf(c.userOdds)
+                it.attempts++
+                it.wins += result.toInt()
+            }
         }
     }
     // ======================================================================
