@@ -6,28 +6,27 @@ class TextEDisplayer : EDisplayer() {
     override fun dashboardOf(e: Experiment) {
         println("\n\n========================================================================================")
         // title
-        println("TITLE        ${e.title}")
+        println("NAME        ${e.name}")
 
         // description
         println("\nDESCRIPTION  ${e.description}")
 
         // duration (days)
-        println("\nDURATION     ${e.segment.size * e.segmentCt} days")
+        println("\nDURATION     ${e.segment.size * e.segCount} days")
 
-        println("\nFOUNDATIONS")
-        for (f in e.foundations) {
-            f.printShort(0);
+        println("\nSEGMENT")
+        for (day in e.segment) {
+            if (day != null) {
+                println("    $day")
+                /*
+                for (objective in day) {
+                    objective.printShort(0)
+                } */
+            } else {
+                println("    N/A")
+            }
         }
 
-        println("\nCHALLENGES")
-        for (c in e.challenges) {
-            c.printShort(0);
-        }
-
-        println("\nEXAMS")
-        for (e in e.exams) {
-            e.printShort(0);
-        }
         println("========================================================================================\n")
     }
 }
