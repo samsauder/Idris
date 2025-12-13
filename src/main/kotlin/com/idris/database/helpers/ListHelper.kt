@@ -1,5 +1,6 @@
 package com.idris.database.helpers
 
+import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
@@ -56,6 +57,14 @@ object ListHelper : Helper() {
         transaction {
             println("PROGRESSIONS")
             println(bar)
+            val styled15minus = "[...1599]"
+            val styled16 = "${Styles.GREEN}[1600-1699]${Styles.RESET}"
+            val styled17 = "${Styles.BLUE}[1700-1799]${Styles.RESET}"
+            val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
+            val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
+
+            println("CHALLENGE ELO KEY: $styled15minus $styled16 $styled17 $styled18 $styled19plus");
+
             for (progressionEntity in ProgressionE.Companion.all()) {
                 val progression = progressionEntity.deEntify(datapath);
                 progression.print()
