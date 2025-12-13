@@ -6,6 +6,8 @@ import com.idris.database.ExamE
 import com.idris.database.ExamsT
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
+import com.idris.database.ProgressionE
+import com.idris.database.ProgressionsT
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
@@ -43,13 +45,19 @@ object DeleteHelper : Helper() {
             println("\nDeleted '${e.name}' from the Exam table.")
         }
     }
-
+    // ======================================================================
     override fun x() {
         TODO("Not yet implemented")
     }
-
+    // ======================================================================
     override fun p(datapath: String) {
-        TODO("Not yet implemented")
+        transaction {
+            val name = inputName()
+            val eIterator =  ProgressionE.find { ProgressionsT.name eq name }.iterator()
+            val e = eIterator.next()
+            e.delete()
+            println("\nDeleted '${e.name}' from the Progression table.")
+        }
     }
     // ======================================================================
 }
