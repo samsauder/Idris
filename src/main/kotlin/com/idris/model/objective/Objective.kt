@@ -22,7 +22,7 @@ abstract class Objective(var name: String,
     init {
         // nameStr = styleAndPad(name, Styles.BOLD,  20)  // name + style + padding
         // nameStr = styleAndPad(name, Styles.GREEN,  20)  // name + style + padding
-        nameStr = pad(name,  28)
+        nameStr = pad(name,  20)
         var skillName = ""
         skill?.let { skillName = it.id };
         // skillStr = pad(skillName,  16)
