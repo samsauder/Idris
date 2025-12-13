@@ -60,7 +60,7 @@ object ListHelper : Helper() {
 
         println("CHALLENGE ELO KEY: $styled15minus $styled16 $styled17 $styled18 $styled19plus\n");
         println("PROGRESSIONS")
-        println(bar)
+        println(barc)
         transaction {
             for (progressionEntity in ProgressionE.Companion.all()) {
                 val progression = progressionEntity.deEntify(datapath);
