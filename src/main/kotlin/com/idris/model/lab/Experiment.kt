@@ -28,11 +28,17 @@ class Experiment(var name: String,
                  var segCount: Int) {
     // lateinit var startDate: LocalDate;
     // adherance
+
+
     /*
     fun begin() {
         startDate = LocalDate.now();
     }*/
 }
+
+
+
+
 
 fun main() {
     val limitDay = listOf(
