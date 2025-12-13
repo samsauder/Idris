@@ -9,7 +9,7 @@ import org.jetbrains.exposed.v1.dao.IntEntityClass
 import com.idris.Database
 
 
-object ProgressionsT : IntIdTable("daysT") {
+object ProgressionsT : IntIdTable("progressionsT") {
     val name = varchar("progressionName", 50)
     val description = varchar("description", 200)
 

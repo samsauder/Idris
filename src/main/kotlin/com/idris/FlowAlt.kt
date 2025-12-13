@@ -1,6 +1,7 @@
 package com.idris
 
 import com.idris.database.helpers.*
+import com.idris.sampleData.nineRepsV6for90
 
 // The REPL command line interface
 
@@ -24,11 +25,11 @@ class FlowAlt {
             if (args.size !in 2..3) println("ERROR: invalid argument count")
 
             when (args[0]) {  // args: <command> <option>
-                "list" -> ListHelper.choose(args[1])
-                "create" -> CreateHelper.choose(args[1])
-                "delete" -> DeleteHelper.choose(args[1])
-                "log" -> LogHelper.choose(args[1])
-                "modify" -> ModifyHelper.choose(args[1])
+                "list" -> ListHelper.choose(args[1], path)
+                "create" -> CreateHelper.choose(args[1], path)
+                "delete" -> DeleteHelper.choose(args[1], path)
+                "log" -> LogHelper.choose(args[1], path)
+                "modify" -> ModifyHelper.choose(args[1], path)
                 // "dash" -> DashHelper.choose(args[1])
             }
 

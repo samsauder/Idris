@@ -131,17 +131,20 @@ fun insertExampleChallenge() {
 // Set up the tables for the real/test database
 fun setupTables(isReal: Boolean) {
     transaction {
-        ChallengesT.deleteAll()
+        /*ChallengesT.deleteAll()
         ChAttemptsT.deleteAll()
         FoundationsT.deleteAll()
-        ExamsT.deleteAll()
+        ExamsT.deleteAll()*/
         SchemaUtils.create(ChallengesT)
         SchemaUtils.create(ChAttemptsT)
         SchemaUtils.create(FoundationsT)
         SchemaUtils.create(ExamsT)
+        SchemaUtils.create(ProgressionsT)
+        // SchemaUtils.create(ExperimentsT)
+        // SchemaUtils.create(DaysT)
 
         val type: String = if (isReal) "real" else "test"
-        println("Created ChallengesT, ChAttemptsT, FoundationsT, ExamsT tables for the $type database.")
+        println("Created ChallengesT, ChAttemptsT, FoundationsT, ExamsT, ProgressionsT tables for the $type database.")
     }
 }
 
@@ -160,7 +163,7 @@ fun setupRealDatabase() {
 
     setupTables(true)
     // insertTacticsChallenges()
-    insertRapidChallenges()
+    // insertRapidChallenges()
 }
 
 

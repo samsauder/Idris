@@ -12,14 +12,16 @@ abstract class Helper {
     val barc = "$bar=================="
 
     // Input an operation option and call its appropriate function
-    fun choose(option: String) {
+    fun choose(option: String, datapath: String) {
         when(option) {
             "-f" -> f()
             "-c" -> c()
             "-e" -> e()
+            "-p" -> p(datapath)
             else -> error("Invalid option")
         }
     }
+
 
     abstract fun f();  // call the operation for Foundation
     abstract fun c();  // call the operation for Challenge

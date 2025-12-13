@@ -99,7 +99,7 @@ object CreateHelper : Helper() {
         val nameIn = inputName()
         val descriptionIn = inputDescription()
 
-        println("Input challenge names in increasing order of difficulty (enter for null):")
+        println("Input challenge names in increasing order of difficulty (X for null):")
         val c0In = inputChallenge(0)
         val c1In = inputChallenge(1)
         val c2In = inputChallenge(2)

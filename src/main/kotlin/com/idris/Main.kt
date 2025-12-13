@@ -6,5 +6,6 @@ package com.idris
 fun main(args: Array<String>) {
     val fa = FlowAlt()
 
-    fa.repl("sdata/realData.db")
+    // fa.repl("sdata/realData.db")
+    fa.repl("sdata/real.db")
 }
