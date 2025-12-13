@@ -69,7 +69,7 @@ object ModifyHelper : Helper() {
                         it.attempts = 0
                         it.wins = 0
                     }
-                    if (progressionNameNew != "1.0") it.progressionName = progressionNameNew
+                    if (progressionNameNew != "-1") it.progressionName = progressionNameNew
                 }
             }
             println("\nModified '$name' in the Challenge table.")
