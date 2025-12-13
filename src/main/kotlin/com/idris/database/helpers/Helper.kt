@@ -8,14 +8,14 @@ import java.util.Scanner
 
 abstract class Helper {
     val scanner = Scanner(System.`in`)
-    val bar = "====================================================="
+    val bar = "======================================================================================================="
     val barc = "$bar=================="
 
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
         when(option) {
             "-f" -> f()
-            "-c" -> c()
+            "-c" -> c(datapath)
             "-e" -> e()
             "-p" -> p(datapath)
             else -> error("Invalid option")
@@ -24,7 +24,7 @@ abstract class Helper {
 
 
     abstract fun f();  // call the operation for Foundation
-    abstract fun c();  // call the operation for Challenge
+    abstract fun c(datapath: String);  // call the operation for Challenge
     abstract fun e();  // call the operation for Exam
     abstract fun x();  // call the operation for Experiment
     // abstract fun d();  // call the operation for Day

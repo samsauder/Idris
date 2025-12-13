@@ -26,7 +26,7 @@ object DeleteHelper : Helper() {
         }
     }
     // ======================================================================
-    override fun c() {
+    override fun c(datapath: String) {
         transaction {
             val name = inputName()
             val cIterator =  ChallengeE.find { ChallengesT.name eq name }.iterator()

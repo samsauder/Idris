@@ -37,7 +37,7 @@ object CreateHelper : Helper() {
         println("\nAdded '${f.name}' to the Foundation table.")
     }
     // ======================================================================
-    override fun c() {  // add a ChallengeE to the database
+    override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = Challenge("", null, "", -1.0, 0.01)
         this.fillObjectiveCore(c)
         val skillName = c.skill?.id

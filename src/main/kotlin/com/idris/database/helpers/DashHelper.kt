@@ -9,7 +9,7 @@ object DashHelper : Helper() {
         TODO("Not yet implemented")
     }
 
-    override fun c() {
+    override fun c(datapath: String) {
         TODO("Not yet implemented")
     }
 
