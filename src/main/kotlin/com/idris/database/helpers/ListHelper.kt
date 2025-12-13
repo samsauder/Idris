@@ -65,7 +65,6 @@ object ListHelper : Helper() {
             for (progressionEntity in ProgressionE.Companion.all()) {
                 val progression = progressionEntity.deEntify(datapath);
                 progression.print()
-                //println()
             }
         }
     }

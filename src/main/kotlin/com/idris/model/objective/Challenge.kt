@@ -72,7 +72,6 @@ class Challenge : Objective {
 
 
     init {
-        // challengeElo = et.opponentRating(userElo, userOdds)
         generateChallengeElo()
     }
 
@@ -107,7 +106,7 @@ class Challenge : Objective {
         val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 5)        // user odds + style
 
         val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
-        println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
+        println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr] $usOddsStr  $descriptionStr")
     }
 
 
@@ -140,8 +139,6 @@ class Challenge : Objective {
         }
         attempts++
 
-        // println("wins/attempts now: $wins/$attempts")
-
         val userEloOld = getUserEloString()
         val challengeEloOld = getChallengeEloString()
         val oddsOld = userOdds
@@ -162,22 +159,6 @@ class Challenge : Objective {
         }
 
         println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
-    }
-
-
-    // writes cElo, uElo and uOdds to the database at <dbFilePath>.db
-    // the dbFilePath is of the form /directory/filename.db
-    fun writeToDB(dbFilePath: String) {
-        Database.Companion.connect("jdbc:sqlite:${dbFilePath}", "org.sqlite.JDBC")
-        TransactionManager.Companion.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-
-        transaction {
-            val challengeE = ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
-                it.cElo = BigDecimal.valueOf(challengeElo)
-                it.uElo = BigDecimal.valueOf(userElo)
-                it.uOdds = BigDecimal.valueOf(userOdds)
-            }
-        }
     }
 
 

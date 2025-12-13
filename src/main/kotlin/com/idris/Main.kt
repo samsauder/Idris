@@ -4,13 +4,15 @@ package com.idris
 
 
 fun main(args: Array<String>) {
-    val fa = FlowAlt()
-
     val path = "sdata/real.db"
     // path = "testdata/testData.db"
 
-    // val database = Database(path)
-    // database.reset(false)
+    FlowAlt.repl(path)
+}
 
-    fa.repl(path)
+
+// Reloads the specified database (reconnects and resets)
+fun reload(path: String) {
+    val database = Database(path)
+    database.reset(false)
 }

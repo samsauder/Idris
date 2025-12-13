@@ -6,7 +6,7 @@ import com.idris.sampleData.nineRepsV6for90
 // The REPL command line interface
 
 
-class FlowAlt {
+object FlowAlt {
     // Start an Idris REPL
     fun repl(path: String) {
         val d = Database(path)

@@ -49,7 +49,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
                 c
             }
 
-            else -> {  // cElo is initialized, use the suppling constructor
+            else -> {  // cElo is initialized, use the supplying constructor
                 val c = Challenge(
                     name,
                     Skill(skill, null),
