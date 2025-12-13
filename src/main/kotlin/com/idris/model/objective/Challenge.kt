@@ -6,6 +6,7 @@ import com.idris.database.ChallengesT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
+import com.idris.sampleData.colorRecall
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
@@ -22,7 +23,7 @@ class Challenge : Objective {
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
-    lateinit var progressionName: String
+    var progressionName: String = ""
 
     // for keeping track of provisional challenge elo (no updating user elo)
     var attempts: Int = 0  // how many times has the user attempted
@@ -95,9 +96,15 @@ class Challenge : Objective {
         val provSym = if (attempts < 20) "?" else ""  // provisional symbol (?)
 
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
-        val chEloStr = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
-        val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
-        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.BOLD, 5)        // user odds + style
+
+        val conditionalCElo = this.colorByOwnElo("${getChallengeEloString()}$provSym")
+        val chEloStr = styleAndPad(conditionalCElo, Styles.BOLD, 5)  // challenge elo + style + padding
+        val usEloStr = pad(getUserEloString(), 5)      // user elo + style + padding
+
+        // val chEloStrOrig = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
+        // val usEloStrOrig = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
+
+        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 5)        // user odds + style
 
         val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
         println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
