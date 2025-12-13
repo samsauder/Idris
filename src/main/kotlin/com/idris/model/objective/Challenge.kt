@@ -139,33 +139,41 @@ class Challenge : Objective {
         }
         attempts++
 
-        val userEloOld = colorByOwnElo(getUserEloString())
-        val challengeEloOld = colorByOwnElo(getChallengeEloString())
-        val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
 
+        val userEloOld = getUserEloString()
+        val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
+        val challengeEloOld = colorByOwnElo("${getChallengeEloString()}$provSymOld")
         val oddsOld = userOdds
+
+        val challengeEloNew: String
+        val provSymNew: String
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
 
         if (attempts < 20) {  // provisional (update just the challenge elo)
             userOdds = wins / (attempts * 1.0)
             regenerateChallengeElo()
-            println("    ${Styles.ITALIC}cELO${Styles.RESET} | ${challengeEloOld}? -> ${Styles.RED}${getChallengeEloString()}?${Styles.RESET}")
+            provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
+            challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
+
+            println("    ${Styles.ITALIC}Challenge Elo |  ${Styles.RESET} | $challengeEloOld -> $challengeEloNew")
         } else {  // update both ratings
             userElo = et.newRating(userElo, 40, sU, eU)
             challengeElo = et.newRating(challengeElo, 40, sB, eB)
             userOdds = et.expectedOutcome(userElo, challengeElo)
 
-            val userEloNew = colorByOwnElo(getUserEloString())
-            val challengeEloNew = colorByOwnElo(getChallengeEloString())
-            val provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
+            val userEloNew = getUserEloString()
+            provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
+            challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
 
-
-            println("    ${Styles.ITALIC}User Elo      |  ${Styles.RESET} | $userEloOld -> $userEloNew")
-            println("    ${Styles.ITALIC}Challenge Elo |  ${Styles.RESET} | $challengeEloOld$provSymOld -> $challengeEloNew$provSymNew")
+            println("    ${Styles.ITALIC}User Elo      |  $userEloOld -> $userEloNew")
+            println("    ${Styles.ITALIC}Challenge Elo |  $challengeEloOld -> $challengeEloNew")
         }
 
-        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
+        val userOddsAsPercentageOld = (oddsOld * 100).toInt()
+        val userOddsAsPercentageNew = (userOdds * 100).toInt()
+
+        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  $userOddsAsPercentageOld -> $userOddsAsPercentageNew%")
     }
 
 
