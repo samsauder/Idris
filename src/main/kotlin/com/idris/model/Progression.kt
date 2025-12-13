@@ -35,7 +35,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
     }
 
     fun print() {
-        print("\n${Styles.BOLD}$name${Styles.RESET} (")
+        print("${Styles.BOLD}$name${Styles.RESET} (")
         var c = 0;
         for (challenge in challenges) {
             //println("challenge is: $challenge")
@@ -63,7 +63,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
             print("${style}${challenge?.name}${Styles.RESET}")
             c++;
         }
-        print(")")
+        print(")\n")
     }
 
 
