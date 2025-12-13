@@ -1,10 +1,13 @@
 package com.idris.database
 
 import com.idris.database.ChAttemptsT.varchar
+import com.idris.model.challenge.components.Progression
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import com.idris.Database
+
 
 object ProgressionsT : IntIdTable("daysT") {
     val name = varchar("progressionName", 50)
@@ -39,4 +42,12 @@ class ProgressionE(id: EntityID<Int>) : IntEntity(id) {
     var c7 by ProgressionsT.c7
     var c8 by ProgressionsT.c8
     var c9 by ProgressionsT.c9
+
+    // Given a path to a .db file
+    fun deEntify(datapath: String) : Progression {
+        return Progression(
+            name,
+            listOf(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9),
+            Database(datapath))
+    }
 }

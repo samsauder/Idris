@@ -26,7 +26,7 @@ abstract class Helper {
     abstract fun e();  // call the operation for Exam
     abstract fun x();  // call the operation for Experiment
     // abstract fun d();  // call the operation for Day
-    abstract fun p();  // call the operation for Progression
+    abstract fun p(datapath: String);  // call the operation for Progression
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective) {
