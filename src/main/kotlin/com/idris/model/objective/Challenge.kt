@@ -92,7 +92,7 @@ class Challenge : Objective {
 
 
     override fun printShort(startLevel: Int) {
-        val provSym = if (attempts < 20) "?" else ""  // provisional symbol (?)
+        val provSym = if (attempts < 20) "?" else " "  // provisional symbol (?)
 
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
 
@@ -139,8 +139,10 @@ class Challenge : Objective {
         }
         attempts++
 
-        val userEloOld = getUserEloString()
-        val challengeEloOld = getChallengeEloString()
+        val userEloOld = colorByOwnElo(getUserEloString())
+        val challengeEloOld = colorByOwnElo(getChallengeEloString())
+        val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
+
         val oddsOld = userOdds
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
@@ -154,8 +156,13 @@ class Challenge : Objective {
             challengeElo = et.newRating(challengeElo, 40, sB, eB)
             userOdds = et.expectedOutcome(userElo, challengeElo)
 
-            println("    ${Styles.ITALIC}uELO${Styles.RESET} | $userEloOld -> ${Styles.BLUE}${getUserEloString()}${Styles.RESET}")
-            println("    ${Styles.ITALIC}cELO${Styles.RESET} | $challengeEloOld -> ${Styles.RED}${getChallengeEloString()}${Styles.RESET}")
+            val userEloNew = colorByOwnElo(getUserEloString())
+            val challengeEloNew = colorByOwnElo(getChallengeEloString())
+            val provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
+
+
+            println("    ${Styles.ITALIC}User Elo      |  ${Styles.RESET} | $userEloOld -> $userEloNew")
+            println("    ${Styles.ITALIC}Challenge Elo |  ${Styles.RESET} | $challengeEloOld$provSymOld -> $challengeEloNew$provSymNew")
         }
 
         println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  ${(oddsOld * 100).toInt()}% -> ${Styles.GREEN}${(userOdds * 100).toInt()}%${Styles.RESET}")
@@ -186,13 +193,13 @@ class Challenge : Objective {
         val l4 = Styles.RED
         val reset = Styles.RESET
 
-        if (challengeElo in 1600.0..<1699.0) {
+        if (challengeElo in 1600.0..<1700.0) {
             style = l1
-        } else if (challengeElo in 1700.0..1799.0) {
+        } else if (challengeElo in 1700.0..<1800.0) {
             style = l2
-        } else if (challengeElo in 1800.0..1899.0) {
+        } else if (challengeElo in 1800.0..<1900.0) {
             style = l3
-        } else if (challengeElo > 1900.0) {
+        } else if (challengeElo >= 1900.0) {
             style = l4
         }
         return "$style$str$reset"
