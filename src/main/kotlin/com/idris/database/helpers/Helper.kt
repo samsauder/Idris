@@ -84,4 +84,11 @@ abstract class Helper {
         print("CHALLENGE$i  ")
         return scanner.next()
     }
+
+
+    fun inputProgression() : String {
+        val s = Scanner(System.`in`)
+        print("PROGRESSION  ")
+        return scanner.next()
+    }
 }

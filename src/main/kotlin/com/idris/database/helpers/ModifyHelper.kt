@@ -48,6 +48,7 @@ object ModifyHelper : Helper() {
             println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
 
             val nameNew = inputName()
+            val progressionNameNew = inputProgression()
             val skillNew = inputSkill()
             val descriptionNew = inputDescription()
             val minutesNew = inputMinutes()
@@ -68,6 +69,7 @@ object ModifyHelper : Helper() {
                         it.attempts = 0
                         it.wins = 0
                     }
+                    if (progressionNameNew != "1.0") it.progressionName = progressionNameNew
                 }
             }
             println("\nModified '$name' in the Challenge table.")

@@ -22,6 +22,7 @@ class Challenge : Objective {
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
+    lateinit var progressionName: String
 
     // for keeping track of provisional challenge elo (no updating user elo)
     var attempts: Int = 0  // how many times has the user attempted
@@ -74,7 +75,6 @@ class Challenge : Objective {
         generateChallengeElo()
     }
 
-
     fun generateChallengeElo() {
         challengeElo = et.opponentRating(userElo, userOdds)
     }
@@ -99,7 +99,8 @@ class Challenge : Objective {
         val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
         val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.BOLD, 5)        // user odds + style
 
-        println("$lvl$symbolHolder $nameStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
+        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 28)
+        println("$lvl$symbolHolder $nameStr $progressionStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
     }
 
 

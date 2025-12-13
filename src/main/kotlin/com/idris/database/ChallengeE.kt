@@ -10,6 +10,7 @@ import java.math.BigDecimal
 
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
 object ChallengesT : ObjectivesT("challengesT") {
+    val progressionName = varchar("progressionName", 50)
     val cElo = decimal("cElo",6, 2)     // challenge elo
     val uElo = decimal("uElo", 6, 2)    // user elo
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
@@ -30,6 +31,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
     var skill by ChallengesT.skill
     var description: String by ChallengesT.description
     var minutes by ChallengesT.minutes
+    var progressionName by ChallengesT.progressionName
     var cElo by ChallengesT.cElo
     var uElo by ChallengesT.uElo
     var uOdds by ChallengesT.uOdds
@@ -58,6 +60,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
                 )
                 c.attempts = attempts
                 c.wins = wins
+                c.progressionName = progressionName
                 return c
             }
         }

@@ -42,6 +42,8 @@ object CreateHelper : Helper() {
         this.fillObjectiveCore(c)
         val skillName = c.skill?.id
 
+        val progressionNameIn = inputProgression()
+
         val s = Scanner(System.`in`)
         print("ODDS  ")
         c.userOdds = s.nextDouble()
@@ -59,6 +61,7 @@ object CreateHelper : Helper() {
                 uOdds = c.userOdds.toBigDecimal()
                 attempts = 0
                 wins = 0
+                progressionName = progressionNameIn
             }
         }
 
@@ -130,4 +133,5 @@ object CreateHelper : Helper() {
 
     }
     // ======================================================================
+
 }
