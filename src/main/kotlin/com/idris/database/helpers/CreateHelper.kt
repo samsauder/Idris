@@ -3,6 +3,7 @@ package com.idris.database.helpers
 import com.idris.database.ChallengeE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
+import com.idris.database.ProgressionE
 import com.idris.model.objective.Exam
 import com.idris.model.objective.Foundation
 import com.idris.model.objective.Challenge
@@ -88,9 +89,51 @@ object CreateHelper : Helper() {
 
         println("\nAdded '${e.name}' to the Exam table.")
     }
-
+    // ======================================================================
     override fun x() {
         TODO("Not yet implemented")
     }
     // ======================================================================
+    override fun p() {
+        // TODO("Not yet implemented")
+        val nameIn = inputName()
+        val descriptionIn = inputDescription()
+
+        println("Input challenge names in increasing order of difficulty (enter for null):")
+        val c0In = inputChallenge(0)
+        val c1In = inputChallenge(1)
+        val c2In = inputChallenge(2)
+        val c3In = inputChallenge(3)
+        val c4In = inputChallenge(4)
+        val c5In = inputChallenge(5)
+        val c6In = inputChallenge(6)
+        val c7In = inputChallenge(7)
+        val c8In = inputChallenge(8)
+        val c9In = inputChallenge(9)
+
+        transaction {
+            ProgressionE.Companion.new {
+                name = nameIn
+                description = descriptionIn
+                c0 = c0In
+                c1 = c1In
+                c2 = c2In
+                c3 = c3In
+                c4 = c4In
+                c5 = c5In
+                c6 = c6In
+                c7 = c7In
+                c8 = c8In
+                c9 = c9In
+            }
+        }
+
+    }
+    // ======================================================================
+
+    fun inputChallenge(i: Int) : String {
+        // val s = Scanner(System.`in`)
+        print("CHALLENGE$i  ")
+        return scanner.next()
+    }
 }
