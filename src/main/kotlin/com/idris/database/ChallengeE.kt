@@ -45,6 +45,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
                 val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
                 c.attempts = attempts
                 c.wins = wins
+                c.progressionName = progressionName
                 c
             }
 

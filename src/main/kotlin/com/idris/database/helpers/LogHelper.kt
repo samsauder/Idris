@@ -52,6 +52,7 @@ object LogHelper : Helper() {
                 it.uOdds = BigDecimal.valueOf(c.userOdds)
                 it.attempts++
                 it.wins += result.toInt()
+                it.progressionName = c.progressionName
             }
         }
     }

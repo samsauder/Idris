@@ -55,6 +55,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         var i = 0
 
         for (challenge in challenges) {
+            if (challenge == null) continue
             println()
             var which = 0.0
             if (seenIndex == -1) {
