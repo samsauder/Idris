@@ -63,7 +63,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
             print("${style}${challenge?.name}${Styles.RESET}")
             c++;
         }
-        print(")\n")
+        print(")")
     }
 
 
