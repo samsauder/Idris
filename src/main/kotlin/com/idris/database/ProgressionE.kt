@@ -4,6 +4,7 @@ import com.idris.database.ChAttemptsT.varchar
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 object ProgressionsT : IntIdTable("daysT") {
     val name = varchar("progressionName", 50)
@@ -23,6 +24,8 @@ object ProgressionsT : IntIdTable("daysT") {
 }
 
 class ProgressionE(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<ProgressionE>(ProgressionsT) {
+    }
     var name by ProgressionsT.name
     var description by ProgressionsT.description
 
