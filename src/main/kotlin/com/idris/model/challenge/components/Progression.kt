@@ -22,6 +22,10 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         transaction {
             var i = 0
             for (cName in challengeNames) {
+                println("$cName")
+                if (cName == "X") {  // null placeholder
+                    continue;
+                }
                 val cIterator = ChallengeE.find { ChallengesT.name eq cName }.iterator()
                 // System.out.println("Found $cName");
                 val c = cIterator.next().deEntify()
@@ -36,6 +40,9 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         print("\n${Styles.BOLD}$name${Styles.RESET} (")
         var c = 0;
         for (challenge in challenges) {
+            if (challenge?.equals("X") as Boolean) {  // null placeholder
+                continue;
+            }
             if (c != 0) print(" -> ")
             var style = ""
             challenge?.challengeElo?.let {
