@@ -6,6 +6,8 @@ import com.idris.database.ExamE
 import com.idris.database.ExamsT
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
+import com.idris.database.ProgressionE
+import com.idris.database.ProgressionsT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.objective.Foundation
@@ -99,7 +101,42 @@ object ModifyHelper : Helper() {
     }
 
     override fun p(datapath: String) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
+        val name = inputName()
+
+        println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
+        val nameNew = inputName()
+        val descriptionNew = inputDescription()
+
+        val c0New = inputChallenge(0)
+        val c1New = inputChallenge(1)
+        val c2New = inputChallenge(2)
+        val c3New = inputChallenge(3)
+        val c4New = inputChallenge(4)
+        val c5New = inputChallenge(5)
+        val c6New = inputChallenge(6)
+        val c7New = inputChallenge(7)
+        val c8New = inputChallenge(8)
+        val c9New = inputChallenge(9)
+
+        transaction {
+            ProgressionE.Companion.findSingleByAndUpdate(ProgressionsT.name eq name) {
+                if (nameNew != "-1") it.name = nameNew
+                if (descriptionNew != "-1") it.description = descriptionNew
+
+                if (c0New != "-1") it.c0 = c0New else return@findSingleByAndUpdate
+                if (c1New != "-1") it.c1 = c1New else return@findSingleByAndUpdate
+                if (c2New != "-1") it.c2 = c2New else return@findSingleByAndUpdate
+                if (c3New != "-1") it.c3 = c3New else return@findSingleByAndUpdate
+                if (c4New != "-1") it.c4 = c4New else return@findSingleByAndUpdate
+                if (c5New != "-1") it.c5 = c5New else return@findSingleByAndUpdate
+                if (c6New != "-1") it.c6 = c6New else return@findSingleByAndUpdate
+                if (c7New != "-1") it.c7 = c7New else return@findSingleByAndUpdate
+                if (c8New != "-1") it.c8 = c8New else return@findSingleByAndUpdate
+                if (c9New != "-1") it.c9 = c9New else return@findSingleByAndUpdate
+            }
+        }
+        println("\nModified '$name' in the Progression table.")
     }
     // ======================================================================
 

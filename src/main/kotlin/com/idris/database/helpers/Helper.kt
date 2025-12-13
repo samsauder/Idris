@@ -78,4 +78,10 @@ abstract class Helper {
         print("MINUTES  ")
         return s.nextInt().toDouble()
     }
+
+    fun inputChallenge(i: Int) : String {
+        // val s = Scanner(System.`in`)
+        print("CHALLENGE$i  ")
+        return scanner.next()
+    }
 }

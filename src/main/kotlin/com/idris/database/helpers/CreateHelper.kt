@@ -130,10 +130,4 @@ object CreateHelper : Helper() {
 
     }
     // ======================================================================
-
-    fun inputChallenge(i: Int) : String {
-        // val s = Scanner(System.`in`)
-        print("CHALLENGE$i  ")
-        return scanner.next()
-    }
 }
