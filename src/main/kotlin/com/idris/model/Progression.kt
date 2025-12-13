@@ -1,4 +1,4 @@
-package com.idris.model.challenge.components
+package com.idris.model
 import com.idris.Database
 import com.idris.constants.Styles
 import com.idris.constants.Styles.RED
@@ -22,14 +22,12 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         transaction {
             var i = 0
             for (cName in challengeNames) {
-                println("$cName")
                 if (cName == "X") {  // null placeholder
                     continue;
                 }
                 val cIterator = ChallengeE.find { ChallengesT.name eq cName }.iterator()
                 // System.out.println("Found $cName");
                 val c = cIterator.next().deEntify()
-                c.printShort(0)
                 challenges[i] = c
                 i++
             }
@@ -40,9 +38,15 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         print("\n${Styles.BOLD}$name${Styles.RESET} (")
         var c = 0;
         for (challenge in challenges) {
+            //println("challenge is: $challenge")
+            if (challenge == null) {
+                continue
+            }
+            /*
             if (challenge?.equals("X") as Boolean) {  // null placeholder
                 continue;
-            }
+            }*/
+
             if (c != 0) print(" -> ")
             var style = ""
             challenge?.challengeElo?.let {
@@ -51,12 +55,12 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
                 } else if (it >= 1700 && it < 1800) {
                     style = Styles.BLUE
                 } else if (it >= 1800 && it < 1900) {
-                    style = Styles.YELLOW
+                    style = YELLOW
                 } else if (it >= 1900) {
-                    style = Styles.RED;
+                    style = RED;
                 }
             }
-            print("\n  ${style}${challenge?.name}${Styles.RESET}")
+            print("${style}${challenge?.name}${Styles.RESET}")
             c++;
         }
         print(")\n")

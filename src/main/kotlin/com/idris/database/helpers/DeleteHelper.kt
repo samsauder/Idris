@@ -53,10 +53,10 @@ object DeleteHelper : Helper() {
     override fun p(datapath: String) {
         transaction {
             val name = inputName()
-            val eIterator =  ProgressionE.find { ProgressionsT.name eq name }.iterator()
-            val e = eIterator.next()
-            e.delete()
-            println("\nDeleted '${e.name}' from the Progression table.")
+            val pIterator =  ProgressionE.find { ProgressionsT.name eq name }.iterator()
+            val p = pIterator.next()
+            p.delete()
+            println("\nDeleted '${p.name}' from the Progression table.")
         }
     }
     // ======================================================================

@@ -1,7 +1,6 @@
 package com.idris.database
 
-import com.idris.database.ChAttemptsT.varchar
-import com.idris.model.challenge.components.Progression
+import com.idris.model.Progression
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
