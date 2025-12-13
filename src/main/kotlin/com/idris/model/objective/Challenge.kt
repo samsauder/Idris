@@ -99,8 +99,8 @@ class Challenge : Objective {
         val usEloStr = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
         val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.BOLD, 5)        // user odds + style
 
-        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 28)
-        println("$lvl$symbolHolder $nameStr $progressionStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
+        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
+        println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr $chEloStr $usEloStr $usOddsStr  $descriptionStr")
     }
 
 
