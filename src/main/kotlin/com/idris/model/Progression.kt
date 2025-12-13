@@ -38,29 +38,9 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         print("${Styles.BOLD}$name${Styles.RESET} (")
         var c = 0;
         for (challenge in challenges) {
-            //println("challenge is: $challenge")
-            if (challenge == null) {
-                continue
-            }
-            /*
-            if (challenge?.equals("X") as Boolean) {  // null placeholder
-                continue;
-            }*/
-
+            if (challenge == null) continue
             if (c != 0) print(" -> ")
-            var style = ""
-            challenge?.challengeElo?.let {
-                if (it >= 1600 && it < 1700) {
-                    style = Styles.GREEN
-                } else if (it >= 1700 && it < 1800) {
-                    style = Styles.BLUE
-                } else if (it >= 1800 && it < 1900) {
-                    style = YELLOW
-                } else if (it >= 1900) {
-                    style = RED;
-                }
-            }
-            print("${style}${challenge?.name}${Styles.RESET}")
+            print(challenge.colorByOwnElo(challenge.name))
             c++;
         }
         print(")\n")

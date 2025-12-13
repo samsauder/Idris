@@ -188,4 +188,25 @@ class Challenge : Objective {
         return round(userElo).toInt().toString()
     }
 
+
+    // Return a conditionally ANSI colored string depending on the current this object's challengeElo
+    fun colorByOwnElo(str: String): String {
+        var style = ""
+        val l1 = Styles.GREEN
+        val l2 = Styles.BLUE
+        val l3 = Styles.YELLOW
+        val l4 = Styles.RED
+        val reset = Styles.RESET
+
+        if (challengeElo in 1600.0..<1699.0) {
+            style = l1
+        } else if (challengeElo in 1700.0..1799.0) {
+            style = l2
+        } else if (challengeElo in 1800.0..1899.0) {
+            style = l3
+        } else if (challengeElo > 1900.0) {
+            style = l4
+        }
+        return "$style$str$reset"
+    }
 }
