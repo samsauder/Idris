@@ -139,41 +139,33 @@ class Challenge : Objective {
         }
         attempts++
 
-
         val userEloOld = getUserEloString()
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
         val challengeEloOld = colorByOwnElo("${getChallengeEloString()}$provSymOld")
         val oddsOld = userOdds
-
-        val challengeEloNew: String
-        val provSymNew: String
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
 
         if (attempts < 20) {  // provisional (update just the challenge elo)
             userOdds = wins / (attempts * 1.0)
             regenerateChallengeElo()
-            provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
-            challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
-
-            println("    ${Styles.ITALIC}Challenge Elo |  ${Styles.RESET} | $challengeEloOld -> $challengeEloNew")
         } else {  // update both ratings
             userElo = et.newRating(userElo, 40, sU, eU)
             challengeElo = et.newRating(challengeElo, 40, sB, eB)
             userOdds = et.expectedOutcome(userElo, challengeElo)
-
             val userEloNew = getUserEloString()
-            provSymNew = if (attempts < 20) "?" else ""  // provisional symbol (?)
-            challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
 
-            println("    ${Styles.ITALIC}User Elo      |  $userEloOld -> $userEloNew")
-            println("    ${Styles.ITALIC}Challenge Elo |  $challengeEloOld -> $challengeEloNew")
+            println("    USER ELO           |  $userEloOld -> $userEloNew")
         }
+
+        val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
+        val challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
 
         val userOddsAsPercentageOld = (oddsOld * 100).toInt()
         val userOddsAsPercentageNew = (userOdds * 100).toInt()
 
-        println("    ${Styles.ITALIC}ODDS${Styles.RESET} |  $userOddsAsPercentageOld -> $userOddsAsPercentageNew%")
+        println("    CHALLENGE ELO      |  $challengeEloOld -> $challengeEloNew")
+        println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%")
     }
 
 
@@ -195,8 +187,8 @@ class Challenge : Objective {
     // Return a conditionally ANSI colored string depending on the current this object's challengeElo
     fun colorByOwnElo(str: String): String {
         var style = ""
-        val l1 = Styles.GREEN
-        val l2 = Styles.BLUE
+        val l1 = Styles.BLUE
+        val l2 = Styles.GREEN
         val l3 = Styles.YELLOW
         val l4 = Styles.RED
         val reset = Styles.RESET
