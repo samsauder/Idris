@@ -6,11 +6,13 @@ import com.idris.database.ExamE
 import com.idris.database.ExamsT
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
+import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.objective.Foundation
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
+import java.util.Scanner
 
 // Call the Idris 'modify' operation for Foundation, Challenge, or Exam
 
@@ -47,6 +49,9 @@ object ModifyHelper : Helper() {
             val skillNew = inputSkill()
             val descriptionNew = inputDescription()
             val minutesNew = inputMinutes()
+            val oddsNew = inputOdds()
+            val et = EloTool()
+            val cEloNew = et.opponentRating(1500.00, oddsNew)
 
             transaction {
                 ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
@@ -54,8 +59,16 @@ object ModifyHelper : Helper() {
                     if (skillNew != "-1") it.skill = skillNew
                     if (descriptionNew != "-1") it.description = descriptionNew
                     if (minutesNew != -1.0) it.minutes = minutesNew.toBigDecimal()
+                    if (oddsNew != -1.0) {
+                        it.cElo = cEloNew.toBigDecimal()
+                        it.uElo = BigDecimal("1500.00")
+                        it.uOdds = oddsNew.toBigDecimal()
+                        it.attempts = 0
+                        it.wins = 0
+                    }
                 }
             }
+            println("\nModified '$name' in the Challenge table.")
         }
     }
     // ======================================================================
@@ -85,4 +98,10 @@ object ModifyHelper : Helper() {
         TODO("Not yet implemented")
     }
     // ======================================================================
+
+    private fun inputOdds() : Double {
+            val s = Scanner(System.`in`)
+            print("ODDS  ")
+            return s.nextDouble()
+    }
 }
