@@ -53,8 +53,8 @@ object ListHelper : Helper() {
 
     override fun p(datapath: String) {
         val styled15minus = "[...1599]"
-        val styled16 = "${Styles.GREEN}[1600-1699]${Styles.RESET}"
-        val styled17 = "${Styles.BLUE}[1700-1799]${Styles.RESET}"
+        val styled16 = "${Styles.BLUE}[1600-1699]${Styles.RESET}"
+        val styled17 = "${Styles.GREEN}[1700-1799]${Styles.RESET}"
         val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
         val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
 
