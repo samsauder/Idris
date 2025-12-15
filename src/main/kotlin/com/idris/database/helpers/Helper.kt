@@ -2,7 +2,10 @@ package com.idris.database.helpers
 
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
+import com.idris.database.ConceptE
+import com.idris.database.DayE
 import com.idris.database.ExamE
+import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
 import com.idris.database.ProgressionE
@@ -47,16 +50,14 @@ abstract class Helper {
 
         // check that a concept with the specified name exists in the database
         transaction {
-            val conceptIterator = when (type) {
-                ConceptType.FOUNDATION -> FoundationE.find { FoundationsT.name eq name }.iterator()
-                ConceptType.CHALLENGE ->  ChallengeE.find { ChallengesT.name eq name }.iterator()
-                ConceptType.EXAM -> ExamE.find { ChallengesT.name eq name }.iterator()
-                ConceptType.PROGRESSION -> ProgressionE.find { ProgressionsT.name eq name }.iterator()
-                // ConceptType.DAY -> DayE.find { DaysT.name eq name}.iterator()
-                // ConceptType.EXPERIMENT -> experimentIterator = ExperimentsE.find { ExperimentsT.name eq name }.iterator()
-                else -> null
-            }
-            exists = conceptIterator!!.hasNext()
+            exists = when (type) {
+                ConceptType.FOUNDATION  -> FoundationE.getOneNamed(name)
+                ConceptType.CHALLENGE   -> ChallengeE.getOneNamed(name)
+                ConceptType.EXAM        -> ExamE.getOneNamed(name)
+                ConceptType.PROGRESSION -> ProgressionE.getOneNamed(name)
+                ConceptType.DAY         -> DayE.getOneNamed(name)
+                ConceptType.EXPERIMENT  -> ExperimentE.getOneNamed(name)
+            } != null
         }
         return exists
     }
