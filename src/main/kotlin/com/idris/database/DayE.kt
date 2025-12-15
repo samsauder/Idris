@@ -4,6 +4,9 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
 
+// A Day is a plan of action to advance a specific skill (consists of a set of Foundations and Progressions)
+
+
 object DaysT : IntIdTable("daysT") {
     val name = varchar("dayName", 50)
     val description = varchar("description", 200)
