@@ -50,6 +50,10 @@ object DeleteHelper : Helper() {
         TODO("Not yet implemented")
     }
     // ======================================================================
+    override fun d() {
+        TODO("Not yet implemented")
+    }
+    // ======================================================================
     override fun p(datapath: String) {
         transaction {
             val name = inputName()

@@ -97,11 +97,15 @@ object ModifyHelper : Helper() {
             }
         }
     }
-
+    // ======================================================================
     override fun x() {
         TODO("Not yet implemented")
     }
-
+    // ======================================================================
+    override fun d() {
+        TODO("Not yet implemented")
+    }
+    // ======================================================================
     override fun p(datapath: String) {
         //TODO("Not yet implemented")
         val name = inputName()
@@ -141,7 +145,6 @@ object ModifyHelper : Helper() {
         println("\nModified '$name' in the Progression table.")
     }
     // ======================================================================
-
     private fun inputOdds() : Double {
             val s = Scanner(System.`in`)
             print("ODDS  ")

@@ -65,16 +65,19 @@ object LogHelper : Helper() {
             TODO("Not yet implemented")
         }
     }
-
+    // ======================================================================
     override fun x() {
         TODO("Not yet implemented")
     }
-
+    // ======================================================================
+    override fun d() {
+        TODO("Not yet implemented")
+    }
+    // ======================================================================
     override fun p(datapath: String) {
         TODO("Not yet implemented")
     }
     // ======================================================================
-
     private fun inputResult() : String {
         // val s = Scanner(System.`in`)
         print("RESULT  ")  // win/loss
