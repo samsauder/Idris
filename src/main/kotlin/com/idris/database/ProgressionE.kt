@@ -6,6 +6,7 @@ import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import com.idris.Database
+import com.idris.model.newclasses.Concept
 
 
 object ProgressionsT : IntIdTable("progressionsT") {
@@ -25,7 +26,7 @@ object ProgressionsT : IntIdTable("progressionsT") {
     val c9 = varchar("c9Name", 50)
 }
 
-class ProgressionE(id: EntityID<Int>) : IntEntity(id) {
+class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ProgressionE>(ProgressionsT) {
     }
     var name by ProgressionsT.name
@@ -48,5 +49,9 @@ class ProgressionE(id: EntityID<Int>) : IntEntity(id) {
             name,
             listOf(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9),
             Database(datapath))
+    }
+
+    override fun deEntify(): Concept {
+        TODO("Not yet implemented")
     }
 }

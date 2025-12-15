@@ -11,7 +11,7 @@ object ExamsT : ObjectivesT("examsT") {
     val passed = bool("passed")
 }
 
-class ExamE(id: EntityID<Int>) : IntEntity(id) {
+class ExamE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ExamE>(ExamsT) {
 
     }
@@ -23,7 +23,7 @@ class ExamE(id: EntityID<Int>) : IntEntity(id) {
     var passed by ExamsT.passed
 
     // Turn the ExamE into an Exam
-    fun deEntify() : Exam {
+    override fun deEntify() : Exam {
         return Exam(
             name,
             Skill(skill, null),

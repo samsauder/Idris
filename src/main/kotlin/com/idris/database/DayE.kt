@@ -1,8 +1,11 @@
 package com.idris.database
 
+import com.idris.model.newclasses.Concept
+import com.idris.model.newclasses.NewDay
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 // A Day is a plan of action to advance a specific skill (consists of a set of Foundations and Progressions)
 
@@ -30,7 +33,9 @@ object DaysT : IntIdTable("daysT") {
     val p4 = varchar("p4Name", 50)
 }
 
-class DayE(id: EntityID<Int>) : IntEntity(id) {
+class DayE(id: EntityID<Int>) : ConceptE(id) {
+    companion object : IntEntityClass<DayE>(DaysT)
+
     var name by DaysT.name
     var description by DaysT.description
 
@@ -50,4 +55,8 @@ class DayE(id: EntityID<Int>) : IntEntity(id) {
     var p2 by DaysT.p2
     var p3 by DaysT.p3
     var p4 by DaysT.p4
+
+    override fun deEntify(): NewDay {
+        TODO("Not yet implemented")
+    }
 }

@@ -1,6 +1,7 @@
 package com.idris.database
 
 import com.idris.model.lab.Experiment
+import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntity
@@ -25,7 +26,7 @@ object ExperimentsT : IntIdTable("experimentsT") {
     // val startDate
 }
 
-class ExperimentE(id: EntityID<Int>) : IntEntity(id) {
+class ExperimentE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ExperimentE>(ExperimentsT) {
     }
 
@@ -41,5 +42,9 @@ class ExperimentE(id: EntityID<Int>) : IntEntity(id) {
     var d7 by ExperimentsT.d7
 
     var segCount by ExperimentsT.segCount
+
+    override fun deEntify(): Concept {
+        TODO("Not yet implemented")
+    }
     // var startDate
 }

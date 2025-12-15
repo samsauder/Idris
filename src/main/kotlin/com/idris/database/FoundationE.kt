@@ -18,7 +18,7 @@ object FoundationsT : ObjectivesT("foundationsT") {
 }
 
 
-class FoundationE(id: EntityID<Int>) : IntEntity(id) {
+class FoundationE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<FoundationE>(FoundationsT) {
 
     }
@@ -29,7 +29,7 @@ class FoundationE(id: EntityID<Int>) : IntEntity(id) {
     var minutes by FoundationsT.minutes
 
     // Turn the FoundationE into a Foundation
-    fun deEntify() : Foundation {
+    override fun deEntify() : Foundation {
         return Foundation(
             name,
             Skill(skill, null),
