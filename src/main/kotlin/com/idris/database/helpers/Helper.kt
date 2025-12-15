@@ -27,7 +27,7 @@ abstract class Helper {
     abstract fun c(datapath: String);  // call the operation for Challenge
     abstract fun e();  // call the operation for Exam
     abstract fun x();  // call the operation for Experiment
-    // abstract fun d();  // call the operation for Day
+    abstract fun d();  // call the operation for Day
     abstract fun p(datapath: String);  // call the operation for Progression
 
     // Fill an Objectives attributes from standard input
@@ -91,4 +91,12 @@ abstract class Helper {
         print("PROGRESSION  ")
         return scanner.next()
     }
+
+    // Prints a prompt string and returns a string taken in from standard input
+    fun inputString(prompt: String) : String {
+        val s = Scanner(System.`in`);
+        print("$prompt  ")
+        return scanner.next();
+    }
+
 }
