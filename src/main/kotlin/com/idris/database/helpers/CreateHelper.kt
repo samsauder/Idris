@@ -1,9 +1,11 @@
 package com.idris.database.helpers
 
 import com.idris.database.ChallengeE
+import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
+import com.idris.model.auxiliary.ConceptType
 import com.idris.model.objective.Exam
 import com.idris.model.objective.Foundation
 import com.idris.model.objective.Challenge
@@ -97,12 +99,46 @@ object CreateHelper : Helper() {
         TODO("Not yet implemented")
     }
     // ======================================================================
+    // Create a Day
+    override fun d() {
+        val nm = inputString("NAME")                                // name
+        val desc = inputString("DESCRIPTION")                       // description
+        val fnms = inputConceptNames(ConceptType.FOUNDATION, 10)  // Foundation names
+        val pnms = inputConceptNames(ConceptType.PROGRESSION, 5)  // Progression names
+
+        transaction {
+            DayE.Companion.new {
+                name = nm
+                description = desc
+                f0 = fnms[0]!!
+                f1 = fnms[1]!!
+                f2 = fnms[2]!!
+                f3 = fnms[3]!!
+                f4 = fnms[4]!!
+                f5 = fnms[5]!!
+                f6 = fnms[6]!!
+                f7 = fnms[7]!!
+                f8 = fnms[8]!!
+                f9 = fnms[9]!!
+                p0 = pnms[0]!!
+                p1 = pnms[1]!!
+                p2 = pnms[2]!!
+                p3 = pnms[3]!!
+                p4 = pnms[4]!!
+            }
+        }
+        println("\nAdded '${nm}' to the Day table.")
+    }
+    // ======================================================================
     override fun p(datapath: String) {
         // TODO("Not yet implemented")
         val nameIn = inputName()
         val descriptionIn = inputDescription()
 
         println("Input challenge names in increasing order of difficulty (X for null):")
+        // val challengeNames = inputEntityNames("CHALLENGE")
+
+        ///*
         val c0In = inputChallenge(0)
         val c1In = inputChallenge(1)
         val c2In = inputChallenge(2)
@@ -113,6 +149,7 @@ object CreateHelper : Helper() {
         val c7In = inputChallenge(7)
         val c8In = inputChallenge(8)
         val c9In = inputChallenge(9)
+        //*/
 
         transaction {
             ProgressionE.Companion.new {
@@ -133,5 +170,4 @@ object CreateHelper : Helper() {
 
     }
     // ======================================================================
-
 }
