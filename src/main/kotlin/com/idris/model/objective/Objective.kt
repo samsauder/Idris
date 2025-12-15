@@ -3,12 +3,15 @@ package com.idris.model.objective
 import com.idris.constants.Styles
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
+import com.idris.model.newclasses.Concept
 
 
-abstract class Objective(var name: String,
-                         var skill: Skill?,
-                         var description: String,
-                         var minutes: Double) {
+abstract class Objective(
+    override var name: String,
+    var skill: Skill?,
+    override var description: String,
+    var minutes: Double) : Concept() {
+
     lateinit var objectiveType: ObjectiveType
     var symbol = ""
     val symbolColor = Styles.GREEN
