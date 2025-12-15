@@ -4,7 +4,7 @@ package com.idris.database.helpers
 // - dash brings up a detailed overview of the specified Idris entity
 
 
-class DashHelper : Helper() {
+object DashHelper : Helper() {
     // ======================================================================
     override fun f() {
         TODO("Not yet implemented")

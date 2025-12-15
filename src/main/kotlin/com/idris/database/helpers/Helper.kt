@@ -24,6 +24,7 @@ abstract class Helper {
     val bar = "======================================================================================================="
     val barc = "$bar=================="
 
+
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
         when(option) {
@@ -65,28 +66,12 @@ abstract class Helper {
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective) {
-        /*
-        val s = Scanner(System.`in`)
-
-        print("NAME  ")
-        o.name = s.next()
-
-        print("SKILL  ")
-        o.skill = Skill(s.next(), null)
-
-        print("DESCRIPTION  ")
-        val z = Scanner(System.`in`)
-        o.description = z.nextLine()
-
-        print("MINUTES  ")
-        val w = Scanner(System.`in`)
-        o.minutes = z.nextDouble()*/
-
         o.name = inputName()
         o.skill = Skill(inputSkill(), null)
         o.description = inputDescription()
         o.minutes = inputMinutes()
     }
+
 
     fun inputName() : String {
         // val s = Scanner(System.`in`)
@@ -94,11 +79,13 @@ abstract class Helper {
         return scanner.next()
     }
 
+
     fun inputSkill() : String {
         // val s = Scanner(System.`in`)
         print("SKILL  ")
         return scanner.next()
     }
+
 
     fun inputDescription() : String {
         val s = Scanner(System.`in`)
@@ -106,11 +93,13 @@ abstract class Helper {
         return s.nextLine()
     }
 
+
     fun inputMinutes() : Double {
         val s = Scanner(System.`in`)
         print("MINUTES  ")
         return s.nextInt().toDouble()
     }
+
 
     fun inputChallenge(i: Int) : String {
         // val s = Scanner(System.`in`)
@@ -125,12 +114,14 @@ abstract class Helper {
         return scanner.next()
     }
 
+
     // Prints a prompt string and returns a string taken in from standard input
     fun inputString(prompt: String) : String {
         val s = Scanner(System.`in`);
         print("$prompt  ")
         return scanner.next();
     }
+
 
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
