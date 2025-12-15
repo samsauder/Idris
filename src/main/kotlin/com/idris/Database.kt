@@ -52,6 +52,7 @@ class Database(var path: String) {  // specify a valid .db file with path
             ChAttemptsT.deleteAll()
             FoundationsT.deleteAll()
             ExamsT.deleteAll()
+            ProgressionsT.deleteAll()
         }
     }
 }
