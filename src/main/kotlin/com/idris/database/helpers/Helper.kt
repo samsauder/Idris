@@ -1,7 +1,17 @@
 package com.idris.database.helpers
 
+import com.idris.database.ChallengeE
+import com.idris.database.ChallengesT
+import com.idris.database.ExamE
+import com.idris.database.FoundationE
+import com.idris.database.FoundationsT
+import com.idris.database.ProgressionE
+import com.idris.database.ProgressionsT
 import com.idris.model.objective.Objective
 import com.idris.model.Skill
+import com.idris.model.auxiliary.ConceptType
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
 // Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
@@ -29,6 +39,28 @@ abstract class Helper {
     abstract fun x();  // call the operation for Experiment
     abstract fun d();  // call the operation for Day
     abstract fun p(datapath: String);  // call the operation for Progression
+
+
+    // Return true if there is a ConceptE of ConceptType type with the specified name in the database
+    fun conceptExists(name: String, type: ConceptType) : Boolean {
+        var exists = false
+
+        // check that a concept with the specified name exists in the database
+        transaction {
+            val conceptIterator = when (type) {
+                ConceptType.FOUNDATION -> FoundationE.find { FoundationsT.name eq name }.iterator()
+                ConceptType.CHALLENGE ->  ChallengeE.find { ChallengesT.name eq name }.iterator()
+                ConceptType.EXAM -> ExamE.find { ChallengesT.name eq name }.iterator()
+                ConceptType.PROGRESSION -> ProgressionE.find { ProgressionsT.name eq name }.iterator()
+                // ConceptType.DAY -> DayE.find { DaysT.name eq name}.iterator()
+                // ConceptType.EXPERIMENT -> experimentIterator = ExperimentsE.find { ExperimentsT.name eq name }.iterator()
+                else -> null
+            }
+            exists = conceptIterator!!.hasNext()
+        }
+        return exists
+    }
+
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective) {
