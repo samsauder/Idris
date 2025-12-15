@@ -1,0 +1,37 @@
+package com.idris.model.newclasses
+
+// An area of expertise
+// Keter domain: the domain that has all the highest level domains as components
+
+class Domain(override val name: String,
+             override val description: String,
+             val superdomain: Domain?) : Concept() {
+
+}
+
+
+fun main() {
+    val keter = Domain(
+        "keter",
+        "The superdomain of all the highest level domains.",
+        null
+    )
+
+    val bouldering = Domain(
+        "bouldering",
+        "The general domain of bouldering.",
+        keter
+    )
+
+    val limit = Domain(
+        "limit",
+        "The domain of max effort focused bouldering.",
+        bouldering
+    )
+
+    val volume = Domain(
+        "volume",
+        "The domain of endurance focused bouldering.",
+        bouldering
+    )
+}
