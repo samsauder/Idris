@@ -7,6 +7,7 @@ import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import com.idris.Database
 import com.idris.model.newclasses.Concept
+import org.jetbrains.exposed.v1.core.eq
 
 
 object ProgressionsT : IntIdTable("progressionsT") {
@@ -28,7 +29,11 @@ object ProgressionsT : IntIdTable("progressionsT") {
 
 class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ProgressionE>(ProgressionsT) {
+        fun getOneNamed(name: String): ProgressionE? {
+            return find { ProgressionsT.name eq name}.singleOrNull()
+        }
     }
+
     var name by ProgressionsT.name
     var description by ProgressionsT.description
 

@@ -19,10 +19,10 @@ object ChallengesT : ObjectivesT("challengesT") {
 }
 
 
-class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
+class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ChallengeE>(ChallengesT) {
         // Return the ChallengeE with the specified name
-        fun getChallengeByName(name: String): ChallengeE? {
+        fun getOneNamed(name: String): ChallengeE? {
             return find { ChallengesT.name eq name}.singleOrNull()
         }
     }
@@ -39,7 +39,7 @@ class ChallengeE(id: EntityID<Int>) : IntEntity(id) {
     var wins by ChallengesT.wins
 
     // Returns the Challenge version of the current ChallengeE
-    fun deEntify() : Challenge {
+    override fun deEntify() : Challenge {
         return when (cElo) {
             BigDecimal("-0000.00") -> {  // cElo is uninitialized, use the determining constructor
                 val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())

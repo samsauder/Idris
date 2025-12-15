@@ -4,6 +4,7 @@ import com.idris.model.lab.Experiment
 import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
@@ -28,6 +29,9 @@ object ExperimentsT : IntIdTable("experimentsT") {
 
 class ExperimentE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ExperimentE>(ExperimentsT) {
+        fun getOneNamed(name: String): ExperimentE? {
+            return find { ExperimentsT.name eq name}.singleOrNull()
+        }
     }
 
     var name by ExperimentsT.name

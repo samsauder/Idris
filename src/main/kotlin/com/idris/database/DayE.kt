@@ -4,6 +4,7 @@ import com.idris.model.newclasses.Concept
 import com.idris.model.newclasses.NewDay
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
@@ -34,7 +35,11 @@ object DaysT : IntIdTable("daysT") {
 }
 
 class DayE(id: EntityID<Int>) : ConceptE(id) {
-    companion object : IntEntityClass<DayE>(DaysT)
+    companion object : IntEntityClass<DayE>(DaysT) {
+        fun getOneNamed(name: String): DayE? {
+            return find { DaysT.name eq name}.singleOrNull()
+        }
+    }
 
     var name by DaysT.name
     var description by DaysT.description

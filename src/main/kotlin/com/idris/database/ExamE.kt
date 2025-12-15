@@ -3,9 +3,10 @@ package com.idris.database
 import com.idris.model.objective.Exam
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
-import org.jetbrains.exposed.v1.dao.IntEntity
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
+
 
 object ExamsT : ObjectivesT("examsT") {
     val passed = bool("passed")
@@ -13,7 +14,9 @@ object ExamsT : ObjectivesT("examsT") {
 
 class ExamE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<ExamE>(ExamsT) {
-
+        fun getOneNamed(name: String): ExamE? {
+            return find { ExamsT.name eq name}.singleOrNull()
+        }
     }
 
     var name by ExamsT.name

@@ -6,6 +6,7 @@ import com.idris.model.objective.Foundation
 import com.idris.model.Skill
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.util.Objects
@@ -20,7 +21,9 @@ object FoundationsT : ObjectivesT("foundationsT") {
 
 class FoundationE(id: EntityID<Int>) : ConceptE(id) {
     companion object : IntEntityClass<FoundationE>(FoundationsT) {
-
+        fun getOneNamed(name: String): FoundationE? {
+            return find { FoundationsT.name eq name}.singleOrNull()
+        }
     }
 
     var name by FoundationsT.name
