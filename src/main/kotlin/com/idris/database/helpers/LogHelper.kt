@@ -28,13 +28,16 @@ object LogHelper : Helper() {
             val cIterator = ChallengeE.Companion.find { ChallengesT.name eq name }.iterator()
             val cE = cIterator.next()
             val c = cE.deEntify()
-            val pIterator = ProgressionE.Companion.find { ProgressionsT.name eq c.progressionName }.iterator()
-            val pE = pIterator.next()
-            val p = pE.deEntify(datapath)
-
             val result = if (resultString == "win") 1.0 else 0.0
-            p.massLog(c.name, result)
-            // cManual(name, result)
+
+            if (c.progressionName == "X") {  // null placeholder
+                cManual(name, result)
+            } else {
+                val pIterator = ProgressionE.Companion.find { ProgressionsT.name eq c.progressionName }.iterator()
+                val pE = pIterator.next()
+                val p = pE.deEntify(datapath)
+                p.massLog(c.name, result)
+            }
         }
     }
 
