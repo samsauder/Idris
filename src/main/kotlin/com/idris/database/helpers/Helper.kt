@@ -131,4 +131,18 @@ abstract class Helper {
         return scanner.next();
     }
 
+    // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
+    fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
+        val entityNames = arrayOfNulls<String>(10)
+        for (i in 0..n) {
+            var name = inputString(type.toString())
+            while (!conceptExists(name, type)) {
+                println("Not a valid ${type}.")
+                name = inputString(type.toString())
+            }
+            entityNames + name
+        }
+        return entityNames
+    }
+
 }
