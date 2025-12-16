@@ -1,6 +1,7 @@
 package com.idris
 import com.idris.database.ChAttemptsT
 import com.idris.database.ChallengesT
+import com.idris.database.DaysT
 import com.idris.database.ExamsT
 import com.idris.database.FoundationsT
 import com.idris.database.ProgressionsT
@@ -39,7 +40,7 @@ class Database(var path: String) {  // specify a valid .db file with path
             SchemaUtils.create(ExamsT)
             SchemaUtils.create(ProgressionsT)
             // SchemaUtils.create(ExperimentsT)
-            // SchemaUtils.create(DaysT)
+            SchemaUtils.create(DaysT)
 
             println("Set up all tables for the database at '$path'.\n")
         }
@@ -53,6 +54,7 @@ class Database(var path: String) {  // specify a valid .db file with path
             FoundationsT.deleteAll()
             ExamsT.deleteAll()
             ProgressionsT.deleteAll()
+            DaysT.deleteAll()
         }
     }
 }
