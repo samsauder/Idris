@@ -24,7 +24,11 @@ object FlowAlt {
             val args = input.split(" ")  // parse the args
 
             if (args[0] == "q") break  // Quit the REPL on q
-            if (args.size !in 2..3) println("ERROR: invalid argument count")
+
+            if (args.size !in 2..3) {
+                println("ERROR: invalid command\n")
+                continue
+            }
 
             when (args[0]) {  // args: <command> <option>
                 "list" -> ListHelper.choose(args[1], path)
@@ -34,7 +38,7 @@ object FlowAlt {
                 "modify" -> ModifyHelper.choose(args[1], path)
                 // "dash" -> DashHelper.choose(args[1])
                 "help" -> help()
-                else -> { println("ERROR: invalid command") }
+                else -> { println("ERROR: invalid command\n") }
             }
 
             println()
