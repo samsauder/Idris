@@ -1,5 +1,6 @@
 package com.idris
 
+import com.idris.constants.Styles
 import com.idris.database.helpers.*
 import com.idris.sampleData.nineRepsV6for90
 
@@ -12,10 +13,7 @@ object FlowAlt {
         val d = Database(path)
         d.connect()
 
-        // val syntaxLater = "SYNTAX: [list/create/delete/modify/log/dash/begin] -[x/f/c/e/p/d]"
-        val syntax = "SYNTAX: [list/create/delete/modify/log] -[f/c/e/p]"
-
-        println("(Idris REPL)        $syntax")
+        println("\n(Idris REPL)")
 
         var input = ""
 
@@ -35,9 +33,29 @@ object FlowAlt {
                 "log" -> LogHelper.choose(args[1], path)
                 "modify" -> ModifyHelper.choose(args[1], path)
                 // "dash" -> DashHelper.choose(args[1])
+                "help" -> help()
+                else -> { println("ERROR: invalid command") }
             }
 
             println()
         }
     }
+
+
+    // Print help
+    private fun help() {
+        val styled14minus = "[..1499]"
+        val styled15 = "${Styles.CYAN}[1500-1599]${Styles.RESET}"
+        val styled16 = "${Styles.BLUE}[1600-1699]${Styles.RESET}"
+        val styled17 = "${Styles.GREEN}[1700-1799]${Styles.RESET}"
+        val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
+        val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
+
+        // val syntaxLater = "SYNTAX: [list/create/delete/modify/log/dash/begin] -[x/f/c/e/p/d]"
+        val syntax = "SYNTAX        |  [list/create/delete/modify/log] -[f/c/e/p]"
+        val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18 $styled19plus\n"
+        println(syntax)
+        println(colors)
+    }
+
 }
