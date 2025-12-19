@@ -25,11 +25,11 @@ abstract class Objective(
     init {
         // nameStr = styleAndPad(name, Styles.BOLD,  20)  // name + style + padding
         // nameStr = styleAndPad(name, Styles.GREEN,  20)  // name + style + padding
-        nameStr = pad(name,  20)
+        nameStr = pad(name,  12)
         var skillName = ""
         skill?.let { skillName = it.id };
         // skillStr = pad(skillName,  16)
-        skillStr = styleAndPad(skillName, Styles.ITALIC, 16)
+        skillStr = styleAndPad(skillName, Styles.ITALIC, 12)
         // descriptionStr = description  // uncomment if wanted
         descriptionStr = style(description, Styles.YELLOW)
         // minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)            // mins + style + padding
