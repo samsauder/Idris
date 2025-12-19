@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val path = "sdata/real.db"
     // val path = "testdata/testData.db"
     // val path = "testdata/willData.db"
-    reload(path, false)
+    // reload(path, false)
     FlowAlt.repl(path)
 }
 
