@@ -25,7 +25,7 @@ object FlowAlt {
 
             if (args[0] == "q") break  // Quit the REPL on q
 
-            if (args.size !in 2..3) {
+            if (args.size !in 2..3 && args[0] != "help") {
                 println("ERROR: invalid command\n")
                 continue
             }
