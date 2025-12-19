@@ -54,13 +54,6 @@ object ListHelper : Helper() {
     }
     // ======================================================================
     override fun p(datapath: String) {
-        val styled15minus = "[...1599]"
-        val styled16 = "${Styles.BLUE}[1600-1699]${Styles.RESET}"
-        val styled17 = "${Styles.GREEN}[1700-1799]${Styles.RESET}"
-        val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
-        val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
-
-        println("CHALLENGE ELO KEY: $styled15minus $styled16 $styled17 $styled18 $styled19plus\n");
         println("PROGRESSIONS")
         println(barc)
         transaction {
