@@ -233,8 +233,8 @@ class Challenge : Objective {
     // Return a conditionally ANSI colored string depending on the current this object's challengeElo
     fun colorByOwnElo(str: String): String {
         var style = ""
-        val l0 = Styles.CYAN
-        val l1 = Styles.BLUE
+        val l0 = Styles.BLUE
+        val l1 = Styles.CYAN
         val l2 = Styles.GREEN
         val l3 = Styles.YELLOW
         val l4 = Styles.RED
