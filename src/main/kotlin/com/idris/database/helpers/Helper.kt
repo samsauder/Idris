@@ -1,19 +1,15 @@
 package com.idris.database.helpers
 
 import com.idris.database.ChallengeE
-import com.idris.database.ChallengesT
-import com.idris.database.ConceptE
 import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
-import com.idris.database.FoundationsT
 import com.idris.database.ProgressionE
-import com.idris.database.ProgressionsT
 import com.idris.model.objective.Objective
 import com.idris.model.Skill
+import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
-import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
@@ -65,18 +61,39 @@ abstract class Helper {
 
 
     // Fill an Objectives attributes from standard input
-    fun fillObjectiveCore(o: Objective) {
-        o.name = inputName()
+    fun fillObjectiveCore(o: Objective, t: ConceptType) {
+        o.name = inputName(t, ConceptState.ABSENT)
         o.skill = Skill(inputSkill(), null)
         o.description = inputDescription()
         o.minutes = inputMinutes()
     }
 
 
-    fun inputName() : String {
+    // Takes a name of a Concept from standard input and verifies that the target ConceptState is true (EXISTS or ABSENT)
+    fun inputName(t: ConceptType, desiredState: ConceptState) : String {
         // val s = Scanner(System.`in`)
         print("NAME  ")
-        return scanner.next()
+        var name = scanner.next()
+
+        while (inUndesiredState(name, t, desiredState)) {
+            println("ERROR: '${name}' not $desiredState in the $t table.\n")
+            name = inputName(t, desiredState)
+        }
+        return name
+    }
+
+
+    // Return true if a named concept should be PRESENT from its table but is ABSENT, false otherwise
+    // Return true if a named concept should be ABSENT from its table but is PRESENT, false otherwise
+    // ARGS
+    // * n: target concept name
+    // * t: target concept type
+    // * s: desired concept state
+    fun inUndesiredState(conceptName: String, conceptType: ConceptType, desiredConceptState: ConceptState): Boolean {
+        return when (desiredConceptState) {
+            ConceptState.PRESENT -> !conceptExists(conceptName, conceptType)
+            ConceptState.ABSENT -> conceptExists(conceptName, conceptType)
+        }
     }
 
 
