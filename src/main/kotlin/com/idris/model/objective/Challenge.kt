@@ -96,9 +96,9 @@ class Challenge : Objective {
 
         val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)        // user odds + style
 
-        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 12)
+        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 14)
         // println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
-        println("$lvl$symbolHolder $nameStr [ $chEloStr $usOddsStr ]         $progressionStr $skillStr $minsStr $descriptionStr")
+        println("$lvl$symbolHolder $nameStr | $chEloStr $usOddsStr         $progressionStr $skillStr $minsStr $descriptionStr")
     }
 
 
