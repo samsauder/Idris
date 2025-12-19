@@ -32,7 +32,7 @@ abstract class Helper {
             "-c" -> c(datapath)
             "-e" -> e()
             "-p" -> p(datapath)
-            else -> error("Invalid option")
+            else -> println("ERROR: invalid command")
         }
     }
 
