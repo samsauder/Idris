@@ -1,18 +1,9 @@
 package com.idris.model.objective
 
 import com.idris.constants.Styles
-import com.idris.database.ChallengeE
-import com.idris.database.ChallengesT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
-import com.idris.sampleData.colorRecall
-import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.jdbc.Database
-import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.math.BigDecimal
-import java.sql.Connection
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt
@@ -98,47 +89,51 @@ class Challenge : Objective {
 
         val conditionalCElo = this.colorByOwnElo("${getChallengeEloString()}$provSym")
         val chEloStr = styleAndPad(conditionalCElo, Styles.BOLD, 5)  // challenge elo + style + padding
-        val usEloStr = pad(getUserEloString(), 5)      // user elo + style + padding
+        //val usEloStr = pad(getUserEloString(), 5)      // user elo + style + padding
 
         // val chEloStrOrig = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
         // val usEloStrOrig = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
 
-        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 5)        // user odds + style
+        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 3)        // user odds + style
 
-        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
-        println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
+        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 12)
+        // println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
+        println("$lvl$symbolHolder $nameStr [ $chEloStr $usOddsStr ]         $progressionStr $skillStr $minsStr $descriptionStr")
     }
 
 
     // value is the result of the attempt for the user (1.0 or 0.5 or 0.0)
     override fun log(value: Double) {
         // println("(log)")
-        val eU = et.expectedOutcome(userElo, challengeElo)  // expected user outcome
-        val eB = et.expectedOutcome(challengeElo, userElo)  // expected benchmark outcome
-        var sU: Double = -1.0  // actual user outcome
-        var sB: Double = -1.0  // actual benchmark outcome
+        val eUo = et.expectedOutcome(userElo, challengeElo)  // expected user outcome
+        val eCo = et.expectedOutcome(challengeElo, userElo)  // expected challenge outcome
+        var aUo: Double = -1.0  // actual user outcome
+        var aCo: Double = -1.0  // actual challenge outcome
 
         when (value) {
             1.0 -> {
                 print("${Styles.GREEN}[+]${Styles.RESET}")
-                sU = 1.0
-                sB = 0.0
+                aUo = 1.0
+                aCo = 0.0
                 wins++
             }  // user won
             0.0 -> {
                 print("${Styles.RED}[-]${Styles.RESET}")
-                sU = 0.0
-                sB = 1.0
+                aUo = 0.0
+                aCo = 1.0
             }  // benchmark won
             0.5 -> {
                 // print("[=]")
-                sU = 0.5
-                sB = 0.5
+                aUo = 0.5
+                aCo = 0.5
             } // no winner
             else -> {}
         }
         attempts++
 
+        originalLogSequence(eUo, aUo, eCo, aCo)
+        // updatedLogSequence()
+        /*
         val userEloOld = getUserEloString()
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
         val challengeEloOld = colorByOwnElo("${getChallengeEloString()}$provSymOld")
@@ -150,8 +145,8 @@ class Challenge : Objective {
             userOdds = wins / (attempts * 1.0)
             regenerateChallengeElo()
         } else {  // update both ratings
-            userElo = et.newRating(userElo, 40, sU, eU)
-            challengeElo = et.newRating(challengeElo, 40, sB, eB)
+            userElo = et.newRating(userElo, 40, aUo, eUo)
+            challengeElo = et.newRating(challengeElo, 40, aCo, eCo)
             userOdds = et.expectedOutcome(userElo, challengeElo)
             val userEloNew = getUserEloString()
 
@@ -166,7 +161,58 @@ class Challenge : Objective {
 
         println("    CHALLENGE ELO      |  $challengeEloOld -> $challengeEloNew")
         println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%")
+        */
     }
+
+
+    // In which challenge elo and user elo are both updated after each log (or just challenge elo if it is provisional)
+    // ARGS:
+    // * euo (expected user outcome)
+    // * auo (actual user outcome)
+    // * eco (expected challenge outcome)
+    // * aco (actual challenge outcome)
+    fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
+        // val userEloOld = getUserEloString()
+        val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
+        val challengeEloOld = colorByOwnElo("${getChallengeEloString()}$provSymOld")
+        val oddsOld = userOdds
+
+        println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
+
+        // previously: if (attempts < 20)
+        if (true) {  // provisional (update just the challenge elo)
+            userOdds = wins / (attempts * 1.0)
+            regenerateChallengeElo()
+        } else {  // update both ratings
+            /*
+            userElo = et.newRating(userElo, 40, aUo, eUo)
+            challengeElo = et.newRating(challengeElo, 40, aCo, eCo)
+            userOdds = et.expectedOutcome(userElo, challengeElo)
+            val userEloNew = getUserEloString()
+
+            println("    USER ELO           |  $userEloOld -> $userEloNew")
+           */
+        }
+
+        val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
+        val challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
+
+        val userOddsAsPercentageOld = (oddsOld * 100).toInt()
+        val userOddsAsPercentageNew = (userOdds * 100).toInt()
+
+        println("    CHALLENGE ELO      |  $challengeEloOld -> $challengeEloNew")
+        println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%")
+    }
+
+
+    // In which challenge elo is kept at a constant 1500 and user elo is calculated based on the odds after each log
+    fun updatedLogSequence() {
+
+    }
+
+
+
+
 
 
     // Returns a string of the elo (turns -Infinity to 0000.0)
@@ -187,13 +233,16 @@ class Challenge : Objective {
     // Return a conditionally ANSI colored string depending on the current this object's challengeElo
     fun colorByOwnElo(str: String): String {
         var style = ""
+        val l0 = Styles.CYAN
         val l1 = Styles.BLUE
         val l2 = Styles.GREEN
         val l3 = Styles.YELLOW
         val l4 = Styles.RED
         val reset = Styles.RESET
 
-        if (challengeElo in 1600.0..<1700.0) {
+        if (challengeElo in 1500.0..<1600.0) {
+            style = l0
+        } else if (challengeElo in 1600.0..<1700.0) {
             style = l1
         } else if (challengeElo in 1700.0..<1800.0) {
             style = l2
@@ -204,4 +253,30 @@ class Challenge : Objective {
         }
         return "$style$str$reset"
     }
+
+
+    // Return a conditionally ANSI colored string depending on the current Challenge's user elo
+    fun colorByUserElo(str: String): String {
+        var style = ""
+        val l0 = Styles.CYAN
+        val l1 = Styles.BLUE
+        val l2 = Styles.GREEN
+        val l3 = Styles.YELLOW
+        val l4 = Styles.RED
+        val reset = Styles.RESET
+
+        if (userElo in 1500.0..<1600.0) {
+            style = l0
+        } else if (userElo in 1600.0..<1700.0) {
+            style = l1
+        } else if (userElo in 1700.0..<1800.0) {
+            style = l2
+        } else if (userElo in 1800.0..<1900.0) {
+            style = l3
+        } else if (userElo >= 1900.0) {
+            style = l4
+        }
+        return "$style$str$reset"
+    }
+
 }
