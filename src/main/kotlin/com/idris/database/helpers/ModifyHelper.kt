@@ -10,6 +10,8 @@ import com.idris.database.ProgressionE
 import com.idris.database.ProgressionsT
 import com.idris.elo.EloTool
 import com.idris.model.Skill
+import com.idris.model.auxiliary.ConceptState
+import com.idris.model.auxiliary.ConceptType
 import com.idris.model.objective.Foundation
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -22,11 +24,11 @@ import java.util.Scanner
 object ModifyHelper : Helper() {
     // ======================================================================
     override fun f() {
-        val name = inputName()
+        val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
 
         println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
 
-        val nameNew = inputName()
+        val nameNew = inputName(ConceptType.FOUNDATION, ConceptState.ABSENT)
         val skillNew = inputSkill()
         val descriptionNew = inputDescription()
         val minutesNew = inputMinutes()
@@ -43,11 +45,11 @@ object ModifyHelper : Helper() {
     // ======================================================================
     override fun c(datapath: String) {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
 
             println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
 
-            val nameNew = inputName()
+            val nameNew = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
             val progressionNameNew = inputProgression()
             val skillNew = inputSkill()
             val descriptionNew = inputDescription()
@@ -78,11 +80,11 @@ object ModifyHelper : Helper() {
     // ======================================================================
     override fun e() {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.EXAM, ConceptState.PRESENT)
 
             println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
 
-            val nameNew = inputName()
+            val nameNew = inputName(ConceptType.EXAM, ConceptState.ABSENT)
             val skillNew = inputSkill()
             val descriptionNew = inputDescription()
             val minutesNew = inputMinutes()
@@ -108,10 +110,10 @@ object ModifyHelper : Helper() {
     // ======================================================================
     override fun p(datapath: String) {
         //TODO("Not yet implemented")
-        val name = inputName()
+        val name = inputName(ConceptType.PROGRESSION, ConceptState.PRESENT)
 
         println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")
-        val nameNew = inputName()
+        val nameNew = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
         val descriptionNew = inputDescription()
 
         val c0New = inputChallenge(0)

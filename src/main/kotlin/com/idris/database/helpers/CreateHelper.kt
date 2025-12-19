@@ -5,6 +5,7 @@ import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
+import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
 import com.idris.model.objective.Exam
 import com.idris.model.objective.Foundation
@@ -24,7 +25,7 @@ object CreateHelper : Helper() {
             "",
             -1.0
         )
-        this.fillObjectiveCore(f)
+        this.fillObjectiveCore(f, ConceptType.FOUNDATION)
         val skillName = f.skill?.id
 
         transaction {
@@ -41,7 +42,7 @@ object CreateHelper : Helper() {
     // ======================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = Challenge("", null, "", -1.0, 0.01)
-        this.fillObjectiveCore(c)
+        this.fillObjectiveCore(c, ConceptType.CHALLENGE)
         val skillName = c.skill?.id
 
         val progressionNameIn = inputProgression()
@@ -78,7 +79,7 @@ object CreateHelper : Helper() {
             -1.0,
             false
         )
-        this.fillObjectiveCore(e)
+        this.fillObjectiveCore(e, ConceptType.EXAM)
         val skillName = e.skill?.id
 
         transaction {
@@ -101,7 +102,7 @@ object CreateHelper : Helper() {
     // ======================================================================
     // Create a Day
     override fun d() {
-        val nm = inputString("NAME")                                // name
+        val nm = inputName(ConceptType.DAY, ConceptState.ABSENT)                                // name
         val desc = inputString("DESCRIPTION")                       // description
         val fnms = inputConceptNames(ConceptType.FOUNDATION, 10)  // Foundation names
         val pnms = inputConceptNames(ConceptType.PROGRESSION, 5)  // Progression names
@@ -132,7 +133,7 @@ object CreateHelper : Helper() {
     // ======================================================================
     override fun p(datapath: String) {
         // TODO("Not yet implemented")
-        val nameIn = inputName()
+        val nameIn = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
         val descriptionIn = inputDescription()
 
         println("Input challenge names in increasing order of difficulty (X for null):")

@@ -4,6 +4,8 @@ import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
 import com.idris.database.ProgressionE
 import com.idris.database.ProgressionsT
+import com.idris.model.auxiliary.ConceptState
+import com.idris.model.auxiliary.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
@@ -21,7 +23,7 @@ object LogHelper : Helper() {
     // ======================================================================
     override fun c(datapath: String) {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
             val resultString = inputResult()
             println()
 

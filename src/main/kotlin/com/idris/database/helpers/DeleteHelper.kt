@@ -8,6 +8,8 @@ import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
 import com.idris.database.ProgressionE
 import com.idris.database.ProgressionsT
+import com.idris.model.auxiliary.ConceptState
+import com.idris.model.auxiliary.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
@@ -18,7 +20,7 @@ object DeleteHelper : Helper() {
     // ======================================================================
     override fun f() {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
             val fIterator =  FoundationE.find { FoundationsT.name eq name }.iterator()
             val f = fIterator.next()
             f.delete()
@@ -28,7 +30,7 @@ object DeleteHelper : Helper() {
     // ======================================================================
     override fun c(datapath: String) {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
             val cIterator =  ChallengeE.find { ChallengesT.name eq name }.iterator()
             val c = cIterator.next()
             c.delete()
@@ -38,7 +40,7 @@ object DeleteHelper : Helper() {
     // ======================================================================
     override fun e() {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.EXAM, ConceptState.PRESENT)
             val eIterator =  ExamE.find { ExamsT.name eq name }.iterator()
             val e = eIterator.next()
             e.delete()
@@ -56,7 +58,7 @@ object DeleteHelper : Helper() {
     // ======================================================================
     override fun p(datapath: String) {
         transaction {
-            val name = inputName()
+            val name = inputName(ConceptType.PROGRESSION, ConceptState.PRESENT)
             val pIterator =  ProgressionE.find { ProgressionsT.name eq name }.iterator()
             val p = pIterator.next()
             p.delete()
