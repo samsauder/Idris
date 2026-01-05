@@ -11,6 +11,7 @@ import com.idris.model.Skill
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.util.Arrays
 import java.util.Scanner
 
 // Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
@@ -144,14 +145,19 @@ abstract class Helper {
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
         val entityNames = arrayOfNulls<String>(10)
-        for (i in 0..n) {
+        for (i in 0..< n) {
             var name = inputString(type.toString())
+            if (name == "X") {
+                entityNames[i] = name
+                continue
+            }
             while (!conceptExists(name, type)) {
                 println("Not a valid ${type}.")
                 name = inputString(type.toString())
             }
-            entityNames + name
+            entityNames[i] = name
         }
+        println("ENTITY NAMES: ${entityNames.contentToString()}")
         return entityNames
     }
 
