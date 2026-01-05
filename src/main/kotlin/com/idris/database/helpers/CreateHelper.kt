@@ -104,7 +104,11 @@ object CreateHelper : Helper() {
     override fun d() {
         val nm = inputName(ConceptType.DAY, ConceptState.ABSENT)                                // name
         val desc = inputString("DESCRIPTION")                       // description
+
+        println("Input all Foundation names (X for null):")
         val fnms = inputConceptNames(ConceptType.FOUNDATION, 10)  // Foundation names
+
+        println("\nInput all Progression names (X for null):")
         val pnms = inputConceptNames(ConceptType.PROGRESSION, 5)  // Progression names
 
         transaction {

@@ -21,7 +21,7 @@ class Foundation : Objective {
 
     override fun printShort(startLevel: Int) {
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
-        println("$lvl$symbolHolder $nameStr $skillStr $minsStr $descriptionStr")
+        println("$lvl$symbolHolder $nameStr | $skillStr $minsStr $descriptionStr")
     }
 
 
