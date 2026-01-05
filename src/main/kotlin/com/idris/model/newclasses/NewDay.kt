@@ -13,24 +13,16 @@ class NewDay(override val name: String,
              val progressionNames: Array<String>) : Concept() {
 
     fun printDay() {
-        print("${Styles.ITALIC}$name${Styles.RESET}  [")
-        var f = 0;
+        println("\n${Styles.GREEN}$name${Styles.RESET}")
+        print("=======================================================================\n")
         for (fname in foundationNames) {
-            if (fname == "X") continue
-            if (f != 0) print(" : ")
-            print(fname)
-            f++;
+            if (fname == "X") break
+            println(fname)
         }
-        print("] [")
-
-        var p = 0
         for (pname in progressionNames) {
-            if (pname == "X") continue
-            if (p != 0) print(" : ")
-            print("${Styles.BOLD}$pname${Styles.RESET}")
-            p++
+            if (pname == "X") break
+            println("${Styles.BOLD}$pname${Styles.RESET}")
         }
-        print("]\n")
     }
 
 }
