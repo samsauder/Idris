@@ -36,7 +36,7 @@ object FlowAlt {
                 "delete" -> DeleteHelper.choose(args[1], path)
                 "log" -> LogHelper.choose(args[1], path)
                 "modify" -> ModifyHelper.choose(args[1], path)
-                // "dash" -> DashHelper.choose(args[1])
+                // "view" -> DashHelper.choose(args[1])
                 "help" -> help()
                 else -> { println("ERROR: invalid command\n") }
             }
