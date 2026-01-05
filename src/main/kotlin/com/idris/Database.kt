@@ -12,11 +12,17 @@ import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.sql.Connection
 
+// Use main when the database needs to be reset
+fun main() {
+    val path = "testdata/055.db"
+    val reset: Boolean = false
+    val db = Database(path)
+    db.setup(reset)
+    println("Set up $path")
+}
+
 // An abstraction for an SQLITE database of Idris entities on the host machine
-
-
 class Database(var path: String) {  // specify a valid .db file with path
-
     init {
         connect()
     }
@@ -30,9 +36,9 @@ class Database(var path: String) {  // specify a valid .db file with path
     }
 
     // Set up the tables for the current database
-    fun reset(deleteEntities: Boolean) {
+    fun setup(reset: Boolean) {
         transaction {
-            if (deleteEntities) deleteEntities()  // remove all entities
+            if (reset) deleteEntities()  // remove all entities
 
             SchemaUtils.create(ChallengesT)
             SchemaUtils.create(ChAttemptsT)
@@ -57,4 +63,5 @@ class Database(var path: String) {  // specify a valid .db file with path
             DaysT.deleteAll()
         }
     }
+
 }
