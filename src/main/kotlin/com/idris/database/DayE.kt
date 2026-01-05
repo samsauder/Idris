@@ -62,6 +62,11 @@ class DayE(id: EntityID<Int>) : ConceptE(id) {
     var p4 by DaysT.p4
 
     override fun deEntify(): NewDay {
-        TODO("Not yet implemented")
+        return NewDay(
+            name,
+            description,
+            arrayOf(f0, f1, f2, f3, f4, f5, f6, f7, f8, f9),
+            arrayOf(p0, p1, p2, p3, p4)
+        )
     }
 }
