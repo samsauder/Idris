@@ -24,10 +24,11 @@ abstract class Helper {
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
         when(option) {
-            "-f" -> f()
-            "-c" -> c(datapath)
-            "-e" -> e()
-            "-p" -> p(datapath)
+            "-f" -> f()  // foundation
+            "-c" -> c(datapath)  // challenge
+            "-e" -> e()  // exam
+            "-p" -> p(datapath)  // progression
+            "-d" -> d()  // day
             else -> println("ERROR: invalid command")
         }
     }
