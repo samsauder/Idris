@@ -4,6 +4,7 @@ import com.idris.database.DayE
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
 import com.idris.model.newclasses.NewDay
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 // Call the Idris 'view' operation on an Idris entity
@@ -29,9 +30,12 @@ object ViewHelper : Helper() {
     // Print an overview of a specified Day
     override fun d() {
         val name = inputName(ConceptType.DAY, ConceptState.PRESENT)  // get a valid Day name from stdin
-        val dayEntity: DayE = DayE.getOneNamed(name)!!
-        val day: NewDay = dayEntity.deEntify()
-        day.printDay()
+
+        transaction {
+            val dayEntity: DayE = DayE.getOneNamed(name)!!
+            val day: NewDay = dayEntity.deEntify()
+            day.printDay()
+        }
     }
 
     override fun p(datapath: String) {
