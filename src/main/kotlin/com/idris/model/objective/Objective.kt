@@ -1,7 +1,6 @@
 package com.idris.model.objective
 
 import com.idris.constants.Styles
-import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
 import com.idris.model.newclasses.Concept
 
@@ -38,11 +37,12 @@ abstract class Objective : Concept {
         */
     }
 
+    /*
     // Return a string composed of this Objective's icon, its formatted name, and its skill
     fun icon_name_skill(): String {
         val skillf = format(skillName, "", 14)
         return "${icon_name()} | $skillf"
-    }
+    }*/
 
     abstract fun log(value: Double)
 }

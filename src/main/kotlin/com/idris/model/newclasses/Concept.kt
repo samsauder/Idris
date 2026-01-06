@@ -1,7 +1,6 @@
 package com.idris.model.newclasses
 
 import com.idris.constants.Styles
-import com.idris.model.Skill
 
 // The Concept is the superclass of all Idris classes and stores common attributes:
 // + name        |  a unique identifier
@@ -13,6 +12,7 @@ import com.idris.model.Skill
 
 
 abstract class Concept {
+    abstract val icon: String  // one character visual marker
     var name: String
     var skillName: String
     var description: String
@@ -26,20 +26,20 @@ abstract class Concept {
         this.description = description
     }
 
-    abstract val icon: String  // one character visual marker
-
-    init {
-
-    }
-
     abstract fun print()   // print a comprehensive representation
+
     abstract fun printL()  // print a one-line representation
 
-    // Returns a string composed of this Concept's icon and its formatted name
-    fun icon_name(): String {
+
+    // Return a string composed of this Concept's icon, its formatted name, and its skill
+    fun icon_name_skill(): String {
+        val iconf = "${Styles.GREEN}[$icon]${Styles.RESET}"
         val fname = format(name, "", 20)  // formatted name
-        return "${Styles.GREEN}[$icon]${Styles.RESET} $fname"
+        val skillf = format(skillName, Styles.BOLD, 14)
+
+        return "$iconf $fname | $skillf"
     }
+
 
     // Format a string to a specific style and pad it with whitespace to meet the specified width
     // * input "" for style and null for padding if not wanted

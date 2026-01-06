@@ -2,13 +2,10 @@ package com.idris.model.objective
 
 import com.idris.constants.Styles
 import com.idris.elo.EloTool
-import com.idris.model.Skill
 import com.idris.model.auxiliary.ObjectiveType
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt
-
-// import kotlin.math.roundToInt
 
 
 class Challenge : Objective {
