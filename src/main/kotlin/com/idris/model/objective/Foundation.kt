@@ -6,6 +6,7 @@ import com.idris.model.auxiliary.ObjectiveType
 
 
 class Foundation : Objective {
+    override val icon = "◯"
     var done: Boolean = false
 
 
