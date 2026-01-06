@@ -4,6 +4,7 @@ import com.idris.database.ChallengeE
 import com.idris.database.ConceptE
 import com.idris.database.DayE
 import com.idris.database.FoundationE
+import com.idris.database.ProgressionE
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
 import com.idris.model.newclasses.NewDay
@@ -46,24 +47,25 @@ object ViewHelper : Helper() {
     }
 
     override fun p(datapath: String) {
-        TODO("Not yet implemented")
-        // view(ConceptType.PROGRESSION)
+        view(ConceptType.PROGRESSION)
     }
 
     fun view(ct: ConceptType) {
-        val name = inputName(ct, ConceptState.PRESENT)
-        val conceptEntity: ConceptE = when (ct) {
-            ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
-            ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
-            // ConceptType.EXAM -> {}
-            ConceptType.DAY -> {DayE.getOneNamed(name)!!}
-            // ConceptType.PROGRESSION -> {}
-            // ConceptType.EXPERIMENT -> {}
-            else -> {null}
-        } as ConceptE
+        transaction {
+            val name = inputName(ct, ConceptState.PRESENT)
+            val conceptEntity: ConceptE = when (ct) {
+                ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
+                ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
+                // ConceptType.EXAM -> {}
+                ConceptType.DAY -> {DayE.getOneNamed(name)!!}
+                ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
+                // ConceptType.EXPERIMENT -> {}
+                else -> {null}
+            } as ConceptE
 
-        val concept = conceptEntity.deEntify()
-        concept.print()  // comprehensive view
+            val concept = conceptEntity.deEntify()
+            concept.print()  // comprehensive view
+        }
     }
 
 }
