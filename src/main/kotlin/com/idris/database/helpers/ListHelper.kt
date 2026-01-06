@@ -71,7 +71,7 @@ object ListHelper : Helper() {
         transaction {
             for (progressionEntity in ProgressionE.Companion.all()) {
                 val progression = progressionEntity.deEntify(datapath);
-                progression.print()
+                progression.printL()
             }
         }
     }

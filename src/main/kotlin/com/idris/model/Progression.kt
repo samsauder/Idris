@@ -7,13 +7,18 @@ import com.idris.database.helpers.LogHelper
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import com.idris.model.newclasses.Concept
+
 
 // A Progression is an ordered set of Challenges of progressive difficulty
 
 // EX. V7in7 -> V7in5 -> V7in3 -> V7in1
 
 
-class Progression(val name: String, val challengeNames: List<String>, database: Database) {
+class Progression(override val name: String,
+                  override val description: String,
+                  val challengeNames: List<String>, database: Database) : Concept() {
+    override var icon = "P"
     var challenges: Array<Challenge?> = arrayOfNulls<Challenge>(challengeNames.size)
 
     init {  // load named Challenges from the database
@@ -32,7 +37,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         }
     }
 
-    fun print() {
+    override fun print() {
         TODO()
         /*
         print("${Styles.BOLD}$name${Styles.RESET} (")
@@ -45,6 +50,10 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
         }
         print(")\n")
          */
+    }
+
+    override fun printL() {
+        println(icon_name())
     }
 
 
@@ -75,6 +84,7 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
 }
 
 fun main() {
+    /*
     // The V7inN progression tracks increasingly difficult challenges (completing a V7 in decreasingly fewer moves)
     val path = "sdata/realData.db"
     val data = Database(path)
@@ -105,4 +115,5 @@ fun main() {
 
     dreamQuality.print()
     dreamQuantity.print()
+     */
 }
