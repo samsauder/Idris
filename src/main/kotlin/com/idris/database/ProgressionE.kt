@@ -36,7 +36,7 @@ class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by ProgressionsT.name
-    val skillName by ProgressionsT.skillName
+    var skillName by ProgressionsT.skillName
     var description by ProgressionsT.description
 
     var c0 by ProgressionsT.c0

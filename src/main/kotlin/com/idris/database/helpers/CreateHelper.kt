@@ -139,6 +139,7 @@ object CreateHelper : Helper() {
     override fun p(datapath: String) {
         // TODO("Not yet implemented")
         val nameIn = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
+        val skillIn = inputSkill()
         val descriptionIn = inputDescription()
 
         println("Input challenge names in increasing order of difficulty (X for null):")
@@ -160,6 +161,7 @@ object CreateHelper : Helper() {
         transaction {
             ProgressionE.Companion.new {
                 name = nameIn
+                skillName = skillIn
                 description = descriptionIn
                 c0 = c0In
                 c1 = c1In
