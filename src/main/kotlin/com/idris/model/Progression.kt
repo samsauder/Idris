@@ -47,18 +47,19 @@ class Progression : Concept {
 
 
     override fun print() {
-        TODO()
-        /*
-        print("${Styles.BOLD}$name${Styles.RESET} (")
+        // print("${Styles.BOLD}$name${Styles.RESET} (")
+        print(format(name, Styles.BOLD, 20))
+        print(" (")
+
         var c = 0;
         for (challenge in challenges) {
             if (challenge == null) continue
             if (c != 0) print(" -> ")
-            print(challenge.colorFromElo(challenge.name))
+            print(format(challenge.name, challenge.color(), null))
             c++;
         }
         print(")\n")
-         */
+
     }
 
     override fun printL() {
