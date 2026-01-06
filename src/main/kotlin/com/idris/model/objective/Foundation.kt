@@ -20,9 +20,10 @@ class Foundation : Objective {
 
 
     constructor(name: String,
-                skill: Skill?,
+                // skill: Skill?,
+                skillName: String,
                 description: String,
-                minutes: Double) : super(name, skill, description, minutes) {
+                minutes: Double) : super(name, skillName, description, minutes) {
         this.symbol = "◯"
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.FOUNDATION

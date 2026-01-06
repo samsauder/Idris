@@ -2,7 +2,7 @@ package com.idris.sampleData
 
 import com.idris.constants.Descriptions
 import com.idris.model.objective.Foundation
-
+/*
 val hang20mm90max = Foundation("hang20mm90max", hang, Descriptions.HANG_20MM_90MAX, 20.0)
 val pullup85max = Foundation("pullup85max", pull, Descriptions.PULLUP_85MAX, 20.0)
 
@@ -13,3 +13,4 @@ val pullup85max = Foundation("pullup85max", pull, Descriptions.PULLUP_85MAX, 20.
 
 val boulderingLiTodos = mutableListOf(hang20mm90max, pullup85max)
 // val boulderingVoTodos = mutableListOf(hangingKneeRaises, bentLegWindshieldWipers, benchPress)
+*/

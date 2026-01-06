@@ -16,6 +16,7 @@ import com.idris.model.newclasses.Concept
 
 
 class Progression(override val name: String,
+                  override val skillName: String,
                   override val description: String,
                   val challengeNames: List<String>, database: Database) : Concept() {
     override var icon = "P"

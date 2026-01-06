@@ -21,17 +21,18 @@ object CreateHelper : Helper() {
     override fun f() {  // add a FoundationE to the database
         val f = Foundation(
             "",
-            null,
+            "",
+            // null,
             "",
             -1.0
         )
         this.fillObjectiveCore(f, ConceptType.FOUNDATION)
-        val skillName = f.skill?.id
+        val sN = f.skillName
 
         transaction {
             FoundationE.Companion.new {
                 name = f.name
-                if (skillName != null) skill = skillName;
+                if (skillName != "") skillName = sN;
                 description = f.description
                 minutes = f.minutes.toBigDecimal()
             }
@@ -41,9 +42,9 @@ object CreateHelper : Helper() {
     }
     // ======================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
-        val c = Challenge("", null, "", -1.0, 0.01)
+        val c = Challenge("", "", "", -1.0, 0.01)
         this.fillObjectiveCore(c, ConceptType.CHALLENGE)
-        val skillName = c.skill?.id
+        val sN = c.skillName
 
         val progressionNameIn = inputProgression()
 
@@ -56,7 +57,7 @@ object CreateHelper : Helper() {
             ChallengeE.Companion.new {
                 name = c.name
                 // skill = (c.skill?.id ?: String) as String
-                if (skillName != null) skill = skillName;
+                if (skillName != "") skillName = sN;
                 description = c.description
                 minutes = c.minutes.toBigDecimal()
                 cElo = c.challengeElo.toBigDecimal()
@@ -74,18 +75,18 @@ object CreateHelper : Helper() {
     override fun e() {  // add an ExamE to the database
         val e  = Exam(
             "",
-            null,
+            "",
             "",
             -1.0,
             false
         )
         this.fillObjectiveCore(e, ConceptType.EXAM)
-        val skillName = e.skill?.id
+        val sN = e.skillName
 
         transaction {
             ExamE.Companion.new {
                 name = e.name
-                if (skillName != null) skill = skillName;
+                if (skillName != "") skillName = sN;
                 description = e.description
 
                 minutes = e.minutes.toBigDecimal()

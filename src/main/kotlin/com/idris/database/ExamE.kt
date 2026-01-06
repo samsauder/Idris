@@ -20,7 +20,8 @@ class ExamE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by ExamsT.name
-    var skill: String by ExamsT.skill
+    var skillName: String by ExamsT.skillName
+    // var skill: String by ExamsT.skill
     var description by ExamsT.description
     var minutes: BigDecimal by ExamsT.minutes
     var passed by ExamsT.passed
@@ -29,7 +30,8 @@ class ExamE(id: EntityID<Int>) : ConceptE(id) {
     override fun deEntify() : Exam {
         return Exam(
             name,
-            Skill(skill, null),
+            skillName,
+            // Skill(skill, null),
             description,
             minutes.toDouble(),
             passed)

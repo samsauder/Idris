@@ -14,6 +14,7 @@ import kotlin.math.roundToInt
 class Challenge : Objective {
     val et = EloTool()
     override val icon = "●"
+    override var skillName: String = ""
 
     override fun print() {
         TODO("Not yet implemented")
@@ -62,7 +63,7 @@ class Challenge : Objective {
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
 
-
+    /*
     // General Constructor (just makes the core Objective attributes)
     constructor(
         name: String,
@@ -73,9 +74,21 @@ class Challenge : Objective {
         this.symbol = "●"
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.CHALLENGE
+    }*/
+
+    // General Constructor (just makes the core Objective attributes)
+    constructor(
+        name: String,
+        skillName: String,
+        description: String,
+        minutes: Double
+    ) : super(name, skillName, description, minutes) {
+        this.symbol = "●"
+        this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
+        this.objectiveType = ObjectiveType.CHALLENGE
     }
 
-
+    /*
     // Elo Determining Constructor (given user odds)
     constructor(
         name: String,
@@ -87,9 +100,36 @@ class Challenge : Objective {
         this.userOdds = userOdds
         this.userElo = 1500.00
         this.challengeElo = et.opponentRating(userElo, userOdds)
+    } */
+
+    // Elo Determining Constructor (given user odds)
+    constructor(
+        name: String,
+        skillName: String,
+        description: String,
+        minutes: Double,
+        userOdds: Double
+    ) : this(name, skillName, description, minutes) {  // userElo and challengeElo are determined
+        this.userOdds = userOdds
+        this.userElo = 1500.00
+        this.challengeElo = et.opponentRating(userElo, userOdds)
     }
 
 
+    // Elo Supplying Constructor
+    constructor(name: String,
+                skillName: String,
+                description: String,
+                minutes: Double,
+                challengeElo: Double,
+                userElo: Double,
+                userOdds: Double) : this(name, skillName, description, minutes) {  // userElo and challengeElo are given
+        this.challengeElo = challengeElo
+        this.userElo = userElo
+        this.userOdds = userOdds
+    }
+
+    /*
     // Elo Supplying Constructor
     constructor(name: String,
                 skill: Skill,
@@ -101,7 +141,7 @@ class Challenge : Objective {
         this.challengeElo = challengeElo
         this.userElo = userElo
         this.userOdds = userOdds
-    }
+    }*/
 
 
     init {

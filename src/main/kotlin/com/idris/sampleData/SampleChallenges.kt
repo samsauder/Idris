@@ -15,7 +15,7 @@ val threeV5nineV6 = Challenge("threeV5nineV6", volume, Descriptions.THREE_V5_NIN
 val boulderingLiChallenges = mutableListOf(projectV8, newV7)
 val boulderingVoChallenges = mutableListOf(threeV5nineV6)
 */
-
+/*
 val isolateV7in5 = Challenge("isolateV7in5", limit, "", -1.0, -1.0);
 val projectV7in5 = Challenge("projectV7in5", limit, "", -1.0, -1.0);
 
@@ -69,3 +69,4 @@ val reverseCrescent = Challenge("reverseCrescent", karate, Descriptions.REVERSE_
 val tornado = Challenge("tornado", karate, Descriptions.TORNADO, 1.0, 0.60)
 val spinningTornado = Challenge("spinningTornado", karate, Descriptions.SPINNING_TORNADO, 1.0, 0.30)
 val karateChallenges = mutableListOf(fiveForty, reverseCrescent, tornado, spinningTornado)
+ */

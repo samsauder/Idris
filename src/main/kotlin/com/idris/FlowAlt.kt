@@ -2,7 +2,6 @@ package com.idris
 
 import com.idris.constants.Styles
 import com.idris.database.helpers.*
-import com.idris.sampleData.nineRepsV6for90
 
 // The REPL command line interface
 

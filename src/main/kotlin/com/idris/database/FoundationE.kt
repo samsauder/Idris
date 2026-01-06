@@ -27,7 +27,8 @@ class FoundationE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by FoundationsT.name
-    var skill: String by FoundationsT.skill
+    var skillName: String by FoundationsT.skillName
+    // var skill: String by FoundationsT.skill
     var description by FoundationsT.description
     var minutes by FoundationsT.minutes
 
@@ -35,7 +36,8 @@ class FoundationE(id: EntityID<Int>) : ConceptE(id) {
     override fun deEntify() : Foundation {
         return Foundation(
             name,
-            Skill(skill, null),
+            skillName,
+            // Skill(skill, null),
             description,
             minutes.toDouble())
     }

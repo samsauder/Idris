@@ -12,6 +12,7 @@ import org.jetbrains.exposed.v1.core.eq
 
 object ProgressionsT : IntIdTable("progressionsT") {
     val name = varchar("progressionName", 50)
+    val skillName = varchar("skillName", 50)
     val description = varchar("description", 200)
 
     // A progression consists of up to 10 progressively difficult challenges
@@ -35,6 +36,7 @@ class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by ProgressionsT.name
+    val skillName by ProgressionsT.skillName
     var description by ProgressionsT.description
 
     var c0 by ProgressionsT.c0
@@ -52,6 +54,7 @@ class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     fun deEntify(datapath: String) : Progression {
         return Progression(
             name,
+            skillName,
             description,
             listOf(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9),
             Database(datapath))

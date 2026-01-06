@@ -13,6 +13,7 @@ import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 object DaysT : IntIdTable("daysT") {
     val name = varchar("dayName", 50)
+    val skillName = varchar("skillName", 50)
     val description = varchar("description", 200)
 
     // A day consists of up to 10 Foundations and up to 5 Progressions (for a skill)
@@ -42,6 +43,7 @@ class DayE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by DaysT.name
+    var skillName by DaysT.skillName
     var description by DaysT.description
 
     var f0 by DaysT.f0
@@ -64,6 +66,7 @@ class DayE(id: EntityID<Int>) : ConceptE(id) {
     override fun deEntify(): NewDay {
         return NewDay(
             name,
+            skillName,
             description,
             arrayOf(f0, f1, f2, f3, f4, f5, f6, f7, f8, f9),
             arrayOf(p0, p1, p2, p3, p4)

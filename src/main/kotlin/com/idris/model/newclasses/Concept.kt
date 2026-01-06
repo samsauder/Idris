@@ -1,6 +1,7 @@
 package com.idris.model.newclasses
 
 import com.idris.constants.Styles
+import com.idris.model.Skill
 
 // The Concept is the superclass of all Idris classes and stores common attributes:
 // + name        |  a unique identifier
@@ -12,9 +13,10 @@ import com.idris.constants.Styles
 
 
 abstract class Concept {
-    abstract val name: String
-    abstract val description: String
     abstract val icon: String  // one character visual marker
+    abstract val name: String
+    abstract val skillName: String
+    abstract val description: String
 
     init {
         // nameStr = pad(name,  20)

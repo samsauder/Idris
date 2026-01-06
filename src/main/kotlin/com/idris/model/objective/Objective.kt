@@ -8,7 +8,8 @@ import com.idris.model.newclasses.Concept
 
 abstract class Objective(
     override var name: String,
-    var skill: Skill?,
+    override var skillName: String,
+    //var skill: Skill?,
     override var description: String,
     var minutes: Double) : Concept() {
 
@@ -16,10 +17,10 @@ abstract class Objective(
     var symbol = ""
     val symbolColor = Styles.GREEN
     var symbolHolder = ""
-    var nameStr = ""
-    var skillStr = ""
-    var descriptionStr = ""
-    var minsStr = ""
+    // var nameStr = ""
+    // var skillStr = ""
+    // var descriptionStr = ""
+    // var minsStr = ""
 
     init {
         /*
@@ -39,7 +40,7 @@ abstract class Objective(
 
     // Return a string composed of this Objective's icon, its formatted name, and its skill
     fun icon_name_skill(): String {
-        val skillf = format(skill!!.id, "", 14)
+        val skillf = format(skillName, "", 14)
         return "${icon_name()} | $skillf"
     }
 

@@ -41,6 +41,7 @@ class Experiment(var name: String,
 
 
 fun main() {
+    /*
     val limitDay = listOf(
         hang20mm90max,
         isolateV7in5,
@@ -67,6 +68,7 @@ fun main() {
     // val decodedX = Json.decodeFromString<Experiment>(encodedX)
     // displayer.dashboardOf(decodedX);
     displayer.dashboardOf(e);
+    */
 }
 
 

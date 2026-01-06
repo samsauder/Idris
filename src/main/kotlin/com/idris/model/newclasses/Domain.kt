@@ -4,6 +4,7 @@ package com.idris.model.newclasses
 // Keter domain: the domain that has all the highest level domains as components
 
 class Domain(override val name: String,
+             override val skillName: String,
              override val description: String,
              val superdomain: Domain?) : Concept() {
     override val icon: String = "O"
@@ -19,6 +20,7 @@ class Domain(override val name: String,
 
 
 fun main() {
+    /*
     val keter = Domain(
         "keter",
         "The superdomain of all the highest level domains.",
@@ -42,4 +44,5 @@ fun main() {
         "The domain of endurance focused bouldering.",
         bouldering
     )
+     */
 }

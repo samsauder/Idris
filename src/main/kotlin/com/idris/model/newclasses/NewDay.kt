@@ -8,6 +8,7 @@ import com.idris.model.objective.Foundation
 
 
 class NewDay(override val name: String,
+             override val skillName: String,
              override val description: String,
              val foundationNames: Array<String>,
              val progressionNames: Array<String>) : Concept() {

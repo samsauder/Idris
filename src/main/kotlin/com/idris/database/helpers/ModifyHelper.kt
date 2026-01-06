@@ -35,8 +35,8 @@ object ModifyHelper : Helper() {
 
         transaction {
             FoundationE.Companion.findSingleByAndUpdate(FoundationsT.name eq name) {
-               if (nameNew != "-1") it.name = nameNew
-                if (skillNew != "-1") it.skill = skillNew
+                if (nameNew != "-1") it.name = nameNew
+                if (skillNew != "-1") it.skillName = skillNew
                 if (descriptionNew != "-1") it.description = descriptionNew
                 if (minutesNew != -1.0) it.minutes = minutesNew.toBigDecimal()
             }
@@ -61,7 +61,7 @@ object ModifyHelper : Helper() {
             transaction {
                 ChallengeE.Companion.findSingleByAndUpdate(ChallengesT.name eq name) {
                     if (nameNew != "-1") it.name = nameNew
-                    if (skillNew != "-1") it.skill = skillNew
+                    if (skillNew != "-1") it.skillName = skillNew
                     if (descriptionNew != "-1") it.description = descriptionNew
                     if (minutesNew != -1.0) it.minutes = minutesNew.toBigDecimal()
                     if (oddsNew != -1.0) {
@@ -92,7 +92,7 @@ object ModifyHelper : Helper() {
             transaction {
                 ExamE.Companion.findSingleByAndUpdate(ExamsT.name eq name) {
                     if (nameNew != "-1") it.name = nameNew
-                    if (skillNew != "-1") it.skill = skillNew
+                    if (skillNew != "-1") it.skillName = skillNew
                     if (descriptionNew != "-1") it.description = descriptionNew
                     if (minutesNew != -1.0) it.minutes = minutesNew.toBigDecimal()
                 }

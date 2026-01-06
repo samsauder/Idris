@@ -28,7 +28,8 @@ class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by ChallengesT.name
-    var skill by ChallengesT.skill
+    // var skill by ChallengesT.skill
+    var skillName by ChallengesT.skillName
     var description: String by ChallengesT.description
     var minutes by ChallengesT.minutes
     var progressionName by ChallengesT.progressionName
@@ -42,7 +43,8 @@ class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
     override fun deEntify() : Challenge {
         return when (cElo) {
             BigDecimal("-0000.00") -> {  // cElo is uninitialized, use the determining constructor
-                val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
+                // val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
+                val c = Challenge(name, skillName, description, minutes.toDouble(), uOdds.toDouble())
                 c.attempts = attempts
                 c.wins = wins
                 c.progressionName = progressionName
@@ -52,7 +54,8 @@ class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
             else -> {  // cElo is initialized, use the supplying constructor
                 val c = Challenge(
                     name,
-                    Skill(skill, null),
+                    skillName,
+                    // Skill(skill, null),
                     description,
                     minutes.toDouble(),
                     cElo.toDouble(),
@@ -68,6 +71,6 @@ class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     override fun toString(): String {
-        return "Challenge(id=$id, name=$name, skill=$skill)"  // Print a partial representation
+        return "Challenge(id=$id, name=$name, skillName=$skillName)"  // Print a partial representation
     }
 }
