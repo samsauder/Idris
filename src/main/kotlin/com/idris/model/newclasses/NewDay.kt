@@ -11,8 +11,9 @@ class NewDay(override val name: String,
              override val description: String,
              val foundationNames: Array<String>,
              val progressionNames: Array<String>) : Concept() {
+    override val icon = "D"
 
-    fun printDay() {
+    override fun print() {
         println("\n${Styles.GREEN}$name${Styles.RESET}")
         print("=======================================================================\n")
         for (fname in foundationNames) {
@@ -25,13 +26,8 @@ class NewDay(override val name: String,
         }
     }
 
-}
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
 
-fun main() {
-    val nd = NewDay(
-        "day",
-        "a day",
-        arrayOf("hang20mm90max", "pull85max"),
-        arrayOf("V7inN", "V8inN"))
-    nd.printDay()
 }
