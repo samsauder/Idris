@@ -1,8 +1,6 @@
 package com.idris.model.newclasses
 
 import com.idris.constants.Styles
-import com.idris.model.Progression
-import com.idris.model.objective.Foundation
 
 // To replace Day eventually
 
@@ -32,7 +30,7 @@ class NewDay : Concept {
     }
 
     override fun printL() {
-        println(icon_name())
+        println(icon_name_skill())
     }
 
 }

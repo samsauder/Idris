@@ -62,7 +62,7 @@ class Progression : Concept {
     }
 
     override fun printL() {
-        println(icon_name())
+        println(icon_name_skill())
     }
 
 
