@@ -14,7 +14,6 @@ abstract class Objective : Concept {
         skillName: String,
         description: String,
         minutes: Double) : super(name, skillName, description) {
-        // println("      '$skillName' skill passed to Objective constructor")
         this.minutes = minutes
     }
 
@@ -22,11 +21,6 @@ abstract class Objective : Concept {
     var symbol = ""
     val symbolColor = Styles.GREEN
     var symbolHolder = ""
-
-    // var nameStr = ""
-    // var skillStr = ""
-    // var descriptionStr = ""
-    // var minsStr = ""
 
     init {
         /*
@@ -49,8 +43,6 @@ abstract class Objective : Concept {
         val skillf = format(skillName, "", 14)
         return "${icon_name()} | $skillf"
     }
-
-    // abstract fun printShort(startLevel: Int)  // print a one line text representation of the objective
 
     abstract fun log(value: Double)
 }

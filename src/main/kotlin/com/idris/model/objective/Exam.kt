@@ -7,7 +7,6 @@ import com.idris.model.auxiliary.ObjectiveType
 
 class Exam : Objective {
     override val icon = "▶"
-    override var skillName: String = ""
 
     override fun print() {
         TODO("Not yet implemented")
@@ -30,17 +29,7 @@ class Exam : Objective {
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.EXAM
     }
-    /*
-    constructor(
-        name: String,
-        skill: Skill?,
-        description: String,
-        minutes: Double
-    ) : super(name, skill, description, minutes) {
-        this.symbol = "▶"
-        this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
-        this.objectiveType = ObjectiveType.EXAM
-    }*/
+
 
     constructor(
         name: String,
@@ -51,29 +40,6 @@ class Exam : Objective {
     ) : this(name, skillName, description, minutes) {
         this.passed = passed
     }
-
-    /*
-    constructor(
-        name: String,
-        skill: Skill?,
-        description: String,
-        minutes: Double,
-        passed: Boolean
-    ) : this(name, skill, description, minutes) {
-        this.passed = passed
-    }*/
-
-
-    /*
-    override fun printShort(startLevel: Int) {
-        val lvl = " ".repeat(startLevel * 4)  // indent level
-        val passedStr: String = when (passed) {
-            true -> {"✓"}
-            false -> {""}
-        }
-        println("$lvl$symbolHolder $nameStr $skillStr $minsStr $descriptionStr $passedStr")
-    }
-     */
 
 
     override fun log(value: Double) {

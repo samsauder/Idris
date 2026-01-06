@@ -21,7 +21,6 @@ abstract class Concept {
         name: String,
         skillName: String,
         description: String) {
-        // println("      '$skillName' skill passed to Concept constructor")
         this.name = name
         this.skillName = skillName
         this.description = description
@@ -30,27 +29,11 @@ abstract class Concept {
     abstract val icon: String  // one character visual marker
 
     init {
-        // nameStr = pad(name,  20)
+
     }
 
     abstract fun print()   // print a comprehensive representation
     abstract fun printL()  // print a one-line representation
-
-    /*
-    protected fun style(s: String, style: String) : String{
-        return "$style$s${Styles.RESET}"
-    }
-
-    // Returns a whitespace-padded version of the given string
-    protected fun pad(s: String, padLen: Int) : String {
-        return s.padEnd(padLen, ' ')
-    }
-
-    // Returns an ansi-styled and whitespace-padded version of the given string
-    protected fun styleAndPad(s: String, style: String?, padLen: Int) : String {
-        return "$style${s.padEnd(padLen, ' ')}${Styles.RESET}"
-    }
-    */
 
     // Returns a string composed of this Concept's icon and its formatted name
     fun icon_name(): String {

@@ -66,7 +66,6 @@ abstract class Helper {
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective, t: ConceptType) {
         o.name = inputName(t, ConceptState.ABSENT)
-        //o.skill = Skill(inputSkill(), null)
         o.skillName = inputSkill()
         o.description = inputDescription()
         o.minutes = inputMinutes()

@@ -20,7 +20,6 @@ object ListHelper : Helper() {
             for (foundationEntity in FoundationE.Companion.all()) {
                 val foundation = foundationEntity.deEntify()
                 foundation.printL()
-                // foundation.printShort(0);
             }
         }
     }
@@ -31,7 +30,6 @@ object ListHelper : Helper() {
             println(barc)
             for (challengeEntity in ChallengeE.Companion.all()) {
                 val challenge = challengeEntity.deEntify()
-                // challenge.printShort(0)
                 challenge.printL()
             }
         }
@@ -44,7 +42,6 @@ object ListHelper : Helper() {
             for (examEntity in ExamE.Companion.all()) {
                 val exam = examEntity.deEntify();
                 exam.printL()
-                // exam.printShort(0)
             }
         }
     }

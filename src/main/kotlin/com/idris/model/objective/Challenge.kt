@@ -14,7 +14,7 @@ import kotlin.math.roundToInt
 class Challenge : Objective {
     val et = EloTool()
     override val icon = "●"
-    override var skillName: String = ""
+    // override var skillName: String = ""
 
     override fun print() {
         TODO("Not yet implemented")
@@ -63,18 +63,6 @@ class Challenge : Objective {
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
 
-    /*
-    // General Constructor (just makes the core Objective attributes)
-    constructor(
-        name: String,
-        skill: Skill?,
-        description: String,
-        minutes: Double
-    ) : super(name, skill, description, minutes) {
-        this.symbol = "●"
-        this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
-        this.objectiveType = ObjectiveType.CHALLENGE
-    }*/
 
     // General Constructor (just makes the core Objective attributes)
     constructor(
@@ -83,24 +71,12 @@ class Challenge : Objective {
         description: String,
         minutes: Double
     ) : super(name, skillName, description, minutes) {
+        // println("    '$skillName' skill passed to Challenge constructor")
         this.symbol = "●"
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.CHALLENGE
     }
 
-    /*
-    // Elo Determining Constructor (given user odds)
-    constructor(
-        name: String,
-        skill: Skill?,
-        description: String,
-        minutes: Double,
-        userOdds: Double
-    ) : this(name, skill, description, minutes) {  // userElo and challengeElo are determined
-        this.userOdds = userOdds
-        this.userElo = 1500.00
-        this.challengeElo = et.opponentRating(userElo, userOdds)
-    } */
 
     // Elo Determining Constructor (given user odds)
     constructor(
@@ -128,20 +104,6 @@ class Challenge : Objective {
         this.userElo = userElo
         this.userOdds = userOdds
     }
-
-    /*
-    // Elo Supplying Constructor
-    constructor(name: String,
-                skill: Skill,
-                description: String,
-                minutes: Double,
-                challengeElo: Double,
-                userElo: Double,
-                userOdds: Double) : this(name, skill, description, minutes) {  // userElo and challengeElo are given
-        this.challengeElo = challengeElo
-        this.userElo = userElo
-        this.userOdds = userOdds
-    }*/
 
 
     init {
@@ -285,13 +247,6 @@ class Challenge : Objective {
     }
 
 
-    /*
-    private fun ueloStr() : String {
-        return round(userElo).toInt().toString()
-    }
-    */
-
-
     // Return a conditional ANSI color style depending on the current object's challengeElo
     fun color(): String {
         var style = ""
@@ -300,7 +255,6 @@ class Challenge : Objective {
         val l2 = Styles.GREEN
         val l3 = Styles.YELLOW
         val l4 = Styles.RED
-        // val reset = Styles.RESET
 
         if (challengeElo in 1500.0..<1600.0) {
             style = l0
@@ -315,32 +269,5 @@ class Challenge : Objective {
         }
         return style
     }
-
-
-    /*
-    // Return a conditionally ANSI colored string depending on the current Challenge's user elo
-    fun colorByUserElo(str: String): String {
-        var style = ""
-        val l0 = Styles.CYAN
-        val l1 = Styles.BLUE
-        val l2 = Styles.GREEN
-        val l3 = Styles.YELLOW
-        val l4 = Styles.RED
-        val reset = Styles.RESET
-
-        if (userElo in 1500.0..<1600.0) {
-            style = l0
-        } else if (userElo in 1600.0..<1700.0) {
-            style = l1
-        } else if (userElo in 1700.0..<1800.0) {
-            style = l2
-        } else if (userElo in 1800.0..<1900.0) {
-            style = l3
-        } else if (userElo >= 1900.0) {
-            style = l4
-        }
-        return "$style$str$reset"
-    }
-    */
 
 }

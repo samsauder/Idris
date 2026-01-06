@@ -42,7 +42,6 @@ class Progression : Concept {
                     continue;
                 }
                 val cIterator = ChallengeE.find { ChallengesT.name eq cName }.iterator()
-                // System.out.println("Found $cName");
                 val c = cIterator.next().deEntify()
                 challenges[i] = c
                 i++
