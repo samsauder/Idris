@@ -39,7 +39,8 @@ abstract class Objective(
 
     // Return a string composed of this Objective's icon, its formatted name, and its skill
     fun icon_name_skill(): String {
-        return "${icon_name()} | $skill"
+        val skillf = format(skill!!.id, "", 14)
+        return "${icon_name()} | $skillf"
     }
 
     // abstract fun printShort(startLevel: Int)  // print a one line text representation of the objective
