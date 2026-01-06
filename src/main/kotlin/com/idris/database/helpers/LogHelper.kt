@@ -37,7 +37,9 @@ object LogHelper : Helper() {
             } else {
                 val pIterator = ProgressionE.Companion.find { ProgressionsT.name eq c.progressionName }.iterator()
                 val pE = pIterator.next()
-                val p = pE.deEntify(datapath)
+                // val p = pE.deEntify(datapath)
+                val p = pE.deEntify()
+
                 p.massLog(c.name, result)
             }
         }

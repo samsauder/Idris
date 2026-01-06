@@ -17,7 +17,7 @@ class Progression : Concept {
     override var icon = "P"
 
     var challengeNames: List<String>
-    var database: Database
+    // var database: Database
     var challenges: Array<Challenge?>
 
     constructor(
@@ -25,10 +25,10 @@ class Progression : Concept {
         skillName: String,
         description: String,
         challengeNames: List<String>,
-        database: Database) : super(name, skillName, description) {
+        /*database: Database*/) : super(name, skillName, description) {
 
         this.challengeNames = challengeNames
-        this.database = database
+        // this.database = database
         challenges = arrayOfNulls<Challenge>(challengeNames.size)
 
         transaction {

@@ -50,21 +50,21 @@ class ProgressionE(id: EntityID<Int>) : ConceptE(id) {
     var c8 by ProgressionsT.c8
     var c9 by ProgressionsT.c9
 
-    // Given a path to a .db file
-    fun deEntify(datapath: String) : Progression {
+
+    override fun deEntify() : Progression {
         val cN = listOf(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9)
 
         val p = Progression(
             name,
             skillName,
             description,
-            cN,
-            Database(datapath))
+            cN)
 
         return p
     }
 
+    /*
     override fun deEntify(): Concept {
         TODO("Not yet implemented")
-    }
+    }*/
 }

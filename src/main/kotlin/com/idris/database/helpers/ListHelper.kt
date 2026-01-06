@@ -67,7 +67,8 @@ object ListHelper : Helper() {
         println(barc)
         transaction {
             for (progressionEntity in ProgressionE.Companion.all()) {
-                val progression = progressionEntity.deEntify(datapath);
+                // val progression = progressionEntity.deEntify(datapath);
+                val progression = progressionEntity.deEntify();
                 progression.printL()
             }
         }
