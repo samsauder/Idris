@@ -21,7 +21,7 @@ abstract class Concept {
     }
 
     abstract fun print()   // print a comprehensive representation
-    abstract fun printL()  // print a one-line representation
+    abstract fun printL(): String  // print a one-line representation
 
     /*
     protected fun style(s: String, style: String) : String{
@@ -47,7 +47,8 @@ abstract class Concept {
 
     // Format a string to a specific style and pad it with whitespace to meet the specified width
     // * input null for style and/or padding if desired
-    private fun format(s: String, style: Styles?, width: Int?): String {
+    // * style must be a string in Styles
+    protected fun format(s: String, style: String?, width: Int?): String {
         val middle = if (width != null) s.padEnd(width, ' ') else s
         val fin = if (style != null) Styles.RESET else ""  // reset style at end if style was applied
         return "$style$middle$fin"
