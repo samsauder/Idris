@@ -6,6 +6,7 @@ import com.idris.model.auxiliary.ObjectiveType
 
 
 class Exam : Objective {
+    override val icon = "▶"
     var passed: Boolean = false
 
 
