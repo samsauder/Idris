@@ -19,8 +19,8 @@ class Challenge : Objective {
         TODO("Not yet implemented")
     }
 
-    override fun printL(): String {
-        return icon_name_skill_elo_odds()
+    override fun printL() {
+        println(icon_name_skill_elo_odds())
     }
 
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
@@ -196,7 +196,8 @@ class Challenge : Objective {
     fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
         // val userEloOld = getUserEloString()
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloOld = colorFromElo("${celoS()}$provSymOld")
+        val challengeEloOld = format("${celoS()}$provSymOld", color(), null)
+        // val challengeEloOld = colorFromElo("${celoS()}$provSymOld")
         val oddsOld = userOdds
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
@@ -217,7 +218,8 @@ class Challenge : Objective {
         }
 
         val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloNew = colorFromElo("${celoS()}$provSymNew")
+        val challengeEloNew = format("${celoS()}$provSymNew", color(), null)
+        //val challengeEloNew = colorFromElo("${celoS()}$provSymNew")
 
         val userOddsAsPercentageOld = (oddsOld * 100).toInt()
         val userOddsAsPercentageNew = (userOdds * 100).toInt()

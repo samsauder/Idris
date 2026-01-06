@@ -1,8 +1,6 @@
 package com.idris.model
 import com.idris.Database
 import com.idris.constants.Styles
-import com.idris.constants.Styles.RED
-import com.idris.constants.Styles.YELLOW
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
 import com.idris.database.helpers.LogHelper
@@ -35,15 +33,18 @@ class Progression(val name: String, val challengeNames: List<String>, database: 
     }
 
     fun print() {
+        TODO()
+        /*
         print("${Styles.BOLD}$name${Styles.RESET} (")
         var c = 0;
         for (challenge in challenges) {
             if (challenge == null) continue
             if (c != 0) print(" -> ")
-            print(challenge.colorByOwnElo(challenge.name))
+            print(challenge.colorFromElo(challenge.name))
             c++;
         }
         print(")\n")
+         */
     }
 
 

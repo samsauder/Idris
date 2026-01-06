@@ -21,7 +21,7 @@ abstract class Concept {
     }
 
     abstract fun print()   // print a comprehensive representation
-    abstract fun printL(): String  // print a one-line representation
+    abstract fun printL()  // print a one-line representation
 
     /*
     protected fun style(s: String, style: String) : String{

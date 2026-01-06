@@ -27,7 +27,7 @@ class NewDay(override val name: String,
     }
 
     override fun printL() {
-        icon_name()
+        println(icon_name())
     }
 
 }
