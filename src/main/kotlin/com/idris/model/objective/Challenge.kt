@@ -8,6 +8,8 @@ import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt
 
+// import kotlin.math.roundToInt
+
 
 class Challenge : Objective {
     val et = EloTool()
@@ -17,9 +19,39 @@ class Challenge : Objective {
         TODO("Not yet implemented")
     }
 
-    override fun printL() {
-        TODO("Not yet implemented")
+    override fun printL(): String {
+        return icon_name_skill_elo_odds()
     }
+
+    // Return a string composed of the Challenge icon, name, skill, elo, and odds
+    private fun icon_name_skill_elo_odds(): String {
+        val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
+        val elof = format("${celoS()}$qm",color(), 5)  // formatted elo
+        val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
+        return "${icon_name_skill()}$elof$oddsf"
+    }
+
+
+    /*
+    override fun printShort(startLevel: Int) {
+        val provSym = if (attempts < 20) "?" else " "  // provisional symbol (?)
+
+        val lvl = " ".repeat(startLevel * 4)                                          // indent level
+
+        val conditionalCElo = this.colorByOwnElo("${getChallengeEloString()}$provSym")
+        val chEloStr = styleAndPad(conditionalCElo, Styles.BOLD, 5)  // challenge elo + style + padding
+        //val usEloStr = pad(getUserEloString(), 5)      // user elo + style + padding
+
+        // val chEloStrOrig = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
+        // val usEloStrOrig = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
+
+        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)        // user odds + style
+
+        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
+        // println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
+        println("$lvl$symbolHolder $nameStr | $chEloStr $usOddsStr         $progressionStr $skillStr $minsStr $descriptionStr")
+    }*/
+
 
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
@@ -90,27 +122,6 @@ class Challenge : Objective {
             et.opponentRating(1500.0, wins/(attempts*1.0))
         }
     }
-
-    /*
-    override fun printShort(startLevel: Int) {
-        val provSym = if (attempts < 20) "?" else " "  // provisional symbol (?)
-
-        val lvl = " ".repeat(startLevel * 4)                                          // indent level
-
-        val conditionalCElo = this.colorByOwnElo("${getChallengeEloString()}$provSym")
-        val chEloStr = styleAndPad(conditionalCElo, Styles.BOLD, 5)  // challenge elo + style + padding
-        //val usEloStr = pad(getUserEloString(), 5)      // user elo + style + padding
-
-        // val chEloStrOrig = styleAndPad("${getChallengeEloString()}$provSym", Styles.RED, 5)  // challenge elo + style + padding
-        // val usEloStrOrig = styleAndPad(getUserEloString(), Styles.BLUE, 5)      // user elo + style + padding
-
-        val usOddsStr = styleAndPad("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)        // user odds + style
-
-        val progressionStr = styleAndPad("$progressionName", Styles.BOLD, 20)
-        // println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
-        println("$lvl$symbolHolder $nameStr | $chEloStr $usOddsStr         $progressionStr $skillStr $minsStr $descriptionStr")
-    }
-    */
 
 
     // value is the result of the attempt for the user (1.0 or 0.5 or 0.0)
@@ -185,7 +196,7 @@ class Challenge : Objective {
     fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
         // val userEloOld = getUserEloString()
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloOld = colorByOwnElo("${getChallengeEloString()}$provSymOld")
+        val challengeEloOld = colorFromElo("${celoS()}$provSymOld")
         val oddsOld = userOdds
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
@@ -206,7 +217,7 @@ class Challenge : Objective {
         }
 
         val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloNew = colorByOwnElo("${getChallengeEloString()}$provSymNew")
+        val challengeEloNew = colorFromElo("${celoS()}$provSymNew")
 
         val userOddsAsPercentageOld = (oddsOld * 100).toInt()
         val userOddsAsPercentageNew = (userOdds * 100).toInt()
@@ -222,12 +233,8 @@ class Challenge : Objective {
     }
 
 
-
-
-
-
-    // Returns a string of the elo (turns -Infinity to 0000.0)
-    private fun getChallengeEloString() : String {
+    // Returns a string of the challenge elo (turns -Infinity to 0000.0)
+    private fun celoS() : String {
         var benchElo: String = round(challengeElo).toInt().toString()
         if (challengeElo == Double.NEGATIVE_INFINITY) {
             benchElo = "0000"
@@ -236,20 +243,22 @@ class Challenge : Objective {
     }
 
 
-    private fun getUserEloString() : String {
+    /*
+    private fun ueloStr() : String {
         return round(userElo).toInt().toString()
     }
+    */
 
 
-    // Return a conditionally ANSI colored string depending on the current this object's challengeElo
-    fun colorByOwnElo(str: String): String {
+    // Return a conditional ANSI color style depending on the current object's challengeElo
+    fun color(): String {
         var style = ""
         val l0 = Styles.BLUE
         val l1 = Styles.CYAN
         val l2 = Styles.GREEN
         val l3 = Styles.YELLOW
         val l4 = Styles.RED
-        val reset = Styles.RESET
+        // val reset = Styles.RESET
 
         if (challengeElo in 1500.0..<1600.0) {
             style = l0
@@ -262,10 +271,11 @@ class Challenge : Objective {
         } else if (challengeElo >= 1900.0) {
             style = l4
         }
-        return "$style$str$reset"
+        return style
     }
 
 
+    /*
     // Return a conditionally ANSI colored string depending on the current Challenge's user elo
     fun colorByUserElo(str: String): String {
         var style = ""
@@ -289,5 +299,6 @@ class Challenge : Objective {
         }
         return "$style$str$reset"
     }
+    */
 
 }
