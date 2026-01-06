@@ -26,7 +26,7 @@ class Challenge : Objective {
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
     private fun icon_name_skill_elo_odds(): String {
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        val elof = format("${celoS()}$qm",color(), 5)  // formatted elo
+        val elof = format("${celoS()}$qm",color(), 10)  // formatted elo
         val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
         return "${icon_name_skill()}$elof$oddsf"
     }
