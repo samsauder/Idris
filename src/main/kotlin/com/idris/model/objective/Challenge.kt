@@ -11,6 +11,7 @@ import kotlin.math.roundToInt
 
 class Challenge : Objective {
     val et = EloTool()
+    override val icon = "●"
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
