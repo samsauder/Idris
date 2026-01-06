@@ -7,6 +7,15 @@ import com.idris.model.auxiliary.ObjectiveType
 
 class Foundation : Objective {
     override val icon = "◯"
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
+
     var done: Boolean = false
 
 
@@ -19,11 +28,13 @@ class Foundation : Objective {
         this.objectiveType = ObjectiveType.FOUNDATION
     }
 
-
+    /*
     override fun printShort(startLevel: Int) {
         val lvl = " ".repeat(startLevel * 4)                                          // indent level
         println("$lvl$symbolHolder $nameStr | $skillStr $minsStr $descriptionStr")
     }
+
+     */
 
 
     // 1.0 = done, -1 = error

@@ -12,6 +12,7 @@ class Day(id: String, skill: Skill, subskills: List<Skill>?, startDate: String?)
             field = value
         }
 
+    /*
     fun printDayPlan() {
         printPlan(0)
         println("    OBJECTIVES")
@@ -20,4 +21,5 @@ class Day(id: String, skill: Skill, subskills: List<Skill>?, startDate: String?)
             obj.printShort(2)
         }
     }
+    */
 }

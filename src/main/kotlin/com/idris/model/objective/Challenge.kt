@@ -12,6 +12,15 @@ import kotlin.math.roundToInt
 class Challenge : Objective {
     val et = EloTool()
     override val icon = "●"
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
+
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
@@ -82,7 +91,7 @@ class Challenge : Objective {
         }
     }
 
-
+    /*
     override fun printShort(startLevel: Int) {
         val provSym = if (attempts < 20) "?" else " "  // provisional symbol (?)
 
@@ -101,6 +110,7 @@ class Challenge : Objective {
         // println("$lvl$symbolHolder $nameStr $progressionStr $skillStr $minsStr [ $chEloStr $usEloStr]  $usOddsStr  $descriptionStr")
         println("$lvl$symbolHolder $nameStr | $chEloStr $usOddsStr         $progressionStr $skillStr $minsStr $descriptionStr")
     }
+    */
 
 
     // value is the result of the attempt for the user (1.0 or 0.5 or 0.0)

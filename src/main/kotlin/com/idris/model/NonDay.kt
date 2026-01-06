@@ -9,6 +9,7 @@ class NonDay : Plan {
 
     var subplans: MutableList<Plan> = mutableListOf()
 
+    /*
     fun printNonDayPlan() {
         printPlan(0)
         println("    SUBPLANS")
@@ -32,6 +33,6 @@ class NonDay : Plan {
             }
 
             println()
-        }
-    }
+        }*/
+
 }

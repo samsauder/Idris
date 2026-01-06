@@ -7,6 +7,15 @@ import com.idris.model.auxiliary.ObjectiveType
 
 class Exam : Objective {
     override val icon = "▶"
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
+
     var passed: Boolean = false
 
 
@@ -32,6 +41,7 @@ class Exam : Objective {
                 }
 
 
+    /*
     override fun printShort(startLevel: Int) {
         val lvl = " ".repeat(startLevel * 4)  // indent level
         val passedStr: String = when (passed) {
@@ -40,6 +50,7 @@ class Exam : Objective {
         }
         println("$lvl$symbolHolder $nameStr $skillStr $minsStr $descriptionStr $passedStr")
     }
+     */
 
 
     override fun log(value: Double) {

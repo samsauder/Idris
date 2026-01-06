@@ -27,7 +27,7 @@ class NewDay(override val name: String,
     }
 
     override fun printL() {
-        TODO("Not yet implemented")
+        icon_name()
     }
 
 }

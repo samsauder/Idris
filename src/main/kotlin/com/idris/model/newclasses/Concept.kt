@@ -20,12 +20,6 @@ abstract class Concept {
         // nameStr = pad(name,  20)
     }
 
-    // Returns a string composed of this Concept's icon and its formatted name
-    fun icon_name(): String {
-        val fname = format(name, null, 20)  // formatted name
-        return "[$icon] $fname"
-    }
-
     abstract fun print()   // print a comprehensive representation
     abstract fun printL()  // print a one-line representation
 
@@ -45,10 +39,16 @@ abstract class Concept {
     }
     */
 
+    // Returns a string composed of this Concept's icon and its formatted name
+    fun icon_name(): String {
+        val fname = format(name, null, 20)  // formatted name
+        return "[$icon] $fname"
+    }
+
     // Format a string to a specific style and pad it with whitespace to meet the specified width
     // * input null for style and/or padding if desired
     private fun format(s: String, style: Styles?, width: Int?): String {
-        val middle = if (width != null) str.padEnd(width, ' ') else s
+        val middle = if (width != null) s.padEnd(width, ' ') else s
         val fin = if (style != null) Styles.RESET else ""  // reset style at end if style was applied
         return "$style$middle$fin"
     }

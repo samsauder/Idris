@@ -22,6 +22,7 @@ abstract class Objective(
     var minsStr = ""
 
     init {
+        /*
         // nameStr = styleAndPad(name, Styles.BOLD,  20)  // name + style + padding
         // nameStr = styleAndPad(name, Styles.GREEN,  20)  // name + style + padding
         nameStr = pad(name,  20)
@@ -33,6 +34,7 @@ abstract class Objective(
         descriptionStr = style(description, Styles.YELLOW)
         // minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)            // mins + style + padding
         minsStr = pad("${minutes.toInt()}m",  5)
+        */
     }
 
     // Return a string composed of this Objective's icon, its formatted name, and its skill
@@ -40,7 +42,7 @@ abstract class Objective(
         return "${icon_name()} | $skill"
     }
 
-    abstract fun printShort(startLevel: Int)  // print a one line text representation of the objective
+    // abstract fun printShort(startLevel: Int)  // print a one line text representation of the objective
 
     abstract fun log(value: Double)
 }

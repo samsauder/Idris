@@ -2,6 +2,7 @@ package com.idris.database.helpers
 
 import com.idris.constants.Styles
 import com.idris.database.ChallengeE
+import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
@@ -18,7 +19,8 @@ object ListHelper : Helper() {
             println(bar)
             for (foundationEntity in FoundationE.Companion.all()) {
                 val foundation = foundationEntity.deEntify()
-                foundation.printShort(0);
+                foundation.printL()
+                // foundation.printShort(0);
             }
         }
     }
@@ -29,7 +31,8 @@ object ListHelper : Helper() {
             println(barc)
             for (challengeEntity in ChallengeE.Companion.all()) {
                 val challenge = challengeEntity.deEntify()
-                challenge.printShort(0)
+                // challenge.printShort(0)
+                challenge.printL()
             }
         }
     }
@@ -40,7 +43,8 @@ object ListHelper : Helper() {
             println(bar)
             for (examEntity in ExamE.Companion.all()) {
                 val exam = examEntity.deEntify();
-                exam.printShort(0)
+                exam.printL()
+                // exam.printShort(0)
             }
         }
     }
@@ -50,7 +54,15 @@ object ListHelper : Helper() {
     }
     // ======================================================================
     override fun d() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        println("DAYS")
+        println(barc)
+        transaction {
+            for (dayEntity in DayE.Companion.all()) {
+                val day = dayEntity.deEntify();
+                day.print()
+            }
+        }
     }
     // ======================================================================
     override fun p(datapath: String) {

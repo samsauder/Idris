@@ -6,7 +6,15 @@ package com.idris.model.newclasses
 class Domain(override val name: String,
              override val description: String,
              val superdomain: Domain?) : Concept() {
+    override val icon: String = "O"
 
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
 }
 
 
