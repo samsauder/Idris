@@ -7,12 +7,16 @@ import com.idris.model.objective.Foundation
 // To replace Day eventually
 
 
-class NewDay(override val name: String,
-             override val skillName: String,
-             override val description: String,
-             val foundationNames: Array<String>,
-             val progressionNames: Array<String>) : Concept() {
+class NewDay : Concept {
     override val icon = "D"
+    val foundationNames: Array<String>
+    val progressionNames: Array<String>
+
+    constructor(name: String, skillName: String, description: String, foundationNames: Array<String>, progressionNames: Array<String>)
+            : super(name, skillName, description) {
+        this.foundationNames = foundationNames
+        this.progressionNames = progressionNames
+    }
 
     override fun print() {
         println("\n${Styles.GREEN}$name${Styles.RESET}")

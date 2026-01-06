@@ -3,10 +3,14 @@ package com.idris.model.newclasses
 // An area of expertise
 // Keter domain: the domain that has all the highest level domains as components
 
-class Domain(override val name: String,
-             override val skillName: String,
-             override val description: String,
-             val superdomain: Domain?) : Concept() {
+class Domain : Concept {
+    val superdomain: Domain?
+
+    constructor(name: String, skillName: String, description: String, superdomain: Domain?)
+            : super(name, skillName, description) {
+        this.superdomain = superdomain
+    }
+
     override val icon: String = "O"
 
     override fun print() {

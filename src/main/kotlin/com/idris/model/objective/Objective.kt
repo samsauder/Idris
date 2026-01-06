@@ -6,17 +6,23 @@ import com.idris.model.auxiliary.ObjectiveType
 import com.idris.model.newclasses.Concept
 
 
-abstract class Objective(
-    override var name: String,
-    override var skillName: String,
-    //var skill: Skill?,
-    override var description: String,
-    var minutes: Double) : Concept() {
+abstract class Objective : Concept {
+    var minutes: Double
+
+    constructor(
+        name: String,
+        skillName: String,
+        description: String,
+        minutes: Double) : super(name, skillName, description) {
+        // println("      '$skillName' skill passed to Objective constructor")
+        this.minutes = minutes
+    }
 
     lateinit var objectiveType: ObjectiveType
     var symbol = ""
     val symbolColor = Styles.GREEN
     var symbolHolder = ""
+
     // var nameStr = ""
     // var skillStr = ""
     // var descriptionStr = ""

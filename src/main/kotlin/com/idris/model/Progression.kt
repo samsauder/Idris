@@ -15,10 +15,22 @@ import com.idris.model.newclasses.Concept
 // EX. V7in7 -> V7in5 -> V7in3 -> V7in1
 
 
-class Progression(override val name: String,
-                  override val skillName: String,
-                  override val description: String,
-                  val challengeNames: List<String>, database: Database) : Concept() {
+class Progression : Concept {
+    lateinit var challengeNames: List<String>
+    var database: Database
+
+    constructor(
+        name: String,
+        skillName: String,
+        description: String,
+        challengeNames: List<String>,
+        database: Database) : super(name, skillName, description) {
+
+            this.database = database
+        this.challengeNames = challengeNames
+    }
+
+
     override var icon = "P"
     var challenges: Array<Challenge?> = arrayOfNulls<Challenge>(challengeNames.size)
 

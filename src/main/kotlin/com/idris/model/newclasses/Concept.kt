@@ -13,10 +13,21 @@ import com.idris.model.Skill
 
 
 abstract class Concept {
+    var name: String
+    var skillName: String
+    var description: String
+
+    constructor(
+        name: String,
+        skillName: String,
+        description: String) {
+        // println("      '$skillName' skill passed to Concept constructor")
+        this.name = name
+        this.skillName = skillName
+        this.description = description
+    }
+
     abstract val icon: String  // one character visual marker
-    abstract val name: String
-    abstract val skillName: String
-    abstract val description: String
 
     init {
         // nameStr = pad(name,  20)
