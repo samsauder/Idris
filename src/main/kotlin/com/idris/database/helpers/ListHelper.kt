@@ -60,7 +60,7 @@ object ListHelper : Helper() {
         transaction {
             for (dayEntity in DayE.Companion.all()) {
                 val day = dayEntity.deEntify();
-                day.print()
+                day.printL()
             }
         }
     }
