@@ -104,6 +104,7 @@ object CreateHelper : Helper() {
     // Create a Day
     override fun d() {
         val nm = inputName(ConceptType.DAY, ConceptState.ABSENT)                                // name
+        val sk = inputSkill()
         val desc = inputString("DESCRIPTION")                       // description
 
         println("Input all Foundation names (X for null):")
@@ -115,6 +116,7 @@ object CreateHelper : Helper() {
         transaction {
             DayE.Companion.new {
                 name = nm
+                skillName = sk
                 description = desc
                 f0 = fnms[0]!!
                 f1 = fnms[1]!!

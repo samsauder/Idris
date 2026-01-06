@@ -11,13 +11,14 @@ import com.idris.model.newclasses.Concept
 
 
 // A Progression is an ordered set of Challenges of progressive difficulty
-
 // EX. V7in7 -> V7in5 -> V7in3 -> V7in1
 
-
 class Progression : Concept {
-    lateinit var challengeNames: List<String>
+    override var icon = "P"
+
+    var challengeNames: List<String>
     var database: Database
+    var challenges: Array<Challenge?>
 
     constructor(
         name: String,
@@ -26,15 +27,10 @@ class Progression : Concept {
         challengeNames: List<String>,
         database: Database) : super(name, skillName, description) {
 
-            this.database = database
         this.challengeNames = challengeNames
-    }
+        this.database = database
+        challenges = arrayOfNulls<Challenge>(challengeNames.size)
 
-
-    override var icon = "P"
-    var challenges: Array<Challenge?> = arrayOfNulls<Challenge>(challengeNames.size)
-
-    init {  // load named Challenges from the database
         transaction {
             var i = 0
             for (cName in challengeNames) {
@@ -48,6 +44,7 @@ class Progression : Concept {
             }
         }
     }
+
 
     override fun print() {
         TODO()
@@ -94,6 +91,7 @@ class Progression : Concept {
         }
     }
 }
+
 
 fun main() {
     /*

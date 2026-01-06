@@ -158,7 +158,7 @@ abstract class Helper {
             }
             entityNames[i] = name
         }
-        println("ENTITY NAMES: ${entityNames.contentToString()}")
+
         return entityNames
     }
 
