@@ -1,4 +1,4 @@
-package com.idris.database.helpers
+package com.idris.database.operators
 
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType

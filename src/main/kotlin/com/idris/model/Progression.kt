@@ -1,9 +1,8 @@
 package com.idris.model
-import com.idris.Database
 import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
-import com.idris.database.helpers.LogHelper
+import com.idris.database.operators.LogHelper
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction

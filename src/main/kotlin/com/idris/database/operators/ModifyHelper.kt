@@ -1,4 +1,4 @@
-package com.idris.database.helpers
+package com.idris.database.operators
 
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT

@@ -1,7 +1,7 @@
 package com.idris
 
 import com.idris.constants.Styles
-import com.idris.database.helpers.*
+import com.idris.database.operators.*
 
 // The REPL command line interface
 
