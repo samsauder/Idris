@@ -54,8 +54,8 @@ object FlowAlt {
         val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
         val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
 
-        // val syntaxLater = "SYNTAX: [list/create/delete/modify/log/dash/begin] -[x/f/c/e/p/d]"
-        val syntax = "SYNTAX        |  [list/create/delete/modify/log/view] -[f/c/e/p/d]"
+        // val syntaxLater = "SYNTAX: [list/create/delete/modify/log/dash/begin] -[x/f/c/e/p/d/r]"
+        val syntax = "SYNTAX        |  [list/create/delete/modify/log/view] -[x/f/c/e/p/d]"
         val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18 $styled19plus\n"
         println(syntax)
         println(colors)

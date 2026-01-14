@@ -1,4 +1,6 @@
 package com.idris.model.lab
+import com.idris.constants.Styles
+import com.idris.database.helpers.CreateHelper.barc
 import com.idris.model.objective.Exam
 import com.idris.model.objective.Foundation
 import com.idris.model.Skill
@@ -40,17 +42,21 @@ class Experiment : Concept {
 
     override fun print() {  // provisionally done
         // TODO("Not yet implemented")
+        println("\n$barc")
         println("NAME $name")
-        println("SKILL $skillName")
-        println("DESCRIPTION $description\n")
+        println("\nSKILL $skillName")
+        println("\nDESCRIPTION $description")
         var d = 1
-        println("DAYS")
+        println("\nDAYS")
         for (dayName in segment) {
-            if (dayName == null) continue
-            print("  D${d} $dayName")
+            if (dayName == "X") {
+                println("  D${d}")
+                continue
+            }
+            println("  D${d} ${Styles.BOLD}$dayName${Styles.RESET}")
             d++
         }
-        println("REPEAT x${segCount}")
+        println("\nREPEAT x${segCount}")
     }
 
     override fun printL() {  // provisionally done

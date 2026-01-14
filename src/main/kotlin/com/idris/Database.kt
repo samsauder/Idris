@@ -3,6 +3,7 @@ import com.idris.database.ChAttemptsT
 import com.idris.database.ChallengesT
 import com.idris.database.DaysT
 import com.idris.database.ExamsT
+import com.idris.database.ExperimentsT
 import com.idris.database.FoundationsT
 import com.idris.database.ProgressionsT
 import org.jetbrains.exposed.v1.jdbc.Database
@@ -45,7 +46,7 @@ class Database(var path: String) {  // specify a valid .db file with path
             SchemaUtils.create(FoundationsT)
             SchemaUtils.create(ExamsT)
             SchemaUtils.create(ProgressionsT)
-            // SchemaUtils.create(ExperimentsT)
+            SchemaUtils.create(ExperimentsT)
             SchemaUtils.create(DaysT)
 
             println("Set up all tables for the database at '$path'.\n")

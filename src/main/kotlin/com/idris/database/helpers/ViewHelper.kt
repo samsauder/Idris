@@ -3,6 +3,7 @@ package com.idris.database.helpers
 import com.idris.database.ChallengeE
 import com.idris.database.ConceptE
 import com.idris.database.DayE
+import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
 import com.idris.model.auxiliary.ConceptState
@@ -29,8 +30,8 @@ object ViewHelper : Helper() {
     }
 
     override fun x() {
-        TODO("Not yet implemented")
-        // view(ConceptType.EXPERIMENT)
+        // TODO("Not yet implemented")
+        view(ConceptType.EXPERIMENT)
     }
 
     // Print an overview of a specified Day
@@ -59,7 +60,7 @@ object ViewHelper : Helper() {
                 // ConceptType.EXAM -> {}
                 ConceptType.DAY -> {DayE.getOneNamed(name)!!}
                 ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
-                // ConceptType.EXPERIMENT -> {}
+                ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
                 else -> {null}
             } as ConceptE
 
