@@ -73,19 +73,9 @@ object DeleteHelper : Helper() {
     // ======================================================================
 
     fun delete(ct: ConceptType) {  // provisionally complete
-        transaction {
-            val name = inputName(ct, ConceptState.PRESENT)
-            val conceptEntity: ConceptE = when (ct) {
-                ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
-                ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
-                // ConceptType.EXAM -> {}
-                ConceptType.DAY -> {DayE.getOneNamed(name)!!}
-                ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
-                ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
-                else -> {null}
-            } as ConceptE
-            conceptEntity.delete()
-            println("\nDeleted '${name}' from the $ct table.")
-        }
+        val name = inputName(ct, ConceptState.PRESENT)
+        val conceptE = getConceptEntity(ct, name)
+        conceptE?.delete()
+        println("\nDeleted '${name}' from the $ct table.")
     }
 }
