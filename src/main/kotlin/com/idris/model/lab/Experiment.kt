@@ -38,7 +38,7 @@ class Experiment : Concept {
         this.segCount = segCount
         }
 
-    override fun print() {  // in progress
+    override fun print() {  // provisionally done
         // TODO("Not yet implemented")
         println("NAME $name")
         println("SKILL $skillName")
@@ -53,14 +53,13 @@ class Experiment : Concept {
         println("REPEAT x${segCount}")
     }
 
-    override fun printL() {
+    override fun printL() {  // provisionally done
         // TODO("Not yet implemented")
         println(icon_name_skill())
     }
 
     // lateinit var startDate: LocalDate;
     // adherance
-
 
     /*
     fun begin() {
