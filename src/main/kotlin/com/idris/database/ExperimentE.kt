@@ -49,8 +49,18 @@ class ExperimentE(id: EntityID<Int>) : ConceptE(id) {
 
     var segCount by ExperimentsT.segCount
 
-    override fun deEntify(): Concept {
-        TODO("Not yet implemented")
+    override fun deEntify(): Concept {  // provisionally done
+        // TODO("Not yet implemented")
+        val dN = listOf(d1, d2, d3, d4, d5, d6, d7)
+
+        val x = Experiment(
+            name,
+            skillName,
+            description,
+            dN,
+            segCount
+        )
+        return x
     }
     // var startDate
 }
