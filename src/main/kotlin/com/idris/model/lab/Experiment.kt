@@ -54,7 +54,8 @@ class Experiment : Concept {
     }
 
     override fun printL() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        println(icon_name_skill())
     }
 
     // lateinit var startDate: LocalDate;
