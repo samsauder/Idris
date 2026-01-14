@@ -1,6 +1,7 @@
 package com.idris.database.helpers
 
 import com.idris.database.ChallengeE
+import com.idris.database.ConceptE
 import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.ExperimentE
@@ -161,6 +162,22 @@ abstract class Helper {
         }
 
         return entityNames
+    }
+
+
+    // Return a concept entity of the specified ConceptType from its table
+    fun getEntityOfType(ct: ConceptType): ConceptE {
+        val name = inputName(ct, ConceptState.PRESENT)
+        val conceptEntity: ConceptE = when (ct) {
+            ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
+            ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
+            ConceptType.EXAM -> {ExamE.getOneNamed(name)!!}
+            ConceptType.DAY -> {DayE.getOneNamed(name)!!}
+            ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
+            ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
+            // ConceptType.RECORD -> {}
+        } as ConceptE
+        return conceptEntity
     }
 
 }
