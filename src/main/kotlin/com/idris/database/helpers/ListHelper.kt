@@ -1,6 +1,5 @@
 package com.idris.database.helpers
 
-import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.DayE
 import com.idris.database.ExamE
@@ -12,7 +11,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 // Call the Idris 'list' operation for Foundation, Challenge, or Exam
 
 
-object ListHelper : Helper() {
+object ListHelper : Operator() {
     // fun list(ct: ConceptType) {}
 
     // ======================================================================

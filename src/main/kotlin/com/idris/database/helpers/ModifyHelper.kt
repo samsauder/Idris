@@ -9,10 +9,8 @@ import com.idris.database.FoundationsT
 import com.idris.database.ProgressionE
 import com.idris.database.ProgressionsT
 import com.idris.elo.EloTool
-import com.idris.model.Skill
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
-import com.idris.model.objective.Foundation
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
@@ -21,7 +19,7 @@ import java.util.Scanner
 // Call the Idris 'modify' operation for Foundation, Challenge, or Exam
 
 
-object ModifyHelper : Helper() {
+object ModifyHelper : Operator() {
     // ======================================================================
     override fun f() {
         val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)

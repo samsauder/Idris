@@ -17,7 +17,7 @@ import java.util.Scanner
 // Call the Idris 'create' operation for Foundation, Challenge, or Exam
 
 
-object CreateHelper : Helper() {
+object CreateHelper : Operator() {
     // ======================================================================
     override fun f() {  // add a FoundationE to the database
         val f = Foundation(

@@ -7,7 +7,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 // Call the Idris 'delete' operation for Foundation, Challenge, or Exam
 
-object DeleteHelper : Helper() {
+object DeleteHelper : Operator() {
     fun delete(ct: ConceptType) {  // provisionally complete
         transaction {
             val name = inputName(ct, ConceptState.PRESENT)

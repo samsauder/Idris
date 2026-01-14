@@ -2,13 +2,12 @@ package com.idris.database.helpers
 
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 // Call the Idris 'view' operation on an Idris entity
 // * view brings up a detailed overview of the specified entity
 
-object ViewHelper : Helper() {
+object ViewHelper : Operator() {
     fun view(ct: ConceptType) {
         val name = inputName(ct, ConceptState.PRESENT)
         val conceptE = getConceptEntity(ct, name)

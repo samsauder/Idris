@@ -10,13 +10,12 @@ import com.idris.database.ProgressionE
 import com.idris.model.objective.Objective
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
-import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
 // Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
 
-abstract class Helper {
+abstract class Operator {
     val scanner = Scanner(System.`in`)
     // val bar = "======================================================================================================="
     val bar = "========================================"

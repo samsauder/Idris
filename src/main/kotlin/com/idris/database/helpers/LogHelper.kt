@@ -13,7 +13,7 @@ import java.math.BigDecimal
 // Call the 'Idris' log operation for Foundation, Challenge, or Exam
 
 
-object LogHelper : Helper() {
+object LogHelper : Operator() {
     // ======================================================================
     override fun f() {
         transaction {
