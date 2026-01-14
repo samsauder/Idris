@@ -8,11 +8,10 @@ import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
 import com.idris.model.objective.Objective
-import com.idris.model.Skill
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
+import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.util.Arrays
 import java.util.Scanner
 
 // Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
@@ -165,19 +164,22 @@ abstract class Helper {
     }
 
 
-    // Return a concept entity of the specified ConceptType from its table
-    fun getEntityOfType(ct: ConceptType): ConceptE {
-        val name = inputName(ct, ConceptState.PRESENT)
-        val conceptEntity: ConceptE = when (ct) {
-            ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
-            ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
-            ConceptType.EXAM -> {ExamE.getOneNamed(name)!!}
-            ConceptType.DAY -> {DayE.getOneNamed(name)!!}
-            ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
-            ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
-            // ConceptType.RECORD -> {}
-        } as ConceptE
-        return conceptEntity
+    // Return a concept of the specified ConceptType and name from its table (or null if not found)
+    fun getConceptEntity(ct: ConceptType, name: String): ConceptE? {
+        var cE: ConceptE? = null
+        transaction {
+            val conceptEntity: ConceptE = when (ct) {
+                ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
+                ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
+                ConceptType.EXAM -> {ExamE.getOneNamed(name)!!}
+                ConceptType.DAY -> {DayE.getOneNamed(name)!!}
+                ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
+                ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
+                // ConceptType.RECORD -> {}
+            }
+            cE = conceptEntity
+        }
+        return cE
     }
 
 }
