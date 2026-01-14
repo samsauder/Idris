@@ -2,6 +2,7 @@ package com.idris.model.lab
 import com.idris.model.objective.Exam
 import com.idris.model.objective.Foundation
 import com.idris.model.Skill
+import com.idris.model.newclasses.Concept
 import com.idris.model.objective.Challenge
 import com.idris.model.objective.Objective
 import com.idris.sampleData.*;
@@ -22,10 +23,29 @@ import kotlinx.serialization.*
 
 
 
-class Experiment(var name: String,
-                 var description: String,
-                 var segment: List<String?>,
-                 var segCount: Int) {
+class Experiment : Concept {
+    override val icon = "X"
+    var segment: List<String?>
+    var segCount: Int
+
+    constructor(
+        name: String,
+        skillName: String,
+        description: String,
+        segment: List<String?>,
+        segCount: Int) : super(name, skillName, description) {
+        this.segment = segment
+        this.segCount = segCount
+        }
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
+    }
+
     // lateinit var startDate: LocalDate;
     // adherance
 

@@ -11,6 +11,7 @@ import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 object ExperimentsT : IntIdTable("experimentsT") {
     val name = varchar("name", 50)
+    val skillName = varchar("skillName", 50)
     val description = varchar("description", 400)
 
     // a segment consists of 7 Day names (from the DaysT table)
@@ -35,6 +36,7 @@ class ExperimentE(id: EntityID<Int>) : ConceptE(id) {
     }
 
     var name by ExperimentsT.name
+    var skillName by ExperimentsT.skillName
     var description by ExperimentsT.description
 
     var d1 by ExperimentsT.d1
