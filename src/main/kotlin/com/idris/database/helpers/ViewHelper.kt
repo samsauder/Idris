@@ -1,14 +1,7 @@
 package com.idris.database.helpers
 
-import com.idris.database.ChallengeE
-import com.idris.database.ConceptE
-import com.idris.database.DayE
-import com.idris.database.ExperimentE
-import com.idris.database.FoundationE
-import com.idris.database.ProgressionE
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
-import com.idris.model.newclasses.NewDay
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
@@ -52,7 +45,9 @@ object ViewHelper : Helper() {
     }
 
     fun view(ct: ConceptType) {
+        /*
         transaction {
+            /*
             val name = inputName(ct, ConceptState.PRESENT)
             val conceptEntity: ConceptE = when (ct) {
                 ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
@@ -62,11 +57,14 @@ object ViewHelper : Helper() {
                 ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
                 ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
                 else -> {null}
-            } as ConceptE
-
-            val concept = conceptEntity.deEntify()
+            } as ConceptE*/
+            val concept = getConceptOfType(ct)
             concept.print()  // comprehensive view
-        }
+        }*/
+        val name = inputName(ct, ConceptState.PRESENT)
+        val conceptE = getConceptEntity(ct, name)
+        val concept = conceptE?.deEntify()
+        concept?.print()  // comprehensive view
     }
 
 }
