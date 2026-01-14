@@ -4,6 +4,7 @@ import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.DayE
 import com.idris.database.ExamE
+import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -47,7 +48,15 @@ object ListHelper : Helper() {
     }
     // ======================================================================
     override fun x() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        println("EXPERIMENTS")
+        println(barc)
+        transaction {
+            for (expEntity in ExperimentE.Companion.all()) {
+                val day = expEntity.deEntify();
+                day.printL()
+            }
+        }
     }
     // ======================================================================
     override fun d() {
@@ -74,4 +83,6 @@ object ListHelper : Helper() {
         }
     }
     // ======================================================================
+
+
 }
