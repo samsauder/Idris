@@ -2,8 +2,11 @@ package com.idris.database.helpers
 
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
+import com.idris.database.ConceptE
+import com.idris.database.DayE
 import com.idris.database.ExamE
 import com.idris.database.ExamsT
+import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.FoundationsT
 import com.idris.database.ProgressionE
@@ -54,7 +57,8 @@ object DeleteHelper : Helper() {
     }
     // ======================================================================
     override fun d() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        delete(ConceptType.DAY)
     }
     // ======================================================================
     override fun p(datapath: String) {
