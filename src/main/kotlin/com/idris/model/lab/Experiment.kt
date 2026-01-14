@@ -38,8 +38,19 @@ class Experiment : Concept {
         this.segCount = segCount
         }
 
-    override fun print() {
-        TODO("Not yet implemented")
+    override fun print() {  // in progress
+        // TODO("Not yet implemented")
+        println("NAME $name")
+        println("SKILL $skillName")
+        println("DESCRIPTION $description\n")
+        var d = 1
+        println("DAYS")
+        for (dayName in segment) {
+            if (dayName == null) continue
+            print("  D${d} $dayName")
+            d++
+        }
+        println("REPEAT x${segCount}")
     }
 
     override fun printL() {
