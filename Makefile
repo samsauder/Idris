@@ -1,2 +1,2 @@
 idris:
-	java -jar build/libs/Idris-0.0551.jar
+	java -jar build/libs/Idris-0.0552.jar
