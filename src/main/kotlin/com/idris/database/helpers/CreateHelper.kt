@@ -3,6 +3,7 @@ package com.idris.database.helpers
 import com.idris.database.ChallengeE
 import com.idris.database.DayE
 import com.idris.database.ExamE
+import com.idris.database.ExperimentE
 import com.idris.database.FoundationE
 import com.idris.database.ProgressionE
 import com.idris.model.auxiliary.ConceptState
@@ -97,10 +98,36 @@ object CreateHelper : Helper() {
         println("\nAdded '${e.name}' to the Exam table.")
     }
     // ======================================================================
-    override fun x() {
-        TODO("Not yet implemented")
+    override fun x() {  // PROVISIONALLY DONE
+        // TODO("Not yet implemented")
+        val nm = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)                                // name
+        val sk = inputSkill()
+        val desc = inputString("DESCRIPTION")
 
+        println("Input all Day names (x for null):")
+        val dnms = inputConceptNames(ConceptType.DAY, 7)
 
+        val s = Scanner(System.`in`)
+        print("SEGMENT COUNT")
+        val scount = s.nextInt()
+
+        transaction {
+            ExperimentE.Companion.new {
+                name = nm
+                skillName = sk
+                description = desc
+                d1 = dnms[0]!!
+                d2 = dnms[1]!!
+                d3 = dnms[2]!!
+                d4 = dnms[3]!!
+                d5 = dnms[4]!!
+                d6 = dnms[5]!!
+                d7 = dnms[6]!!
+                segCount = scount
+            }
+        }
+
+        println("\nAdded '${nm}' to the Experiment table.")
     }
     // ======================================================================
     // Create a Day
