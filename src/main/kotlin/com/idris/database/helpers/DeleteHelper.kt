@@ -49,7 +49,8 @@ object DeleteHelper : Helper() {
     }
     // ======================================================================
     override fun x() {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        delete(ConceptType.EXPERIMENT)
     }
     // ======================================================================
     override fun d() {
