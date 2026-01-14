@@ -31,6 +31,7 @@ abstract class Helper {
             "-e" -> e()  // exam
             "-p" -> p(datapath)  // progression
             "-d" -> d()  // day
+            "-x" -> x()  // experiment
             else -> println("ERROR: invalid command")
         }
     }
