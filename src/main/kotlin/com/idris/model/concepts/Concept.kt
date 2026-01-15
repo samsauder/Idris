@@ -2,23 +2,22 @@ package com.idris.model.concepts
 
 import com.idris.constants.Styles
 
+
 abstract class Concept {
     abstract val icon: String  // one character visual marker
     var name: String
     var skillName: String
     var description: String
 
-    constructor(
-        name: String,
-        skillName: String,
-        description: String) {
+    constructor(name: String,
+                skillName: String,
+                description: String) {
         this.name = name
         this.skillName = skillName
         this.description = description
     }
 
     abstract fun print()   // print a comprehensive representation
-
     abstract fun printL()  // print a one-line representation
 
 

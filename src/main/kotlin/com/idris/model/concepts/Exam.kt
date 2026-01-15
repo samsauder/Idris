@@ -6,40 +6,25 @@ import com.idris.model.enums.ObjectiveType
 
 class Exam : Objective {
     override val icon = "▶"
-
-    override fun print() {
-        TODO("Not yet implemented")
-    }
-
-    override fun printL() {
-        TODO("Not yet implemented")
-    }
-
     var passed: Boolean = false
 
-
-    constructor(
-        name: String,
-        skillName: String,
-        description: String,
-        minutes: Double
-    ) : super(name, skillName, description, minutes) {
+    constructor(name: String,
+                skillName: String,
+                description: String,
+                minutes: Double) : super(name, skillName, description, minutes) {
         this.symbol = "▶"
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.EXAM
     }
 
 
-    constructor(
-        name: String,
-        skillName: String,
-        description: String,
-        minutes: Double,
-        passed: Boolean
-    ) : this(name, skillName, description, minutes) {
+    constructor(name: String,
+                skillName: String,
+                description: String,
+                minutes: Double,
+                passed: Boolean) : this(name, skillName, description, minutes) {
         this.passed = passed
     }
-
 
     override fun log(value: Double) {
         when (value) {
@@ -48,6 +33,14 @@ class Exam : Objective {
             }
             0.0 -> {}
         }
+    }
+
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        TODO("Not yet implemented")
     }
 
 }

@@ -2,6 +2,7 @@ package com.idris.model.concepts
 
 import com.idris.constants.Styles
 
+
 class NewDay : Concept {
     override val icon = "D"
     val foundationNames: Array<String>

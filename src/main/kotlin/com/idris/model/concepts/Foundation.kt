@@ -19,7 +19,6 @@ class Foundation : Objective {
 
 
     constructor(name: String,
-                // skill: Skill?,
                 skillName: String,
                 description: String,
                 minutes: Double) : super(name, skillName, description, minutes) {
@@ -27,15 +26,6 @@ class Foundation : Objective {
         this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.FOUNDATION
     }
-
-    /*
-    override fun printShort(startLevel: Int) {
-        val lvl = " ".repeat(startLevel * 4)                                          // indent level
-        println("$lvl$symbolHolder $nameStr | $skillStr $minsStr $descriptionStr")
-    }
-
-     */
-
 
     // 1.0 = done, -1 = error
     override fun log(value: Double) {

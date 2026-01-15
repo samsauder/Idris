@@ -20,28 +20,5 @@ abstract class Objective : Concept {
     val symbolColor = Styles.GREEN
     var symbolHolder = ""
 
-    init {
-        /*
-        // nameStr = styleAndPad(name, Styles.BOLD,  20)  // name + style + padding
-        // nameStr = styleAndPad(name, Styles.GREEN,  20)  // name + style + padding
-        nameStr = pad(name,  20)
-        var skillName = ""
-        skill?.let { skillName = it.id };
-        // skillStr = pad(skillName,  16)
-        skillStr = styleAndPad(skillName, Styles.ITALIC, 14)
-        // descriptionStr = description  // uncomment if wanted
-        descriptionStr = style(description, Styles.YELLOW)
-        // minsStr = styleAndPad("${minutes.toInt()}m", Styles.ITALIC, 5)            // mins + style + padding
-        minsStr = pad("${minutes.toInt()}m",  5)
-        */
-    }
-
-    /*
-    // Return a string composed of this Objective's icon, its formatted name, and its skill
-    fun icon_name_skill(): String {
-        val skillf = format(skillName, "", 14)
-        return "${icon_name()} | $skillf"
-    }*/
-
     abstract fun log(value: Double)
 }
