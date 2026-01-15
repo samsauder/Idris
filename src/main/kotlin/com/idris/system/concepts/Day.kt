@@ -3,7 +3,7 @@ package com.idris.system.concepts
 import com.idris.system.extra.Styles
 
 
-class NewDay : Concept {
+class Day : Concept {
     override val icon = "D"
     val foundationNames: Array<String>
     val progressionNames: Array<String>

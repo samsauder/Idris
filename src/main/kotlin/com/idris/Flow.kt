@@ -8,7 +8,7 @@ import com.idris.database.operators.Modifier
 import com.idris.database.operators.Viewer
 import com.idris.system.extra.Styles
 
-object FlowAlt {
+object Flow {
     // Start an Idris REPL
     fun repl(path: String) {
         val d = Database(path)

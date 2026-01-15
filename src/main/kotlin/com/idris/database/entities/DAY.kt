@@ -1,6 +1,6 @@
 package com.idris.database.entities
 
-import com.idris.system.concepts.NewDay
+import com.idris.system.concepts.Day
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq
@@ -61,8 +61,8 @@ class DAY(id: EntityID<Int>) : CONCEPT(id) {
     var p3 by DAYS.p3
     var p4 by DAYS.p4
 
-    override fun deEntify(): NewDay {
-        return NewDay(
+    override fun deEntify(): Day {
+        return Day(
             name,
             skillName,
             description,
