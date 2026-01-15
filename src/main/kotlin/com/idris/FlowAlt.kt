@@ -30,12 +30,12 @@ object FlowAlt {
             }
 
             when (args[0]) {  // args: <command> <option>
-                "list" -> ListHelper.choose(args[1], path)
-                "create" -> CreateHelper.choose(args[1], path)
-                "delete" -> DeleteHelper.choose(args[1], path)
-                "log" -> LogHelper.choose(args[1], path)
-                "modify" -> ModifyHelper.choose(args[1], path)
-                "view" -> ViewHelper.choose(args[1], path)
+                "list" -> Lister.choose(args[1], path)
+                "create" -> Creator.choose(args[1], path)
+                "delete" -> Deleter.choose(args[1], path)
+                "log" -> Logger.choose(args[1], path)
+                "modify" -> Modifier.choose(args[1], path)
+                "view" -> Viewer.choose(args[1], path)
                 "help" -> help()
                 else -> { println("ERROR: invalid command\n") }
             }

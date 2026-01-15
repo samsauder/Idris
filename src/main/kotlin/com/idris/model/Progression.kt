@@ -2,7 +2,7 @@ package com.idris.model
 import com.idris.constants.Styles
 import com.idris.database.ChallengeE
 import com.idris.database.ChallengesT
-import com.idris.database.operators.LogHelper
+import com.idris.database.operators.Logger
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -86,7 +86,7 @@ class Progression : Concept {
                 which = 0.0
             }
 
-            LogHelper.cManual(challenge?.name as String, which)
+            Logger.cManual(challenge?.name as String, which)
             i++
         }
     }
