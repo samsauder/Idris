@@ -40,6 +40,10 @@ tasks.jar.configure {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
+tasks.withType<JavaExec> {
+    jvmArgs("--enable-native-access=ALL-UNNAMED")
+}
+
 kotlin {
     jvmToolchain(21)
 }
