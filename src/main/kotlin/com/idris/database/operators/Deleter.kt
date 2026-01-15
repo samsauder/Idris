@@ -1,11 +1,11 @@
 package com.idris.database.operators
 
-import com.idris.model.enums.ConceptState
-import com.idris.model.enums.ConceptType
+import com.idris.system.extra.ConceptState
+import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
-
 // Call the Idris 'delete' operation for Foundation, Challenge, or Exam
+
 
 object Deleter : Operator() {
     fun delete(ct: ConceptType) {  // provisionally complete

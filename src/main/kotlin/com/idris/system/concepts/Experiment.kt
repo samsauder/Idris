@@ -1,7 +1,6 @@
-package com.idris.model.lab
-import com.idris.constants.Styles
-import com.idris.database.operators.Creator.barc
-import com.idris.model.concepts.Concept
+package com.idris.system.concepts
+
+import com.idris.system.extra.Styles
 
 
 class Experiment : Concept {
@@ -22,8 +21,6 @@ class Experiment : Concept {
         }
 
     override fun print() {
-        // TODO("Not yet implemented")
-        println("\n$barc")
         println("NAME $name")
         println("\nSKILL $skillName")
         println("\nDESCRIPTION $description")
@@ -46,8 +43,3 @@ class Experiment : Concept {
 
     // fun begin()
 }
-
-
-
-
-

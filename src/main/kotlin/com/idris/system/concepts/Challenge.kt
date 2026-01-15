@@ -1,8 +1,8 @@
-package com.idris.model.concepts
+package com.idris.system.concepts
 
-import com.idris.constants.Styles
-import com.idris.EloTool
-import com.idris.model.enums.ObjectiveType
+import com.idris.system.extra.Styles
+import com.idris.system.extra.EloTool
+import com.idris.system.extra.ObjectiveType
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt

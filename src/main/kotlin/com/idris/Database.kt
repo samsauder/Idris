@@ -13,6 +13,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.sql.Connection
 
+
 // Use main when the database needs to be reset
 fun main() {
     val path = "testdata/0552.db"
@@ -64,5 +65,4 @@ class Database(var path: String) {  // specify a valid .db file with path
             DAYS.deleteAll()
         }
     }
-
 }

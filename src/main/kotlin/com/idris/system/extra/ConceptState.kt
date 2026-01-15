@@ -1,4 +1,4 @@
-package com.idris.model.enums
+package com.idris.system.extra
 
 
 enum class ConceptState {

@@ -1,6 +1,6 @@
-package com.idris.model.concepts
+package com.idris.system.concepts
 
-import com.idris.constants.Styles
+import com.idris.system.extra.Styles
 
 
 class NewDay : Concept {
@@ -30,5 +30,4 @@ class NewDay : Concept {
     override fun printL() {
         println(icon_name_skill())
     }
-
 }

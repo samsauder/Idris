@@ -7,20 +7,26 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.model.concepts.Objective
-import com.idris.model.enums.ConceptState
-import com.idris.model.enums.ConceptType
+import com.idris.system.concepts.Objective
+import com.idris.system.extra.ConceptState
+import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
 // Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
 
+
 abstract class Operator {
     val scanner = Scanner(System.`in`)
-    // val bar = "======================================================================================================="
     val bar = "========================================"
     val barc = "$bar=================="
 
+    abstract fun f();  // call the operation for Foundation
+    abstract fun c(datapath: String);  // call the operation for Challenge
+    abstract fun e();  // call the operation for Exam
+    abstract fun x();  // call the operation for Experiment
+    abstract fun d();  // call the operation for Day
+    abstract fun p(datapath: String);  // call the operation for Progression
 
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
@@ -34,15 +40,6 @@ abstract class Operator {
             else -> println("ERROR: invalid command")
         }
     }
-
-
-    abstract fun f();  // call the operation for Foundation
-    abstract fun c(datapath: String);  // call the operation for Challenge
-    abstract fun e();  // call the operation for Exam
-    abstract fun x();  // call the operation for Experiment
-    abstract fun d();  // call the operation for Day
-    abstract fun p(datapath: String);  // call the operation for Progression
-
 
     // Return true if there is a ConceptE of ConceptType type with the specified name in the database
     fun conceptExists(name: String, type: ConceptType) : Boolean {

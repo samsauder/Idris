@@ -1,10 +1,12 @@
 package com.idris
 
-import com.idris.constants.Styles
-import com.idris.database.operators.*
-
-// The REPL command line interface
-
+import com.idris.database.operators.Creator
+import com.idris.database.operators.Deleter
+import com.idris.database.operators.Lister
+import com.idris.database.operators.Logger
+import com.idris.database.operators.Modifier
+import com.idris.database.operators.Viewer
+import com.idris.system.extra.Styles
 
 object FlowAlt {
     // Start an Idris REPL
@@ -44,7 +46,6 @@ object FlowAlt {
         }
     }
 
-
     // Print help
     private fun help() {
         val styled14minus = "[..1499]"
@@ -54,7 +55,6 @@ object FlowAlt {
         val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
         val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
 
-        // val syntaxLater = "SYNTAX: [list/create/delete/modify/log/dash/begin] -[x/f/c/e/p/d/r]"
         val syntax = "SYNTAX        |  [list/create/delete/modify/log/view] -[x/f/c/e/p/d]"
         val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18 $styled19plus\n"
         println(syntax)

@@ -1,7 +1,7 @@
 package com.idris.database.entities
 
-import com.idris.model.lab.Experiment
-import com.idris.model.concepts.Concept
+import com.idris.system.concepts.Experiment
+import com.idris.system.concepts.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq

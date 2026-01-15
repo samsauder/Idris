@@ -1,22 +1,12 @@
-package com.idris.model.concepts
+package com.idris.system.concepts
 
-import com.idris.constants.Styles
-import com.idris.model.enums.ObjectiveType
+import com.idris.system.extra.Styles
+import com.idris.system.extra.ObjectiveType
 
 
 class Foundation : Objective {
     override val icon = "◯"
-
-    override fun print() {
-        TODO("Not yet implemented")
-    }
-
-    override fun printL() {
-        println(icon_name_skill())
-    }
-
     var done: Boolean = false
-
 
     constructor(name: String,
                 skillName: String,
@@ -35,4 +25,11 @@ class Foundation : Objective {
         }
     }
 
+    override fun print() {
+        TODO("Not yet implemented")
+    }
+
+    override fun printL() {
+        println(icon_name_skill())
+    }
 }

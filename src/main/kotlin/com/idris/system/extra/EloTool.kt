@@ -1,4 +1,4 @@
-package com.idris
+package com.idris.system.extra
 
 import kotlin.math.ln
 import kotlin.math.pow

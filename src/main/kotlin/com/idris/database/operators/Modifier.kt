@@ -8,9 +8,9 @@ import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
-import com.idris.EloTool
-import com.idris.model.enums.ConceptState
-import com.idris.model.enums.ConceptType
+import com.idris.system.extra.EloTool
+import com.idris.system.extra.ConceptState
+import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal

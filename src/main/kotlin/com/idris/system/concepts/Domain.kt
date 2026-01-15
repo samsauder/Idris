@@ -1,4 +1,4 @@
-package com.idris.model.concepts
+package com.idris.system.concepts
 
 
 class Domain : Concept {
@@ -20,9 +20,4 @@ class Domain : Concept {
     override fun printL() {
         TODO("Not yet implemented")
     }
-}
-
-
-fun main() {
-
 }

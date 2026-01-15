@@ -6,8 +6,6 @@ import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 
-enum class Months {JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC}
-
 object RECORDS : IntIdTable("chAttemptsT") {
     val challenge = reference("challenge", CHALLENGES)
     val won = bool("won")

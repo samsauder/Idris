@@ -6,11 +6,11 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.model.enums.ConceptState
-import com.idris.model.enums.ConceptType
-import com.idris.model.concepts.Exam
-import com.idris.model.concepts.Foundation
-import com.idris.model.concepts.Challenge
+import com.idris.system.extra.ConceptState
+import com.idris.system.extra.ConceptType
+import com.idris.system.concepts.Exam
+import com.idris.system.concepts.Foundation
+import com.idris.system.concepts.Challenge
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
