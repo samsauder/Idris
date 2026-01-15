@@ -1,4 +1,4 @@
-package com.idris.database
+package com.idris.database.entities
 
 import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID

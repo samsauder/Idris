@@ -1,9 +1,9 @@
 package com.idris.database.operators
 
-import com.idris.database.CHALLENGE
-import com.idris.database.CHALLENGES
-import com.idris.database.PROGRESSION
-import com.idris.database.PROGRESSIONS
+import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.CHALLENGES
+import com.idris.database.entities.PROGRESSION
+import com.idris.database.entities.PROGRESSIONS
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
 import org.jetbrains.exposed.v1.core.eq

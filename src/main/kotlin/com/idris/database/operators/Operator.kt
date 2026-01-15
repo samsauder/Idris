@@ -1,12 +1,12 @@
 package com.idris.database.operators
 
-import com.idris.database.CHALLENGE
-import com.idris.database.CONCEPT
-import com.idris.database.DAY
-import com.idris.database.EXAM
-import com.idris.database.EXPERIMENT
-import com.idris.database.FOUNDATION
-import com.idris.database.PROGRESSION
+import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.CONCEPT
+import com.idris.database.entities.DAY
+import com.idris.database.entities.EXAM
+import com.idris.database.entities.EXPERIMENT
+import com.idris.database.entities.FOUNDATION
+import com.idris.database.entities.PROGRESSION
 import com.idris.model.objective.Objective
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType

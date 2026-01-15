@@ -1,7 +1,7 @@
 package com.idris.model
 import com.idris.constants.Styles
-import com.idris.database.CHALLENGE
-import com.idris.database.CHALLENGES
+import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.CHALLENGES
 import com.idris.database.operators.Logger
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.eq

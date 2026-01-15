@@ -1,11 +1,11 @@
 package com.idris.database.operators
 
-import com.idris.database.CHALLENGE
-import com.idris.database.DAY
-import com.idris.database.EXAM
-import com.idris.database.EXPERIMENT
-import com.idris.database.FOUNDATION
-import com.idris.database.PROGRESSION
+import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.DAY
+import com.idris.database.entities.EXAM
+import com.idris.database.entities.EXPERIMENT
+import com.idris.database.entities.FOUNDATION
+import com.idris.database.entities.PROGRESSION
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 // Call the Idris 'list' operation for Foundation, Challenge, or Exam
