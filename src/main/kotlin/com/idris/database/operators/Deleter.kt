@@ -1,7 +1,7 @@
 package com.idris.database.operators
 
-import com.idris.model.auxiliary.ConceptState
-import com.idris.model.auxiliary.ConceptType
+import com.idris.model.enums.ConceptState
+import com.idris.model.enums.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 

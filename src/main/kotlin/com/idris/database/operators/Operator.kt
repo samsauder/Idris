@@ -7,9 +7,9 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.model.objective.Objective
-import com.idris.model.auxiliary.ConceptState
-import com.idris.model.auxiliary.ConceptType
+import com.idris.model.concepts.Objective
+import com.idris.model.enums.ConceptState
+import com.idris.model.enums.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 

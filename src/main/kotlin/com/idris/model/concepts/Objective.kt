@@ -1,8 +1,7 @@
-package com.idris.model.objective
+package com.idris.model.concepts
 
 import com.idris.constants.Styles
-import com.idris.model.auxiliary.ObjectiveType
-import com.idris.model.newclasses.Concept
+import com.idris.model.enums.ObjectiveType
 
 
 abstract class Objective : Concept {

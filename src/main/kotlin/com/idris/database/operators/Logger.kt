@@ -4,8 +4,8 @@ import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
-import com.idris.model.auxiliary.ConceptState
-import com.idris.model.auxiliary.ConceptType
+import com.idris.model.enums.ConceptState
+import com.idris.model.enums.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal

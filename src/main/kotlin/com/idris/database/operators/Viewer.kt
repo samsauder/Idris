@@ -1,7 +1,7 @@
 package com.idris.database.operators
 
-import com.idris.model.auxiliary.ConceptState
-import com.idris.model.auxiliary.ConceptType
+import com.idris.model.enums.ConceptState
+import com.idris.model.enums.ConceptType
 
 
 // Call the Idris 'view' operation on an Idris entity

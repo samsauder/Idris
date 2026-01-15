@@ -1,27 +1,15 @@
 package com.idris.model.lab
 import com.idris.constants.Styles
 import com.idris.database.operators.Creator.barc
-import com.idris.model.newclasses.Concept
-// import java.time.LocalDateTime
-
-// import kotlinx.serialization.json.*
-
-// Sam Sauder
-// Dec 5 2025
-// An Experiment is plan of action to achieve a PRIMARY goal and a set of AUXILIARY goals over a certain duration.
-// + name
-// + description
-// + segment: a list of Day names that can be looked up when needed from the Day database
-// + segCount: how many times does the segment repeat
-// + startDate: when the experiment was begun
-// + adherance: # of days completed / # of days possible to have completed
-
+import com.idris.model.concepts.Concept
 
 
 class Experiment : Concept {
     override val icon = "X"
     var segment: List<String?>
     var segCount: Int
+    // startDate
+    // adherence
 
     constructor(
         name: String,
@@ -33,7 +21,7 @@ class Experiment : Concept {
         this.segCount = segCount
         }
 
-    override fun print() {  // provisionally done
+    override fun print() {
         // TODO("Not yet implemented")
         println("\n$barc")
         println("NAME $name")
@@ -52,83 +40,14 @@ class Experiment : Concept {
         println("\nREPEAT x${segCount}")
     }
 
-    override fun printL() {  // provisionally done
-        // TODO("Not yet implemented")
+    override fun printL() {
         println(icon_name_skill())
     }
 
-    // lateinit var startDate: LocalDate;
-    // adherance
-
-    /*
-    fun begin() {
-        startDate = LocalDate.now();
-    }*/
+    // fun begin()
 }
 
 
 
 
-
-fun main() {
-    /*
-    val limitDay = listOf(
-        hang20mm90max,
-        isolateV7in5,
-        projectV7in5,
-        isolateV8in7,
-        projectV8in7,
-        pullup85max
-    )
-
-    val volumeDay = listOf(
-        nineRepsV6for90,
-        twelveRepsV6for90,
-        fifteenRepsV6for90,
-        eighteenRepsV6for90
-    )
-
-    // val segment = listOf(limitDay, volumeDay, null, limitDay, volumeDay, null, null)
-    val segment = listOf("limitDay", "volumeDay", null, "limitDay", "volumeDay", null, null)
-
-
-    val e = Experiment("thing", "a thing.", segment, 1);
-    val displayer = TextEDisplayer();
-    // val encodedX = Json.encodeToString(e)
-    // val decodedX = Json.decodeFromString<Experiment>(encodedX)
-    // displayer.dashboardOf(decodedX);
-    displayer.dashboardOf(e);
-    */
-}
-
-
-
-/*
-class Experiment(var title: String,
-                 var description: String,
-                 var segment: Array<List<Skill>>,
-                 var segmentCt: Int,
-                 var foundations: Array<Foundation>,
-                 var challenges: Array<Challenge>,
-                 var exams: Array<Exam>) {
-
-    // private var adherence: Double
-    // start date
-}
-*/
-
-
-
-// + title
-// + description       |  precise specification of the experiment
-// + start date        |  what day was the experiment begun
-// + practiceSegmentCt |  # of practice segments in the entire experiment
-// + measureSegmentCt  |  1
-// + segmentDuration   |  length of practiceSegment (days)
-// + practiceSegment   |  an array of Skill lists for each day in a segment (may have gaps)
-// + measureSegment    |  an array of Exam lists for each day in the segment    (may have gaps)
-// + foundations       |  an array of all Foundations
-// + challenges        |  an array of all Challenges
-// + exams             |  an array of all Exams
-// + adherence         |  current # of days completed / projected # of days completed
 

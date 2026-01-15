@@ -1,4 +1,4 @@
-package com.idris.model.newclasses
+package com.idris.model.concepts
 
 // An area of expertise
 // Keter domain: the domain that has all the highest level domains as components

@@ -1,7 +1,7 @@
 package com.idris.model
 
-import com.idris.model.auxiliary.Type
-import com.idris.model.objective.Objective
+import com.idris.model.enums.Type
+import com.idris.model.concepts.Objective
 
 // model.DayPlan
 

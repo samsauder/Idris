@@ -1,4 +1,4 @@
-package com.idris.model.auxiliary
+package com.idris.model.enums
 
 // Types of Plans
 enum class Type {

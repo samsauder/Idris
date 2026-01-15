@@ -1,4 +1,4 @@
-package com.idris.model.auxiliary
+package com.idris.model.enums
 
 enum class ConceptState {
     PRESENT, ABSENT

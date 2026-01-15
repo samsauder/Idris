@@ -1,6 +1,6 @@
 package com.idris.database.entities
 
-import com.idris.model.newclasses.Concept
+import com.idris.model.concepts.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.dao.IntEntity
 

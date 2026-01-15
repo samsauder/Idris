@@ -1,7 +1,7 @@
 package com.idris.model
 
 import com.idris.constants.Styles
-import com.idris.model.auxiliary.Type
+import com.idris.model.enums.Type
 import java.time.LocalDate
 
 // com.idris.Plan
