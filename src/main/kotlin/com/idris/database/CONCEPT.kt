@@ -7,6 +7,6 @@ import org.jetbrains.exposed.v1.dao.IntEntity
 // Abstract class defining common attributes for all Idris database entities
 
 
-abstract class ConceptE(id: EntityID<Int>) : IntEntity(id) {
+abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
     abstract fun deEntify() : Concept;  // return a Concept
 }

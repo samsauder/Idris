@@ -5,11 +5,10 @@ import com.idris.model.newclasses.Concept
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 
-object ExperimentsT : IntIdTable("experimentsT") {
+object EXPERIMENTS : IntIdTable("experimentsT") {
     val name = varchar("name", 50)
     val skillName = varchar("skillName", 50)
     val description = varchar("description", 400)
@@ -28,26 +27,26 @@ object ExperimentsT : IntIdTable("experimentsT") {
     // val startDate
 }
 
-class ExperimentE(id: EntityID<Int>) : ConceptE(id) {
-    companion object : IntEntityClass<ExperimentE>(ExperimentsT) {
-        fun getOneNamed(name: String): ExperimentE? {
-            return find { ExperimentsT.name eq name}.singleOrNull()
+class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
+    companion object : IntEntityClass<EXPERIMENT>(EXPERIMENTS) {
+        fun getOneNamed(name: String): EXPERIMENT? {
+            return find { EXPERIMENTS.name eq name}.singleOrNull()
         }
     }
 
-    var name by ExperimentsT.name
-    var skillName by ExperimentsT.skillName
-    var description by ExperimentsT.description
+    var name by EXPERIMENTS.name
+    var skillName by EXPERIMENTS.skillName
+    var description by EXPERIMENTS.description
 
-    var d1 by ExperimentsT.d1
-    var d2 by ExperimentsT.d2
-    var d3 by ExperimentsT.d3
-    var d4 by ExperimentsT.d4
-    var d5 by ExperimentsT.d5
-    var d6 by ExperimentsT.d6
-    var d7 by ExperimentsT.d7
+    var d1 by EXPERIMENTS.d1
+    var d2 by EXPERIMENTS.d2
+    var d3 by EXPERIMENTS.d3
+    var d4 by EXPERIMENTS.d4
+    var d5 by EXPERIMENTS.d5
+    var d6 by EXPERIMENTS.d6
+    var d7 by EXPERIMENTS.d7
 
-    var segCount by ExperimentsT.segCount
+    var segCount by EXPERIMENTS.segCount
 
     override fun deEntify(): Concept {  // provisionally done
         // TODO("Not yet implemented")

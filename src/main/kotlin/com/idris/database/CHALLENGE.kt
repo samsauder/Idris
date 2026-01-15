@@ -1,15 +1,13 @@
 package com.idris.database
 
-import com.idris.model.Skill
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
 
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
-object ChallengesT : ObjectivesT("challengesT") {
+object CHALLENGES : OBJECTIVES("challengesT") {
     val progressionName = varchar("progressionName", 50)
     val cElo = decimal("cElo",6, 2)     // challenge elo
     val uElo = decimal("uElo", 6, 2)    // user elo
@@ -19,25 +17,25 @@ object ChallengesT : ObjectivesT("challengesT") {
 }
 
 
-class ChallengeE(id: EntityID<Int>) : ConceptE(id) {
-    companion object : IntEntityClass<ChallengeE>(ChallengesT) {
+class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
+    companion object : IntEntityClass<CHALLENGE>(CHALLENGES) {
         // Return the ChallengeE with the specified name
-        fun getOneNamed(name: String): ChallengeE? {
-            return find { ChallengesT.name eq name}.singleOrNull()
+        fun getOneNamed(name: String): CHALLENGE? {
+            return find { CHALLENGES.name eq name}.singleOrNull()
         }
     }
 
-    var name by ChallengesT.name
+    var name by CHALLENGES.name
     // var skill by ChallengesT.skill
-    var skillName by ChallengesT.skillName
-    var description: String by ChallengesT.description
-    var minutes by ChallengesT.minutes
-    var progressionName by ChallengesT.progressionName
-    var cElo by ChallengesT.cElo
-    var uElo by ChallengesT.uElo
-    var uOdds by ChallengesT.uOdds
-    var attempts by ChallengesT.attempts
-    var wins by ChallengesT.wins
+    var skillName by CHALLENGES.skillName
+    var description: String by CHALLENGES.description
+    var minutes by CHALLENGES.minutes
+    var progressionName by CHALLENGES.progressionName
+    var cElo by CHALLENGES.cElo
+    var uElo by CHALLENGES.uElo
+    var uOdds by CHALLENGES.uOdds
+    var attempts by CHALLENGES.attempts
+    var wins by CHALLENGES.wins
 
     // Returns the Challenge version of the current ChallengeE
     override fun deEntify() : Challenge {

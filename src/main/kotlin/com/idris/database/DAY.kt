@@ -1,17 +1,15 @@
 package com.idris.database
 
-import com.idris.model.newclasses.Concept
 import com.idris.model.newclasses.NewDay
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq
-import org.jetbrains.exposed.v1.dao.IntEntity
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 // A Day is a plan of action to advance a specific skill (consists of a set of Foundations and Progressions)
 
 
-object DaysT : IntIdTable("daysT") {
+object DAYS : IntIdTable("daysT") {
     val name = varchar("dayName", 50)
     val skillName = varchar("skillName", 50)
     val description = varchar("description", 200)
@@ -35,33 +33,33 @@ object DaysT : IntIdTable("daysT") {
     val p4 = varchar("p4Name", 50)
 }
 
-class DayE(id: EntityID<Int>) : ConceptE(id) {
-    companion object : IntEntityClass<DayE>(DaysT) {
-        fun getOneNamed(name: String): DayE? {
-            return find { DaysT.name eq name}.singleOrNull()
+class DAY(id: EntityID<Int>) : CONCEPT(id) {
+    companion object : IntEntityClass<DAY>(DAYS) {
+        fun getOneNamed(name: String): DAY? {
+            return find { DAYS.name eq name}.singleOrNull()
         }
     }
 
-    var name by DaysT.name
-    var skillName by DaysT.skillName
-    var description by DaysT.description
+    var name by DAYS.name
+    var skillName by DAYS.skillName
+    var description by DAYS.description
 
-    var f0 by DaysT.f0
-    var f1 by DaysT.f1
-    var f2 by DaysT.f2
-    var f3 by DaysT.f3
-    var f4 by DaysT.f4
-    var f5 by DaysT.f5
-    var f6 by DaysT.f6
-    var f7 by DaysT.f7
-    var f8 by DaysT.f8
-    var f9 by DaysT.f9
+    var f0 by DAYS.f0
+    var f1 by DAYS.f1
+    var f2 by DAYS.f2
+    var f3 by DAYS.f3
+    var f4 by DAYS.f4
+    var f5 by DAYS.f5
+    var f6 by DAYS.f6
+    var f7 by DAYS.f7
+    var f8 by DAYS.f8
+    var f9 by DAYS.f9
 
-    var p0 by DaysT.p0
-    var p1 by DaysT.p1
-    var p2 by DaysT.p2
-    var p3 by DaysT.p3
-    var p4 by DaysT.p4
+    var p0 by DAYS.p0
+    var p1 by DAYS.p1
+    var p2 by DAYS.p2
+    var p3 by DAYS.p3
+    var p4 by DAYS.p4
 
     override fun deEntify(): NewDay {
         return NewDay(

@@ -1,12 +1,12 @@
 package com.idris.database.operators
 
-import com.idris.database.ChallengeE
-import com.idris.database.ConceptE
-import com.idris.database.DayE
-import com.idris.database.ExamE
-import com.idris.database.ExperimentE
-import com.idris.database.FoundationE
-import com.idris.database.ProgressionE
+import com.idris.database.CHALLENGE
+import com.idris.database.CONCEPT
+import com.idris.database.DAY
+import com.idris.database.EXAM
+import com.idris.database.EXPERIMENT
+import com.idris.database.FOUNDATION
+import com.idris.database.PROGRESSION
 import com.idris.model.objective.Objective
 import com.idris.model.auxiliary.ConceptState
 import com.idris.model.auxiliary.ConceptType
@@ -51,12 +51,12 @@ abstract class Operator {
         // check that a concept with the specified name exists in the database
         transaction {
             exists = when (type) {
-                ConceptType.FOUNDATION  -> FoundationE.getOneNamed(name)
-                ConceptType.CHALLENGE   -> ChallengeE.getOneNamed(name)
-                ConceptType.EXAM        -> ExamE.getOneNamed(name)
-                ConceptType.PROGRESSION -> ProgressionE.getOneNamed(name)
-                ConceptType.DAY         -> DayE.getOneNamed(name)
-                ConceptType.EXPERIMENT  -> ExperimentE.getOneNamed(name)
+                ConceptType.FOUNDATION  -> FOUNDATION.getOneNamed(name)
+                ConceptType.CHALLENGE   -> CHALLENGE.getOneNamed(name)
+                ConceptType.EXAM        -> EXAM.getOneNamed(name)
+                ConceptType.PROGRESSION -> PROGRESSION.getOneNamed(name)
+                ConceptType.DAY         -> DAY.getOneNamed(name)
+                ConceptType.EXPERIMENT  -> EXPERIMENT.getOneNamed(name)
             } != null
         }
         return exists
@@ -164,16 +164,16 @@ abstract class Operator {
 
 
     // Return a concept of the specified ConceptType and name from its table (or null if not found)
-    fun getConceptEntity(ct: ConceptType, name: String): ConceptE? {
-        var cE: ConceptE? = null
+    fun getConceptEntity(ct: ConceptType, name: String): CONCEPT? {
+        var cE: CONCEPT? = null
         transaction {
-            val conceptEntity: ConceptE = when (ct) {
-                ConceptType.FOUNDATION -> {FoundationE.getOneNamed(name)!!}
-                ConceptType.CHALLENGE -> {ChallengeE.getOneNamed(name)!!}
-                ConceptType.EXAM -> {ExamE.getOneNamed(name)!!}
-                ConceptType.DAY -> {DayE.getOneNamed(name)!!}
-                ConceptType.PROGRESSION -> {ProgressionE.getOneNamed(name)!!}
-                ConceptType.EXPERIMENT -> {ExperimentE.getOneNamed(name)!!}
+            val conceptEntity: CONCEPT = when (ct) {
+                ConceptType.FOUNDATION -> {FOUNDATION.getOneNamed(name)!!}
+                ConceptType.CHALLENGE -> {CHALLENGE.getOneNamed(name)!!}
+                ConceptType.EXAM -> {EXAM.getOneNamed(name)!!}
+                ConceptType.DAY -> {DAY.getOneNamed(name)!!}
+                ConceptType.PROGRESSION -> {PROGRESSION.getOneNamed(name)!!}
+                ConceptType.EXPERIMENT -> {EXPERIMENT.getOneNamed(name)!!}
                 // ConceptType.RECORD -> {}
             }
             cE = conceptEntity

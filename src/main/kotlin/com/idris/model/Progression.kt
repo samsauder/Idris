@@ -1,7 +1,7 @@
 package com.idris.model
 import com.idris.constants.Styles
-import com.idris.database.ChallengeE
-import com.idris.database.ChallengesT
+import com.idris.database.CHALLENGE
+import com.idris.database.CHALLENGES
 import com.idris.database.operators.Logger
 import com.idris.model.objective.Challenge
 import org.jetbrains.exposed.v1.core.eq
@@ -36,7 +36,7 @@ class Progression : Concept {
                 if (cName == "X") {  // null placeholder
                     continue;
                 }
-                val cIterator = ChallengeE.find { ChallengesT.name eq cName }.iterator()
+                val cIterator = CHALLENGE.find { CHALLENGES.name eq cName }.iterator()
                 val c = cIterator.next().deEntify()
                 challenges[i] = c
                 i++

@@ -1,11 +1,11 @@
 package com.idris
-import com.idris.database.ChAttemptsT
-import com.idris.database.ChallengesT
-import com.idris.database.DaysT
-import com.idris.database.ExamsT
-import com.idris.database.ExperimentsT
-import com.idris.database.FoundationsT
-import com.idris.database.ProgressionsT
+import com.idris.database.RECORDS
+import com.idris.database.CHALLENGES
+import com.idris.database.DAYS
+import com.idris.database.EXAMS
+import com.idris.database.EXPERIMENTS
+import com.idris.database.FOUNDATIONS
+import com.idris.database.PROGRESSIONS
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.deleteAll
@@ -41,13 +41,13 @@ class Database(var path: String) {  // specify a valid .db file with path
         transaction {
             if (reset) deleteEntities()  // remove all entities
 
-            SchemaUtils.create(ChallengesT)
-            SchemaUtils.create(ChAttemptsT)
-            SchemaUtils.create(FoundationsT)
-            SchemaUtils.create(ExamsT)
-            SchemaUtils.create(ProgressionsT)
-            SchemaUtils.create(ExperimentsT)
-            SchemaUtils.create(DaysT)
+            SchemaUtils.create(CHALLENGES)
+            SchemaUtils.create(RECORDS)
+            SchemaUtils.create(FOUNDATIONS)
+            SchemaUtils.create(EXAMS)
+            SchemaUtils.create(PROGRESSIONS)
+            SchemaUtils.create(EXPERIMENTS)
+            SchemaUtils.create(DAYS)
 
             println("Set up all tables for the database at '$path'.\n")
         }
@@ -56,12 +56,12 @@ class Database(var path: String) {  // specify a valid .db file with path
     // Delete all entities in the database
     private fun deleteEntities() {
         transaction {
-            ChallengesT.deleteAll()
-            ChAttemptsT.deleteAll()
-            FoundationsT.deleteAll()
-            ExamsT.deleteAll()
-            ProgressionsT.deleteAll()
-            DaysT.deleteAll()
+            CHALLENGES.deleteAll()
+            RECORDS.deleteAll()
+            FOUNDATIONS.deleteAll()
+            EXAMS.deleteAll()
+            PROGRESSIONS.deleteAll()
+            DAYS.deleteAll()
         }
     }
 
