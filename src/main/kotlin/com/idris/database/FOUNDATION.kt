@@ -5,13 +5,10 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 
-// IntIdTable("foundationsT")
-
 
 object FOUNDATIONS : OBJECTIVES("foundationsT") {
 
 }
-
 
 class FOUNDATION(id: EntityID<Int>) : CONCEPT(id) {
     companion object : IntEntityClass<FOUNDATION>(FOUNDATIONS) {
@@ -22,7 +19,6 @@ class FOUNDATION(id: EntityID<Int>) : CONCEPT(id) {
 
     var name by FOUNDATIONS.name
     var skillName: String by FOUNDATIONS.skillName
-    // var skill: String by FoundationsT.skill
     var description by FOUNDATIONS.description
     var minutes by FOUNDATIONS.minutes
 
@@ -31,7 +27,6 @@ class FOUNDATION(id: EntityID<Int>) : CONCEPT(id) {
         return Foundation(
             name,
             skillName,
-            // Skill(skill, null),
             description,
             minutes.toDouble())
     }

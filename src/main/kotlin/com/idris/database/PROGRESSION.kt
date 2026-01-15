@@ -56,12 +56,6 @@ class PROGRESSION(id: EntityID<Int>) : CONCEPT(id) {
             skillName,
             description,
             cN)
-
         return p
     }
-
-    /*
-    override fun deEntify(): Concept {
-        TODO("Not yet implemented")
-    }*/
 }

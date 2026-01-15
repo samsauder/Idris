@@ -6,6 +6,7 @@ import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import java.math.BigDecimal
 
+
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
 object CHALLENGES : OBJECTIVES("challengesT") {
     val progressionName = varchar("progressionName", 50)
@@ -16,7 +17,6 @@ object CHALLENGES : OBJECTIVES("challengesT") {
     val wins = integer("wins")  // how many times has the user won
 }
 
-
 class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
     companion object : IntEntityClass<CHALLENGE>(CHALLENGES) {
         // Return the ChallengeE with the specified name
@@ -26,7 +26,6 @@ class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
     }
 
     var name by CHALLENGES.name
-    // var skill by ChallengesT.skill
     var skillName by CHALLENGES.skillName
     var description: String by CHALLENGES.description
     var minutes by CHALLENGES.minutes
@@ -41,7 +40,6 @@ class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
     override fun deEntify() : Challenge {
         return when (cElo) {
             BigDecimal("-0000.00") -> {  // cElo is uninitialized, use the determining constructor
-                // val c = Challenge(name, Skill(skill, null), description, minutes.toDouble(), uOdds.toDouble())
                 val c = Challenge(name, skillName, description, minutes.toDouble(), uOdds.toDouble())
                 c.attempts = attempts
                 c.wins = wins
@@ -53,7 +51,6 @@ class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
                 val c = Challenge(
                     name,
                     skillName,
-                    // Skill(skill, null),
                     description,
                     minutes.toDouble(),
                     cElo.toDouble(),

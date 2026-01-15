@@ -47,6 +47,7 @@ class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
     var d7 by EXPERIMENTS.d7
 
     var segCount by EXPERIMENTS.segCount
+    // var startDate
 
     override fun deEntify(): Concept {  // provisionally done
         // TODO("Not yet implemented")
@@ -61,5 +62,4 @@ class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
         )
         return x
     }
-    // var startDate
 }

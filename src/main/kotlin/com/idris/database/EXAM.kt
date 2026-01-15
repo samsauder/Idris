@@ -20,7 +20,6 @@ class EXAM(id: EntityID<Int>) : CONCEPT(id) {
 
     var name by EXAMS.name
     var skillName: String by EXAMS.skillName
-    // var skill: String by ExamsT.skill
     var description by EXAMS.description
     var minutes: BigDecimal by EXAMS.minutes
     var passed by EXAMS.passed
@@ -30,7 +29,6 @@ class EXAM(id: EntityID<Int>) : CONCEPT(id) {
         return Exam(
             name,
             skillName,
-            // Skill(skill, null),
             description,
             minutes.toDouble(),
             passed)
