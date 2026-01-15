@@ -8,8 +8,11 @@ class Day : Concept {
     val foundationNames: Array<String>
     val progressionNames: Array<String>
 
-    constructor(name: String, skillName: String, description: String, foundationNames: Array<String>, progressionNames: Array<String>)
-            : super(name, skillName, description) {
+    constructor(name: String,
+                skillName: String,
+                description: String,
+                foundationNames: Array<String>,
+                progressionNames: Array<String>) : super(name, skillName, description) {
         this.foundationNames = foundationNames
         this.progressionNames = progressionNames
     }
