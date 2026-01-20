@@ -2,24 +2,75 @@ package com.idris.database.operators
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
+import com.idris.database.entities.CONCEPT
+import com.idris.database.entities.DAY
+import com.idris.database.entities.DAYS
 import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXAMS
+import com.idris.database.entities.EXPERIMENT
+import com.idris.database.entities.EXPERIMENTS
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
+import com.idris.system.extra.AttributeType
 import com.idris.system.extra.EloTool
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import org.w3c.dom.Attr
 import java.math.BigDecimal
 import java.util.Scanner
 
-// Call the Idris 'modify' operation for Foundation, Challenge, or Exam
+// Call the Idris 'modify' operation for one of the concepts
 
 
 object Modifier : Operator() {
+    /*
+    // Modify a single attribute of the target concept
+    fun modify(ct: ConceptType, at: AttributeType) {
+        val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)  // get target
+        val concept: CONCEPT
+
+        transaction {
+            when(ct) {
+                ConceptType.FOUNDATION -> TODO()
+                ConceptType.CHALLENGE -> TODO()
+                ConceptType.EXAM -> TODO()
+                ConceptType.PROGRESSION -> TODO()
+                ConceptType.DAY -> TODO()
+                ConceptType.EXPERIMENT -> TODO()
+            }
+
+
+
+            // func
+        }
+    }
+    */
+
+    /*
+    // Modify the specified attribute
+    fun assignAttribute(at: AttributeType) {
+        val s = inputString("Enter your desired new value.")
+        val concept: CONCEPT
+
+        when (at) {
+           concept =
+        }
+        transaction {
+            when(at) {
+                AttributeType.NAME -> {
+
+                }
+                AttributeType.SKILL_NAME -> {}
+                AttributeType.DESCRIPTION -> {}
+            }
+        }
+    }*/
+
+
     // ======================================================================
     override fun f() {
         val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
