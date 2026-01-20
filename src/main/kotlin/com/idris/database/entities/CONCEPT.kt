@@ -14,8 +14,5 @@ object CONCEPTS(tableName: String) : IntIdTable(tableName) {
 */
 
 abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<CONCEPT>(CONCEPTS) {
-
-    }
     abstract fun deEntify() : Concept;  // return a Concept
 }
