@@ -154,7 +154,52 @@ object Modifier : Operator() {
     }
     // ======================================================================
     override fun d() {
-        TODO("Not yet implemented")
+        val name = inputName(ConceptType.DAY, ConceptState.PRESENT)
+
+        println("\nFor each following attribute, enter a new value or nothing to keep the existing value.")
+        val nameNew = inputName(ConceptType.DAY, ConceptState.ABSENT)
+        val descriptionNew = inputDescription()
+
+        val fNames = arrayOfNulls<String>(10)  // foundation names
+
+        for (i in 0..9) {
+            val f = inputString("FOUNDATION  ")
+            if (f == "") break
+            fNames[i] = f
+        }
+
+        val pNames = arrayOfNulls<String>(10)  // foundation names
+
+        for (i in 0..4) {
+            val p = inputString("PROGRESSION ")
+            if (p == "") break
+            pNames[i] = p
+        }
+
+        transaction {
+            DAY.Companion.findSingleByAndUpdate(DAYS.name eq name) {
+                if (nameNew != "") it.name = nameNew
+                if (descriptionNew != "") it.description = descriptionNew
+
+                if (fNames[0] != null) it.f0 = fNames[0]!!
+                if (fNames[1] != null) it.f1 = fNames[1]!!
+                if (fNames[2] != null) it.f2 = fNames[2]!!
+                if (fNames[3] != null) it.f3 = fNames[3]!!
+                if (fNames[4] != null) it.f4 = fNames[4]!!
+                if (fNames[5] != null) it.f5 = fNames[5]!!
+                if (fNames[6] != null) it.f6 = fNames[6]!!
+                if (fNames[7] != null) it.f7 = fNames[7]!!
+                if (fNames[8] != null) it.f8 = fNames[8]!!
+                if (fNames[9] != null) it.f9 = fNames[9]!!
+
+                if (pNames[0] != null) it.p0 = pNames[0]!!
+                if (pNames[1] != null) it.p1 = pNames[1]!!
+                if (pNames[2] != null) it.p2 = pNames[2]!!
+                if (pNames[3] != null) it.p3 = pNames[3]!!
+                if (pNames[4] != null) it.p4 = pNames[4]!!
+            }
+        }
+
     }
     // ======================================================================
     override fun p(datapath: String) {
