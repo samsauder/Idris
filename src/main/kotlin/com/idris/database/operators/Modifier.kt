@@ -150,7 +150,39 @@ object Modifier : Operator() {
     }
     // ======================================================================
     override fun x() {
-        TODO("Not yet implemented")
+        val name = inputName(ConceptType.EXPERIMENT, ConceptState.PRESENT)
+
+        println("\nFor each following attribute, enter a new value or nothing to keep the existing value (r for rest).")
+        val nameNew = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)
+        val skillNew = inputString("SKILL-NAME  ")
+        val descriptionNew = inputString("DESCRIPTION  ")
+
+        val dNames = arrayOfNulls<String>(7)
+        for (i in 0..6) {  // day names
+            val d = inputString("DAY  ")
+            if (d == "") break
+            dNames[i] = d
+        }
+
+        val segCountNew = inputInteger("# OF SEGMENTS  ")
+
+        transaction {
+            EXPERIMENT.Companion.findSingleByAndUpdate(EXPERIMENTS.name eq name) {
+                if (nameNew != "") it.name = nameNew
+                if (skillNew != "") it.skillName = skillNew
+                if (descriptionNew != "") it.description = descriptionNew
+
+                if (dNames[0] != null) it.d1 = dNames[0]!!
+                if (dNames[1] != null) it.d2 = dNames[1]!!
+                if (dNames[2] != null) it.d3 = dNames[2]!!
+                if (dNames[3] != null) it.d4 = dNames[3]!!
+                if (dNames[4] != null) it.d5 = dNames[4]!!
+                if (dNames[5] != null) it.d6 = dNames[5]!!
+                if (dNames[6] != null) it.d7 = dNames[6]!!
+
+                if (segCountNew != null) it.segCount = segCountNew
+            }
+        }
     }
     // ======================================================================
     override fun d() {
@@ -158,10 +190,10 @@ object Modifier : Operator() {
 
         println("\nFor each following attribute, enter a new value or nothing to keep the existing value.")
         val nameNew = inputName(ConceptType.DAY, ConceptState.ABSENT)
-        val descriptionNew = inputDescription()
+        val skillNew = inputString("SKILL-NAME  ")
+        val descriptionNew = inputString("DESCRIPTION  ")
 
         val fNames = arrayOfNulls<String>(10)  // foundation names
-
         for (i in 0..9) {
             val f = inputString("FOUNDATION  ")
             if (f == "") break
@@ -169,7 +201,6 @@ object Modifier : Operator() {
         }
 
         val pNames = arrayOfNulls<String>(10)  // foundation names
-
         for (i in 0..4) {
             val p = inputString("PROGRESSION ")
             if (p == "") break
@@ -179,6 +210,7 @@ object Modifier : Operator() {
         transaction {
             DAY.Companion.findSingleByAndUpdate(DAYS.name eq name) {
                 if (nameNew != "") it.name = nameNew
+                if (skillNew != "") it.skillName = skillNew
                 if (descriptionNew != "") it.description = descriptionNew
 
                 if (fNames[0] != null) it.f0 = fNames[0]!!
