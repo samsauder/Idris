@@ -40,6 +40,6 @@ class Exam : Objective {
     }
 
     override fun printL() {
-        TODO("Not yet implemented")
+        println(icon_name_skill())
     }
 }
