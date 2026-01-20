@@ -27,7 +27,7 @@ class Experiment : Concept {
         var d = 1
         println("\nDAYS")
         for (dayName in segment) {
-            if (dayName == "X") {
+            if (dayName == ".") {  // if rest day
                 println("  D${d}")
                 continue
             }

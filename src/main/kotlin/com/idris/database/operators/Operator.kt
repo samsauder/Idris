@@ -124,6 +124,7 @@ abstract class Operator {
         val s = Scanner(System.`in`)
         print("$prompt  ")
         val num = readlnOrNull() ?: return null
+        if (num == "") return null
         return num.toInt()
     }
 
@@ -145,8 +146,7 @@ abstract class Operator {
     // Prints a prompt string and returns a string taken in from standard input
     fun inputString(prompt: String) : String {
         print("$prompt  ")
-        val name = readlnOrNull() ?: ""
-        return name
+        return readlnOrNull() ?: ""
     }
 
 
