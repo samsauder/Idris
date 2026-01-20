@@ -72,8 +72,10 @@ abstract class Operator {
     // Takes a name of a Concept from standard input and verifies that the target ConceptState is true (EXISTS or ABSENT)
     fun inputName(t: ConceptType, desiredState: ConceptState) : String {
         // val s = Scanner(System.`in`)
-        print("NAME  ")
-        var name = scanner.next()
+        // print("NAME  ")
+        // var name = scanner.next()
+        var name = inputString("NAME  ")
+        if (name == "") return ""  // return nothing if nothing is input
 
         while (inUndesiredState(name, t, desiredState)) {
             println("ERROR: '${name}' not $desiredState in the $t table.\n")
@@ -118,6 +120,14 @@ abstract class Operator {
     }
 
 
+    fun inputInteger(prompt: String) : Int? {
+        val s = Scanner(System.`in`)
+        print("$prompt  ")
+        val num = readlnOrNull() ?: return null
+        return num.toInt()
+    }
+
+
     fun inputChallenge(i: Int) : String {
         // val s = Scanner(System.`in`)
         print("CHALLENGE$i  ")
@@ -134,9 +144,9 @@ abstract class Operator {
 
     // Prints a prompt string and returns a string taken in from standard input
     fun inputString(prompt: String) : String {
-        val s = Scanner(System.`in`);
         print("$prompt  ")
-        return scanner.next();
+        val name = readlnOrNull() ?: ""
+        return name
     }
 
 
