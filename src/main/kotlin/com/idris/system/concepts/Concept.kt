@@ -37,4 +37,10 @@ abstract class Concept {
         val fin = if (style != "") Styles.RESET else ""  // reset style at end if style was applied
         return "$style$middle$fin"
     }
+
+    // Format a string to a specific style
+    protected fun style(s: String, style: String?): String {
+        val fin = if (style != "") Styles.RESET else ""  // reset style at end if style was applied
+        return "$style$s$fin"
+    }
 }
