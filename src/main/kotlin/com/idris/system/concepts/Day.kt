@@ -1,8 +1,6 @@
 package com.idris.system.concepts
 
-import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.FOUNDATION
-import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
 import com.idris.system.extra.Styles
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
