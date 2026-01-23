@@ -29,6 +29,18 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
         fun getAll(t: ConceptType): SizedIterable<CONCEPT> {
             return CONCEPT.companion(t).all()
         }
+
+        fun conceptNamed(t: ConceptType, name: String): CONCEPT {
+            return when (t) {
+                ConceptType.FOUNDATION -> { FOUNDATION.getOneNamed(name)!! }
+                ConceptType.CHALLENGE -> { CHALLENGE.getOneNamed(name)!! }
+                ConceptType.EXAM -> { EXAM.getOneNamed(name)!! }
+                ConceptType.DAY -> { DAY.getOneNamed(name)!! }
+                ConceptType.PROGRESSION -> { PROGRESSION.getOneNamed(name)!! }
+                ConceptType.EXPERIMENT -> { EXPERIMENT.getOneNamed(name)!! }
+                // ConceptType.RECORD -> { RECORD.getOneNamed(name)!! }
+            }
+        }
     }
 
     abstract fun deEntify() : Concept;  // return a Concept
