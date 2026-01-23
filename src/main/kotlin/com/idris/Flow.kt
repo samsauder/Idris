@@ -1,11 +1,13 @@
 package com.idris
 
-import com.idris.database.operators.Creator
-import com.idris.database.operators.Deleter
-import com.idris.database.operators.Lister
-import com.idris.database.operators.Logger
-import com.idris.database.operators.Modifier
-import com.idris.database.operators.Viewer
+import com.idris.database.operators.Controller
+import com.idris.database.operators.todo.Creator
+import com.idris.database.operators.refactored.Deleter
+import com.idris.database.operators.refactored.Lister
+import com.idris.database.operators.todo.Logger
+import com.idris.database.operators.todo.Modifier
+import com.idris.database.operators.refactored.Viewer
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styles
 
 object Flow {
@@ -24,27 +26,52 @@ object Flow {
             input = readln()
             val args = input.split(" ")  // parse the args
 
-            if (args[0] == "q") break  // Quit the REPL on q
+            when(args[0]) {
+                "q" -> break      // quit the REPL
+                "help" -> help()  // open help
+            }
 
-            if (args.size !in 2..3 && args[0] != "help") {
-                println("ERROR: invalid command\n")
+            if (args.size != 2) {
+                println("ERROR: invalid # of args\n")
+                continue
+            }
+
+            val t = flagToCT(args[1])  // concept type from flag
+            if (t == null) {
+                println("ERROR: invalid flag\n")
                 continue
             }
 
             when (args[0]) {  // args: <command> <option>
-                "list" -> Lister.choose(args[1], path)
+                // "list" -> Lister.choose(args[1], path)
+                "list" -> Controller.list(t)
                 "create" -> Creator.choose(args[1], path)
                 "delete" -> Deleter.choose(args[1], path)
                 "log" -> Logger.choose(args[1], path)
                 "modify" -> Modifier.choose(args[1], path)
                 "view" -> Viewer.choose(args[1], path)
                 "help" -> help()
-                else -> { println("ERROR: invalid command\n") }
+                else -> { println("ERROR: invalid operator\n") }
             }
 
             println()
         }
     }
+
+
+    // Returns the ConceptType version of the given CLI flag
+    fun flagToCT(flag: String): ConceptType? {
+        return when (flag) {
+            "-f" -> ConceptType.FOUNDATION
+            "-c" -> ConceptType.CHALLENGE
+            "-e" -> ConceptType.EXAM
+            "-p" -> ConceptType.PROGRESSION
+            "-d" -> ConceptType.DAY
+            "-x" -> ConceptType.EXPERIMENT
+            else -> {null}  // invalid flag
+        }
+    }
+
 
     // Print help
     private fun help() {
