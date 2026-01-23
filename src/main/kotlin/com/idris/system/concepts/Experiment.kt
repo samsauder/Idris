@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.database.operators.Creator.bar
 import com.idris.system.extra.Styles
 
 
@@ -20,22 +21,45 @@ class Experiment : Concept {
         this.segCount = segCount
         }
 
+
     override fun print() {
-        println("NAME $name")
-        println("\nSKILL $skillName")
-        println("\nDESCRIPTION $description")
-        var d = 1
-        println("\nDAYS")
-        for (dayName in segment) {
-            if (dayName == ".") {  // if rest day
-                println("  D${d}")
+        val barChar = "-"
+        val barWidth = 60
+        val labelWidth = 12  // width
+
+        println("\n${bar(barChar, barWidth)}")
+        print(pad(" NAME", labelWidth))
+        println(style("  $name", Styles.BOLD))
+        //println()
+
+        print(pad(" SKILL",labelWidth))
+        println(style("  $skillName", Styles.ITALIC))
+        //println()
+
+        print(pad(" DESCRIPTION",labelWidth))
+        println(style("  $description", Styles.YELLOW))
+        println()
+
+        print(pad(" WEEK", labelWidth))
+        var d = 0
+        for (day in segment) {
+            if (day == "X") continue  // empty day slot
+            if (d != 0) print(pad("", labelWidth))
+            print("  |")
+            if (day == "_") {  // rest day slot
+                println()
                 continue
             }
-            println("  D${d} ${Styles.BOLD}$dayName${Styles.RESET}")
+            println(style("  $day", Styles.GREEN))
             d++
         }
-        println("\nREPEAT x${segCount}")
+        println()
+
+        print(pad(" REPEAT",labelWidth))
+        println("  x$segCount")
+        println(bar(barChar, barWidth))
     }
+
 
     override fun printL() {
         println(icon_name_skill())
