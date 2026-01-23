@@ -28,7 +28,10 @@ object Flow {
 
             when(args[0]) {
                 "q" -> break      // quit the REPL
-                "help" -> help()  // open help
+                "help" -> {       // open help
+                    help()
+                    continue
+                }
             }
 
             if (args.size != 2) {
