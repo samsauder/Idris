@@ -1,5 +1,4 @@
 package com.idris.system.concepts
-import com.idris.system.extra.Styles
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
 import com.idris.database.operators.Logger
@@ -60,21 +59,20 @@ class Progression : Concept {
     }
 
     override fun print() {
-        print(format(name, Styles.BOLD, 20))
-        print(" (")
-
-        var c = 0;
+        // var c = 0
         for (challenge in challenges) {
             if (challenge == null) continue
-            if (c != 0) print(" -> ")
-            print(format(challenge.name, challenge.color(), null))
-            c++;
+            // if (c != 0) print("->")
+            print(format(challenge.name, challenge.color(), 20))
+            // c++
         }
-        print(")\n")
-
     }
 
     override fun printL() {
-        println(icon_name_skill())
+        print(icon_name_skill())
+        // print("  ")
+        this.print()
+        println()
     }
+
 }
