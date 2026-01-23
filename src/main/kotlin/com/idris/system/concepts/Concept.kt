@@ -43,4 +43,10 @@ abstract class Concept {
         val fin = if (style != "") Styles.RESET else ""  // reset style at end if style was applied
         return "$style$s$fin"
     }
+
+    protected fun pad(s: String, width: Int): String {
+        val middle = s.padEnd(width, ' ')
+        return middle
+    }
+    
 }
