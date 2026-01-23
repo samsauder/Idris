@@ -37,19 +37,19 @@ object Flow {
             }
 
             val t = flagToCT(args[1])  // concept type from flag
+
             if (t == null) {
                 println("ERROR: invalid flag\n")
                 continue
             }
 
             when (args[0]) {  // args: <command> <option>
-                // "list" -> Lister.choose(args[1], path)
                 "list" -> Controller.list(t)
                 "create" -> Creator.choose(args[1], path)
                 "delete" -> Deleter.choose(args[1], path)
                 "log" -> Logger.choose(args[1], path)
                 "modify" -> Modifier.choose(args[1], path)
-                "view" -> Viewer.choose(args[1], path)
+                "view" -> Controller.view(t)
                 "help" -> help()
                 else -> { println("ERROR: invalid operator\n") }
             }
