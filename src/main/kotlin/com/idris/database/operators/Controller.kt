@@ -2,7 +2,12 @@ package com.idris.database.operators
 
 import com.idris.database.entities.CONCEPT
 import com.idris.database.operators.refactored.Deleter.bar
+import com.idris.database.operators.refactored.Deleter.inputName
+import com.idris.system.concepts.Concept
+import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Styles
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 // The Controller is an abstraction used to operate on database concepts
@@ -12,18 +17,18 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 object Controller {
     const val WIDTH = 130  // table width
+    const val BAR_CHAR = "-"
 
-    private fun title(t: ConceptType) {  // outputs a title and a horizontal bar under it
-        println("${t}S")
-        println(bar("=", WIDTH))
-    }
 
     // ======================================================================
     fun list(t: ConceptType) {  // list all concepts of a given type
-        title(t)
+        println("\n${t}S")
+        println(bar(BAR_CHAR, WIDTH))
+
         transaction {
             for (c in CONCEPT.getAll(t))  c.deEntify().printL()
         }
+        println(bar(BAR_CHAR, WIDTH))
     }
     // ======================================================================
     fun create() { TODO() }

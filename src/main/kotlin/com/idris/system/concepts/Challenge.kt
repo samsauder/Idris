@@ -3,6 +3,7 @@ package com.idris.system.concepts
 import com.idris.system.extra.Styles
 import com.idris.system.extra.EloTool
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Styler.format
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt

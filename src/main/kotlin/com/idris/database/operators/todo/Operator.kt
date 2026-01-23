@@ -198,7 +198,7 @@ abstract class Operator {
                 }
 
                 ConceptType.EXPERIMENT -> {
-                    EXPERIMENT.Companion.getOneNamed(name)!!
+                    EXPERIMENT.getOneNamed(name)!!
                 }
                 // ConceptType.RECORD -> {}
             }
