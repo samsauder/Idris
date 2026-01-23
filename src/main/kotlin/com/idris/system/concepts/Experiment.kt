@@ -25,21 +25,16 @@ class Experiment : Concept {
 
 
     override fun print() {
-        val barChar = "-"
-        val barWidth = 60
         val labelWidth = 12  // width
 
-        println("\n${bar(barChar, barWidth)}")
         print(pad(" NAME", labelWidth))
         println(style("  $name", Styles.BOLD))
-        //println()
 
         print(pad(" SKILL",labelWidth))
         println(style("  $skillName", Styles.ITALIC))
-        //println()
 
         print(pad(" DESCRIPTION",labelWidth))
-        println(style("  $description", Styles.YELLOW))
+        println(style("  $description", Styles.GREEN))
         println()
 
         print(pad(" WEEK", labelWidth))
@@ -52,14 +47,13 @@ class Experiment : Concept {
                 println()
                 continue
             }
-            println(style("  $day", Styles.GREEN))
+            println(style("  $day", Styles.BLUE))
             d++
         }
         println()
 
         print(pad(" REPEAT",labelWidth))
         println("  x$segCount")
-        println(bar(barChar, barWidth))
     }
 
 

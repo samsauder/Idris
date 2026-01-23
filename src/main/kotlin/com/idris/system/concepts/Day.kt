@@ -22,20 +22,15 @@ class Day : Concept {
     }
 
     override fun print() {
-        println("\n${Styles.GREEN}$name${Styles.RESET}  ${style(description, Styles.YELLOW)}")
-        print("=======================================================================\n")
+        println(style("$description\n", Styles.YELLOW))
         transaction {
             for (fname in foundationNames) {
                 if (fname == "X") break  // if null
-                // println(fname)
-
                 val f = FOUNDATION.getOneNamed(fname)?.deEntify()  // get the Foundation with the given name
                 f?.printL()
             }
             for (pname in progressionNames) {
                 if (pname == "X") break  // if null
-
-                // println("${Styles.BOLD}$pname${Styles.RESET}")
                 val p = PROGRESSION.getOneNamed(pname)?.deEntify()  // get the Progression with the given name
                 p?.printL()
             }
