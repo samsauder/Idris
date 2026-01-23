@@ -28,6 +28,11 @@ abstract class Operator {
     abstract fun d();  // call the operation for Day
     abstract fun p(datapath: String);  // call the operation for Progression
 
+    // Print a horizontal bar of the given char and width
+    fun bar(c: CharSequence, w: Int): String {
+       return c.repeat(w)
+    }
+
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
         when(option) {
@@ -74,7 +79,7 @@ abstract class Operator {
         // val s = Scanner(System.`in`)
         // print("NAME  ")
         // var name = scanner.next()
-        var name = inputString("NAME  ")
+        var name = inputString("?")
         if (name == "") return ""  // return nothing if nothing is input
 
         while (inUndesiredState(name, t, desiredState)) {
@@ -155,7 +160,7 @@ abstract class Operator {
         val entityNames = arrayOfNulls<String>(10)
         for (i in 0..< n) {
             var name = inputString(type.toString())
-            if (name == "X") {
+            if (name == "X" || name == ".") {  // empty (X) or rest day (.)
                 entityNames[i] = name
                 continue
             }

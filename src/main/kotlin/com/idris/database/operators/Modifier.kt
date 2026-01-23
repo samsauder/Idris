@@ -152,7 +152,7 @@ object Modifier : Operator() {
     override fun x() {
         val name = inputName(ConceptType.EXPERIMENT, ConceptState.PRESENT)
 
-        println("\nFor each following attribute, enter a new value or nothing to keep the existing value (. for rest)")
+        println("\nFor each following attribute, enter a new value or nothing to keep the existing value (_ for rest)")
         val nameNew = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)
         val skillNew = inputString("SKILL-NAME  ")
         val descriptionNew = inputString("DESCRIPTION  ")

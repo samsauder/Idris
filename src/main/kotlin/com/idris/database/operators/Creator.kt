@@ -104,7 +104,7 @@ object Creator : Operator() {
         val sk = inputSkill()
         val desc = inputString("DESCRIPTION")
 
-        println("Input all Day names (x for null):")
+        println("Input all Day names (X for empty, _ for rest):")
         val dnms = inputConceptNames(ConceptType.DAY, 7)
 
         val s = Scanner(System.`in`)

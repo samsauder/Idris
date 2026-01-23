@@ -48,5 +48,5 @@ abstract class Concept {
         val middle = s.padEnd(width, ' ')
         return middle
     }
-    
+
 }
