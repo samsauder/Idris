@@ -23,7 +23,7 @@ class Day : Concept {
     }
 
     override fun print() {
-        println("\n${Styles.GREEN}$name${Styles.RESET}")
+        println("\n${Styles.GREEN}$name${Styles.RESET}  ${style(description, Styles.YELLOW)}")
         print("=======================================================================\n")
         transaction {
             for (fname in foundationNames) {
