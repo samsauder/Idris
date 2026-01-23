@@ -1,7 +1,7 @@
 package com.idris.system.concepts
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
-import com.idris.database.operators.Logger
+import com.idris.database.operators.todo.Logger
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
@@ -70,7 +70,7 @@ class Progression : Concept {
 
     override fun printL() {
         print(icon_name_skill())
-        // print("  ")
+        print("  ")
         this.print()
         println()
     }
