@@ -1,8 +1,7 @@
-package com.idris.database.operators
+package com.idris.database.operators.todo
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
-import com.idris.database.entities.CONCEPT
 import com.idris.database.entities.DAY
 import com.idris.database.entities.DAYS
 import com.idris.database.entities.EXAM
@@ -13,18 +12,13 @@ import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
-import com.idris.system.extra.AttributeType
-import com.idris.system.extra.EloTool
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.EloTool
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import org.w3c.dom.Attr
 import java.math.BigDecimal
 import java.util.Scanner
-
-// Call the Idris 'modify' operation for one of the concepts
-
 
 object Modifier : Operator() {
     /*

@@ -1,4 +1,4 @@
-package com.idris.database.operators
+package com.idris.database.operators.todo
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.DAY
@@ -6,16 +6,13 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.system.extra.ConceptState
-import com.idris.system.extra.ConceptType
+import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Exam
 import com.idris.system.concepts.Foundation
-import com.idris.system.concepts.Challenge
+import com.idris.system.extra.ConceptState
+import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
-
-// Call the Idris 'create' operation for Foundation, Challenge, or Exam
-
 
 object Creator : Operator() {
     // ======================================================================

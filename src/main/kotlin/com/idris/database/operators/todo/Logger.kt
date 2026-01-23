@@ -1,4 +1,4 @@
-package com.idris.database.operators
+package com.idris.database.operators.todo
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
@@ -9,9 +9,6 @@ import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
-
-// Call the 'Idris' log operation for Foundation, Challenge, or Exam
-
 
 object Logger : Operator() {
     // ======================================================================
@@ -69,18 +66,19 @@ object Logger : Operator() {
             TODO("Not yet implemented")
         }
     }
-    // ======================================================================
+
     override fun x() {
         TODO("Not yet implemented")
     }
-    // ======================================================================
+
     override fun d() {
         TODO("Not yet implemented")
     }
-    // ======================================================================
+
     override fun p(datapath: String) {
         TODO("Not yet implemented")
     }
+
     // ======================================================================
     private fun inputResult() : String {
         // val s = Scanner(System.`in`)

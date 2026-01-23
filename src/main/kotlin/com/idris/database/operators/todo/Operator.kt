@@ -1,4 +1,4 @@
-package com.idris.database.operators
+package com.idris.database.operators.todo
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CONCEPT
@@ -10,11 +10,9 @@ import com.idris.database.entities.PROGRESSION
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
-
-// Call an Idris operation (list/create/delete/log) for Foundation, Challenge, or Exam
-
 
 abstract class Operator {
     val scanner = Scanner(System.`in`)
@@ -53,17 +51,16 @@ abstract class Operator {
         // check that a concept with the specified name exists in the database
         transaction {
             exists = when (type) {
-                ConceptType.FOUNDATION  -> FOUNDATION.getOneNamed(name)
-                ConceptType.CHALLENGE   -> CHALLENGE.getOneNamed(name)
-                ConceptType.EXAM        -> EXAM.getOneNamed(name)
-                ConceptType.PROGRESSION -> PROGRESSION.getOneNamed(name)
-                ConceptType.DAY         -> DAY.getOneNamed(name)
-                ConceptType.EXPERIMENT  -> EXPERIMENT.getOneNamed(name)
+                ConceptType.FOUNDATION -> FOUNDATION.Companion.getOneNamed(name)
+                ConceptType.CHALLENGE -> CHALLENGE.Companion.getOneNamed(name)
+                ConceptType.EXAM -> EXAM.Companion.getOneNamed(name)
+                ConceptType.PROGRESSION -> PROGRESSION.Companion.getOneNamed(name)
+                ConceptType.DAY -> DAY.Companion.getOneNamed(name)
+                ConceptType.EXPERIMENT -> EXPERIMENT.Companion.getOneNamed(name)
             } != null
         }
         return exists
     }
-
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective, t: ConceptType) {
@@ -180,12 +177,29 @@ abstract class Operator {
         var cE: CONCEPT? = null
         transaction {
             val conceptEntity: CONCEPT = when (ct) {
-                ConceptType.FOUNDATION -> {FOUNDATION.getOneNamed(name)!!}
-                ConceptType.CHALLENGE -> {CHALLENGE.getOneNamed(name)!!}
-                ConceptType.EXAM -> {EXAM.getOneNamed(name)!!}
-                ConceptType.DAY -> {DAY.getOneNamed(name)!!}
-                ConceptType.PROGRESSION -> {PROGRESSION.getOneNamed(name)!!}
-                ConceptType.EXPERIMENT -> {EXPERIMENT.getOneNamed(name)!!}
+                ConceptType.FOUNDATION -> {
+                    FOUNDATION.Companion.getOneNamed(name)!!
+                }
+
+                ConceptType.CHALLENGE -> {
+                    CHALLENGE.Companion.getOneNamed(name)!!
+                }
+
+                ConceptType.EXAM -> {
+                    EXAM.Companion.getOneNamed(name)!!
+                }
+
+                ConceptType.DAY -> {
+                    DAY.Companion.getOneNamed(name)!!
+                }
+
+                ConceptType.PROGRESSION -> {
+                    PROGRESSION.Companion.getOneNamed(name)!!
+                }
+
+                ConceptType.EXPERIMENT -> {
+                    EXPERIMENT.Companion.getOneNamed(name)!!
+                }
                 // ConceptType.RECORD -> {}
             }
             cE = conceptEntity

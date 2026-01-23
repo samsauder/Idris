@@ -1,11 +1,8 @@
-package com.idris.database.operators
+package com.idris.database.operators.refactored
 
+import com.idris.database.operators.todo.Operator
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
-
-// Call the Idris 'view' operation on an Idris entity
-// * view brings up a detailed overview of the specified entity
-
 
 object Viewer : Operator() {
     fun view(ct: ConceptType) {
