@@ -34,6 +34,18 @@ object Controller {
     // ======================================================================
     fun log() { TODO() }
     // ======================================================================
-    fun view() { TODO() }
+    fun view(t: ConceptType) {
+        val name = inputName(t, ConceptState.PRESENT)
+        var concept: Concept? = null
+
+        println("\n${name}")
+        println(bar(BAR_CHAR, WIDTH))
+
+        transaction {
+            concept = CONCEPT.conceptNamed(t, name).deEntify()
+        }
+        concept?.print()
+        println(bar(BAR_CHAR, WIDTH))
+    }
     // ======================================================================
 }
