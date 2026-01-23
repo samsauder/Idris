@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styles
 
 
@@ -28,25 +29,4 @@ abstract class Concept {
 
         return "$iconf $fname | $skillf"
     }
-
-    // Format a string to a specific style and pad it with whitespace to meet the specified width
-    // * input "" for style and null for padding if not wanted
-    // * style must be a string in Styles
-    protected fun format(s: String, style: String?, width: Int?): String {
-        val middle = if (width != null) s.padEnd(width, ' ') else s
-        val fin = if (style != "") Styles.RESET else ""  // reset style at end if style was applied
-        return "$style$middle$fin"
-    }
-
-    // Format a string to a specific style
-    protected fun style(s: String?, style: String?): String {
-        val fin = if (style != "") Styles.RESET else ""  // reset style at end if style was applied
-        return "$style$s$fin"
-    }
-
-    protected fun pad(s: String, width: Int): String {
-        val middle = s.padEnd(width, ' ')
-        return middle
-    }
-
 }
