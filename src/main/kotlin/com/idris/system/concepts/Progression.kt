@@ -2,6 +2,7 @@ package com.idris.system.concepts
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
 import com.idris.database.operators.todo.Logger
+import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -66,7 +67,7 @@ class Progression : Concept {
     fun printSeq() {  // print the sequence of challenges for the current progression
         for (challenge in challenges) {
             if (challenge == null) continue
-            print(format(challenge.name, challenge.color(), 20))
+            print(format(challenge.name, Styler.colorByElo(challenge.challengeElo), 20))
         }
     }
 

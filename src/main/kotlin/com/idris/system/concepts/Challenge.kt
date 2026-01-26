@@ -3,6 +3,7 @@ package com.idris.system.concepts
 import com.idris.system.extra.Styles
 import com.idris.system.extra.EloTool
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
 import java.time.LocalDate
 import kotlin.math.round
@@ -100,7 +101,7 @@ class Challenge : Objective {
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
     private fun icon_name_skill_elo_odds(): String {
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        val elof = format("${celoS()}$qm",color(), 10)  // formatted elo
+        val elof = format("${celoS()}$qm", Styler.colorByElo(challengeElo), 10)  // formatted elo
         val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
         return "${icon_name_skill()}$elof$oddsf"
     }
@@ -128,7 +129,7 @@ class Challenge : Objective {
     // * aco (actual challenge outcome)
     fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloOld = format("${celoS()}$provSymOld", color(), null)
+        val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByElo(challengeElo), null)
         val oddsOld = userOdds
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
@@ -149,7 +150,7 @@ class Challenge : Objective {
         }
 
         val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloNew = format("${celoS()}$provSymNew", color(), null)
+        val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByElo(challengeElo), null)
 
         val userOddsAsPercentageOld = (oddsOld * 100).toInt()
         val userOddsAsPercentageNew = (userOdds * 100).toInt()
@@ -158,36 +159,15 @@ class Challenge : Objective {
         println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%")
     }
 
+
     // Returns a string of the challenge elo (turns -Infinity to 0000.0)
     private fun celoS() : String {
         var benchElo: String = round(challengeElo).toInt().toString()
-        if (challengeElo == Double.NEGATIVE_INFINITY) {
-            benchElo = "0000"
-        }
+        if (challengeElo == Double.NEGATIVE_INFINITY) benchElo = "0000"
         return benchElo
     }
 
-    // Return a conditional ANSI color style depending on the current object's challengeElo
-    fun color(): String {
-        var style = ""
-        val l0 = Styles.BLUE
-        val l1 = Styles.CYAN
-        val l2 = Styles.GREEN
-        val l3 = Styles.YELLOW
-        val l4 = Styles.RED
 
-        if (challengeElo in 1500.0..<1600.0) {
-            style = l0
-        } else if (challengeElo in 1600.0..<1700.0) {
-            style = l1
-        } else if (challengeElo in 1700.0..<1800.0) {
-            style = l2
-        } else if (challengeElo in 1800.0..<1900.0) {
-            style = l3
-        } else if (challengeElo >= 1900.0) {
-            style = l4
-        }
-        return style
-    }
+
 
 }
