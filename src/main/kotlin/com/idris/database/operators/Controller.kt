@@ -80,7 +80,7 @@ object Controller {
         println("\nDASHBOARD")
         println(bar(BAR_CHAR, WIDTH))
 
-        transaction {
+        transaction {  // print the progressions of each skill
             // val f: CONCEPT = CONCEPT.conceptsOfSkill(ConceptType.CHALLENGE, )
         }
     }
