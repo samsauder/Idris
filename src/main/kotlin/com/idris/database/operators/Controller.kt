@@ -2,6 +2,7 @@ package com.idris.database.operators
 
 import com.idris.database.entities.CONCEPT
 import com.idris.database.operators.refactored.Deleter.bar
+import com.idris.database.operators.refactored.Deleter.getConceptEntity
 import com.idris.database.operators.refactored.Deleter.inputName
 import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Experiment
@@ -47,7 +48,14 @@ object Controller {
     // ======================================================================
     fun create() { TODO() }
     // ======================================================================
-    fun delete() { TODO() }
+    fun delete(t: ConceptType) {
+        transaction {
+            val name = inputName(t, ConceptState.PRESENT)
+            val conceptE = getConceptEntity(t, name)
+            conceptE?.delete()
+            println("\nDeleted ${style(name, Styles.BOLD)} from the $t table.")
+        }
+    }
     // ======================================================================
     fun modify() { TODO() }
     // ======================================================================
@@ -73,7 +81,7 @@ object Controller {
         println(bar(BAR_CHAR, WIDTH))
 
         transaction {
-            val f: CONCEPT = find { CONCEPTS.name eq name}.singleOrNull()
+            // val f: CONCEPT = CONCEPT.conceptsOfSkill(ConceptType.CHALLENGE, )
         }
     }
 }

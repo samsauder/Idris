@@ -49,7 +49,7 @@ object Flow {
             when (args[0]) {  // args: <command> <option>
                 "list" -> Controller.list(t)
                 "create" -> Creator.choose(args[1], path)
-                "delete" -> Deleter.choose(args[1], path)
+                "delete" -> Controller.delete(t)
                 "log" -> Logger.choose(args[1], path)
                 "modify" -> Modifier.choose(args[1], path)
                 "view" -> Controller.view(t)
