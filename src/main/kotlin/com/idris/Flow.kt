@@ -36,7 +36,7 @@ object Flow {
                 "view" -> Controller.view(type!!)
                 "dash" -> Controller.dash()
                 "help" -> Controller.help()
-                "q" -> continue
+                "q" -> break
                 else -> { println("ERROR: invalid command\n") }
             }
 
