@@ -2,13 +2,9 @@ package com.idris
 
 import com.idris.database.operators.Controller
 import com.idris.database.operators.todo.Creator
-import com.idris.database.operators.refactored.Deleter
-import com.idris.database.operators.refactored.Lister
 import com.idris.database.operators.todo.Logger
 import com.idris.database.operators.todo.Modifier
-import com.idris.database.operators.refactored.Viewer
 import com.idris.system.extra.ConceptType
-import com.idris.system.extra.Styles
 
 object Flow {
     // Start an Idris REPL
@@ -21,43 +17,30 @@ object Flow {
         var input = ""
 
         while (true) {
-            println()
             print(">> ")
             input = readln()
             val args = input.split(" ")  // parse the args
+            val type = if (args.size == 2) flagToCT(args[1]) else null
 
-            when(args[0]) {
-                "q" -> break      // quit the REPL
-                "help" -> {       // open help
-                    Controller.help()
-                    continue
-                }
-            }
-
-            if (args.size != 2) {
-                println("ERROR: invalid # of args\n")
-                continue
-            }
-
-            val t = flagToCT(args[1])  // concept type from flag
-
-            if (t == null) {
+            if (type == null && args.size > 1) {
                 println("ERROR: invalid flag\n")
                 continue
             }
 
             when (args[0]) {  // args: <command> <option>
-                "list" -> Controller.list(t)
+                "list" -> Controller.list(type!!)
                 "create" -> Creator.choose(args[1], path)
-                "delete" -> Controller.delete(t)
+                "delete" -> Controller.delete(type!!)
                 "log" -> Logger.choose(args[1], path)
                 "modify" -> Modifier.choose(args[1], path)
-                "view" -> Controller.view(t)
+                "view" -> Controller.view(type!!)
+                "dash" -> Controller.dash()
                 "help" -> Controller.help()
-                else -> { println("ERROR: invalid operator\n") }
+                "q" -> continue
+                else -> { println("ERROR: invalid command\n") }
             }
 
-            println()
+            println("\n")
         }
     }
 
