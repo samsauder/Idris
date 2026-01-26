@@ -4,6 +4,7 @@ import com.idris.database.entities.CONCEPT
 import com.idris.database.operators.refactored.Deleter.bar
 import com.idris.database.operators.refactored.Deleter.inputName
 import com.idris.system.concepts.Concept
+import com.idris.system.concepts.Experiment
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
@@ -67,6 +68,12 @@ object Controller {
     }
     // ======================================================================
     fun dash() {  // See an overview of your statistics across skills
-        TODO()
+        // TODO()
+        println("\nDASHBOARD")
+        println(bar(BAR_CHAR, WIDTH))
+
+        transaction {
+            val f: CONCEPT = find { CONCEPTS.name eq name}.singleOrNull()
+        }
     }
 }
