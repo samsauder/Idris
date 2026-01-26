@@ -11,6 +11,14 @@ import com.idris.system.concepts.Exam
 import com.idris.system.concepts.Foundation
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.Util
+import com.idris.system.extra.Util.inputChallenge
+import com.idris.system.extra.Util.inputConceptNames
+import com.idris.system.extra.Util.inputDescription
+import com.idris.system.extra.Util.inputName
+import com.idris.system.extra.Util.inputProgression
+import com.idris.system.extra.Util.inputSkill
+import com.idris.system.extra.Util.inputString
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
 
@@ -24,7 +32,7 @@ object Creator : Operator() {
             "",
             -1.0
         )
-        this.fillObjectiveCore(f, ConceptType.FOUNDATION)
+        Util.fillObjectiveCore(f, ConceptType.FOUNDATION)
         val sN = f.skillName
 
         transaction {
@@ -41,7 +49,7 @@ object Creator : Operator() {
     // ======================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = Challenge("", "", "", -1.0, 0.01)
-        this.fillObjectiveCore(c, ConceptType.CHALLENGE)
+        Util.fillObjectiveCore(c, ConceptType.CHALLENGE)
         val sN = c.skillName
 
         val progressionNameIn = inputProgression()
@@ -78,7 +86,7 @@ object Creator : Operator() {
             -1.0,
             false
         )
-        this.fillObjectiveCore(e, ConceptType.EXAM)
+        Util.fillObjectiveCore(e, ConceptType.EXAM)
         val sN = e.skillName
 
         transaction {

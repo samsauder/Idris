@@ -15,56 +15,20 @@ import com.idris.database.entities.PROGRESSIONS
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.EloTool
+import com.idris.system.extra.Util.inputChallenge
+import com.idris.system.extra.Util.inputDescription
+import com.idris.system.extra.Util.inputInteger
+import com.idris.system.extra.Util.inputMinutes
+import com.idris.system.extra.Util.inputName
+import com.idris.system.extra.Util.inputProgression
+import com.idris.system.extra.Util.inputSkill
+import com.idris.system.extra.Util.inputString
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.util.Scanner
 
 object Modifier : Operator() {
-    /*
-    // Modify a single attribute of the target concept
-    fun modify(ct: ConceptType, at: AttributeType) {
-        val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)  // get target
-        val concept: CONCEPT
-
-        transaction {
-            when(ct) {
-                ConceptType.FOUNDATION -> TODO()
-                ConceptType.CHALLENGE -> TODO()
-                ConceptType.EXAM -> TODO()
-                ConceptType.PROGRESSION -> TODO()
-                ConceptType.DAY -> TODO()
-                ConceptType.EXPERIMENT -> TODO()
-            }
-
-
-
-            // func
-        }
-    }
-    */
-
-    /*
-    // Modify the specified attribute
-    fun assignAttribute(at: AttributeType) {
-        val s = inputString("Enter your desired new value.")
-        val concept: CONCEPT
-
-        when (at) {
-           concept =
-        }
-        transaction {
-            when(at) {
-                AttributeType.NAME -> {
-
-                }
-                AttributeType.SKILL_NAME -> {}
-                AttributeType.DESCRIPTION -> {}
-            }
-        }
-    }*/
-
-
     // ======================================================================
     override fun f() {
         val name = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)

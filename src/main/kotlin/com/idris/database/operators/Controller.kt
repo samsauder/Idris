@@ -1,15 +1,14 @@
 package com.idris.database.operators
 
 import com.idris.database.entities.CONCEPT
-import com.idris.database.operators.refactored.Deleter.bar
-import com.idris.database.operators.refactored.Deleter.getConceptEntity
-import com.idris.database.operators.refactored.Deleter.inputName
 import com.idris.system.concepts.Concept
-import com.idris.system.concepts.Experiment
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import com.idris.system.extra.Util.bar
+import com.idris.system.extra.Util.getConceptEntity
+import com.idris.system.extra.Util.inputName
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 // The Controller is an abstraction used to operate on database concepts
@@ -76,7 +75,6 @@ object Controller {
     }
     // ======================================================================
     fun dash() {  // See an overview of your statistics across skills
-        // TODO()
         println("\nDASHBOARD")
         println(bar(BAR_CHAR, WIDTH))
 

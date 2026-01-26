@@ -6,6 +6,7 @@ import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.Util.inputName
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
