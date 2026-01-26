@@ -22,7 +22,7 @@ class Day : Concept {
     }
 
     override fun print() {
-        println(style("$description\n", Styles.YELLOW))
+        println(style("$description\n", Styles.GREEN))
         transaction {
             for (fname in foundationNames) {
                 if (fname == "X") break  // if null

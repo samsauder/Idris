@@ -157,7 +157,7 @@ abstract class Operator {
         val entityNames = arrayOfNulls<String>(10)
         for (i in 0..< n) {
             var name = inputString(type.toString())
-            if (name == "X" || name == ".") {  // empty (X) or rest day (.)
+            if (name == "X" || name == "_") {  // empty (X) or rest day (_)
                 entityNames[i] = name
                 continue
             }
