@@ -29,7 +29,7 @@ object Flow {
             when(args[0]) {
                 "q" -> break      // quit the REPL
                 "help" -> {       // open help
-                    help()
+                    Controller.help()
                     continue
                 }
             }
