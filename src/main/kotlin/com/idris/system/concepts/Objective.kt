@@ -5,7 +5,7 @@ import com.idris.system.extra.ObjectiveType
 
 
 abstract class Objective : Concept {
-    var minutes: Double
+    var minutes: Double = 0.0
 
     constructor(
         name: String,
@@ -14,6 +14,8 @@ abstract class Objective : Concept {
         minutes: Double) : super(name, skillName, description) {
         this.minutes = minutes
     }
+
+    constructor() : super()
 
     lateinit var objectiveType: ObjectiveType
     var symbol = ""

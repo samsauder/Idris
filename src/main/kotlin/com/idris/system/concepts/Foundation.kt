@@ -17,6 +17,8 @@ class Foundation : Objective {
         this.objectiveType = ObjectiveType.FOUNDATION
     }
 
+    constructor() : super()
+
     // 1.0 = done, -1 = error
     override fun log(won: Boolean) {
         TODO()

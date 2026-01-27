@@ -10,8 +10,8 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 class Progression : Concept {
     override var icon = "P"
-    var challengeNames: List<String>
-    var challenges: Array<Challenge?>
+    lateinit var challengeNames: List<String>
+    lateinit var challenges: Array<Challenge?>
 
     constructor(name: String,
                 skillName: String,
@@ -34,6 +34,8 @@ class Progression : Concept {
             }
         }
     }
+
+    constructor()
 
     // Log the result for the specified Challenge then:
     // + log a win on all lower level ones

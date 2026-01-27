@@ -9,8 +9,8 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 class Day : Concept {
     override val icon = "D"
-    val foundationNames: Array<String>
-    val progressionNames: Array<String>
+    var foundationNames: Array<String> = emptyArray()
+    var progressionNames: Array<String> = emptyArray()
 
     constructor(name: String,
                 skillName: String,
@@ -20,6 +20,8 @@ class Day : Concept {
         this.foundationNames = foundationNames
         this.progressionNames = progressionNames
     }
+
+    constructor()
 
     override fun print() {
         println(style("$description\n", Styles.GREEN))

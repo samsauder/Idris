@@ -30,6 +30,8 @@ class Challenge : Objective {
         this.objectiveType = ObjectiveType.CHALLENGE
     }
 
+    constructor()
+
     // Elo Determining Constructor (given user odds)
     constructor(name: String,
                 skillName: String,

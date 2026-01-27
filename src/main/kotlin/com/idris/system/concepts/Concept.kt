@@ -6,9 +6,9 @@ import com.idris.system.extra.Styles
 
 abstract class Concept {
     abstract val icon: String  // one character visual marker
-    var name: String
-    var skillName: String
-    var description: String
+    lateinit var name: String
+    lateinit var skillName: String
+    lateinit var description: String
 
     constructor(name: String,
                 skillName: String,
@@ -17,6 +17,8 @@ abstract class Concept {
         this.skillName = skillName
         this.description = description
     }
+
+    constructor()
 
     abstract fun print()   // print a comprehensive representation
     abstract fun printL()  // print a one-line representation

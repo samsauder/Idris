@@ -26,6 +26,8 @@ class Exam : Objective {
         this.passed = passed
     }
 
+    constructor()
+
     override fun log(won: Boolean) {
         TODO()
     }
