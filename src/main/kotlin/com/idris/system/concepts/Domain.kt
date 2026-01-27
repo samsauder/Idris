@@ -3,12 +3,12 @@ package com.idris.system.concepts
 
 class Domain : Concept {
     override val icon: String = "O"
-    val superdomain: Domain?
+    val superdomain: String?
 
     constructor(name: String,
                 skillName: String,
                 description: String,
-                superdomain: Domain?) : super(name, skillName, description) {
+                superdomain: String?) : super(name, skillName, description) {
         this.superdomain = superdomain
     }
 
