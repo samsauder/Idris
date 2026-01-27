@@ -94,6 +94,7 @@ object Creator : Operator() {
     }                  // TODO shorten
 
     override fun x() {
+        /*
         val nm = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)                                // name
         val sk = inputSkill()
         val desc = inputString("DESCRIPTION")
@@ -122,7 +123,29 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${nm}' to the Experiment table.")
-    }                  // TODO shorten
+         */
+
+        val s = Scanner(System.`in`)
+        transaction {
+            EXPERIMENT.new {
+                name = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputString("DESCRIPTION")
+
+                val dnms = inputConceptNames(ConceptType.DAY, 7)  // Day names
+
+                d1 = dnms[0]!!
+                d2 = dnms[1]!!
+                d3 = dnms[2]!!
+                d4 = dnms[3]!!
+                d5 = dnms[4]!!
+                d6 = dnms[5]!!
+                d7 = dnms[6]!!
+                segCount = s.nextInt()
+                println("\nAdded ${style(name, Styles.BOLD)} to the Experiment table.")
+            }
+        }
+    }
 
     override fun d() {
         transaction {
