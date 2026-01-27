@@ -18,11 +18,8 @@ class Foundation : Objective {
     }
 
     // 1.0 = done, -1 = error
-    override fun log(value: Double) {
-        when(value) {
-            1.0 -> { done = true }
-            else -> {}
-        }
+    override fun log(won: Boolean) {
+        TODO()
     }
 
     override fun print() {

@@ -26,13 +26,8 @@ class Exam : Objective {
         this.passed = passed
     }
 
-    override fun log(value: Double) {
-        when (value) {
-            1.0 -> {
-                passed = true
-            }
-            0.0 -> {}
-        }
+    override fun log(won: Boolean) {
+        TODO()
     }
 
     override fun print() {
