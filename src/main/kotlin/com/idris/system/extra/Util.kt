@@ -8,7 +8,9 @@ import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
 import com.idris.system.concepts.Objective
+import com.idris.system.extra.Styler.style
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.time.LocalDate
 import java.util.Scanner
 
 
@@ -180,6 +182,14 @@ object Util {
             cE = conceptEntity
         }
         return cE
+    }
+
+    // Print the result of a recent challenge attempt
+    fun printResult(name: String, won: Boolean) {
+        val sym = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
+        val nameB = style(name, Styles.BOLD)
+        val date = "${LocalDate.now()}"
+        println("$sym $nameB on $date.")
     }
 
 
