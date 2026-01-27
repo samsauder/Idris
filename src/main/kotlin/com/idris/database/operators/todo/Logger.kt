@@ -49,7 +49,7 @@ object Logger : Operator() {
             val cE = cIterator.next()
             val c = cE.deEntify()
 
-            c.log(result)
+            c.log(result == 1.0)
 
             val challengeE = CHALLENGE.Companion.findSingleByAndUpdate(CHALLENGES.name eq name) {
                 it.cElo = BigDecimal.valueOf(c.challengeElo)
