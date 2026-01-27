@@ -1,18 +1,28 @@
 package com.idris.system.concepts
 
-import jdk.jfr.Description
+import com.idris.system.extra.EloRater
+import com.idris.system.extra.Rater
+import com.idris.system.extra.Util
+
+// Soon to replace Challenge (cleaner)
+
 
 class ChallengeNew : Objective {
     override val icon = "●"
-    var elo: Double = 0.0
+    private var rating = 0.0
+    private var rater: Rater
 
     constructor(name: String,
                 skillName: String,
                 description: String,
-                minutes: Double) : super(name, skillName, description, minutes)
+                minutes: Double,
+                rater: Rater) : super(name, skillName, description, minutes) {
+                    this.rater = rater
+                }
 
-    override fun log(value: Double) {
-        TODO("Not yet implemented")
+    override fun log(won: Boolean) {
+        rater.update(this, won)  // update the challenge rating for this ChallengeNew
+        Util.printResult(name, won)        // output a visual of the result to stdout
     }
 
     override fun print() {
@@ -22,4 +32,9 @@ class ChallengeNew : Objective {
     override fun printL() {
         TODO("Not yet implemented")
     }
+}
+
+fun main() {
+    val c = ChallengeNew("thing", "t", "", 1.0, EloRater)
+    c.log(true)
 }
