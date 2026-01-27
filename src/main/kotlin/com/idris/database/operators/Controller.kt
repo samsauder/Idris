@@ -45,7 +45,7 @@ object Controller {
         println(bar(BAR_CHAR, WIDTH))
     }
     // ======================================================================
-    fun create() { TODO() }
+    fun create(t: ConceptType) { TODO() }
     // ======================================================================
     fun delete(t: ConceptType) {
         transaction {
@@ -75,6 +75,8 @@ object Controller {
     }
     // ======================================================================
     fun dash() {  // See an overview of your statistics across skills
+        TODO()
+        /* WORK-IN-PROGRESS
         println("\nDASHBOARD")
         println(bar(BAR_CHAR, WIDTH))
 
@@ -83,5 +85,6 @@ object Controller {
         transaction {  // print the progressions of each skill
             // val f: CONCEPT = CONCEPT.conceptsOfSkill(ConceptType.CHALLENGE, )
         }
+         */
     }
 }
