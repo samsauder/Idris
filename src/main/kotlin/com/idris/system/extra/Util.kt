@@ -48,6 +48,7 @@ object Util {
         // o.name = inputName(t, ConceptState.ABSENT)
         // o.skillName = inputSkill()
         // o.description = inputDescription()
+        fillConceptCore(o, t)
         o.minutes = inputMinutes()
     }
 
