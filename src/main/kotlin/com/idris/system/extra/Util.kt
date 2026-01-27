@@ -7,6 +7,7 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
+import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.style
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -44,10 +45,20 @@ object Util {
 
     // Fill an Objectives attributes from standard input
     fun fillObjectiveCore(o: Objective, t: ConceptType) {
-        o.name = inputName(t, ConceptState.ABSENT)
-        o.skillName = inputSkill()
-        o.description = inputDescription()
+        // o.name = inputName(t, ConceptState.ABSENT)
+        // o.skillName = inputSkill()
+        // o.description = inputDescription()
         o.minutes = inputMinutes()
+    }
+
+    // Fill a Concept's attributes from standard input
+    fun fillConceptCore(c: Concept, t: ConceptType) {
+        val n = inputName(t, ConceptState.ABSENT)
+        val s = inputSkill()
+        val d = inputDescription()
+        c.name = n
+        c.skillName = s
+        c.description = d
     }
 
 
