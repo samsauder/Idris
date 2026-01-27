@@ -143,6 +143,8 @@ object Util {
 
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
+        println("Input all $type names (X for null, _ for rest)")
+
         val entityNames = arrayOfNulls<String>(10)
         for (i in 0..< n) {
             var name = inputString(type.toString())
