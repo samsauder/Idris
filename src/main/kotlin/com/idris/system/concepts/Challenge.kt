@@ -59,35 +59,26 @@ class Challenge : Objective {
     }
 
     // value is the result of the attempt for the user (1.0 or 0.5 or 0.0)
-    override fun log(value: Double) {
+    override fun log(won: Boolean) {
         val eUo = et.expectedOutcome(userElo, challengeElo)  // expected user outcome
         val eCo = et.expectedOutcome(challengeElo, userElo)  // expected challenge outcome
-        var aUo: Double = -1.0  // actual user outcome
-        var aCo: Double = -1.0  // actual challenge outcome
+        var aUo: Double   // actual user outcome
+        var aCo: Double   // actual challenge outcome
 
-        when (value) {
-            1.0 -> {
-                print("${Styles.GREEN}[+]${Styles.RESET}")
-                aUo = 1.0
-                aCo = 0.0
-                wins++
-            }  // user won
-            0.0 -> {
-                print("${Styles.RED}[-]${Styles.RESET}")
-                aUo = 0.0
-                aCo = 1.0
-            }  // benchmark won
-            0.5 -> {
-                // print("[=]")
-                aUo = 0.5
-                aCo = 0.5
-            } // no winner
-            else -> {}
+        if (won) {
+            print("${Styles.GREEN}[+]${Styles.RESET}")
+            aUo = 1.0
+            aCo = 0.0
+            wins++
+        } else {
+            print("${Styles.RED}[-]${Styles.RESET}")
+            aUo = 0.0
+            aCo = 1.0
         }
+        
         attempts++
 
         originalLogSequence(eUo, aUo, eCo, aCo)
-        // updatedLogSequence()
     }
 
     override fun print() {
