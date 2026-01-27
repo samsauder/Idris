@@ -25,7 +25,6 @@ import java.util.Scanner
 
 
 object Creator : Operator() {
-    // ======================================================================
     override fun f() {  // add a FoundationE to the database
         transaction {
             FOUNDATION.new {
@@ -37,7 +36,6 @@ object Creator : Operator() {
             }
         }
     }
-    // ======================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = Challenge("", "", "", -1.0, 0.01)
         Util.fillObjectiveCore(c, ConceptType.CHALLENGE)
@@ -67,8 +65,7 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${c.name}' to the Challenge table.")
-    }
-    // ======================================================================
+    } // TODO shorten
     override fun e() {  // add an ExamE to the database
         val e  = Exam(
             "",
@@ -92,10 +89,8 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${e.name}' to the Exam table.")
-    }
-    // ======================================================================
-    override fun x() {  // PROVISIONALLY DONE
-        // TODO("Not yet implemented")
+    }  // TODO shorten
+    override fun x() {
         val nm = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)                                // name
         val sk = inputSkill()
         val desc = inputString("DESCRIPTION")
@@ -124,9 +119,7 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${nm}' to the Experiment table.")
-    }
-    // ======================================================================
-    // Create a Day
+    }  // TODO shorten
     override fun d() {
         transaction {
             DAY.new {
