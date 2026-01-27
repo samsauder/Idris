@@ -18,6 +18,7 @@ import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputDescription
 import com.idris.system.extra.Util.inputInteger
+import com.idris.system.extra.Util.inputMinutes
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputProgression
 import com.idris.system.extra.Util.inputSkill
@@ -32,8 +33,8 @@ object Creator : Operator() {
             FOUNDATION.new {
                 name = inputName(ConceptType.FOUNDATION, ConceptState.ABSENT)
                 skillName = inputSkill()
-                description = inputDescription()
-                minutes = Util.inputMinutes().toBigDecimal()
+                description = inputString("DESCRIPTION")
+                minutes = inputBigDecimal("MINUTES")
                 println("\nAdded ${style(name, Styles.BOLD)} to the Foundation table.")
             }
         }
@@ -59,29 +60,17 @@ object Creator : Operator() {
     }
     // =======================================================================================================
     override fun e() {  // add an ExamE to the database
-        val e  = Exam(
-            "",
-            "",
-            "",
-            -1.0,
-            false
-        )
-        Util.fillObjectiveCore(e, ConceptType.EXAM)
-        val sN = e.skillName
-
         transaction {
             EXAM.new {
-                name = e.name
-                if (skillName != "") skillName = sN
-                description = e.description
-
-                minutes = e.minutes.toBigDecimal()
+                name = inputName(ConceptType.EXAM, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputString("DESCRIPTION")
+                minutes = inputBigDecimal("MINUTES")
                 passed = false
+                println("\nAdded ${style(name, Styles.BOLD)} to the Exam table.")
             }
         }
-
-        println("\nAdded '${e.name}' to the Exam table.")
-    }                  // TODO shorten
+    }
     // =======================================================================================================
     override fun x() {
         val s = Scanner(System.`in`)
@@ -153,6 +142,7 @@ object Creator : Operator() {
                 c7 = inputChallenge(7)
                 c8 = inputChallenge(8)
                 c9 = inputChallenge(9)
+                println("\nAdded ${style(name, Styles.BOLD)} to the Progression table.")
             }
         }
     }
