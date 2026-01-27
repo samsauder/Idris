@@ -5,9 +5,6 @@ import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 // Defines common attributes for all Idris Objective tables
 
 
-abstract class OBJECTIVES(tableName: String) : IntIdTable(tableName) {
-    val name = varchar("name", 50)
-    val skillName = varchar("skillName", 50)
-    val description = varchar("description", 200)
+abstract class OBJECTIVES(tableName: String) : CONCEPTS(tableName) {
     val minutes = decimal("minutes",5, 2)
 }
