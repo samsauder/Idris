@@ -53,6 +53,7 @@ object Creator : Operator() {
                 uOdds = 1.0.toBigDecimal()
                 attempts = 0
                 wins = 0
+                println("\nAdded ${style(name, Styles.BOLD)} to the Challenge table.")
             }
         }
     }
