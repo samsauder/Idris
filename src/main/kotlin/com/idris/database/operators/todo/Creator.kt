@@ -16,6 +16,7 @@ import com.idris.system.extra.Util
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputDescription
+import com.idris.system.extra.Util.inputInteger
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputProgression
 import com.idris.system.extra.Util.inputSkill
@@ -94,37 +95,6 @@ object Creator : Operator() {
     }                  // TODO shorten
 
     override fun x() {
-        /*
-        val nm = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)                                // name
-        val sk = inputSkill()
-        val desc = inputString("DESCRIPTION")
-
-        println("Input all Day names (X for empty, _ for rest):")
-        val dnms = inputConceptNames(ConceptType.DAY, 7)
-
-        val s = Scanner(System.`in`)
-        print("SEGMENT COUNT")
-        val scount = s.nextInt()
-
-        transaction {
-            EXPERIMENT.new {
-                name = nm
-                skillName = sk
-                description = desc
-                d1 = dnms[0]!!
-                d2 = dnms[1]!!
-                d3 = dnms[2]!!
-                d4 = dnms[3]!!
-                d5 = dnms[4]!!
-                d6 = dnms[5]!!
-                d7 = dnms[6]!!
-                segCount = scount
-            }
-        }
-
-        println("\nAdded '${nm}' to the Experiment table.")
-         */
-
         val s = Scanner(System.`in`)
         transaction {
             EXPERIMENT.new {
@@ -141,7 +111,7 @@ object Creator : Operator() {
                 d5 = dnms[4]!!
                 d6 = dnms[5]!!
                 d7 = dnms[6]!!
-                segCount = s.nextInt()
+                segCount = inputInteger("SEGMENT COUNT")!!
                 println("\nAdded ${style(name, Styles.BOLD)} to the Experiment table.")
             }
         }
