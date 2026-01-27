@@ -8,7 +8,6 @@ import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Exam
-import com.idris.system.concepts.Foundation
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
@@ -23,6 +22,7 @@ import com.idris.system.extra.Util.inputSkill
 import com.idris.system.extra.Util.inputString
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.Scanner
+
 
 object Creator : Operator() {
     // ======================================================================
@@ -128,21 +128,15 @@ object Creator : Operator() {
     // ======================================================================
     // Create a Day
     override fun d() {
-        val nm = inputName(ConceptType.DAY, ConceptState.ABSENT)                                // name
-        val sk = inputSkill()
-        val desc = inputString("DESCRIPTION")                       // description
-
-        println("Input all Foundation names (X for null):")
-        val fnms = inputConceptNames(ConceptType.FOUNDATION, 10)  // Foundation names
-
-        println("\nInput all Progression names (X for null):")
-        val pnms = inputConceptNames(ConceptType.PROGRESSION, 5)  // Progression names
-
         transaction {
-            DAY.Companion.new {
-                name = nm
-                skillName = sk
-                description = desc
+            DAY.new {
+                name = inputName(ConceptType.DAY, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputString("DESCRIPTION")
+
+                val fnms = inputConceptNames(ConceptType.FOUNDATION, 10)  // Foundation names
+                val pnms = inputConceptNames(ConceptType.PROGRESSION, 5)  // Progression names
+
                 f0 = fnms[0]!!
                 f1 = fnms[1]!!
                 f2 = fnms[2]!!
@@ -153,14 +147,15 @@ object Creator : Operator() {
                 f7 = fnms[7]!!
                 f8 = fnms[8]!!
                 f9 = fnms[9]!!
+
                 p0 = pnms[0]!!
                 p1 = pnms[1]!!
                 p2 = pnms[2]!!
                 p3 = pnms[3]!!
                 p4 = pnms[4]!!
+                println("\nAdded ${style(name, Styles.BOLD)} to the Day table.")
             }
         }
-        println("\nAdded '${nm}' to the Day table.")
     }
     // ======================================================================
     override fun p(datapath: String) {
