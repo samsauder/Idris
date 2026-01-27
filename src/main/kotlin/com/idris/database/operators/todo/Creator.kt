@@ -36,6 +36,7 @@ object Creator : Operator() {
             }
         }
     }
+
     override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = Challenge("", "", "", -1.0, 0.01)
         Util.fillObjectiveCore(c, ConceptType.CHALLENGE)
@@ -49,10 +50,10 @@ object Creator : Operator() {
         c.generateChallengeElo()
 
         transaction {
-            CHALLENGE.Companion.new {
+            CHALLENGE.new {
                 name = c.name
                 // skill = (c.skill?.id ?: String) as String
-                if (skillName != "") skillName = sN;
+                if (skillName != "") skillName = sN
                 description = c.description
                 minutes = c.minutes.toBigDecimal()
                 cElo = c.challengeElo.toBigDecimal()
@@ -65,7 +66,8 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${c.name}' to the Challenge table.")
-    } // TODO shorten
+    }  // TODO shorten
+
     override fun e() {  // add an ExamE to the database
         val e  = Exam(
             "",
@@ -78,9 +80,9 @@ object Creator : Operator() {
         val sN = e.skillName
 
         transaction {
-            EXAM.Companion.new {
+            EXAM.new {
                 name = e.name
-                if (skillName != "") skillName = sN;
+                if (skillName != "") skillName = sN
                 description = e.description
 
                 minutes = e.minutes.toBigDecimal()
@@ -89,7 +91,8 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${e.name}' to the Exam table.")
-    }  // TODO shorten
+    }                  // TODO shorten
+
     override fun x() {
         val nm = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)                                // name
         val sk = inputSkill()
@@ -103,7 +106,7 @@ object Creator : Operator() {
         val scount = s.nextInt()
 
         transaction {
-            EXPERIMENT.Companion.new {
+            EXPERIMENT.new {
                 name = nm
                 skillName = sk
                 description = desc
@@ -119,7 +122,8 @@ object Creator : Operator() {
         }
 
         println("\nAdded '${nm}' to the Experiment table.")
-    }  // TODO shorten
+    }                  // TODO shorten
+
     override fun d() {
         transaction {
             DAY.new {
@@ -150,6 +154,7 @@ object Creator : Operator() {
             }
         }
     }
+
     override fun p(datapath: String) {
         transaction {
             PROGRESSION.new {
