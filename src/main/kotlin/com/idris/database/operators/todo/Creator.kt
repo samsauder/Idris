@@ -157,47 +157,23 @@ object Creator : Operator() {
             }
         }
     }
-    // ======================================================================
     override fun p(datapath: String) {
-        // TODO("Not yet implemented")
-        val nameIn = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
-        val skillIn = inputSkill()
-        val descriptionIn = inputDescription()
-
-        println("Input challenge names in increasing order of difficulty (X for null):")
-        // val challengeNames = inputEntityNames("CHALLENGE")
-
-        ///*
-        val c0In = inputChallenge(0)
-        val c1In = inputChallenge(1)
-        val c2In = inputChallenge(2)
-        val c3In = inputChallenge(3)
-        val c4In = inputChallenge(4)
-        val c5In = inputChallenge(5)
-        val c6In = inputChallenge(6)
-        val c7In = inputChallenge(7)
-        val c8In = inputChallenge(8)
-        val c9In = inputChallenge(9)
-        //*/
-
         transaction {
-            PROGRESSION.Companion.new {
-                name = nameIn
-                skillName = skillIn
-                description = descriptionIn
-                c0 = c0In
-                c1 = c1In
-                c2 = c2In
-                c3 = c3In
-                c4 = c4In
-                c5 = c5In
-                c6 = c6In
-                c7 = c7In
-                c8 = c8In
-                c9 = c9In
+            PROGRESSION.new {
+                name = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputDescription()
+                c0 = inputChallenge(0)
+                c1 = inputChallenge(1)
+                c2 = inputChallenge(2)
+                c3 = inputChallenge(3)
+                c4 = inputChallenge(4)
+                c5 = inputChallenge(5)
+                c6 = inputChallenge(6)
+                c7 = inputChallenge(7)
+                c8 = inputChallenge(8)
+                c9 = inputChallenge(9)
             }
         }
-
     }
-    // ======================================================================
 }
