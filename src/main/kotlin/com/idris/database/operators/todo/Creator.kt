@@ -11,6 +11,8 @@ import com.idris.system.concepts.Exam
 import com.idris.system.concepts.Foundation
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Styles
 import com.idris.system.extra.Util
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
@@ -25,26 +27,15 @@ import java.util.Scanner
 object Creator : Operator() {
     // ======================================================================
     override fun f() {  // add a FoundationE to the database
-        val f = Foundation(
-            "",
-            "",
-            // null,
-            "",
-            -1.0
-        )
-        Util.fillObjectiveCore(f, ConceptType.FOUNDATION)
-        val sN = f.skillName
-
         transaction {
-            FOUNDATION.Companion.new {
-                name = f.name
-                if (skillName != "") skillName = sN;
-                description = f.description
-                minutes = f.minutes.toBigDecimal()
+            FOUNDATION.new {
+                name = inputName(ConceptType.FOUNDATION, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputDescription()
+                minutes = Util.inputMinutes().toBigDecimal()
+                println("\nAdded ${style(name, Styles.BOLD)} to the Foundation table.")
             }
         }
-
-        println("\nAdded '${f.name}' to the Foundation table.")
     }
     // ======================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
