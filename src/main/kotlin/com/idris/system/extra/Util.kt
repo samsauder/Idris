@@ -11,6 +11,7 @@ import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.style
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.Scanner
 
@@ -140,6 +141,11 @@ object Util {
         return readlnOrNull() ?: ""
     }
 
+    // Prints a prompt string a returns a double taken from stdin
+    fun inputBigDecimal(prompt: String): BigDecimal {
+        print("$prompt  ")
+        return scanner.nextBigDecimal()
+    }
 
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
