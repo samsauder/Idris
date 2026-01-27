@@ -13,6 +13,7 @@ import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
 import com.idris.system.extra.Util
+import com.idris.system.extra.Util.inputBigDecimal
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputDescription
@@ -37,38 +38,25 @@ object Creator : Operator() {
             }
         }
     }
-
+    // =======================================================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
-        val c = Challenge("", "", "", -1.0, 0.01)
-        Util.fillObjectiveCore(c, ConceptType.CHALLENGE)
-        val sN = c.skillName
-
-        val progressionNameIn = inputProgression()
-
         val s = Scanner(System.`in`)
-        print("ODDS  ")
-        c.userOdds = s.nextDouble()
-        c.generateChallengeElo()
-
         transaction {
             CHALLENGE.new {
-                name = c.name
-                // skill = (c.skill?.id ?: String) as String
-                if (skillName != "") skillName = sN
-                description = c.description
-                minutes = c.minutes.toBigDecimal()
-                cElo = c.challengeElo.toBigDecimal()
-                uElo = c.userElo.toBigDecimal()
-                uOdds = c.userOdds.toBigDecimal()
+                name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
+                skillName = inputSkill()
+                description = inputString("DESCRIPTION")
+                minutes = inputBigDecimal("MINUTES")
+                progressionName = inputProgression()
+                cElo = 0.0.toBigDecimal()
+                uElo = 0.0.toBigDecimal()
+                uOdds = 1.0.toBigDecimal()
                 attempts = 0
                 wins = 0
-                progressionName = progressionNameIn
             }
         }
-
-        println("\nAdded '${c.name}' to the Challenge table.")
-    }  // TODO shorten
-
+    }
+    // =======================================================================================================
     override fun e() {  // add an ExamE to the database
         val e  = Exam(
             "",
@@ -93,7 +81,7 @@ object Creator : Operator() {
 
         println("\nAdded '${e.name}' to the Exam table.")
     }                  // TODO shorten
-
+    // =======================================================================================================
     override fun x() {
         val s = Scanner(System.`in`)
         transaction {
@@ -116,7 +104,7 @@ object Creator : Operator() {
             }
         }
     }
-
+    // =======================================================================================================
     override fun d() {
         transaction {
             DAY.new {
@@ -147,7 +135,7 @@ object Creator : Operator() {
             }
         }
     }
-
+    // =======================================================================================================
     override fun p(datapath: String) {
         transaction {
             PROGRESSION.new {
@@ -167,4 +155,5 @@ object Creator : Operator() {
             }
         }
     }
+    // =======================================================================================================
 }
