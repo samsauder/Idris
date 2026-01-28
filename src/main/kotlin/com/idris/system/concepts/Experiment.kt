@@ -33,7 +33,7 @@ class Experiment : Concept {
         println(style("  $skillName", Styles.ITALIC))
 
         print(pad(" DESCRIPTION",labelWidth))
-        println(style("  $description", Styles.GREEN))
+        println(style("  $description", Styles.YELLOW))
         println()
 
         print(pad(" WEEK", labelWidth))

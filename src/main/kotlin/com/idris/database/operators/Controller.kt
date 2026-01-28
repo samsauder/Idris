@@ -29,10 +29,12 @@ object Controller {
         val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
         val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
 
-        val syntax = "SYNTAX        |  [list/create/delete/modify/log/view] -[x/f/c/e/p/d]"
+        println(bar(BAR_CHAR, WIDTH))
         val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18 $styled19plus\n"
-        println(syntax)
+        val syntax = "\nSYNTAX        |  [list/create/delete/modify/log/view] -[x/f/c/e/p/d]"
+        println(bar(BAR_CHAR, WIDTH))
         println(colors)
+        println(syntax)
     }
     // ======================================================================
     fun list(t: ConceptType) {  // list all concepts of a given type
@@ -58,7 +60,10 @@ object Controller {
     // ======================================================================
     fun modify() { TODO() }
     // ======================================================================
-    fun log() { TODO() }
+    fun log() {
+        TODO()
+
+    }
     // ======================================================================
     fun view(t: ConceptType) {
         val name = inputName(t, ConceptState.PRESENT)
