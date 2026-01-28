@@ -22,19 +22,20 @@ object Controller {
 
     // ======================================================================
     fun help() {
-        val styled14minus = "[..1499]"
-        val styled15 = "${Styles.BLUE}[1500-1599]${Styles.RESET}"
-        val styled16 = "${Styles.CYAN}[1600-1699]${Styles.RESET}"
-        val styled17 = "${Styles.GREEN}[1700-1799]${Styles.RESET}"
-        val styled18 = "${Styles.YELLOW}[1800-1899]${Styles.RESET}"
-        val styled19plus = "${Styles.RED}[1900...]${Styles.RESET}"
+        val styled14minus = "..1499"
+        val styled15 = "${Styles.BLUE}1500-1599${Styles.RESET}"
+        val styled16 = "${Styles.CYAN}1600-1699${Styles.RESET}"
+        val styled17 = "${Styles.GREEN}1700-1799${Styles.RESET}"
+        val styled18 = "${Styles.YELLOW}1800-1899${Styles.RESET}"
+        val styled19plus = "${Styles.RED}1900...${Styles.RESET}"
 
-        println(bar(BAR_CHAR, WIDTH))
         val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18 $styled19plus\n"
-        val syntax = "\nSYNTAX        |  [list/create/delete/modify/log/view] -[x/f/c/e/p/d]"
-        println(bar(BAR_CHAR, WIDTH))
+        val syntax = "\nSYNTAX        |  list/create/delete/modify/log/view -x/f/c/e/p/d"
+        println("\n${bar(BAR_CHAR, WIDTH)}")
         println(colors)
         println(syntax)
+        println(bar(BAR_CHAR, WIDTH))
+
     }
     // ======================================================================
     fun list(t: ConceptType) {  // list all concepts of a given type
