@@ -1,9 +1,13 @@
 package com.idris.database.operators
 
+import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CONCEPT
+import com.idris.database.operators.todo.Logger
+import com.idris.database.operators.todo.Operator
 import com.idris.system.concepts.Concept
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.ObjectiveType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
 import com.idris.system.extra.Util.bar
@@ -61,10 +65,7 @@ object Controller {
     // ======================================================================
     fun modify() { TODO() }
     // ======================================================================
-    fun log() {
-        TODO()
-
-    }
+    fun log(ot: ObjectiveType) { TODO() }
     // ======================================================================
     fun view(t: ConceptType) {
         val name = inputName(t, ConceptState.PRESENT)

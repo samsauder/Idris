@@ -149,7 +149,7 @@ class Challenge : Objective {
         val userOddsAsPercentageNew = (userOdds * 100).toInt()
 
         println("    CHALLENGE ELO      |  $challengeEloOld -> $challengeEloNew")
-        println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%")
+        println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%\n\n")
     }
 
 

@@ -160,7 +160,7 @@ object Creator : Operator() {
                 name = rN           // custom tag
                 skillName = sN      // associated skill
                 description = de    // description
-                objectiveName = oN  // name of completed f/c/e
+                objectiveName = oN  // name of completed objective
                 won = w             // success/failure
                 date = da           // date completed
             }
