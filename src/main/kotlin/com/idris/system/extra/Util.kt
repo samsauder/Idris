@@ -7,6 +7,7 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
+import com.idris.database.entities.RECORD
 import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.style
@@ -39,6 +40,7 @@ object Util {
                 ConceptType.PROGRESSION -> PROGRESSION.getOneNamed(name)
                 ConceptType.DAY -> DAY.getOneNamed(name)
                 ConceptType.EXPERIMENT -> EXPERIMENT.getOneNamed(name)
+                ConceptType.RECORD -> RECORD.getOneNamed(name)
             } != null
         }
         return exists
@@ -198,6 +200,7 @@ object Util {
                     EXPERIMENT.getOneNamed(name)!!
                 }
                 // ConceptType.RECORD -> {}
+                ConceptType.RECORD -> RECORD.getOneNamed(name)!!
             }
             cE = conceptEntity
         }

@@ -22,7 +22,7 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
                 ConceptType.DAY -> { DAY.Companion }
                 ConceptType.PROGRESSION -> { PROGRESSION.Companion }
                 ConceptType.EXPERIMENT -> { EXPERIMENT.Companion }
-                // ConceptType.RECORD -> { RECORD.Companion }
+                ConceptType.RECORD -> { RECORD.Companion }
             }
         }
 
@@ -39,7 +39,7 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
                 ConceptType.DAY -> { DAY.getOneNamed(name)!! }
                 ConceptType.PROGRESSION -> { PROGRESSION.getOneNamed(name)!! }
                 ConceptType.EXPERIMENT -> { EXPERIMENT.getOneNamed(name)!! }
-                // ConceptType.RECORD -> { RECORD.getOneNamed(name)!! }
+                ConceptType.RECORD -> { RECORD.getOneNamed(name)!! }
             }
         }
 
@@ -52,7 +52,7 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
                 ConceptType.DAY -> { FOUNDATION.find { DAYS.skillName eq sname }}
                 ConceptType.PROGRESSION -> { FOUNDATION.find { PROGRESSIONS.skillName eq sname } }
                 ConceptType.EXPERIMENT -> { EXPERIMENT.find { EXPERIMENTS.skillName eq sname } }
-                // ConceptType.RECORD -> { RECORD.find { RECORDS.skillName eq sname }}
+                ConceptType.RECORD -> { RECORD.find { RECORDS.skillName eq sname }}
             }
         }
         

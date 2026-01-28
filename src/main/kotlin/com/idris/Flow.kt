@@ -57,6 +57,7 @@ object Flow {
             "-p" -> ConceptType.PROGRESSION
             "-d" -> ConceptType.DAY
             "-x" -> ConceptType.EXPERIMENT
+            "-r" -> ConceptType.RECORD
             else -> {null}  // invalid flag
         }
     }
