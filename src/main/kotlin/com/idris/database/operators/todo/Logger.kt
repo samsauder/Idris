@@ -4,12 +4,21 @@ import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
+import com.idris.system.concepts.Challenge
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Util.inputName
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
+import java.time.LocalDate
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 object Logger : Operator() {
     // ======================================================================
@@ -43,6 +52,7 @@ object Logger : Operator() {
         }
     }
 
+    @OptIn(ExperimentalTime::class)
     fun cManual(name: String, result: Double) {
         transaction {
             val cIterator = CHALLENGE.Companion.find { CHALLENGES.name eq name }.iterator()
@@ -59,6 +69,13 @@ object Logger : Operator() {
                 it.wins += result.toInt()
                 it.progressionName = c.progressionName
             }
+
+            // add record to the record table
+            val won = result == 1.0
+            val challenge: Challenge = CHALLENGE.getOneNamed(name)!!.deEntify()
+            val date: String = LocalDate.now().toString()
+            val datetime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
+            Creator.r("${name}___${datetime}", challenge.skillName, "", name, won, datetime)
         }
     }
     // ======================================================================
