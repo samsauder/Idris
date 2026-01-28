@@ -149,12 +149,20 @@ object Creator : Operator() {
         }
     }
     // =======================================================================================================
-    fun r(oname2: String, won2: Boolean, date2: String) {  // create RECORD
+    fun r(rN: String,
+          sN: String,
+          de: String,
+          oN: String,
+          w: Boolean,
+          da: String) {  // create RECORD
         transaction {
             RECORD.new {
-                oname = oname2  // objective name
-                won = won2      // won (true/false)
-                date = date2    // date completed
+                name = rN           // custom tag
+                skillName = sN      // associated skill
+                description = de    // description
+                objectiveName = oN  // name of completed f/c/e
+                won = w             // success/failure
+                date = da           // date completed
             }
         }
     }
