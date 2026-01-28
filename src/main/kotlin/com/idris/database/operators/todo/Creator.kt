@@ -6,6 +6,7 @@ import com.idris.database.entities.EXAM
 import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
+import com.idris.database.entities.RECORD
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Exam
 import com.idris.system.extra.ConceptState
@@ -148,4 +149,13 @@ object Creator : Operator() {
         }
     }
     // =======================================================================================================
+    fun r(oname2: String, won2: Boolean, date2: String) {  // create RECORD
+        transaction {
+            RECORD.new {
+                oname = oname2  // objective name
+                won = won2      // won (true/false)
+                date = date2    // date completed
+            }
+        }
+    }
 }
