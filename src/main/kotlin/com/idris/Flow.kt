@@ -61,4 +61,15 @@ object Flow {
             else -> {null}  // invalid flag
         }
     }
+
+    // Returns the ObjectiveType version of the given CLI flag
+    fun flagToOT(flag: String): ObjectiveType? {
+        return when (flag) {
+            "-f" -> ObjectiveType.FOUNDATION
+            "-c" -> ObjectiveType.CHALLENGE
+            "-e" -> ObjectiveType.EXAM
+            else -> {null}  // invalid flag
+        }
+    }
+
 }
