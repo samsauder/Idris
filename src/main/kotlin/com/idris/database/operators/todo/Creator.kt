@@ -1,31 +1,21 @@
 package com.idris.database.operators.todo
 
-import com.idris.database.entities.CHALLENGE
-import com.idris.database.entities.DAY
-import com.idris.database.entities.EXAM
-import com.idris.database.entities.EXPERIMENT
-import com.idris.database.entities.FOUNDATION
-import com.idris.database.entities.PROGRESSION
-import com.idris.database.entities.RECORD
-import com.idris.system.concepts.Challenge
-import com.idris.system.concepts.Exam
+import com.idris.database.entities.*
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
-import com.idris.system.extra.Util
 import com.idris.system.extra.Util.inputBigDecimal
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputDescription
 import com.idris.system.extra.Util.inputInteger
-import com.idris.system.extra.Util.inputMinutes
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputProgression
 import com.idris.system.extra.Util.inputSkill
 import com.idris.system.extra.Util.inputString
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.util.Scanner
+import java.util.*
 
 
 object Creator : Operator() {
@@ -43,7 +33,7 @@ object Creator : Operator() {
     }
     // =======================================================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
-        val s = Scanner(System.`in`)
+        Scanner(System.`in`)
         transaction {
             CHALLENGE.new {
                 name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
@@ -75,7 +65,7 @@ object Creator : Operator() {
     }
     // =======================================================================================================
     override fun x() {
-        val s = Scanner(System.`in`)
+        Scanner(System.`in`)
         transaction {
             EXPERIMENT.new {
                 name = inputName(ConceptType.EXPERIMENT, ConceptState.ABSENT)

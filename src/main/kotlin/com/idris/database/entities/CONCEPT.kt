@@ -58,5 +58,5 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
         
     }
 
-    abstract fun deEntify() : Concept;  // return a Concept
+    abstract fun deEntify() : Concept  // return a Concept
 }

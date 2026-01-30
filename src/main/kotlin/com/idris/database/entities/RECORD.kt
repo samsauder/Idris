@@ -7,7 +7,7 @@ import org.jetbrains.exposed.v1.dao.IntEntityClass
 
 
 object RECORDS : CONCEPTS("recordsT") {
-    val objectiveName = varchar("oname", 50)  // objective name (may be challenge, exam, foundation)
+    val objectiveName = varchar("oname", 60)  // objective name (may be challenge, exam, foundation)
     val won = bool("won")
     val date = varchar("date", 30)  // string representation of the date
 }

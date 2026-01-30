@@ -8,9 +8,8 @@ import com.idris.system.concepts.Challenge
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Util.inputName
-import kotlinx.datetime.LocalDateTime
+import com.idris.system.extra.Util.inputString
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -18,7 +17,6 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
 object Logger : Operator() {
     // ======================================================================
@@ -31,7 +29,7 @@ object Logger : Operator() {
     override fun c(datapath: String) {
         transaction {
             val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
-            val resultString = inputResult()
+            val resultString = inputString("RESULT  ")
             println()
 
             val cIterator = CHALLENGE.Companion.find { CHALLENGES.name eq name }.iterator()
@@ -55,13 +53,13 @@ object Logger : Operator() {
     @OptIn(ExperimentalTime::class)
     fun cManual(name: String, result: Double) {
         transaction {
-            val cIterator = CHALLENGE.Companion.find { CHALLENGES.name eq name }.iterator()
+            val cIterator = CHALLENGE.find { CHALLENGES.name eq name }.iterator()
             val cE = cIterator.next()
             val c = cE.deEntify()
 
             c.log(result == 1.0)
 
-            val challengeE = CHALLENGE.Companion.findSingleByAndUpdate(CHALLENGES.name eq name) {
+            val challengeE = CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
                 it.cElo = BigDecimal.valueOf(c.challengeElo)
                 it.uElo = BigDecimal.valueOf(c.userElo)
                 it.uOdds = BigDecimal.valueOf(c.userOdds)
@@ -98,9 +96,4 @@ object Logger : Operator() {
     }
 
     // ======================================================================
-    private fun inputResult() : String {
-        // val s = Scanner(System.`in`)
-        print("RESULT  ")  // win/loss
-        return scanner.next()
-    }
 }

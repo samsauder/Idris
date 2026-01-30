@@ -69,7 +69,7 @@ class Progression : Concept {
     fun printSeq() {  // print the sequence of challenges for the current progression
         for (challenge in challenges) {
             if (challenge == null) continue
-            print(format(challenge.name, Styler.colorByElo(challenge.challengeElo), 24))
+            print(format(challenge.name, Styler.colorByElo(challenge.challengeElo), 28))
         }
     }
 
