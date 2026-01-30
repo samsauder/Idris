@@ -5,6 +5,7 @@ import com.idris.database.operators.todo.Creator
 import com.idris.database.operators.todo.Logger
 import com.idris.database.operators.todo.Modifier
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.ObjectiveType
 
 object Flow {
     // Start an Idris REPL
@@ -20,6 +21,7 @@ object Flow {
             print(">> ")
             input = readln()
             val args = input.split(" ")  // parse the args
+
             val type = if (args.size == 2) flagToCT(args[1]) else null
 
             if (type == null && args.size > 1) {
@@ -27,14 +29,13 @@ object Flow {
                 continue
             }
 
-
-            // skills
+            // skills...
 
             when (args[0]) {  // args: <command> <option>
                 "list" -> Controller.list(type!!)
                 "create" -> Creator.choose(args[1], path)
                 "delete" -> Controller.delete(type!!)
-                "log" -> Logger.choose(args[1], path)
+                "log" -> Controller.log(flagToOT(args[1])!!)
                 "modify" -> Modifier.choose(args[1], path)
                 "view" -> Controller.view(type!!)
                 "dash" -> Controller.dash()
