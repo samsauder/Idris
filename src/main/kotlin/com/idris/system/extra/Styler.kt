@@ -25,10 +25,9 @@ object Styler {
     fun colorByElo(elo: Double): String {
         var style = ""
         val l0 = Styles.BLUE
-        val l1 = Styles.CYAN
-        val l2 = Styles.GREEN
-        val l3 = Styles.YELLOW
-        val l4 = Styles.RED
+        val l1 = Styles.GREEN
+        val l2 = Styles.YELLOW
+        val l3 = Styles.RED
 
         if (elo in 1500.0..<1600.0) {
             style = l0
@@ -36,10 +35,8 @@ object Styler {
             style = l1
         } else if (elo in 1700.0..<1800.0) {
             style = l2
-        } else if (elo in 1800.0..<1900.0) {
+        } else if (elo >= 1800.0) {
             style = l3
-        } else if (elo >= 1900.0) {
-            style = l4
         }
         return style
     }
