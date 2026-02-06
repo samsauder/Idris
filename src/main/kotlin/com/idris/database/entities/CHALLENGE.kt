@@ -4,7 +4,9 @@ import com.idris.system.concepts.Challenge
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
+import kotlin.math.min
 
 
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable
@@ -15,6 +17,29 @@ object CHALLENGES : OBJECTIVES("challengesT") {
     val uOdds = decimal("uOdds", 3, 2)  // user win odds
     val attempts = integer("attempts")  // how many times has the user attempted
     val wins = integer("wins")  // how many times has the user won
+
+    // Insert a new CHALLENGE into CHALLENGES
+    fun insert(name: String,
+               nameP: String?,  // associated progression name
+               skill: String,
+               description: String?,
+               minutes: BigDecimal) {
+        transaction {
+            CHALLENGE.new {
+                this.name = name
+                this.progressionName = nameP ?: ""  // "" if null
+                this.skillName = skill
+                this.description = description ?: ""  // "" if null
+                this.minutes = minutes
+
+                this.cElo = BigDecimal("0.0")
+                this.uElo = BigDecimal("0.0")
+                this.uOdds = BigDecimal("1.0")
+                this.attempts = 0
+                this.wins = 0
+            }
+        }
+    }
 }
 
 class CHALLENGE(id: EntityID<Int>) : CONCEPT(id) {
