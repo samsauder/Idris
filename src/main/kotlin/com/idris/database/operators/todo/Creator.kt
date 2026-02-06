@@ -5,15 +5,18 @@ import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import com.idris.system.extra.Util.input
 import com.idris.system.extra.Util.inputBigDecimal
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputDescription
-import com.idris.system.extra.Util.inputInteger
+import com.idris.system.extra.Util.inputInt
+import com.idris.system.extra.Util.inputInts
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputProgression
 import com.idris.system.extra.Util.inputSkill
 import com.idris.system.extra.Util.inputString
+import com.idris.system.extra.Util.inputStrings
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.util.*
 
@@ -49,6 +52,15 @@ object Creator : Operator() {
                 println("\nAdded ${style(name, Styles.BOLD)} to the Challenge table.")
             }
         }
+
+        // name
+        // nameP        // associated progression name
+        // skill
+        // description
+        // minutes
+
+        // CHALLENGES.insert(name, nameP, skill, description, minutes)
+        TODO()
     }
     // =======================================================================================================
     override fun e() {  // add an ExamE to the database
@@ -81,7 +93,7 @@ object Creator : Operator() {
                 d5 = dnms[4]!!
                 d6 = dnms[5]!!
                 d7 = dnms[6]!!
-                segCount = inputInteger("SEGMENT COUNT")!!
+                segCount = inputInt("SEGMENT COUNT")!!
                 println("\nAdded ${style(name, Styles.BOLD)} to the Experiment table.")
             }
         }
@@ -136,6 +148,46 @@ object Creator : Operator() {
                 c9 = inputChallenge(9)
                 println("\nAdded ${style(name, Styles.BOLD)} to the Progression table.")
             }
+        }
+    }
+
+
+    // Create 2D progression (also known as a tile)
+    fun t() {
+        val skill = input("SKILL") as String
+        val activity = input("ACTIVITY") as String
+        val tiers: Array<String?> = inputStrings("TIER", 5)  // take in a sequence of tiers
+        val values: Array<Int?> = inputInts("VALUE", 5)  // take in a sequence of values
+        val unit = input("UNIT") as String  // unit of the value
+
+        // val name2P = "${activity}X.Y$unit"
+        // var desc2P: String? = Util.input("DESCRIPTION  ") as String?
+        // desc2P = desc2P ?: "${activity}X in Y ${unit}."  // 2d progression description
+
+        for (tier in tiers) {  // for each tier
+            if (tier == null) break
+
+            val challenges: Array<String?> = arrayOfNulls(10)
+            // val challenges: Array<String?> = inputStrings("CHALLENGE", 10)
+
+            val at = "$activity$tier"
+
+            val nameP = "$at.Y$unit"         // progression name
+            val descP = "$at in Y ${unit}."  // progression description
+            var i = 0  // challenge index
+
+            for (value in values) {  // for each value
+                if (value == null) break
+                val nameC = "$at.$value$unit"   // challenge name
+                val descC = "$at in $value $unit."  // challenge description
+                val mins = if (unit == "m") value.toDouble() else 0.0  // if unit is minutes
+                CHALLENGES.insert(nameC, nameP, skill, descC, mins)  // insert new CHALLENGE into CHALLENGES
+                challenges[i] = nameC  // add challenge name to challenges
+                i++
+            }
+
+            // insert a PROGRESSION referencing the above challenges
+            PROGRESSIONS.insert(nameP, skill, descP, challenges)  // insert a PROGRESSION into PROGRESSIONS
         }
     }
     // =======================================================================================================
