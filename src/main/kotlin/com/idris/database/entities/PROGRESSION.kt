@@ -1,5 +1,6 @@
 package com.idris.database.entities
 
+import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Progression
 import jdk.jfr.Description
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
@@ -29,12 +30,23 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
     // Insert a new PROGRESSION into PROGRESSIONS
     fun insert(name: String,
                skill: String,
-               description: String) {
+               description: String,
+               challenges: Array<String?>) {
         transaction {
             PROGRESSION.new {
                 this.name = name
                 this.skillName = skill
                 this.description = description
+                this.c0 = challenges[0] ?: "X"
+                this.c1 = challenges[1] ?: "X"
+                this.c2 = challenges[2] ?: "X"
+                this.c3 = challenges[3] ?: "X"
+                this.c4 = challenges[4] ?: "X"
+                this.c5 = challenges[5] ?: "X"
+                this.c6 = challenges[6] ?: "X"
+                this.c7 = challenges[7] ?: "X"
+                this.c8 = challenges[8] ?: "X"
+                this.c9 = challenges[9] ?: "X"
             }
         }
     }
