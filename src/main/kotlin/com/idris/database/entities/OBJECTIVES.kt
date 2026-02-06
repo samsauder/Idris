@@ -7,4 +7,12 @@ import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 
 abstract class OBJECTIVES(tableName: String) : CONCEPTS(tableName) {
     val minutes = decimal("minutes",5, 2)
+
+    /*
+    abstract fun insert(name: String,
+                        skill: String,
+                        description: String?,
+                        minutes: Double)
+
+     */
 }

@@ -1,5 +1,6 @@
 package com.idris.database.operators.todo
 
+import com.idris.database.operators.todo.Creator.t
 import java.util.Scanner
 
 
@@ -22,6 +23,7 @@ abstract class Operator {
             "-p" -> p(datapath)  // progression
             "-d" -> d()  // day
             "-x" -> x()  // experiment
+            "-t" -> t()  // tile (2D progression)
             else -> println("ERROR: invalid command")
         }
     }

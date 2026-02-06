@@ -17,7 +17,7 @@ import com.idris.system.extra.ConceptType
 import com.idris.system.extra.EloTool
 import com.idris.system.extra.Util.inputChallenge
 import com.idris.system.extra.Util.inputDescription
-import com.idris.system.extra.Util.inputInteger
+import com.idris.system.extra.Util.inputInt
 import com.idris.system.extra.Util.inputMinutes
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputProgression
@@ -122,7 +122,7 @@ object Modifier : Operator() {
             dNames[i] = d
         }
 
-        val segCountNew = inputInteger("# OF SEGMENTS  ")
+        val segCountNew = inputInt("# OF SEGMENTS  ")
 
         transaction {
             EXPERIMENT.Companion.findSingleByAndUpdate(EXPERIMENTS.name eq name) {

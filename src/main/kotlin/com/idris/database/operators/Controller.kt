@@ -41,7 +41,7 @@ object Controller {
         val styled18plus = "${Styles.RED}18XX+${Styles.RESET}"
 
         val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18plus"
-        val syntax = "SYNTAX        |  list/create/delete/modify/log/view -x/f/c/e/p/d/r"
+        val syntax = "SYNTAX        |  list/create/delete/modify/log/view -x/f/c/e/p/d/r/t"
         println("\n${bar(BAR_CHAR, WIDTH)}")
         println(colors)
         println(syntax)

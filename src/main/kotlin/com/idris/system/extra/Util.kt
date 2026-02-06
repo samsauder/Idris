@@ -114,7 +114,7 @@ object Util {
     }
 
 
-    fun inputInteger(prompt: String) : Int? {
+    fun inputInt(prompt: String) : Int? {
         val s = Scanner(System.`in`)
         print("$prompt  ")
         val num = readlnOrNull() ?: return null
@@ -141,6 +141,43 @@ object Util {
     fun inputString(prompt: String) : String {
         print("$prompt  ")
         return readlnOrNull() ?: ""
+    }
+
+    // Nullable inputString
+    fun inputStringN(prompt: String): String? {
+        print("$prompt  ")
+        val input = readlnOrNull()
+        return if (input == "") null else input
+    }
+
+    // Returns input of Any type from stdin or null
+    fun input(prompt: String): Any? {
+        print("$prompt  ")
+        return readlnOrNull()
+    }
+
+
+    // Returns an array of Strings/nulls from stdin
+    fun inputStrings(prompt: String, count: Int): Array<String?> {
+        val strings = arrayOfNulls<String>(count)  // array of count number of Any type values
+
+        for (i in 0..< count) {
+            val string = inputStringN("$prompt $i") ?: break  // if null, break
+            strings[i] = string
+        }
+        return strings
+    }
+
+
+    // Returns an array of Ints/nulls from stdin
+    fun inputInts(prompt: String, count: Int): Array<Int?> {
+        val ints = arrayOfNulls<Int>(count)  // array of count number of Any type values
+
+        for (i in 0..< count) {
+            val int = inputInt("$prompt $i") ?: break  // if null, break
+            ints[i] = int
+        }
+        return ints
     }
 
     // Prints a prompt string a returns a double taken from stdin
@@ -217,3 +254,7 @@ object Util {
 
 
 }
+
+
+
+// TODO  get rid of all redundant functions

@@ -88,7 +88,7 @@ class Challenge : Objective {
     }
 
     override fun printL() {
-        println(icon_name_skill_elo_odds())
+        println(icon_name_skill_elo_odds())  // progression name added temporarily for debugging
     }
 
     // Return a string composed of the Challenge icon, name, skill, elo, and odds

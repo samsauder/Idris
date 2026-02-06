@@ -24,7 +24,7 @@ class Progression : Concept {
         transaction {
             var i = 0
             for (cName in challengeNames) {
-                if (cName == "X") {  // null placeholder
+                if (cName == "X" || cName == "") {  // null placeholder TODO (change to only "" later)
                     continue;
                 }
                 val cIterator = CHALLENGE.find { CHALLENGES.name eq cName }.iterator()

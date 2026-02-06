@@ -24,7 +24,7 @@ object Flow {
 
             val type = if (args.size == 2) flagToCT(args[1]) else null
 
-            if (type == null && args.size > 1) {
+            if (type == null && args.size > 1 && args[1] != "-t") {  // TODO remove last expression later
                 println("ERROR: invalid flag\n")
                 continue
             }

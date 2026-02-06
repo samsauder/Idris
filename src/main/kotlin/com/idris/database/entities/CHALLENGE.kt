@@ -23,14 +23,14 @@ object CHALLENGES : OBJECTIVES("challengesT") {
                nameP: String?,  // associated progression name
                skill: String,
                description: String?,
-               minutes: BigDecimal) {
+               minutes: Double) {
         transaction {
             CHALLENGE.new {
                 this.name = name
                 this.progressionName = nameP ?: ""  // "" if null
                 this.skillName = skill
                 this.description = description ?: ""  // "" if null
-                this.minutes = minutes
+                this.minutes = BigDecimal(minutes)
 
                 this.cElo = BigDecimal("0.0")
                 this.uElo = BigDecimal("0.0")
