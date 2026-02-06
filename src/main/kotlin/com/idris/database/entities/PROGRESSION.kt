@@ -1,10 +1,12 @@
 package com.idris.database.entities
 
 import com.idris.system.concepts.Progression
+import jdk.jfr.Description
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 object PROGRESSIONS : IntIdTable("progressionsT") {
@@ -23,6 +25,19 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
     val c7 = varchar("c7Name", 50)
     val c8 = varchar("c8Name", 50)
     val c9 = varchar("c9Name", 50)
+
+    // Insert a new PROGRESSION into PROGRESSIONS
+    fun insert(name: String,
+               skill: String,
+               description: String) {
+        transaction {
+            PROGRESSION.new {
+                this.name = name
+                this.skillName = skill
+                this.description = description
+            }
+        }
+    }
 }
 
 class PROGRESSION(id: EntityID<Int>) : CONCEPT(id) {
