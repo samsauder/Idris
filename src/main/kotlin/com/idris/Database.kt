@@ -17,7 +17,7 @@ import java.sql.Connection
 // Use main when the database needs to be reset
 fun main() {
     val path = "testdata/06.db"
-    val reset: Boolean = false
+    val reset: Boolean = true
     val db = Database(path)
     db.setup(reset)
     println("Set up $path")

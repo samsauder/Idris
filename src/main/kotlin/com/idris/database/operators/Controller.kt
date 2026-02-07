@@ -29,7 +29,7 @@ import kotlin.time.ExperimentalTime
 
 
 object Controller {
-    const val WIDTH = 130  // table width
+    const val WIDTH = 150  // table width
     const val BAR_CHAR = "-"
 
     // ======================================================================
