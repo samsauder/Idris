@@ -2,10 +2,10 @@ package com.idris
 
 import com.idris.database.operators.Controller
 import com.idris.database.operators.todo.Creator
-import com.idris.database.operators.todo.Logger
 import com.idris.database.operators.todo.Modifier
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
+
 
 object Flow {
     // Start an Idris REPL
@@ -13,39 +13,60 @@ object Flow {
         val d = Database(path)
         d.connect()
 
-        println("\n(Idris REPL)")
+        println("\n(I D R I S)\n\n")
 
-        var input = ""
+        var input: String? = ""
+        var inputPrev: String? = ""  // last entered command
 
         while (true) {
             print(">> ")
-            input = readln()
-            val args = input.split(" ")  // parse the args
+            // input = readln()
+            input = readlnOrNull()
 
-            val type = if (args.size == 2) flagToCT(args[1]) else null
-
-            if (type == null && args.size > 1 && args[1] != "-t") {  // TODO remove last expression later
-                println("ERROR: invalid flag\n")
-                continue
-            }
-
-            // skills...
-
-            when (args[0]) {  // args: <command> <option>
-                "list" -> Controller.list(type!!)
-                "create" -> Creator.choose(args[1], path)
-                "delete" -> Controller.delete(type!!)
-                "log" -> Controller.log(flagToOT(args[1])!!)
-                "modify" -> Modifier.choose(args[1], path)
-                "view" -> Controller.view(type!!)
-                "dash" -> Controller.dash()
-                "help" -> Controller.help()
-                "q" -> break
-                else -> { println("ERROR: invalid command\n") }
+            if (input == "q") {  // quit
+                break
+            } else if (input == "") {
+                execCommand(inputPrev)  // execute the most recently executed command
+            } else {
+                execCommand(input)
             }
 
             println("\n")
+
+            if (input != "") inputPrev = input
         }
+    }
+
+
+    // Execute the given Idris command, return false if the command is invalid
+    fun execCommand(command: String?): Boolean {
+        val args = command?.split(" ")  // parse the args
+
+        val type = if (args?.size == 2) flagToCT(args[1]) else null
+
+        if (type == null && args?.size!! > 1 && args[1] != "-t") {  // TODO remove last expression later
+            println("ERROR: invalid flag\n")
+            return false
+        }
+
+        // skills...
+
+        when (args?.get(0)) {  // args: <command> <option>
+            "list" -> Controller.list(type!!)
+            "create" -> Creator.choose(args[1], "")
+            "delete" -> Controller.delete(type!!)
+            "log" -> Controller.log(flagToOT(args[1])!!)
+            "modify" -> Modifier.choose(args[1], "")
+            "view" -> Controller.view(type!!)
+            "dash" -> Controller.dash()
+            "help" -> Controller.help()
+            // "q" -> break
+            else -> {
+                println("ERROR: invalid command\n")
+                return false
+            }
+        }
+        return true
     }
 
 
