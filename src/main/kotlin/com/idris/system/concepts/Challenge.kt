@@ -5,6 +5,9 @@ import com.idris.system.extra.EloTool
 import com.idris.system.extra.ObjectiveType
 import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
+import com.idris.system.extra.Styler.pad
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Util
 import java.time.LocalDate
 import kotlin.math.round
 import kotlin.math.roundToInt
@@ -18,6 +21,7 @@ class Challenge : Objective {
     var progressionName: String = ""
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
+    val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
     val et = EloTool()
 
     // General Constructor (just makes the core Objective attributes)
@@ -84,7 +88,20 @@ class Challenge : Objective {
     }
 
     override fun print() {
-        TODO("Not yet implemented")
+        conceptCore(12)
+
+        val eloStyle = Styler.colorByElo(challengeElo)
+        val elo = if (challengeElo < 0) "0000$qm" else "${challengeElo.toInt().toString()}$qm"
+
+        print(pad(" ELO", 12))
+        println(style("  $elo", eloStyle))
+
+        print(pad(" ODDS", 12))
+        println("  ${(userOdds * 100).toInt()}%")
+
+        print(pad(" ATTEMPTS", 12))
+        println(style("  $attempts", Styles.ITALIC))
+
     }
 
     override fun printL() {
@@ -93,7 +110,6 @@ class Challenge : Objective {
 
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
     private fun icon_name_skill_elo_odds(): String {
-        val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
         val elof = format("${celoS()}$qm", Styler.colorByElo(challengeElo), 10)  // formatted elo
         val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
         return "${icon_name_skill()}$elof$oddsf"
