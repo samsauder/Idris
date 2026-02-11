@@ -117,6 +117,8 @@ object Controller {
     // ======================================================================
     fun view(t: ConceptType) {
         val name = inputName(t, ConceptState.PRESENT)
+        if (name == "") return  // user quits
+
         var concept: Concept? = null
 
         println("\n${name}")

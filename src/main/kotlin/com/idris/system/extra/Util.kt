@@ -69,13 +69,18 @@ object Util {
     // Takes a name of a Concept from standard input and verifies that the target ConceptState is true (EXISTS or ABSENT)
     fun inputName(t: ConceptType, desiredState: ConceptState) : String {
         var name = inputString("?")
-        if (name == "") return ""  // return nothing if nothing is input
+        if (name == "" || name == "q") return ""  // return nothing if nothing is input
 
         while (inUndesiredState(name, t, desiredState)) {
-            println("ERROR: '${name}' not $desiredState in the $t table.\n")
+            println("${error()}  ${style(name, Styles.BOLD)} not $desiredState in the $t table.\n")
             name = inputName(t, desiredState)
         }
         return name
+    }
+
+    // Return the string ERROR in red
+    fun error(): String{
+        return style("ERROR", Styles.RED)
     }
 
 
