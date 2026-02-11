@@ -5,6 +5,7 @@ import com.idris.database.operators.todo.Creator
 import com.idris.database.operators.todo.Modifier
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Util
 
 
 object Flow {
@@ -45,7 +46,7 @@ object Flow {
         val type = if (args?.size == 2) flagToCT(args[1]) else null
 
         if (type == null && args?.size!! > 1 && args[1] != "-t") {  // TODO remove last expression later
-            println("ERROR: invalid flag\n")
+            println("${Util.error()}  invalid flag\n")
             return false
         }
 
@@ -62,7 +63,7 @@ object Flow {
             "help" -> Controller.help()
             // "q" -> break
             else -> {
-                println("ERROR: invalid command\n")
+                println("${Util.error()}  invalid command\n")
                 return false
             }
         }
