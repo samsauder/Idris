@@ -25,6 +25,9 @@ class Experiment : Concept {
 
     override fun print() {
         val labelWidth = 12  // width
+        conceptCore(labelWidth)
+        /*
+        val labelWidth = 12  // width
 
         print(pad(" NAME", labelWidth))
         println(style("  $name", Styles.BOLD))
@@ -35,6 +38,7 @@ class Experiment : Concept {
         print(pad(" DESCRIPTION",labelWidth))
         println(style("  $description", Styles.YELLOW))
         println()
+        */
 
         print(pad(" WEEK", labelWidth))
         var d = 0
