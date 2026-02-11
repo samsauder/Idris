@@ -33,7 +33,7 @@ class Exam : Objective {
     }
 
     override fun print() {
-        TODO("Not yet implemented")
+        conceptCore(12)
     }
 
     override fun printL() {
