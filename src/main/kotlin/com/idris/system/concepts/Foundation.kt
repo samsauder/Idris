@@ -25,7 +25,8 @@ class Foundation : Objective {
     }
 
     override fun print() {
-        TODO("Not yet implemented")
+        val labelWidth = 12  // width
+        conceptCore(12)
     }
 
     override fun printL() {
