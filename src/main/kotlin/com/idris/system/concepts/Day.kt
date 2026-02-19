@@ -24,7 +24,8 @@ class Day : Concept {
     constructor()
 
     override fun print() {
-        println(style("$description\n", Styles.YELLOW))
+        conceptCore(12)
+        println()
         transaction {
             for (fname in foundationNames) {
                 if (fname == "X") break  // if null

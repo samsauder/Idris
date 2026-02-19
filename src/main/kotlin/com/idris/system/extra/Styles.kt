@@ -9,5 +9,5 @@ object Styles {
     const val BLUE: String = "\u001b[34m"
     const val RESET: String = "\u001b[0m"
     const val BOLD: String = "\u001b[1m"
-    const val ITALIC: String = "\u001B[3m"
+    const val ITALIC: String = "\u001b[3m"
 }
