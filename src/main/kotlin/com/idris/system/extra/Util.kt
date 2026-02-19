@@ -10,6 +10,7 @@ import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.RECORD
 import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Objective
+import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
@@ -21,6 +22,42 @@ object Util {
     val scanner = Scanner(System.`in`)
     val bar = "========================================"
     val barc = "$bar=================="
+
+    // Print the name Idris
+    fun idrisBanner() {
+        println("    ____    __     _ ")
+        println("   /  _/___/ /____(_)____")
+        println("   / // __  / ___/ / ___/")
+        println(" _/ // /_/ / /  / (__  )")
+        println("/___/\\__,_/_/  /_/____/\n")
+    }
+
+    // Define all Idris operations for the user
+    fun describeOperations(style: String) {
+        printDef("create", OpInfo.CREATE_DESC, style)
+        printDef("delete", OpInfo.DELETE_DESC, style)
+        printDef("modify", OpInfo.MODIFY_DESC, style)
+        printDef("view", OpInfo.VIEW_DESC, style)
+        printDef("list", OpInfo.LIST_DESC, style)
+        printDef("log", OpInfo.LOG_DESC, style)
+    }
+
+    // Define all Idris entities for the user
+    fun describeConcepts(style: String) {
+        printDef("x", ConInfo.X_DESC, style)
+        printDef("d", ConInfo.D_DESC, style)
+        printDef("f", ConInfo.F_DESC, style)
+        printDef("c", ConInfo.C_DESC, style)
+        printDef("e", ConInfo.E_DESC, style)
+        printDef("p", ConInfo.P_DESC, style)
+        printDef("t", ConInfo.T_DESC, style)
+        printDef("r", ConInfo.R_DESC, style)
+    }
+
+    // Prints a definition consisting of: a bolded string and its description
+    private fun printDef(name: String, description: String, style: String) {
+        println("  ${format(name, style, 8)} |  $description")
+    }
 
     // Print a horizontal bar of the given char and width
     fun bar(c: CharSequence, w: Int): String {

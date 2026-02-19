@@ -11,6 +11,7 @@ import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import com.idris.system.extra.Util
 import com.idris.system.extra.Util.bar
 import com.idris.system.extra.Util.getConceptEntity
 import com.idris.system.extra.Util.inputName
@@ -34,19 +35,35 @@ object Controller {
 
     // ======================================================================
     fun help() {
+        val ostyle = Styles.ITALIC  // styling for operation definitions
+        val cstyle = Styles.BOLD  // styling for concept definitions
+
+        val operation = style("operation", Styles.ITALIC)
+        val concept = style("concept", Styles.BOLD)
+
+        val syntax = "SYNTAX   <$operation> <$concept>"
+
+        println("\n${bar(BAR_CHAR, WIDTH)}")
+        println(syntax)
+
+        println()
+        Util.describeOperations(ostyle)
+        println()
+        Util.describeConcepts(cstyle)
+
+        println(bar("-", WIDTH))
+
+        // COLORS
         val styled14minus = "14XX-"
         val styled15 = "${Styles.BLUE}15XX${Styles.RESET}"
         val styled16 = "${Styles.GREEN}16XX${Styles.RESET}"
         val styled17 = "${Styles.YELLOW}17XX${Styles.RESET}"
         val styled18plus = "${Styles.RED}18XX+${Styles.RESET}"
 
-        val colors = "ELO COLOR KEY |  $styled14minus $styled15 $styled16 $styled17 $styled18plus"
-        val syntax = "SYNTAX        |  list/create/delete/modify/log/view -x/f/c/e/p/d/r/t"
-        println("\n${bar(BAR_CHAR, WIDTH)}")
-        println(colors)
-        println(syntax)
-        println(bar(BAR_CHAR, WIDTH))
+        val colors = "ELO      $styled14minus $styled15 $styled16 $styled17 $styled18plus"
 
+        println(colors)
+        println(bar(BAR_CHAR, WIDTH))
     }
     // ======================================================================
     fun list(t: ConceptType) {  // list all concepts of a given type
