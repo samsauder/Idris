@@ -5,6 +5,8 @@ import com.idris.database.operators.todo.Creator
 import com.idris.database.operators.todo.Modifier
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Styles
 import com.idris.system.extra.Util
 
 
@@ -15,8 +17,12 @@ object Flow {
         d.connect()
 
         val version = "0.06"
-        Util.idrisBanner()  // print the name Idris (stqylized)
-        println("Version ${version}\n\n")
+        val quote = "The excellence of the soul is understanding; for one who understands is conscious, devoted, and already godlike."
+        Util.idrisBanner()  // print the name Idris (stylized)
+        println("Version ${version}\n")
+
+        print(style(quote, Styles.YELLOW))
+        println("  — Hermes Trismegistus\n\n")
 
         var input: String? = ""
         var inputPrev: String? = ""  // last entered command
