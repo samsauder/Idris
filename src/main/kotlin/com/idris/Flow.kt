@@ -14,7 +14,9 @@ object Flow {
         val d = Database(path)
         d.connect()
 
-        println("\n(I D R I S)\n\n")
+        val version = "0.06"
+        Util.idrisBanner()  // print the name Idris (stqylized)
+        println("Version ${version}\n\n")
 
         var input: String? = ""
         var inputPrev: String? = ""  // last entered command
