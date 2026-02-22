@@ -1,10 +1,11 @@
 package com.idris.database.operators
 
 import com.idris.database.entities.CHALLENGE
-import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.CONCEPT
+import com.idris.database.entities.EXAM
+import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.database.operators.todo.Creator
+import com.idris.database.operators.todo.Logger
 import com.idris.system.concepts.Concept
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
@@ -16,12 +17,7 @@ import com.idris.system.extra.Util.bar
 import com.idris.system.extra.Util.getConceptEntity
 import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputString
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.math.BigDecimal
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 // The Controller is an abstraction used to operate on database concepts

@@ -57,7 +57,8 @@ class Progression : Concept {
                 which = 0.0
             }
 
-            Logger.cManual(challenge.name as String, which)
+            // Logger.cManual(challenge.name as String, which)
+            Logger.updateChallenge(challenge, result)
             i++
         }
     }

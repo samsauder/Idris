@@ -7,8 +7,7 @@ import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.pad
 import com.idris.system.extra.Styler.style
-import com.idris.system.extra.Util
-import java.time.LocalDate
+import com.idris.system.extra.Util.printAttempt
 import kotlin.math.round
 import kotlin.math.roundToInt
 
@@ -29,7 +28,7 @@ class Challenge : Objective {
                 description: String,
                 minutes: Double) : super(name, skillName, description, minutes) {
         this.symbol = "●"
-        this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
+        // this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.CHALLENGE
     }
 
@@ -142,13 +141,19 @@ class Challenge : Objective {
         val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByChallenge(this), null)
         val oddsOld = userOdds
 
-        println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
+        // val resultSym = resultSym(aUo == 1.0)
+        // println(" $resultSym ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
 
-        // previously: if (attempts < 20)
+        printAttempt(name, aUo == 1.0)
+        userOdds = wins / (attempts * 1.0)
+        regenerateChallengeElo()
+
+        /*
         if (true) {  // provisional (update just the challenge elo)
             userOdds = wins / (attempts * 1.0)
             regenerateChallengeElo()
         } else {  // update both ratings
+         */
             /*
             userElo = et.newRating(userElo, 40, aUo, eUo)
             challengeElo = et.newRating(challengeElo, 40, aCo, eCo)
@@ -156,8 +161,8 @@ class Challenge : Objective {
             val userEloNew = getUserEloString()
 
             println("    USER ELO           |  $userEloOld -> $userEloNew")
-           */
-        }
+
+        }*/
 
         val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
         // val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByElo(challengeElo, attempted), null)

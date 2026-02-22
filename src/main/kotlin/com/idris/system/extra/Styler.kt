@@ -23,7 +23,7 @@ object Styler {
         return middle
     }
 
-    
+
     // Return a style depending on the elo of the given challenge
     fun colorByChallenge(challenge: Challenge): String {
         val elo = challenge.challengeElo

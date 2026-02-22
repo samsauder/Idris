@@ -2,6 +2,8 @@ package com.idris.system.concepts
 
 import com.idris.system.extra.Styles
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Util
 
 
 class Exam : Objective {
@@ -13,10 +15,9 @@ class Exam : Objective {
                 description: String,
                 minutes: Double) : super(name, skillName, description, minutes) {
         this.symbol = "▶"
-        this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
+        // this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.EXAM
     }
-
 
     constructor(name: String,
                 skillName: String,

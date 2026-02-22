@@ -191,20 +191,20 @@ object Creator : Operator() {
         }
     }
     // =======================================================================================================
-    fun r(rN: String,
-          sN: String,
-          de: String,
-          oN: String,
-          w: Boolean,
-          da: String) {  // create RECORD
+    fun r(recordName: String,
+          skillName: String,
+          description: String,
+          objectiveName: String,
+          won: Boolean,
+          datetime: String) {  // create RECORD
         transaction {
             RECORD.new {
-                name = rN           // custom tag
-                skillName = sN      // associated skill
-                description = de    // description
-                objectiveName = oN  // name of completed objective
-                won = w             // success/failure
-                date = da           // date completed
+                this.name = recordName           // custom tag
+                this.skillName = skillName      // associated skill
+                this.description = description    // description
+                this.objectiveName = objectiveName  // name of completed objective
+                this.won = won             // success/failure
+                this.date = datetime           // datetime completed
             }
         }
     }

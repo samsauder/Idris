@@ -2,9 +2,15 @@ package com.idris.database.operators.todo
 
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
+import com.idris.database.entities.EXAM
+import com.idris.database.entities.EXAMS
+import com.idris.database.entities.FOUNDATION
+import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.PROGRESSIONS
 import com.idris.system.concepts.Challenge
+import com.idris.system.concepts.Exam
+import com.idris.system.concepts.Foundation
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Util.inputName
@@ -14,7 +20,6 @@ import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
-import java.time.LocalDate
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -32,32 +37,45 @@ object Logger : Operator() {
             val resultString = inputString("RESULT  ")
             println()
 
-            val cIterator = CHALLENGE.Companion.find { CHALLENGES.name eq name }.iterator()
-            val cE = cIterator.next()
-            val c = cE.deEntify()
+            /*
+            // val cIterator = CHALLENGE.Companion.find { CHALLENGES.name eq name }.iterator()
+            // val cE = cIterator.next()
+            // val c = cE.deEntify()
+            */
+
+            val c = CHALLENGE.getOneNamed(name)?.deEntify()
             val result = if (resultString == "win") 1.0 else 0.0
 
-            if (c.progressionName == "X") {  // null placeholder
-                cManual(name, result)
-            } else {
-                val pIterator = PROGRESSION.Companion.find { PROGRESSIONS.name eq c.progressionName }.iterator()
-                val pE = pIterator.next()
-                // val p = pE.deEntify(datapath)
-                val p = pE.deEntify()
+            if (c?.progressionName == "X") {  // null placeholder
+                // cManual(name, result)
 
-                p.massLog(c.name, result)
+                updateChallenge(c, result)
+            } else {
+                /*
+                // val pIterator = PROGRESSION.Companion.find { PROGRESSIONS.name eq c!!.progressionName }.iterator()
+                // val pE = pIterator.next()
+                // val p = pE.deEntify(datapath)
+                // val p = pE.deEntify()
+                */
+
+                val p = PROGRESSION.getOneNamed(c!!.progressionName)?.deEntify()
+                p?.massLog(c.name, result)
             }
         }
     }
 
+    /*
     @OptIn(ExperimentalTime::class)
     fun cManual(name: String, result: Double) {
         transaction {
-            val cIterator = CHALLENGE.find { CHALLENGES.name eq name }.iterator()
-            val cE = cIterator.next()
-            val c = cE.deEntify()
+            // val cIterator = CHALLENGE.find { CHALLENGES.name eq name }.iterator()
+            // val cE = cIterator.next()
+            // val c = cE.deEntify()
 
-            c.log(result == 1.0)
+            val c: Challenge = CHALLENGE.getOneNamed(name)!!.deEntify()
+
+            /*
+            c.update(result == 1.0)
 
             val challengeE = CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
                 it.cElo = BigDecimal.valueOf(c.challengeElo)
