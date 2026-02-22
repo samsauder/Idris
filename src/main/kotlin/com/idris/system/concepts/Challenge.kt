@@ -89,7 +89,8 @@ class Challenge : Objective {
     override fun print() {
         conceptCore(12)
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        val eloStyle = Styler.colorByElo(challengeElo)
+        // val eloStyle = Styler.colorByElo(challengeElo, attempted)
+        val eloStyle = Styler.colorByChallenge(this)
         val elo = if (challengeElo < 0) "0000$qm" else "${challengeElo.toInt().toString()}$qm"
 
         print(pad(" ELO", 12))
@@ -110,7 +111,9 @@ class Challenge : Objective {
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
     private fun icon_name_skill_elo_odds(): String {
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        val elof = format("${celoS()}$qm", Styler.colorByElo(challengeElo), 10)  // formatted elo
+        // val elof = format("${celoS()}$qm", Styler.colorByElo(challengeElo, attempted), 10)  // formatted elo
+        val elof = format("${celoS()}$qm", Styler.colorByChallenge(this), 10)  // formatted elo
+
         val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
         return "${icon_name_skill()}$elof$oddsf"
     }
@@ -138,7 +141,8 @@ class Challenge : Objective {
     // * aco (actual challenge outcome)
     fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
         val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByElo(challengeElo), null)
+        // val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByElo(challengeElo, attempted), null)
+        val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByChallenge(this), null)
         val oddsOld = userOdds
 
         println(" ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
@@ -159,7 +163,8 @@ class Challenge : Objective {
         }
 
         val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByElo(challengeElo), null)
+        // val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByElo(challengeElo, attempted), null)
+        val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByChallenge(this), null)
 
         val userOddsAsPercentageOld = (oddsOld * 100).toInt()
         val userOddsAsPercentageNew = (userOdds * 100).toInt()
