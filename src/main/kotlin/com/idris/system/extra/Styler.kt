@@ -1,5 +1,7 @@
 package com.idris.system.extra
 
+import com.idris.system.concepts.Challenge
+
 object Styler {
     // Format a string to a specific style and pad it with whitespace to meet the specified width
     // * input "" for style and null for padding if not wanted
@@ -21,15 +23,19 @@ object Styler {
         return middle
     }
 
-    // Return a conditional ANSI color style depending on the given elo
-    fun colorByElo(elo: Double): String {
+    
+    // Return a style depending on the elo of the given challenge
+    fun colorByChallenge(challenge: Challenge): String {
+        val elo = challenge.challengeElo
         var style = ""
         val l0 = Styles.BLUE
         val l1 = Styles.GREEN
         val l2 = Styles.YELLOW
         val l3 = Styles.RED
 
-        if (elo in 1500.0..<1600.0) {
+        if (challenge.attempts == 0) {  // no styling
+            style = Styles.BLACK
+        } else if (elo in 1500.0..<1600.0) {
             style = l0
         } else if (elo in 1600.0..<1700.0) {
             style = l1
