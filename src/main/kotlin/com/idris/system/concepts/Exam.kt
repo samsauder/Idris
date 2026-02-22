@@ -39,6 +39,7 @@ class Exam : Objective {
     }
 
     override fun printL() {
-        println(icon_name_skill())
+        val passedSym = if (passed) style("1", Styles.BOLD) else style("0", Styles.RED)
+        println("${icon_name_skill()} ($passedSym)")
     }
 }
