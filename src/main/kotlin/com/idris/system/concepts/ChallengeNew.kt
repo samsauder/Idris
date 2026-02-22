@@ -20,9 +20,9 @@ class ChallengeNew : Objective {
                     this.rater = rater
                 }
 
-    override fun log(won: Boolean) {
+    override fun update(won: Boolean) {
         rater.update(this, won)  // update the challenge rating for this ChallengeNew
-        Util.printResult(name, won)        // output a visual of the result to stdout
+        Util.printAttempt(name, won)        // output a visual of the result to stdout
     }
 
     override fun print() {
@@ -36,5 +36,5 @@ class ChallengeNew : Objective {
 
 fun main() {
     val c = ChallengeNew("thing", "t", "", 1.0, EloRater)
-    c.log(true)
+    c.update(true)
 }

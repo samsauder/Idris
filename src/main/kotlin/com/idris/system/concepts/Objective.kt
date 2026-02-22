@@ -22,5 +22,5 @@ abstract class Objective : Concept {
     val symbolColor = Styles.GREEN
     var symbolHolder = ""
 
-    abstract fun log(won: Boolean)
+    abstract fun update(won: Boolean)
 }

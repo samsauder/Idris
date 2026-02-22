@@ -28,8 +28,10 @@ class Exam : Objective {
 
     constructor()
 
-    override fun log(won: Boolean) {
-        TODO()
+    override fun update(won: Boolean) {
+        passed = won
+        println()
+        Util.printAttempt(name, won)
     }
 
     override fun print() {
