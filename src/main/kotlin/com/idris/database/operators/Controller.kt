@@ -93,16 +93,21 @@ object Controller {
     @OptIn(ExperimentalTime::class)
     fun log(ot: ObjectiveType) {
         transaction {
-            val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
-            val result = inputString("RESULT  ")
-            val won: Boolean = result == "win"
+            //val resultS = inputString("[RESULT]  ")  // result string: 1 or 0
+            //if (resultS != "1" && resultS != "0") return@transaction
+            // val result = resultS.toDouble()
+            // val result = resultFromInput()
+            // val won: Boolean = resultS == "win"
 
             when(ot) {
                 ObjectiveType.CHALLENGE -> {  // log challenge
-                    val challenge = CHALLENGE.getOneNamed(name)?.deEntify()
+                    val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
+                    val cResult = resultFromInput() ?: return@transaction  // return if null
+                    val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
 
                     if (challenge?.progressionName == "X") {  // challenge has no progression
-                        challenge.log(won)
+                        /*
+                        challenge.update(won)
                         CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
                             it.cElo = BigDecimal.valueOf(challenge.challengeElo)
                             it.uElo = BigDecimal.valueOf(challenge.userElo)
@@ -119,16 +124,38 @@ object Controller {
                             name,
                             won,
                             datetime)  // add record to the record table
+
+                        */
+                        // val result = if (won) 1.0 else 0.0
+                        Logger.updateChallenge(challenge, cResult)
                     } else {                          // challenge has a progression
                         val progression = PROGRESSION.getOneNamed(challenge!!.progressionName)?.deEntify()
-                        val resultNum = if (result == "win") 1.0 else 0.0
-                        progression?.massLog(challenge.name, resultNum)
+                        // val resultNum = if (result == "win") 1.0 else 0.0
+                        // val result = resultS.toDouble()
+                        progression?.massLog(challenge.name, cResult)
                     }
                 }
-                ObjectiveType.EXAM -> { TODO() }
-                ObjectiveType.FOUNDATION -> { TODO() }
+
+                ObjectiveType.EXAM -> {
+                    val eName = inputName(ConceptType.EXAM, ConceptState.PRESENT)
+                    val eResult = resultFromInput() ?: return@transaction
+                    val exam = EXAM.getOneNamed(eName)?.deEntify()
+                    Logger.updateExam(exam!!, eResult)
+                }
+
+                ObjectiveType.FOUNDATION -> {
+                    val fName = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
+                    val foundation = FOUNDATION.getOneNamed(fName)?.deEntify()
+                    Logger.updateFoundation(foundation!!)
+                }
             }
         }
+    }
+
+    fun resultFromInput(): Double? {
+        val resultS = inputString("RESULT  ")  // result string may be 1 or 0
+        // println()
+        return if (resultS != "1" && resultS != "0") null else resultS.toDouble()
     }
 
     // ======================================================================

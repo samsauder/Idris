@@ -66,16 +66,81 @@ object Logger : Operator() {
                 it.attempts++
                 it.wins += result.toInt()
                 it.progressionName = c.progressionName
-            }
+            }*/
 
+            updateChallenge(c, result)  // update the challenge in the database according to the result of the attempt
+
+            /*
             // add record to the record table
             val won = result == 1.0
             val challenge: Challenge = CHALLENGE.getOneNamed(name)!!.deEntify()
-            val date: String = LocalDate.now().toString()
             val datetime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
             Creator.r("${name}___${datetime}", challenge.skillName, "", name, won, datetime)
+            */
         }
     }
+    */
+
+    // Update the challenge in the database given the result on the given challenge (1.0 or 0.0)
+    @OptIn(ExperimentalTime::class)
+    fun updateChallenge(c: Challenge, result: Double) {
+        c.update(result == 1.0)
+
+        transaction {
+            CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq c.name) {
+                it.cElo = BigDecimal.valueOf(c.challengeElo)
+                it.uElo = BigDecimal.valueOf(c.userElo)
+                it.uOdds = BigDecimal.valueOf(c.userOdds)
+                it.attempts++
+                it.wins += result.toInt()
+                // it.progressionName = c.progressionName
+
+                // Creator.r("${obName}___${datetime}", c.skillName, "", obName, result == 1.0, datetime)
+                val datetime = datetimeNow()
+                Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+            }
+        }
+    }
+
+    fun updateExam(e: Exam, result: Double) {
+        val passed = result == 1.0
+        e.update(passed)
+
+        EXAM.findSingleByAndUpdate(EXAMS.name eq e.name) {
+            it.passed = passed
+            val datetime = datetimeNow()
+            Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+        }
+
+    }
+
+    fun updateFoundation(f: Foundation) {
+        f.update(true)
+
+        FOUNDATION.findSingleByAndUpdate(FOUNDATIONS.name eq f.name) {
+            val datetime = datetimeNow()
+            Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
+        }
+    }
+
+    // Return the current datetime
+    @OptIn(ExperimentalTime::class)
+    private fun datetimeNow(): String {
+        return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
+    }
+
+    /*
+    // Add a record to the database documenting: objective name, result, date
+    // - return true if an objective with that name exists in the database
+    // - return false otherwise
+    @OptIn(ExperimentalTime::class)
+    private fun addRecord(obName: String, result: Double): Boolean {
+        // add record to the record table
+        val C = CHALLENGE.getOneNamed(obName) ?: return false
+        val c: Challenge = C.deEntify()
+        val datetime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
+        Creator.r("${obName}___${datetime}", c.skillName, "", obName, result == 1.0, datetime)
+    }*/
     // ======================================================================
     override fun e() {
         transaction {
