@@ -286,12 +286,28 @@ object Util {
         return cE
     }
 
+    /*
     // Print the result of a recent challenge attempt
     fun printResult(name: String, won: Boolean) {
         val sym = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
         val nameB = style(name, Styles.BOLD)
         val date = "${LocalDate.now()}"
         println("$sym $nameB on $date.")
+    }*/
+
+    // Return a win symbol or a loss symbol
+    private fun resultSym(won: Boolean): String {
+        return if (won) {
+            style("[+]", Styles.GREEN)
+        } else {
+            style("[-]", Styles.RED)
+        }
+    }
+
+    // Print win/loss, name, and date of the objective attempt
+    fun printAttempt(objName: String, won: Boolean) {
+        val objNameS = style(objName, Styles.BOLD)  // objective name (styled)
+        println("${resultSym(won)} $objNameS on ${LocalDate.now()}")
     }
 
 
