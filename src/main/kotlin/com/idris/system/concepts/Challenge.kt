@@ -21,14 +21,13 @@ class Challenge : Objective {
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
     val et = EloTool()
+    
 
     // General Constructor (just makes the core Objective attributes)
     constructor(name: String,
                 skillName: String,
                 description: String,
                 minutes: Double) : super(name, skillName, description, minutes) {
-        this.symbol = "●"
-        // this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.CHALLENGE
     }
 
@@ -64,28 +63,43 @@ class Challenge : Objective {
 
     // value is the result of the attempt for the user (1.0 or 0.5 or 0.0)
     override fun update(won: Boolean) {
-        val eUo = et.expectedOutcome(userElo, challengeElo)  // expected user outcome
-        val eCo = et.expectedOutcome(challengeElo, userElo)  // expected challenge outcome
         var aUo = 0.0   // actual user outcome
-        var aCo = 0.0   // actual challenge outcome
 
         if (won) {
             aUo = 1.0
-            // aCo = 0.0
             wins++
-        } else {
-            //aUo = 0.0
-            aCo = 1.0
         }
         
         attempts++
-        originalLogSequence(eUo, aUo, eCo, aCo)
+
+        // ===================================================================================================
+        val provSymBefore = provSym()
+        val eloBefore = format("${eloAsString()}$provSymBefore", Styler.colorByChallenge(this), null)
+        val oddsOld = userOdds
+
+        printAttempt(name, aUo == 1.0)
+        userOdds = wins / (attempts * 1.0)
+        regenerateChallengeElo()
+
+        val provSymAfter = provSym()
+        val eloAfter = format("${eloAsString()}$provSymAfter", Styler.colorByChallenge(this), null)
+
+        val likelihoodBefore = (oddsOld * 100).toInt()
+        val likelihoodAfter = (userOdds * 100).toInt()
+
+        println("    CHALLENGE ELO      |  $eloBefore -> $eloAfter")
+        println("    ODDS               |  $likelihoodBefore% -> $likelihoodAfter%\n\n")
     }
+
+
+    private fun provSym(): String{
+        return if (attempts < 20) "?" else ""
+    }
+
 
     override fun print() {
         conceptCore(12)
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        // val eloStyle = Styler.colorByElo(challengeElo, attempted)
         val eloStyle = Styler.colorByChallenge(this)
         val elo = if (challengeElo < 0) "0000$qm" else "${challengeElo.toInt().toString()}$qm"
 
@@ -107,9 +121,7 @@ class Challenge : Objective {
     // Return a string composed of the Challenge icon, name, skill, elo, and odds
     private fun icon_name_skill_elo_odds(): String {
         val qm = if (attempts < 20) "?" else " "  // a question mark indicates provisional
-        // val elof = format("${celoS()}$qm", Styler.colorByElo(challengeElo, attempted), 10)  // formatted elo
-        val elof = format("${celoS()}$qm", Styler.colorByChallenge(this), 10)  // formatted elo
-
+        val elof = format("${eloAsString()}$qm", Styler.colorByChallenge(this), 10)  // formatted elo
         val oddsf = format("${(100*userOdds).roundToInt()}%", Styles.ITALIC, 4)    // formatted odds
         return "${icon_name_skill()}$elof$oddsf"
     }
@@ -129,61 +141,10 @@ class Challenge : Objective {
         }
     }
 
-    // In which challenge elo and user elo are both updated after each log (or just challenge elo if it is provisional)
-    // ARGS:
-    // * euo (expected user outcome)
-    // * auo (actual user outcome)
-    // * eco (expected challenge outcome)
-    // * aco (actual challenge outcome)
-    fun originalLogSequence(eUo: Double, aUo: Double, eCo: Double, aCo: Double) {
-        val provSymOld = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        // val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByElo(challengeElo, attempted), null)
-        val challengeEloOld = format("${celoS()}$provSymOld", Styler.colorByChallenge(this), null)
-        val oddsOld = userOdds
-
-        // val resultSym = resultSym(aUo == 1.0)
-        // println(" $resultSym ${Styles.BOLD}${name}${Styles.RESET} on ${LocalDate.now()}")
-
-        printAttempt(name, aUo == 1.0)
-        userOdds = wins / (attempts * 1.0)
-        regenerateChallengeElo()
-
-        /*
-        if (true) {  // provisional (update just the challenge elo)
-            userOdds = wins / (attempts * 1.0)
-            regenerateChallengeElo()
-        } else {  // update both ratings
-         */
-            /*
-            userElo = et.newRating(userElo, 40, aUo, eUo)
-            challengeElo = et.newRating(challengeElo, 40, aCo, eCo)
-            userOdds = et.expectedOutcome(userElo, challengeElo)
-            val userEloNew = getUserEloString()
-
-            println("    USER ELO           |  $userEloOld -> $userEloNew")
-
-        }*/
-
-        val provSymNew: String = if (attempts < 20) "?" else ""  // provisional symbol (?)
-        // val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByElo(challengeElo, attempted), null)
-        val challengeEloNew = format("${celoS()}$provSymNew", Styler.colorByChallenge(this), null)
-
-        val userOddsAsPercentageOld = (oddsOld * 100).toInt()
-        val userOddsAsPercentageNew = (userOdds * 100).toInt()
-
-        println("    CHALLENGE ELO      |  $challengeEloOld -> $challengeEloNew")
-        println("    ODDS               |  $userOddsAsPercentageOld% -> $userOddsAsPercentageNew%\n\n")
-    }
-
-
     // Returns a string of the challenge elo (turns -Infinity to 0000.0)
-    private fun celoS() : String {
+    private fun eloAsString() : String {
         var benchElo: String = round(challengeElo).toInt().toString()
         if (challengeElo == Double.NEGATIVE_INFINITY) benchElo = "0000"
         return benchElo
     }
-
-
-
-
 }
