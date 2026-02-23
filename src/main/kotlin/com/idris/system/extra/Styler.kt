@@ -27,13 +27,14 @@ object Styler {
     // Return a style depending on the elo of the given challenge
     fun colorByChallenge(challenge: Challenge): String {
         val elo = challenge.challengeElo
+
         var style = ""
         val l0 = Styles.BLUE
         val l1 = Styles.GREEN
         val l2 = Styles.YELLOW
         val l3 = Styles.RED
 
-        if (challenge.attempts == 0) {  // no styling
+        if (challenge.attempts < 20) {  // no styling to provisional challenges
             style = Styles.BLACK
         } else if (elo in 1500.0..<1600.0) {
             style = l0
