@@ -23,8 +23,6 @@ object EXPERIMENTS : IntIdTable("experimentsT") {
     val d7 = varchar("day7Name", 50) // day 7 reference
 
     var segCount = integer("segCount")  // total # of repeating segments
-
-    // val startDate
 }
 
 class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
@@ -47,7 +45,6 @@ class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
     var d7 by EXPERIMENTS.d7
 
     var segCount by EXPERIMENTS.segCount
-    // var startDate
 
     override fun deEntify(): Concept {  // provisionally done
         // TODO("Not yet implemented")

@@ -89,12 +89,6 @@ object Controller {
     @OptIn(ExperimentalTime::class)
     fun log(ot: ObjectiveType) {
         transaction {
-            //val resultS = inputString("[RESULT]  ")  // result string: 1 or 0
-            //if (resultS != "1" && resultS != "0") return@transaction
-            // val result = resultS.toDouble()
-            // val result = resultFromInput()
-            // val won: Boolean = resultS == "win"
-
             when(ot) {
                 ObjectiveType.CHALLENGE -> {  // log challenge
                     val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
@@ -102,32 +96,9 @@ object Controller {
                     val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
 
                     if (challenge?.progressionName == "X") {  // challenge has no progression
-                        /*
-                        challenge.update(won)
-                        CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
-                            it.cElo = BigDecimal.valueOf(challenge.challengeElo)
-                            it.uElo = BigDecimal.valueOf(challenge.userElo)
-                            it.uOdds = BigDecimal.valueOf(challenge.userOdds)
-                            it.attempts++
-                            it.wins += result.toInt()
-                            it.progressionName = challenge.progressionName
-                        }  // update info
-                        val datetime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
-                        Creator.r(
-                            "${name}___${datetime}",
-                            challenge.skillName,
-                            "",
-                            name,
-                            won,
-                            datetime)  // add record to the record table
-
-                        */
-                        // val result = if (won) 1.0 else 0.0
                         Logger.updateChallenge(challenge, cResult)
                     } else {                          // challenge has a progression
                         val progression = PROGRESSION.getOneNamed(challenge!!.progressionName)?.deEntify()
-                        // val resultNum = if (result == "win") 1.0 else 0.0
-                        // val result = resultS.toDouble()
                         progression?.massLog(challenge.name, cResult)
                     }
                 }
@@ -150,7 +121,6 @@ object Controller {
 
     fun resultFromInput(): Double? {
         val resultS = inputString("RESULT  ")  // result string may be 1 or 0
-        // println()
         return if (resultS != "1" && resultS != "0") null else resultS.toDouble()
     }
 
@@ -169,19 +139,5 @@ object Controller {
         }
         concept?.print()
         println(bar(BAR_CHAR, WIDTH))
-    }
-    // ======================================================================
-    fun dash() {  // See an overview of your statistics across skills
-        TODO()
-        /* WORK-IN-PROGRESS
-        println("\nDASHBOARD")
-        println(bar(BAR_CHAR, WIDTH))
-
-        println("")
-
-        transaction {  // print the progressions of each skill
-            // val f: CONCEPT = CONCEPT.conceptsOfSkill(ConceptType.CHALLENGE, )
-        }
-         */
     }
 }

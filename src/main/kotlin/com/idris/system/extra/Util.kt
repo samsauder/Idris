@@ -8,8 +8,6 @@ import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.RECORD
-import com.idris.system.concepts.Concept
-import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
@@ -21,7 +19,6 @@ import java.util.Scanner
 object Util {
     val scanner = Scanner(System.`in`)
     val bar = "========================================"
-    val barc = "$bar=================="
 
     // Print the name Idris
     fun idrisBanner() {
@@ -83,25 +80,6 @@ object Util {
         return exists
     }
 
-    // Fill an Objectives attributes from standard input
-    fun fillObjectiveCore(o: Objective, t: ConceptType) {
-        // o.name = inputName(t, ConceptState.ABSENT)
-        // o.skillName = inputSkill()
-        // o.description = inputDescription()
-        fillConceptCore(o, t)
-        o.minutes = inputMinutes()
-    }
-
-    // Fill a Concept's attributes from standard input
-    fun fillConceptCore(c: Concept, t: ConceptType) {
-        val n = inputName(t, ConceptState.ABSENT)
-        val s = inputSkill()
-        val d = inputDescription()
-        c.name = n
-        c.skillName = s
-        c.description = d
-    }
-
 
     // Takes a name of a Concept from standard input and verifies that the target ConceptState is true (EXISTS or ABSENT)
     fun inputName(t: ConceptType, desiredState: ConceptState) : String {
@@ -121,7 +99,6 @@ object Util {
     }
 
 
-
     // Return true if a named concept should be PRESENT from its table but is ABSENT, false otherwise
     // Return true if a named concept should be ABSENT from its table but is PRESENT, false otherwise
     // ARGS
@@ -137,7 +114,6 @@ object Util {
 
 
     fun inputSkill() : String {
-        // val s = Scanner(System.`in`)
         print("SKILL  ")
         return scanner.next()
     }
@@ -287,15 +263,6 @@ object Util {
         return cE
     }
 
-    /*
-    // Print the result of a recent challenge attempt
-    fun printResult(name: String, won: Boolean) {
-        val sym = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
-        val nameB = style(name, Styles.BOLD)
-        val date = "${LocalDate.now()}"
-        println("$sym $nameB on $date.")
-    }*/
-
     // Return a win symbol or a loss symbol
     private fun resultSym(won: Boolean): String {
         return if (won) {
@@ -310,10 +277,9 @@ object Util {
         val objNameS = style(objName, Styles.BOLD)  // objective name (styled)
         println("${resultSym(won)} $objNameS on ${LocalDate.now()}")
     }
-
-
 }
 
 
 
 // TODO  get rid of all redundant functions
+// TODO  break up Util into smaller structures

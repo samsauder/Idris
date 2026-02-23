@@ -6,11 +6,9 @@ import com.idris.system.extra.Styles
 
 
 class Experiment : Concept {
-    override val icon = "X"
+    override val icon = "\uD83D\uDDF2"
     var segment: List<String?>
     var segCount: Int
-    // startDate
-    // adherence
 
     constructor(
         name: String,
@@ -26,22 +24,10 @@ class Experiment : Concept {
     override fun print() {
         val labelWidth = 12  // width
         conceptCore(labelWidth)
-        /*
-        val labelWidth = 12  // width
-
-        print(pad(" NAME", labelWidth))
-        println(style("  $name", Styles.BOLD))
-
-        print(pad(" SKILL",labelWidth))
-        println(style("  $skillName", Styles.ITALIC))
-
-        print(pad(" DESCRIPTION",labelWidth))
-        println(style("  $description", Styles.YELLOW))
-        println()
-        */
 
         print(pad(" WEEK", labelWidth))
         var d = 0
+
         for (day in segment) {
             if (day == "X") continue  // empty day slot
             if (d != 0) print(pad("", labelWidth))
@@ -59,10 +45,7 @@ class Experiment : Concept {
         println("  x$segCount")
     }
 
-
     override fun printL() {
         println(icon_name_skill())
     }
-
-    // fun begin()
 }

@@ -28,6 +28,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.util.Scanner
 
+
 object Modifier : Operator() {
     // ======================================================================
     override fun f() {
@@ -41,7 +42,7 @@ object Modifier : Operator() {
         val minutesNew = inputMinutes()
 
         transaction {
-            FOUNDATION.Companion.findSingleByAndUpdate(FOUNDATIONS.name eq name) {
+            FOUNDATION.findSingleByAndUpdate(FOUNDATIONS.name eq name) {
                 if (nameNew != "-1") it.name = nameNew
                 if (skillNew != "-1") it.skillName = skillNew
                 if (descriptionNew != "-1") it.description = descriptionNew
@@ -66,7 +67,7 @@ object Modifier : Operator() {
             val cEloNew = et.opponentRating(1500.00, oddsNew)
 
             transaction {
-                CHALLENGE.Companion.findSingleByAndUpdate(CHALLENGES.name eq name) {
+                CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
                     if (nameNew != "-1") it.name = nameNew
                     if (skillNew != "-1") it.skillName = skillNew
                     if (descriptionNew != "-1") it.description = descriptionNew
@@ -97,7 +98,7 @@ object Modifier : Operator() {
             val minutesNew = inputMinutes()
 
             transaction {
-                EXAM.Companion.findSingleByAndUpdate(EXAMS.name eq name) {
+                EXAM.findSingleByAndUpdate(EXAMS.name eq name) {
                     if (nameNew != "-1") it.name = nameNew
                     if (skillNew != "-1") it.skillName = skillNew
                     if (descriptionNew != "-1") it.description = descriptionNew
@@ -125,7 +126,7 @@ object Modifier : Operator() {
         val segCountNew = inputInt("# OF SEGMENTS  ")
 
         transaction {
-            EXPERIMENT.Companion.findSingleByAndUpdate(EXPERIMENTS.name eq name) {
+            EXPERIMENT.findSingleByAndUpdate(EXPERIMENTS.name eq name) {
                 if (nameNew != "") it.name = nameNew
                 if (skillNew != "") it.skillName = skillNew
                 if (descriptionNew != "") it.description = descriptionNew
@@ -166,7 +167,7 @@ object Modifier : Operator() {
         }
 
         transaction {
-            DAY.Companion.findSingleByAndUpdate(DAYS.name eq name) {
+            DAY.findSingleByAndUpdate(DAYS.name eq name) {
                 if (nameNew != "") it.name = nameNew
                 if (skillNew != "") it.skillName = skillNew
                 if (descriptionNew != "") it.description = descriptionNew
@@ -212,7 +213,7 @@ object Modifier : Operator() {
         val c9New = inputChallenge(9)
 
         transaction {
-            PROGRESSION.Companion.findSingleByAndUpdate(PROGRESSIONS.name eq name) {
+            PROGRESSION.findSingleByAndUpdate(PROGRESSIONS.name eq name) {
                 if (nameNew != "-1") it.name = nameNew
                 if (descriptionNew != "-1") it.description = descriptionNew
 

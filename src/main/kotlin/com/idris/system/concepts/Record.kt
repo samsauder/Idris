@@ -32,10 +32,9 @@ class Record : Concept {
     }
 
     fun icon_oname_skill_datetime(): String {
-        val resultf = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
-        val onamef = pad(objectiveName, 20)
-        val datef = style(date, Styles.ITALIC)
-        return "$resultf $onamef ${format(skillName, Styles.BOLD, 14)} $datef"
+        val resultS = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
+        val objNameS = pad(objectiveName, 20)
+        val dateS = style(date, Styles.ITALIC)
+        return "$resultS $objNameS ${format(skillName, Styles.BOLD, 14)} $dateS"
     }
-
 }

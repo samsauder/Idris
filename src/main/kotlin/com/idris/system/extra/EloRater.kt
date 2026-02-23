@@ -1,6 +1,5 @@
 package com.idris.system.extra
 
-import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.ChallengeNew
 
 object EloRater : Rater() {

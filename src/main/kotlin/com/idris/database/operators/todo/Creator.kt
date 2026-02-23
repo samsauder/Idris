@@ -36,7 +36,6 @@ object Creator : Operator() {
     }
     // =======================================================================================================
     override fun c(datapath: String) {  // add a ChallengeE to the database
-        Scanner(System.`in`)
         transaction {
             CHALLENGE.new {
                 name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
@@ -53,14 +52,7 @@ object Creator : Operator() {
             }
         }
 
-        // name
-        // nameP        // associated progression name
-        // skill
-        // description
-        // minutes
-
-        // CHALLENGES.insert(name, nameP, skill, description, minutes)
-        TODO()
+        // TODO CHALLENGES.insert(name, nameP, skill, description, minutes)
     }
     // =======================================================================================================
     override fun e() {  // add an ExamE to the database
@@ -151,24 +143,18 @@ object Creator : Operator() {
         }
     }
 
-
     // Create 2D progression (also known as a tile)
     fun t() {
         val skill = input("SKILL") as String
         val activity = input("ACTIVITY") as String
         val tiers: Array<String?> = inputStrings("TIER", 5)  // take in a sequence of tiers
-        val values: Array<Int?> = inputInts("VALUE", 5)  // take in a sequence of values
-        val unit = input("UNIT") as String  // unit of the value
-
-        // val name2P = "${activity}X.Y$unit"
-        // var desc2P: String? = Util.input("DESCRIPTION  ") as String?
-        // desc2P = desc2P ?: "${activity}X in Y ${unit}."  // 2d progression description
+        val values: Array<Int?> = inputInts("VALUE", 5)      // take in a sequence of values
+        val unit = input("UNIT") as String                          // unit of the value
 
         for (tier in tiers) {  // for each tier
             if (tier == null) break
 
             val challenges: Array<String?> = arrayOfNulls(10)
-            // val challenges: Array<String?> = inputStrings("CHALLENGE", 10)
 
             val at = "$activity$tier"
 
@@ -178,15 +164,14 @@ object Creator : Operator() {
 
             for (value in values) {  // for each value
                 if (value == null) break
-                val nameC = "$at.$value$unit"   // challenge name
-                val descC = "$at in $value $unit."  // challenge description
-                val mins = if (unit == "m") value.toDouble() else 0.0  // if unit is minutes
+                val nameC = "$at.$value$unit"                                            // challenge name
+                val descC = "$at in $value $unit."                                       // challenge description
+                val mins = if (unit == "m") value.toDouble() else 0.0                    // if unit is minutes
                 CHALLENGES.insert(nameC, nameP, skill, descC, mins)  // insert new CHALLENGE into CHALLENGES
                 challenges[i] = nameC  // add challenge name to challenges
                 i++
             }
 
-            // insert a PROGRESSION referencing the above challenges
             PROGRESSIONS.insert(nameP, skill, descP, challenges)  // insert a PROGRESSION into PROGRESSIONS
         }
     }

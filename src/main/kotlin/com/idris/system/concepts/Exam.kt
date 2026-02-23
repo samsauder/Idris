@@ -7,15 +7,13 @@ import com.idris.system.extra.Util
 
 
 class Exam : Objective {
-    override val icon = "▶"
+    override val icon = "▼"
     var passed: Boolean = false
 
     constructor(name: String,
                 skillName: String,
                 description: String,
                 minutes: Double) : super(name, skillName, description, minutes) {
-        this.symbol = "▶"
-        // this.symbolHolder = "$symbolColor[$symbol]${Styles.RESET}"
         this.objectiveType = ObjectiveType.EXAM
     }
 
@@ -26,8 +24,6 @@ class Exam : Objective {
                 passed: Boolean) : this(name, skillName, description, minutes) {
         this.passed = passed
     }
-
-    constructor()
 
     override fun update(won: Boolean) {
         passed = won

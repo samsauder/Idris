@@ -21,7 +21,7 @@ class Challenge : Objective {
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
     val et = EloTool()
-    
+
 
     // General Constructor (just makes the core Objective attributes)
     constructor(name: String,

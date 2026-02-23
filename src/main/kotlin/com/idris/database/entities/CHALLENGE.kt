@@ -6,7 +6,6 @@ import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
-import kotlin.math.min
 
 
 // A ChallengesT inherits the name, skill, description, and minutes properties from ObjectiveTable

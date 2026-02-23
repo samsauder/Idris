@@ -1,12 +1,10 @@
 package com.idris.system.concepts
 
-import com.idris.system.extra.Styles
 import com.idris.system.extra.ObjectiveType
-import com.idris.system.extra.Styler.style
-import java.time.LocalDate
 
 
 abstract class Objective : Concept {
+    lateinit var objectiveType: ObjectiveType
     var minutes: Double = 0.0
 
     constructor(
@@ -19,10 +17,6 @@ abstract class Objective : Concept {
 
     constructor() : super()
 
-    lateinit var objectiveType: ObjectiveType
-    var symbol = ""
-    val symbolColor = Styles.GREEN
-    var symbolHolder = ""
 
     abstract fun update(won: Boolean)
 }

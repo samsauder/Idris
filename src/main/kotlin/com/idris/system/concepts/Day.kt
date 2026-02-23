@@ -2,8 +2,6 @@ package com.idris.system.concepts
 
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
-import com.idris.system.extra.Styler.style
-import com.idris.system.extra.Styles
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
@@ -20,8 +18,6 @@ class Day : Concept {
         this.foundationNames = foundationNames
         this.progressionNames = progressionNames
     }
-
-    constructor()
 
     override fun print() {
         conceptCore(12)

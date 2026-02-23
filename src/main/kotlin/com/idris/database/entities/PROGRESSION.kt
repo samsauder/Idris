@@ -1,12 +1,10 @@
 package com.idris.database.entities
 
-import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Progression
-import jdk.jfr.Description
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
-import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 

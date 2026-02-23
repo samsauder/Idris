@@ -1,11 +1,9 @@
 package com.idris.database.operators.todo
 
 import com.idris.database.operators.todo.Creator.t
-import java.util.Scanner
 
 
 abstract class Operator {
-    val scanner = Scanner(System.`in`)
 
     abstract fun f();  // call the operation for Foundation
     abstract fun c(datapath: String);  // call the operation for Challenge

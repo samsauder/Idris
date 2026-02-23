@@ -29,7 +29,6 @@ object Flow {
 
         while (true) {
             print(">> ")
-            // input = readln()
             input = readlnOrNull()
 
             if (input == "q") {  // quit
@@ -67,7 +66,6 @@ object Flow {
             "log" -> Controller.log(flagToOT(args[1])!!)
             "modify" -> Modifier.choose(args[1], "")
             "view" -> Controller.view(type!!)
-            "dash" -> Controller.dash()
             "help" -> Controller.help()
             // "q" -> break
             else -> {

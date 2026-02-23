@@ -10,8 +10,8 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 class Progression : Concept {
     override var icon = "P"
-    lateinit var challengeNames: List<String>
-    lateinit var challenges: Array<Challenge?>
+    var challengeNames: List<String>
+    var challenges: Array<Challenge?>
 
     constructor(name: String,
                 skillName: String,
@@ -35,7 +35,6 @@ class Progression : Concept {
         }
     }
 
-    constructor()
 
     // Log the result for the specified Challenge then:
     // + log a win on all lower level ones
@@ -47,17 +46,12 @@ class Progression : Concept {
         for (challenge in challenges) {
             if (challenge == null) continue
             println()
-            var which = 0.0
             if (seenIndex == -1) {
-                which = result
                 if (challenge.name == targetChallenge) {
                     seenIndex = i
                 }
-            } else if (i > seenIndex) {
-                which = 0.0
             }
 
-            // Logger.cManual(challenge.name as String, which)
             Logger.updateChallenge(challenge, result)
             i++
         }
@@ -71,7 +65,6 @@ class Progression : Concept {
         for (challenge in challenges) {
             if (challenge == null) continue
             print(format(challenge.name, Styler.colorByChallenge(challenge), 20))
-            // print(format(challenge.name, Styler.colorByElo(challenge.challengeElo, attempted), 20))
         }
     }
 

@@ -27,17 +27,13 @@ abstract class Concept {
 
     // Return a string composed of this Concept's icon, its formatted name, and its skill
     fun icon_name_skill(): String {
-        val iconf = "${Styles.GREEN}[$icon]${Styles.RESET}"
-        val fname = format(name, "", 20)  // formatted name
-        val skillf = format(skillName, Styles.BOLD, 14)
-
-        return "$iconf  $fname | $skillf"
+        val iconS = style("[$icon]", Styles.GREEN)               // icon (styled)
+        val nameS = format(name, "", 20)           // name (styled)
+        val skillS = format(skillName, Styles.BOLD, 14)  // skill (styled)
+        return "$iconS  $nameS | $skillS"
     }
 
     fun conceptCore(labelWidth: Int) {
-        // print(pad(" NAME", labelWidth))
-        // println("  $name")
-
         print(pad(" SKILL",labelWidth))
         println(style("  $skillName", Styles.BOLD))
 
