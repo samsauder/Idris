@@ -18,7 +18,6 @@ import com.idris.system.extra.Util.inputConceptCore
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputInt
 import com.idris.system.extra.Util.inputInts
-import com.idris.system.extra.Util.inputName
 import com.idris.system.extra.Util.inputObjectiveCore
 import com.idris.system.extra.Util.inputProgression
 import com.idris.system.extra.Util.inputString
@@ -32,7 +31,6 @@ object Creator : Operator() {
         message(f.name, ConceptType.FOUNDATION)
     }
 
-
     override fun c(datapath: String) {  // add a ChallengeE to the database
         val c = inputObjectiveCore(Challenge(), ConceptType.CHALLENGE) as Challenge
         c.progressionName = inputProgression()
@@ -40,13 +38,11 @@ object Creator : Operator() {
         message(c.name, ConceptType.CHALLENGE)
     }
 
-
     override fun e() {  // add an ExamE to the database
         val e = inputObjectiveCore(Exam(), ConceptType.EXAM) as Exam
         EXAMS.insert(e)
         message(e.name, ConceptType.EXAM)
     }
-
 
     override fun x() {
         val x = inputConceptCore(Experiment(), ConceptType.EXPERIMENT) as Experiment
@@ -56,7 +52,6 @@ object Creator : Operator() {
         message(x.name, ConceptType.EXPERIMENT)
     }
 
-
     override fun d() {
         val d = inputConceptCore(Day(), ConceptType.DAY) as Day
         d.foundationNames = inputConceptNames(ConceptType.FOUNDATION, 10) as Array<String>
@@ -65,7 +60,6 @@ object Creator : Operator() {
         message(d.name, ConceptType.DAY)
     }
 
-
     override fun p(datapath: String) {
         val p = inputConceptCore(Progression(), ConceptType.PROGRESSION) as Progression
         val challenges: List<String?> = inputConceptNames(ConceptType.CHALLENGE, 10).toList()
@@ -73,7 +67,6 @@ object Creator : Operator() {
         PROGRESSIONS.insert(p)
         message(p.name, ConceptType.PROGRESSION)
     }
-
 
     fun r() {
         val r = inputConceptCore(Record(), ConceptType.RECORD) as Record
@@ -84,9 +77,7 @@ object Creator : Operator() {
         message(r.name, ConceptType.RECORD)
     }
 
-
-    // Create 2D progression (also known as a tile)
-    fun t() {
+    fun t() {  // create a Tile
         val skill = input("SKILL") as String
         val activity = input("ACTIVITY") as String
         val tiers: Array<String?> = inputStrings("TIER", 5)  // take in a sequence of tiers
@@ -121,9 +112,7 @@ object Creator : Operator() {
         }
     }
 
-
     // =======================================================================================================
-
 
     // What is displayed after an entity with the given name is added to the database
     fun message(name: String, ct: ConceptType) {

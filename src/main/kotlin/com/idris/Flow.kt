@@ -57,8 +57,6 @@ object Flow {
             return false
         }
 
-        // skills...
-
         when (args?.get(0)) {  // args: <command> <option>
             "list" -> Controller.list(type!!)
             "create" -> Creator.choose(args[1], "")
@@ -67,7 +65,7 @@ object Flow {
             "modify" -> Modifier.choose(args[1], "")
             "view" -> Controller.view(type!!)
             "help" -> Controller.help()
-            // "q" -> break
+
             else -> {
                 println("${Util.error()}  invalid command\n")
                 return false
@@ -77,7 +75,7 @@ object Flow {
     }
 
 
-    // Returns the ConceptType version of the given CLI flag
+    // Return the ConceptType version of the given CLI flag
     fun flagToCT(flag: String): ConceptType? {
         return when (flag) {
             "-f" -> ConceptType.FOUNDATION
@@ -91,7 +89,7 @@ object Flow {
         }
     }
 
-    // Returns the ObjectiveType version of the given CLI flag
+    // Return the ObjectiveType version of the given CLI flag
     fun flagToOT(flag: String): ObjectiveType? {
         return when (flag) {
             "-f" -> ObjectiveType.FOUNDATION
@@ -100,5 +98,4 @@ object Flow {
             else -> {null}  // invalid flag
         }
     }
-
 }

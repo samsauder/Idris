@@ -1,7 +1,6 @@
 package com.idris.system.concepts
 import com.idris.database.entities.CHALLENGE
 import com.idris.database.entities.CHALLENGES
-import com.idris.database.operators.todo.Logger
 import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Util.challengesFromNames
