@@ -1,11 +1,13 @@
 package com.idris.database.operators
 
 import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.CONCEPT
 import com.idris.database.entities.EXAM
+import com.idris.database.entities.EXAMS
 import com.idris.database.entities.FOUNDATION
+import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
-import com.idris.database.operators.todo.Logger
 import com.idris.system.concepts.Concept
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
@@ -16,20 +18,17 @@ import com.idris.system.extra.Util
 import com.idris.system.extra.Util.bar
 import com.idris.system.extra.Util.getConceptEntity
 import com.idris.system.extra.Util.inputName
-import com.idris.system.extra.Util.inputString
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import kotlin.time.ExperimentalTime
 
-// The Controller is an abstraction used to operate on database concepts
-// <targets>    f/c/e/p/d/x
-// <operators>  list/create/delete/modify/log/view
+// The Controller is used to operate on database concepts through the text interface
 
 
 object Controller {
     const val WIDTH = 140  // table width
     const val BAR_CHAR = "="
 
-    // ======================================================================
+
     fun help() {
         val ostyle = Styles.ITALIC  // styling for operation definitions
         val cstyle = Styles.BOLD  // styling for concept definitions
@@ -61,19 +60,11 @@ object Controller {
         println(colors)
         println(bar(BAR_CHAR, WIDTH))
     }
-    // ======================================================================
-    fun list(t: ConceptType) {  // list all concepts of a given type
-        println("\n${t}S")
-        println(bar(BAR_CHAR, WIDTH))
 
-        transaction {
-            for (c in CONCEPT.getAll(t))  c.deEntify().printL()
-        }
-        println(bar(BAR_CHAR, WIDTH))
-    }
-    // ======================================================================
-    fun create(t: ConceptType) { TODO() }
-    // ======================================================================
+
+    fun create(t: ConceptType) { TODO("Not yet implemented") }
+
+
     fun delete(t: ConceptType) {
         transaction {
             val name = inputName(t, ConceptState.PRESENT)
@@ -82,50 +73,11 @@ object Controller {
             println("\nDeleted ${style(name, Styles.BOLD)} from the $t table.")
         }
     }
-    // ======================================================================
-    fun modify() { TODO() }
-    // ======================================================================
 
-    @OptIn(ExperimentalTime::class)
-    fun log(ot: ObjectiveType) {
-        transaction {
-            when(ot) {
-                ObjectiveType.CHALLENGE -> {  // log challenge
-                    val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
-                    val cResult = resultFromInput() ?: return@transaction  // return if null
-                    println()  // TODO remove print statement once prints are found for exam and foundation log
-                    val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
 
-                    if (challenge?.progressionName == "X") {  // challenge has no progression
-                        Logger.updateChallenge(challenge, cResult)
-                    } else {                          // challenge has a progression
-                        val progression = PROGRESSION.getOneNamed(challenge!!.progressionName)?.deEntify()
-                        progression?.massLog(challenge.name, cResult)
-                    }
-                }
+    fun modify() { TODO("Not yet implemented") }
 
-                ObjectiveType.EXAM -> {
-                    val eName = inputName(ConceptType.EXAM, ConceptState.PRESENT)
-                    val eResult = resultFromInput() ?: return@transaction
-                    val exam = EXAM.getOneNamed(eName)?.deEntify()
-                    Logger.updateExam(exam!!, eResult)
-                }
 
-                ObjectiveType.FOUNDATION -> {
-                    val fName = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
-                    val foundation = FOUNDATION.getOneNamed(fName)?.deEntify()
-                    Logger.updateFoundation(foundation!!)
-                }
-            }
-        }
-    }
-
-    fun resultFromInput(): Double? {
-        val resultS = inputString("RESULT  ")  // result string may be 1 or 0
-        return if (resultS != "1" && resultS != "0") null else resultS.toDouble()
-    }
-
-    // ======================================================================
     fun view(t: ConceptType) {
         val name = inputName(t, ConceptState.PRESENT)
         if (name == "") return  // user quits
@@ -140,5 +92,51 @@ object Controller {
         }
         concept?.print()
         println(bar(BAR_CHAR, WIDTH))
+    }
+
+
+    fun list(t: ConceptType) {  // list all concepts of a given type
+        println("\n${t}S")
+        println(bar(BAR_CHAR, WIDTH))
+
+        transaction {
+            for (c in CONCEPT.getAll(t))  c.deEntify().printL()
+        }
+        println(bar(BAR_CHAR, WIDTH))
+    }
+
+
+    @OptIn(ExperimentalTime::class)
+    fun log(ot: ObjectiveType) {
+        transaction {
+            when(ot) {
+                ObjectiveType.CHALLENGE -> {  // log challenge
+                    val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
+                    val cResult = Util.resultFromInput() ?: return@transaction  // return if null
+                    println()  // TODO remove print statement once prints are found for exam and foundation log
+                    val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
+
+                    if (challenge?.progressionName == "X") {  // challenge has no progression
+                        CHALLENGES.update(challenge, cResult)
+                    } else {                          // challenge has a progression
+                        val progression = PROGRESSION.getOneNamed(challenge!!.progressionName)?.deEntify()
+                        progression?.massLog(challenge.name, cResult)
+                    }
+                }
+
+                ObjectiveType.EXAM -> {
+                    val eName = inputName(ConceptType.EXAM, ConceptState.PRESENT)
+                    val eResult = Util.resultFromInput() ?: return@transaction
+                    val exam = EXAM.getOneNamed(eName)?.deEntify()
+                    EXAMS.update(exam!!, eResult)
+                }
+
+                ObjectiveType.FOUNDATION -> {
+                    val fName = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
+                    val foundation = FOUNDATION.getOneNamed(fName)?.deEntify()
+                    FOUNDATIONS.update(foundation!!)
+                }
+            }
+        }
     }
 }
