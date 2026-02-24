@@ -1,6 +1,7 @@
 package com.idris.system.extra
 
 import com.idris.database.entities.CHALLENGE
+import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.CONCEPT
 import com.idris.database.entities.DAY
 import com.idris.database.entities.EXAM
@@ -8,8 +9,12 @@ import com.idris.database.entities.EXPERIMENT
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.RECORD
+import com.idris.system.concepts.Challenge
+import com.idris.system.concepts.Concept
+import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
+import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -80,7 +85,6 @@ object Util {
         return exists
     }
 
-
     // Takes a name of a Concept from standard input and verifies that the target ConceptState is true (EXISTS or ABSENT)
     fun inputName(t: ConceptType, desiredState: ConceptState) : String {
         var name = inputString("?")
@@ -98,7 +102,6 @@ object Util {
         return style("ERROR", Styles.RED)
     }
 
-
     // Return true if a named concept should be PRESENT from its table but is ABSENT, false otherwise
     // Return true if a named concept should be ABSENT from its table but is PRESENT, false otherwise
     // ARGS
@@ -112,12 +115,10 @@ object Util {
         }
     }
 
-
     fun inputSkill() : String {
         print("SKILL  ")
         return scanner.next()
     }
-
 
     fun inputDescription() : String {
         val s = Scanner(System.`in`)
@@ -125,13 +126,11 @@ object Util {
         return s.nextLine()
     }
 
-
     fun inputMinutes() : Double {
         val s = Scanner(System.`in`)
         print("MINUTES  ")
         return s.nextInt().toDouble()
     }
-
 
     fun inputInt(prompt: String) : Int? {
         val s = Scanner(System.`in`)
@@ -141,6 +140,12 @@ object Util {
         return num.toInt()
     }
 
+    // Enter a 1 or a 0 and return the appropriate boolean value
+    // - return null on invalid input
+    fun inputBool(prompt: String): Boolean? {
+        val v = inputInt(prompt)
+        return if (v != 1 && v != 0) v == 1 else null
+    }
 
     fun inputChallenge(i: Int) : String {
         // val s = Scanner(System.`in`)
@@ -148,13 +153,11 @@ object Util {
         return scanner.next()
     }
 
-
     fun inputProgression() : String {
         val s = Scanner(System.`in`)
         print("PROGRESSION  ")
         return scanner.next()
     }
-
 
     // Prints a prompt string and returns a string taken in from standard input
     fun inputString(prompt: String) : String {
@@ -226,6 +229,24 @@ object Util {
         return entityNames
     }
 
+    // Fill the Concept with name, skill, and description from stdin
+    fun inputConceptCore(concept: Concept, ct: ConceptType): Concept {
+        val name = inputName(ct, ConceptState.ABSENT)
+        val skill: String = inputSkill()
+        val description = inputString("DESCRIPTION")
+        concept.name = name
+        concept.skillName = skill
+        concept.description = description
+        return concept
+    }
+
+    // Fill the Objective with name, skill, description, and minutes from stdin
+    fun inputObjectiveCore(objective: Objective, ct: ConceptType): Objective {
+        inputConceptCore(objective, ct)
+        objective.minutes = inputBigDecimal("MINUTES").toDouble()
+        return objective
+    }
+
 
     // Return a concept of the specified ConceptType and name from its table (or null if not found)
     fun getConceptEntity(ct: ConceptType, name: String): CONCEPT? {
@@ -277,6 +298,38 @@ object Util {
         val objNameS = style(objName, Styles.BOLD)  // objective name (styled)
         println("${resultSym(won)} $objNameS on ${LocalDate.now()}")
     }
+
+    // Takes in a list of challenge names and returns an array of matching challenges from the db
+    fun challengesFromNames(challengeNames: List<String?>): Array<Challenge?>{
+        var ca: Array<Challenge?> = emptyArray()
+        transaction {
+            val l: Int = challengeNames.size
+            ca = arrayOfNulls(l)  // challenge array
+
+            var i = 0
+            for (cName in challengeNames) {
+                if (cName == "X" || cName == "" || cName == null) {  // null placeholder TODO (change to only "" later)
+                    continue;
+                }
+                val cIterator = CHALLENGE.find { CHALLENGES.name eq cName }.iterator()
+                val c = cIterator.next().deEntify()
+                ca[i] = c
+                i++
+            }
+        }
+        return ca
+    }
+
+    /*
+    // Return an array of each name from the given array of challenges
+    fun namesFromChallenges(ca: Array<Challenge?>): Array<String?> {
+        val names = arrayOfNulls<String?>(ca.size)
+        var i = 0
+        for (c in ca)  names[i++] = c?.name  // either a String or null
+        return names
+    }
+     */
+
 }
 
 
