@@ -7,9 +7,11 @@ import com.idris.database.entities.EXAMS
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.FOUNDATIONS
 import com.idris.database.entities.PROGRESSION
+import com.idris.database.entities.RECORDS
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Exam
 import com.idris.system.concepts.Foundation
+import com.idris.system.concepts.Record
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Util.inputName
@@ -35,6 +37,7 @@ object Logger : Operator() {
         transaction {
             val name = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
             val resultString = inputString("RESULT  ")
+            println()
             println()
 
             val c = CHALLENGE.getOneNamed(name)?.deEntify()
@@ -64,7 +67,12 @@ object Logger : Operator() {
                 it.wins += result.toInt()
 
                 val datetime = datetimeNow()
-                Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+                // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+
+                // TODO("add RECORDS.insert below (Logger.updateChallenge)")
+                val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+                RECORDS.insert(r)
+                // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
             }
         }
     }
@@ -76,9 +84,13 @@ object Logger : Operator() {
         EXAM.findSingleByAndUpdate(EXAMS.name eq e.name) {
             it.passed = passed
             val datetime = datetimeNow()
-            Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
-        }
+            // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
 
+            // TODO("add RECORDS.insert below (Logger.updateExam)")
+            val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+            RECORDS.insert(r)
+            // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+        }
     }
 
     fun updateFoundation(f: Foundation) {
@@ -86,7 +98,12 @@ object Logger : Operator() {
 
         FOUNDATION.findSingleByAndUpdate(FOUNDATIONS.name eq f.name) {
             val datetime = datetimeNow()
-            Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
+            // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
+
+            // TODO("add RECORDS.insert below (Logger.updateFoundation)")
+            val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
+            RECORDS.insert(r)
+            // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
         }
     }
 
