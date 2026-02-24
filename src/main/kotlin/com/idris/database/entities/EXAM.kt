@@ -4,11 +4,41 @@ import com.idris.system.concepts.Exam
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 
 
 object EXAMS : OBJECTIVES("examsT") {
     val passed = bool("passed")
+
+    /* TODO delete comment
+    fun insert(name: String,
+               skill: String,
+               description: String?,
+               minutes: Double,
+               passed: Boolean) {
+        transaction {
+            EXAM.new {
+                this.name = name
+                this.skillName = skill
+                this.description = description ?: ""  // "" if null
+                this.minutes = BigDecimal(minutes)
+                this.passed = passed
+            }
+        }
+    } */
+
+    fun insert(e: Exam) {
+        transaction {
+            EXAM.new {
+                this.name = e.name
+                this.skillName = e.skillName
+                this.description = e.description
+                this.minutes = e.minutes.toBigDecimal()
+                this.passed = e.passed
+            }
+        }
+    }
 }
 
 class EXAM(id: EntityID<Int>) : CONCEPT(id) {

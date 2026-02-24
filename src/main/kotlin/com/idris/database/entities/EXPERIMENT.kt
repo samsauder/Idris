@@ -6,12 +6,13 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 object EXPERIMENTS : IntIdTable("experimentsT") {
-    val name = varchar("name", 50)
-    val skillName = varchar("skillName", 50)
-    val description = varchar("description", 400)
+    var name = varchar("name", 50)
+    var skillName = varchar("skillName", 50)
+    var description = varchar("description", 400)
 
     // a segment consists of 7 Day names (from the DaysT table)
     val d1 = varchar("day1Name", 50) // day 1 reference
@@ -23,7 +24,27 @@ object EXPERIMENTS : IntIdTable("experimentsT") {
     val d7 = varchar("day7Name", 50) // day 7 reference
 
     var segCount = integer("segCount")  // total # of repeating segments
+
+
+    fun insert(x: Experiment) {
+        transaction {
+            EXPERIMENT.new {
+                this.name = x.name
+                this.skillName = x.skillName
+                this.description = x.description
+                this.d1 = x.segment[0]!!
+                this.d2 = x.segment[1]!!
+                this.d3 = x.segment[2]!!
+                this.d4 = x.segment[3]!!
+                this.d5 = x.segment[4]!!
+                this.d6 = x.segment[5]!!
+                this.d7 = x.segment[6]!!
+                this.segCount = x.segCount
+            }
+        }
+    }
 }
+
 
 class EXPERIMENT(id: EntityID<Int>) : CONCEPT(id) {
     companion object : IntEntityClass<EXPERIMENT>(EXPERIMENTS) {

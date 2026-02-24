@@ -1,5 +1,6 @@
 package com.idris.database.entities
 
+import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Progression
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
@@ -25,6 +26,7 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
     val c8 = varchar("c8Name", 50)
     val c9 = varchar("c9Name", 50)
 
+    /*
     // Insert a new PROGRESSION into PROGRESSIONS
     fun insert(name: String,
                skill: String,
@@ -45,6 +47,27 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
                 this.c7 = challenges[7] ?: "X"
                 this.c8 = challenges[8] ?: "X"
                 this.c9 = challenges[9] ?: "X"
+            }
+        }
+    } */
+
+
+    fun insert(p: Progression) {
+        transaction {
+            PROGRESSION.new {
+                this.name = p.name
+                this.skillName = p.skillName
+                this.description = p.description
+                this.c0 = (p.challenges[0]?.name ?: "X") as String
+                this.c1 = (p.challenges[1]?.name ?: "X") as String
+                this.c2 = (p.challenges[2]?.name ?: "X") as String
+                this.c3 = (p.challenges[3]?.name ?: "X") as String
+                this.c4 = (p.challenges[4]?.name ?: "X") as String
+                this.c5 = (p.challenges[5]?.name ?: "X") as String
+                this.c6 = (p.challenges[6]?.name ?: "X") as String
+                this.c7 = (p.challenges[7]?.name ?: "X") as String
+                this.c8 = (p.challenges[8]?.name ?: "X") as String
+                this.c9 = (p.challenges[9]?.name ?: "X") as String
             }
         }
     }

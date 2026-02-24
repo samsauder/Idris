@@ -5,14 +5,15 @@ import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 // A Day is a plan of action to advance a specific skill (consists of a set of Foundations and Progressions)
 
 
 object DAYS : IntIdTable("daysT") {
-    val name = varchar("dayName", 50)
-    val skillName = varchar("skillName", 50)
-    val description = varchar("description", 200)
+    var name = varchar("dayName", 50)
+    var skillName = varchar("skillName", 50)
+    var description = varchar("description", 200)
 
     // A day consists of up to 10 Foundations and up to 5 Progressions (for a skill)
     val f0 = varchar("f0Name", 50)
@@ -31,7 +32,34 @@ object DAYS : IntIdTable("daysT") {
     val p2 = varchar("p2Name", 50)
     val p3 = varchar("p3Name", 50)
     val p4 = varchar("p4Name", 50)
+
+
+    fun insert(d: Day) {
+        transaction {
+            DAY.new {
+                this.name = d.name
+                this.skillName = d.skillName
+                this.description = d.description
+                this.f0 = d.foundationNames[0]
+                this.f1 = d.foundationNames[1]
+                this.f2 = d.foundationNames[2]
+                this.f3 = d.foundationNames[3]
+                this.f4 = d.foundationNames[4]
+                this.f5 = d.foundationNames[5]
+                this.f6 = d.foundationNames[6]
+                this.f7 = d.foundationNames[7]
+                this.f8 = d.foundationNames[8]
+                this.f9 = d.foundationNames[9]
+                this.p0 = d.progressionNames[0]
+                this.p1 = d.progressionNames[1]
+                this.p2 = d.progressionNames[2]
+                this.p3 = d.progressionNames[3]
+                this.p4 = d.progressionNames[4]
+            }
+        }
+    }
 }
+
 
 class DAY(id: EntityID<Int>) : CONCEPT(id) {
     companion object : IntEntityClass<DAY>(DAYS) {

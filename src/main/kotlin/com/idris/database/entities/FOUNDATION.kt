@@ -1,13 +1,40 @@
 package com.idris.database.entities
 
+import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Foundation
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.math.BigDecimal
 
 
 object FOUNDATIONS : OBJECTIVES("foundationsT") {
+    /* TODO remove comment
+    fun insert(name: String,
+               skill: String,
+               description: String?,
+               minutes: Double) {
+        transaction {
+            FOUNDATION.new {
+                this.name = name
+                this.skillName = skill
+                this.description = description ?: ""  // "" if null
+                this.minutes = BigDecimal(minutes)
+            }
+        }
+    } */
 
+    fun insert(f: Foundation) {
+        transaction {
+            FOUNDATION.new {
+                this.name = f.name
+                this.skillName = f.skillName
+                this.description = f.description  // "" if null
+                this.minutes = BigDecimal(f.minutes)
+            }
+        }
+    }
 }
 
 class FOUNDATION(id: EntityID<Int>) : CONCEPT(id) {
