@@ -1,6 +1,8 @@
 package com.idris.database.entities
 
 import com.idris.system.concepts.Exam
+import com.idris.system.concepts.Record
+import com.idris.system.extra.Util.datetimeNow
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
@@ -21,6 +23,18 @@ object EXAMS : OBJECTIVES("examsT") {
                 this.minutes = e.minutes.toBigDecimal()
                 this.passed = e.passed
             }
+        }
+    }
+
+    fun update(e: Exam, result: Double) {
+        val passed = result == 1.0
+        e.update(passed)
+
+        EXAM.findSingleByAndUpdate(EXAMS.name eq e.name) {
+            it.passed = passed
+            val datetime = datetimeNow()
+            val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+            RECORDS.insert(r)
         }
     }
 }

@@ -2,6 +2,8 @@ package com.idris.database.entities
 
 import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Foundation
+import com.idris.system.concepts.Record
+import com.idris.system.extra.Util
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
@@ -18,6 +20,16 @@ object FOUNDATIONS : OBJECTIVES("foundationsT") {
                 this.description = f.description  // "" if null
                 this.minutes = BigDecimal(f.minutes)
             }
+        }
+    }
+
+    fun update(f: Foundation) {
+        f.update(true)
+
+        FOUNDATION.findSingleByAndUpdate(FOUNDATIONS.name eq f.name) {
+            val datetime = Util.datetimeNow()
+            val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
+            RECORDS.insert(r)
         }
     }
 }

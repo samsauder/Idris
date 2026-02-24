@@ -1,6 +1,8 @@
 package com.idris.database.entities
 
 import com.idris.system.concepts.Challenge
+import com.idris.system.concepts.Record
+import com.idris.system.extra.Util.datetimeNow
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.dao.IntEntityClass
@@ -31,6 +33,24 @@ object CHALLENGES : OBJECTIVES("challengesT") {
                 this.uOdds = BigDecimal("1.0")
                 this.attempts = 0
                 this.wins = 0
+            }
+        }
+    }
+
+    fun update(c: Challenge, result: Double) {
+        c.update(result == 1.0)
+
+        transaction {
+            CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq c.name) {
+                it.cElo = BigDecimal.valueOf(c.challengeElo)
+                it.uElo = BigDecimal.valueOf(c.userElo)
+                it.uOdds = BigDecimal.valueOf(c.userOdds)
+                it.attempts++
+                it.wins += result.toInt()
+
+                val datetime = datetimeNow()
+                val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
+                RECORDS.insert(r)
             }
         }
     }
