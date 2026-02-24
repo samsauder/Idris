@@ -26,7 +26,7 @@ import kotlin.time.ExperimentalTime
 
 object Controller {
     const val WIDTH = 140  // table width
-    const val BAR_CHAR = "="
+    const val BAR_CHAR = "―"
 
 
     fun help() {
@@ -84,12 +84,17 @@ object Controller {
 
         var concept: Concept? = null
 
-        println("\n${name}")
-        println(bar(BAR_CHAR, WIDTH))
+        // println("\n${name}")
+        // println(bar(BAR_CHAR, WIDTH))
 
         transaction {
             concept = CONCEPT.conceptNamed(t, name).deEntify()
         }
+
+        val iconS = style("${concept?.icon}", Styles.GREEN)
+        println("\n$iconS  $name")
+        println(bar(BAR_CHAR, WIDTH))
+
         concept?.print()
         println(bar(BAR_CHAR, WIDTH))
     }
