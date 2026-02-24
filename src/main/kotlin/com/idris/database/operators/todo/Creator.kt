@@ -1,29 +1,33 @@
 package com.idris.database.operators.todo
 
-import com.idris.database.entities.*
-import com.idris.system.extra.ConceptState
+import com.idris.database.entities.CHALLENGES
+import com.idris.database.entities.DAYS
+import com.idris.database.entities.EXAMS
+import com.idris.database.entities.EXPERIMENTS
+import com.idris.database.entities.FOUNDATIONS
+import com.idris.database.entities.PROGRESSIONS
+import com.idris.database.entities.RECORDS
+import com.idris.system.concepts.*
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import com.idris.system.extra.Util.challengesFromNames
 import com.idris.system.extra.Util.input
-import com.idris.system.extra.Util.inputBigDecimal
-import com.idris.system.extra.Util.inputChallenge
+import com.idris.system.extra.Util.inputBool
+import com.idris.system.extra.Util.inputConceptCore
 import com.idris.system.extra.Util.inputConceptNames
-import com.idris.system.extra.Util.inputDescription
 import com.idris.system.extra.Util.inputInt
 import com.idris.system.extra.Util.inputInts
 import com.idris.system.extra.Util.inputName
+import com.idris.system.extra.Util.inputObjectiveCore
 import com.idris.system.extra.Util.inputProgression
-import com.idris.system.extra.Util.inputSkill
 import com.idris.system.extra.Util.inputString
 import com.idris.system.extra.Util.inputStrings
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.util.*
 
 
 object Creator : Operator() {
-    // =======================================================================================================
     override fun f() {  // add a FoundationE to the database
+        /* // TODO remove comment
         transaction {
             FOUNDATION.new {
                 name = inputName(ConceptType.FOUNDATION, ConceptState.ABSENT)
@@ -32,10 +36,24 @@ object Creator : Operator() {
                 minutes = inputBigDecimal("MINUTES")
                 println("\nAdded ${style(name, Styles.BOLD)} to the Foundation table.")
             }
-        }
+        } */
+
+        /*
+        //val name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
+        //val skill: String = inputSkill()
+        //val description = inputString("DESCRIPTION")
+        //val minutes = inputBigDecimal("MINUTES").toDouble()
+         */
+
+        val f = inputObjectiveCore(Foundation(), ConceptType.FOUNDATION) as Foundation
+
+        FOUNDATIONS.insert(f)
+        message(f.name, ConceptType.FOUNDATION)
     }
-    // =======================================================================================================
+
+
     override fun c(datapath: String) {  // add a ChallengeE to the database
+        /* // TODO remove comment
         transaction {
             CHALLENGE.new {
                 name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
@@ -50,12 +68,25 @@ object Creator : Operator() {
                 wins = 0
                 println("\nAdded ${style(name, Styles.BOLD)} to the Challenge table.")
             }
-        }
+        }*/
 
-        // TODO CHALLENGES.insert(name, nameP, skill, description, minutes)
+        /*
+        // val name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
+        // val skill: String = inputSkill()
+        // val description = inputString("DESCRIPTION")
+        // val minutes = inputBigDecimal("MINUTES").toDouble()
+         */
+
+        val c = inputObjectiveCore(Challenge(), ConceptType.CHALLENGE) as Challenge
+        c.progressionName = inputProgression()
+
+        CHALLENGES.insert(c)
+        message(c.name, ConceptType.CHALLENGE)
     }
-    // =======================================================================================================
+
+
     override fun e() {  // add an ExamE to the database
+        /* TODO remove comment
         transaction {
             EXAM.new {
                 name = inputName(ConceptType.EXAM, ConceptState.ABSENT)
@@ -65,10 +96,25 @@ object Creator : Operator() {
                 passed = false
                 println("\nAdded ${style(name, Styles.BOLD)} to the Exam table.")
             }
-        }
+        }*/
+
+        /*
+        //val name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
+        //val skill: String = inputSkill()
+        //val description = inputString("DESCRIPTION")
+        //val minutes = inputBigDecimal("MINUTES").toDouble()
+         */
+
+        val e = inputObjectiveCore(Exam(), ConceptType.EXAM) as Exam
+        // e.passed = inputBool("RESULT")!!  TODO delete comment
+
+        EXAMS.insert(e)
+        message(e.name, ConceptType.EXAM)
     }
-    // =======================================================================================================
+
+
     override fun x() {
+        /* TODO remove comment
         Scanner(System.`in`)
         transaction {
             EXPERIMENT.new {
@@ -89,9 +135,25 @@ object Creator : Operator() {
                 println("\nAdded ${style(name, Styles.BOLD)} to the Experiment table.")
             }
         }
+        */
+
+        /*
+        // val name = inputName(ConceptType.CHALLENGE, ConceptState.ABSENT)
+        // val skill: String = inputSkill()
+        // val description = inputString("DESCRIPTION")
+        */
+
+        val x = inputConceptCore(Experiment(), ConceptType.EXPERIMENT) as Experiment
+        x.segment = inputConceptNames(ConceptType.DAY, 7).toList()
+        x.segCount = inputInt("# OF SEGMENTS")!!
+
+        EXPERIMENTS.insert(x)
+        message(x.name, ConceptType.EXPERIMENT)
     }
-    // =======================================================================================================
+
+
     override fun d() {
+        /* TODO remove comment
         transaction {
             DAY.new {
                 name = inputName(ConceptType.DAY, ConceptState.ABSENT)
@@ -120,9 +182,19 @@ object Creator : Operator() {
                 println("\nAdded ${style(name, Styles.BOLD)} to the Day table.")
             }
         }
+        */
+
+        val d = inputConceptCore(Day(), ConceptType.DAY) as Day
+        d.foundationNames = inputConceptNames(ConceptType.FOUNDATION, 10) as Array<String>
+        d.progressionNames = inputConceptNames(ConceptType.PROGRESSION, 5) as Array<String>
+
+        DAYS.insert(d)
+        message(d.name, ConceptType.DAY)
     }
-    // =======================================================================================================
+
+
     override fun p(datapath: String) {
+        /*
         transaction {
             PROGRESSION.new {
                 name = inputName(ConceptType.PROGRESSION, ConceptState.ABSENT)
@@ -140,8 +212,56 @@ object Creator : Operator() {
                 c9 = inputChallenge(9)
                 println("\nAdded ${style(name, Styles.BOLD)} to the Progression table.")
             }
-        }
+        }*/
+
+        val p = inputConceptCore(Progression(), ConceptType.PROGRESSION) as Progression
+        val challenges: List<String?> = inputConceptNames(ConceptType.CHALLENGE, 10).toList()
+        p.challenges = challengesFromNames(challenges)
+
+        PROGRESSIONS.insert(p)
+        message(p.name, ConceptType.PROGRESSION)
     }
+
+
+    fun r() {
+        val r = inputConceptCore(Record(), ConceptType.RECORD) as Record
+        r.objectiveName = inputString("OBJECTIVE")
+        r.won = inputBool("RESULT")!!
+        r.date = inputString("DATETIME")
+
+        RECORDS.insert(r)
+        message(r.name, ConceptType.RECORD)
+    }
+
+    /* TODO remove comment
+    fun r(recordName: String,
+          skillName: String,
+          description: String,
+          objectiveName: String,
+          won: Boolean,
+          datetime: String) {  // create RECORD
+        /*
+        transaction {
+            RECORD.new {
+                this.name = recordName           // custom tag
+                this.skillName = skillName      // associated skill
+                this.description = description    // description
+                this.objectiveName = objectiveName  // name of completed objective
+                this.won = won             // success/failure
+                this.date = datetime           // datetime completed
+            }
+        }
+        */
+
+        val r = inputConceptCore(Record()) as Record
+        r.objectiveName = inputString("OBJECTIVE")
+        r.won = inputBool("RESULT")!!
+        r.date = inputString("DATETIME")
+
+        // TODO RECORDS.insert(r)
+        message(r.name, ConceptType.RECORD)
+    }*/
+
 
     // Create 2D progression (also known as a tile)
     fun t() {
@@ -167,30 +287,24 @@ object Creator : Operator() {
                 val nameC = "$at.$value$unit"                                            // challenge name
                 val descC = "$at in $value $unit."                                       // challenge description
                 val mins = if (unit == "m") value.toDouble() else 0.0                    // if unit is minutes
-                CHALLENGES.insert(nameC, nameP, skill, descC, mins)  // insert new CHALLENGE into CHALLENGES
+
+                // CHALLENGES.insert(nameC, nameP, skill, descC, mins)  // insert new CHALLENGE into CHALLENGES TODO remove comment
+                val c = Challenge(nameC, skill, descC, mins)
+                CHALLENGES.insert(c)
+
                 challenges[i] = nameC  // add challenge name to challenges
                 i++
             }
 
-            PROGRESSIONS.insert(nameP, skill, descP, challenges)  // insert a PROGRESSION into PROGRESSIONS
+            // PROGRESSIONS.insert(nameP, skill, descP, challenges)  // insert a PROGRESSION into PROGRESSIONS TODO remove comment
+            val p = Progression(nameP, skill, descP, challenges.toList() as List<String>)
+            PROGRESSIONS.insert(p)
         }
     }
     // =======================================================================================================
-    fun r(recordName: String,
-          skillName: String,
-          description: String,
-          objectiveName: String,
-          won: Boolean,
-          datetime: String) {  // create RECORD
-        transaction {
-            RECORD.new {
-                this.name = recordName           // custom tag
-                this.skillName = skillName      // associated skill
-                this.description = description    // description
-                this.objectiveName = objectiveName  // name of completed objective
-                this.won = won             // success/failure
-                this.date = datetime           // datetime completed
-            }
-        }
+
+    // What is displayed after an entity with the given name is added to the database
+    fun message(name: String, ct: ConceptType) {
+        println("\nAdded ${style(name, Styles.BOLD)} to the $ct table.")
     }
 }
