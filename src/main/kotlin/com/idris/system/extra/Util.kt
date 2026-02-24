@@ -320,19 +320,14 @@ object Util {
         return ca
     }
 
-    /*
-    // Return an array of each name from the given array of challenges
-    fun namesFromChallenges(ca: Array<Challenge?>): Array<String?> {
-        val names = arrayOfNulls<String?>(ca.size)
-        var i = 0
-        for (c in ca)  names[i++] = c?.name  // either a String or null
-        return names
+    // Return the current datetime
+    @OptIn(ExperimentalTime::class)
+    fun datetimeNow(): String {
+        return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
     }
-     */
 
+    fun resultFromInput(): Double? {
+        val resultS = inputString("RESULT  ")  // result string may be 1 or 0
+        return if (resultS != "1" && resultS != "0") null else resultS.toDouble()
+    }
 }
-
-
-
-// TODO  get rid of all redundant functions
-// TODO  break up Util into smaller structures

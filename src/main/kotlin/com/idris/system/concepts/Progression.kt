@@ -20,24 +20,10 @@ class Progression : Concept {
                 skillName: String,
                 description: String,
                 challengeNames: List<String>) : super(name, skillName, description) {
-
         this.challengeNames = challengeNames
         challenges = arrayOfNulls(challengeNames.size)
 
         transaction {
-            /* TODO remove comment
-            var i = 0
-            for (cName in challengeNames) {
-                if (cName == "X" || cName == "") {  // null placeholder TODO (change to only "" later)
-                    continue;
-                }
-                val cIterator = CHALLENGE.find { CHALLENGES.name eq cName }.iterator()
-                val c = cIterator.next().deEntify()
-                challenges[i] = c
-                i++
-            }
-            */
-
             challenges = challengesFromNames(challengeNames)
         }
     }
@@ -59,13 +45,13 @@ class Progression : Concept {
                 }
             }
 
-            Logger.updateChallenge(challenge, result)
+            CHALLENGES.update(challenge, result)
             i++
         }
     }
 
     override fun print() {
-        TODO()
+        TODO("Not yet implemented")
     }
 
     fun printSeq() {  // print the sequence of challenges for the current progression

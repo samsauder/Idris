@@ -17,30 +17,6 @@ object CHALLENGES : OBJECTIVES("challengesT") {
     val attempts = integer("attempts")  // how many times has the user attempted
     val wins = integer("wins")  // how many times has the user won
 
-    /* TODO remove comment
-    // Insert a new CHALLENGE into CHALLENGES
-    fun insert(name: String,
-               nameP: String?,  // associated progression name
-               skill: String,
-               description: String?,
-               minutes: Double) {
-        transaction {
-            CHALLENGE.new {
-                this.name = name
-                this.progressionName = nameP ?: ""  // "" if null
-                this.skillName = skill
-                this.description = description ?: ""  // "" if null
-                this.minutes = BigDecimal(minutes)
-
-                this.cElo = BigDecimal("0.0")
-                this.uElo = BigDecimal("0.0")
-                this.uOdds = BigDecimal("1.0")
-                this.attempts = 0
-                this.wins = 0
-            }
-        }
-    }
-     */
 
     fun insert(c: Challenge) {
         transaction {

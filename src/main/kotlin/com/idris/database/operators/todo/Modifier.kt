@@ -194,7 +194,6 @@ object Modifier : Operator() {
     }
     // ======================================================================
     override fun p(datapath: String) {
-        //TODO("Not yet implemented")
         val name = inputName(ConceptType.PROGRESSION, ConceptState.PRESENT)
 
         println("\nFor each following attribute, enter a new value or -1 to keep the existing value.")

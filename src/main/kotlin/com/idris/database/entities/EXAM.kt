@@ -11,22 +11,6 @@ import java.math.BigDecimal
 object EXAMS : OBJECTIVES("examsT") {
     val passed = bool("passed")
 
-    /* TODO delete comment
-    fun insert(name: String,
-               skill: String,
-               description: String?,
-               minutes: Double,
-               passed: Boolean) {
-        transaction {
-            EXAM.new {
-                this.name = name
-                this.skillName = skill
-                this.description = description ?: ""  // "" if null
-                this.minutes = BigDecimal(minutes)
-                this.passed = passed
-            }
-        }
-    } */
 
     fun insert(e: Exam) {
         transaction {

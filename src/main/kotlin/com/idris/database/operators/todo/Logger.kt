@@ -67,53 +67,51 @@ object Logger : Operator() {
                 it.wins += result.toInt()
 
                 val datetime = datetimeNow()
-                // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
-
-                // TODO("add RECORDS.insert below (Logger.updateChallenge)")
                 val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
                 RECORDS.insert(r)
-                // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
             }
         }
     }
+    */
 
+
+    /*
     fun updateExam(e: Exam, result: Double) {
         val passed = result == 1.0
         e.update(passed)
 
         EXAM.findSingleByAndUpdate(EXAMS.name eq e.name) {
             it.passed = passed
-            val datetime = datetimeNow()
-            // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
 
-            // TODO("add RECORDS.insert below (Logger.updateExam)")
+            val datetime = datetimeNow()
             val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
             RECORDS.insert(r)
-            // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, result == 1.0, datetime)
         }
     }
+    */
 
+    /* TODO remove comment
     fun updateFoundation(f: Foundation) {
         f.update(true)
 
         FOUNDATION.findSingleByAndUpdate(FOUNDATIONS.name eq f.name) {
             val datetime = datetimeNow()
-            // Creator.r("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
-
-            // TODO("add RECORDS.insert below (Logger.updateFoundation)")
             val r = Record("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
             RECORDS.insert(r)
-            // RECORDS.insert("${it.name}___${datetime}", it.skillName, "", it.name, true, datetime)
         }
     }
+    */
 
+
+    /*
     // Return the current datetime
     @OptIn(ExperimentalTime::class)
     private fun datetimeNow(): String {
         return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
     }
+    */
 
-    // ======================================================================
+
     override fun e() {
         transaction {
             TODO("Not yet implemented")
