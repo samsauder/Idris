@@ -14,16 +14,22 @@ import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.Scanner
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+
+// TODO  get rid of all redundant functions
+// TODO  break up Util into smaller structures
 
 
 object Util {
     val scanner = Scanner(System.`in`)
-    val bar = "========================================"
 
     // Print the name Idris
     fun idrisBanner() {
@@ -178,7 +184,6 @@ object Util {
         return readlnOrNull()
     }
 
-
     // Returns an array of Strings/nulls from stdin
     fun inputStrings(prompt: String, count: Int): Array<String?> {
         val strings = arrayOfNulls<String>(count)  // array of count number of Any type values
@@ -189,7 +194,6 @@ object Util {
         }
         return strings
     }
-
 
     // Returns an array of Ints/nulls from stdin
     fun inputInts(prompt: String, count: Int): Array<Int?> {
@@ -246,7 +250,6 @@ object Util {
         objective.minutes = inputBigDecimal("MINUTES").toDouble()
         return objective
     }
-
 
     // Return a concept of the specified ConceptType and name from its table (or null if not found)
     fun getConceptEntity(ct: ConceptType, name: String): CONCEPT? {
