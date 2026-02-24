@@ -4,14 +4,17 @@ import com.idris.database.entities.CHALLENGES
 import com.idris.database.operators.todo.Logger
 import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
+import com.idris.system.extra.Util.challengesFromNames
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 class Progression : Concept {
     override var icon = "P"
-    var challengeNames: List<String>
-    var challenges: Array<Challenge?>
+    lateinit var challengeNames: List<String>
+    lateinit var challenges: Array<Challenge?>
+
+    constructor()
 
     constructor(name: String,
                 skillName: String,
@@ -22,6 +25,7 @@ class Progression : Concept {
         challenges = arrayOfNulls(challengeNames.size)
 
         transaction {
+            /* TODO remove comment
             var i = 0
             for (cName in challengeNames) {
                 if (cName == "X" || cName == "") {  // null placeholder TODO (change to only "" later)
@@ -32,6 +36,9 @@ class Progression : Concept {
                 challenges[i] = c
                 i++
             }
+            */
+
+            challenges = challengesFromNames(challengeNames)
         }
     }
 

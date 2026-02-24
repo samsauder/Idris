@@ -10,6 +10,8 @@ class Exam : Objective {
     override val icon = "▼"
     var passed: Boolean = false
 
+    constructor()
+
     constructor(name: String,
                 skillName: String,
                 description: String,

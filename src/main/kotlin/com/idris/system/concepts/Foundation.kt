@@ -7,6 +7,8 @@ import com.idris.system.extra.Util
 class Foundation : Objective {
     override val icon = "◯"
 
+    constructor()
+
     constructor(name: String,
                 skillName: String,
                 description: String,

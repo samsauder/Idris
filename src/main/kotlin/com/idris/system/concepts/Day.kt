@@ -6,9 +6,11 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 class Day : Concept {
-    override val icon = "D"
+    override val icon = "⚙"
     var foundationNames: Array<String> = emptyArray()
     var progressionNames: Array<String> = emptyArray()
+
+    constructor()
 
     constructor(name: String,
                 skillName: String,

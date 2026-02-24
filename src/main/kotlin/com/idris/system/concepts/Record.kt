@@ -4,13 +4,16 @@ import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.pad
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import kotlin.properties.Delegates
 
 
 class Record : Concept {
     override val icon = "R"
-    var objectiveName: String       // name of completed f/c/e
-    var won: Boolean                // success/failure
-    var date: String                // date completed
+    lateinit var objectiveName: String       // name of completed f/c/e
+    var won by Delegates.notNull<Boolean>()  // success/failure
+    lateinit var date: String                // date completed
+
+    constructor()
 
     constructor(name: String,
                 skillName: String,

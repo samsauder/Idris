@@ -1,6 +1,7 @@
 package com.idris.database.operators.todo
 
 import com.idris.database.operators.todo.Creator.t
+import com.idris.system.extra.ConceptType
 
 
 abstract class Operator {

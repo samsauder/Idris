@@ -3,12 +3,15 @@ package com.idris.system.concepts
 import com.idris.system.extra.Styler.pad
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
+import kotlin.properties.Delegates
 
 
 class Experiment : Concept {
     override val icon = "\uD83D\uDDF2"
-    var segment: List<String?>
-    var segCount: Int
+    lateinit var segment: List<String?>
+    var segCount by Delegates.notNull<Int>()
+
+    constructor()
 
     constructor(
         name: String,
@@ -25,6 +28,7 @@ class Experiment : Concept {
         val labelWidth = 12  // width
         conceptCore(labelWidth)
 
+        println()
         print(pad(" WEEK", labelWidth))
         var d = 0
 

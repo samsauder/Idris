@@ -93,6 +93,7 @@ object Controller {
                 ObjectiveType.CHALLENGE -> {  // log challenge
                     val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
                     val cResult = resultFromInput() ?: return@transaction  // return if null
+                    println()  // TODO remove print statement once prints are found for exam and foundation log
                     val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
 
                     if (challenge?.progressionName == "X") {  // challenge has no progression
