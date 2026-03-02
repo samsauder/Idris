@@ -54,8 +54,8 @@ object Creator : Operator() {
 
     override fun d() {
         val d = inputConceptCore(Day(), ConceptType.DAY) as Day
-        d.foundationNames = inputConceptNames(ConceptType.FOUNDATION, 10) as Array<String>
-        d.progressionNames = inputConceptNames(ConceptType.PROGRESSION, 5) as Array<String>
+        d.foundationNames = inputConceptNames(ConceptType.FOUNDATION, 10) as Array<String?>
+        d.progressionNames = inputConceptNames(ConceptType.PROGRESSION, 5) as Array<String?>
         DAYS.insert(d)
         message(d.name, ConceptType.DAY)
     }

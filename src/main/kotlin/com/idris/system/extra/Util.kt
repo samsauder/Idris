@@ -214,19 +214,25 @@ object Util {
 
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
-        println("Input all $type names (X for null, _ for rest)")
+        println("\n[$type Names]")
 
         val entityNames = arrayOfNulls<String>(10)
+
         for (i in 0..< n) {
             var name = inputString(type.toString())
-            if (name == "X" || name == "_") {  // empty (X) or rest day (_)
+
+            if (name == "_") {  // rest day _
                 entityNames[i] = name
                 continue
             }
-            while (!conceptExists(name, type)) {
-                println("Not a valid ${type}.")
+
+            if (name == "") break  // nothing
+
+            while (!isInDB(name, type)) {
+                println("$name does not exist among ${type}s.")
                 name = inputString(type.toString())
             }
+
             entityNames[i] = name
         }
 
