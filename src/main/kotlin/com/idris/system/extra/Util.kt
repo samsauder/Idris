@@ -73,19 +73,19 @@ object Util {
     }
 
     // Return true if there is a ConceptE of ConceptType type with the specified name in the database
-    fun conceptExists(name: String, type: ConceptType) : Boolean {
+    fun isInDB(conceptName: String, conceptType: ConceptType) : Boolean {
         var exists = false
 
         // check that a concept with the specified name exists in the database
         transaction {
-            exists = when (type) {
-                ConceptType.FOUNDATION -> FOUNDATION.getOneNamed(name)
-                ConceptType.CHALLENGE -> CHALLENGE.getOneNamed(name)
-                ConceptType.EXAM -> EXAM.getOneNamed(name)
-                ConceptType.PROGRESSION -> PROGRESSION.getOneNamed(name)
-                ConceptType.DAY -> DAY.getOneNamed(name)
-                ConceptType.EXPERIMENT -> EXPERIMENT.getOneNamed(name)
-                ConceptType.RECORD -> RECORD.getOneNamed(name)
+            exists = when (conceptType) {
+                ConceptType.FOUNDATION -> FOUNDATION.getOneNamed(conceptName)
+                ConceptType.CHALLENGE -> CHALLENGE.getOneNamed(conceptName)
+                ConceptType.EXAM -> EXAM.getOneNamed(conceptName)
+                ConceptType.PROGRESSION -> PROGRESSION.getOneNamed(conceptName)
+                ConceptType.DAY -> DAY.getOneNamed(conceptName)
+                ConceptType.EXPERIMENT -> EXPERIMENT.getOneNamed(conceptName)
+                ConceptType.RECORD -> RECORD.getOneNamed(conceptName)
             } != null
         }
         return exists
@@ -116,8 +116,8 @@ object Util {
     // * s: desired concept state
     fun inUndesiredState(conceptName: String, conceptType: ConceptType, desiredConceptState: ConceptState): Boolean {
         return when (desiredConceptState) {
-            ConceptState.PRESENT -> !conceptExists(conceptName, conceptType)
-            ConceptState.ABSENT -> conceptExists(conceptName, conceptType)
+            ConceptState.PRESENT -> !isInDB(conceptName, conceptType)
+            ConceptState.ABSENT -> isInDB(conceptName, conceptType)
         }
     }
 

@@ -9,7 +9,7 @@ import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 class Progression : Concept {
-    override var icon = "P"
+    override var icon = "➤"
     lateinit var challengeNames: List<String>
     lateinit var challenges: Array<Challenge?>
 

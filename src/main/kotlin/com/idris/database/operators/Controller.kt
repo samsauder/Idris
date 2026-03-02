@@ -55,7 +55,7 @@ object Controller {
         val styled17 = "${Styles.YELLOW}17XX${Styles.RESET}"
         val styled18plus = "${Styles.RED}18XX+${Styles.RESET}"
 
-        val colors = "ELO      $styled14minus $styled15 $styled16 $styled17 $styled18plus"
+        val colors = "ELO      $styled14minus  $styled15  $styled16  $styled17  $styled18plus"
 
         println(colors)
         println(bar(BAR_CHAR, WIDTH))
