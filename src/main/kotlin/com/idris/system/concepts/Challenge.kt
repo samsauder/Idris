@@ -103,13 +103,13 @@ class Challenge : Objective {
         val eloStyle = Styler.colorByChallenge(this)
         val elo = if (challengeElo < 0) "0000$qm" else "${challengeElo.toInt().toString()}$qm"
 
-        print(pad(" ELO", 12))
+        print(pad("ELO", 12))
         println(style("  $elo", eloStyle))
 
-        print(pad(" ODDS", 12))
+        print(pad("ODDS", 12))
         println("  ${(userOdds * 100).toInt()}%")
 
-        print(pad(" ATTEMPTS", 12))
+        print(pad("ATTEMPTS", 12))
         println(style("  $attempts", Styles.ITALIC))
 
     }

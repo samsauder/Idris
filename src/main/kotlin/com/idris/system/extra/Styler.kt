@@ -34,7 +34,7 @@ object Styler {
         val l2 = Styles.YELLOW
         val l3 = Styles.RED
 
-        if (challenge.attempts < 20) {  // no styling to provisional challenges
+        if (challenge.attempts == 0) {  // no styling to provisional challenges
             style = Styles.BLACK
         } else if (elo in 1500.0..<1600.0) {
             style = l0
