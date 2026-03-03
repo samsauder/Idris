@@ -102,6 +102,7 @@ object Creator : Operator() {
                 val mins = if (unit == "m") value.toDouble() else 0.0                    // if unit is minutes
 
                 val c = Challenge(nameC, skill, descC, mins)
+                c.progressionName = nameP
                 CHALLENGES.insert(c)
                 challenges[i] = nameC  // add challenge name to challenges
                 i++
