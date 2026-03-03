@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.pad
 import com.idris.system.extra.Styler.style
@@ -9,6 +10,7 @@ import kotlin.properties.Delegates
 
 class Record : Concept {
     override val icon = "R"
+    override val ct = ConceptType.RECORD
     lateinit var objectiveName: String       // name of completed f/c/e
     var won by Delegates.notNull<Boolean>()  // success/failure
     lateinit var date: String                // date completed
@@ -38,6 +40,6 @@ class Record : Concept {
         val resultS = if (won) style("[+]", Styles.GREEN) else style("[-]", Styles.RED)
         val objNameS = pad(objectiveName, 20)
         val dateS = style(date, Styles.ITALIC)
-        return "$resultS $objNameS ${format(skillName, Styles.BOLD, 14)} $dateS"
+        return "$resultS $objNameS ${format(skillName!!, Styles.BOLD, 14)} $dateS"
     }
 }

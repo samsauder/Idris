@@ -1,11 +1,9 @@
 package com.idris.database.operators.todo
 
 import com.idris.database.operators.todo.Creator.t
-import com.idris.system.extra.ConceptType
 
 
 abstract class Operator {
-
     abstract fun f();  // call the operation for Foundation
     abstract fun c(datapath: String);  // call the operation for Challenge
     abstract fun e();  // call the operation for Exam

@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styles
 import com.idris.system.extra.EloTool
 import com.idris.system.extra.ObjectiveType
@@ -14,10 +15,12 @@ import kotlin.math.roundToInt
 
 class Challenge : Objective {
     override val icon = "●"
+    override val ct = ConceptType.CHALLENGE
+
     var userElo: Double = 1500.0
     var challengeElo: Double = 0.0
     var userOdds: Double = 0.0
-    var progressionName: String = ""
+    var progressionName: String? = null
     var attempts: Int = 0  // how many times has the user attempted
     var wins: Int = 0  // how many times has the user won
     val et = EloTool()
@@ -77,7 +80,7 @@ class Challenge : Objective {
         val eloBefore = format("${eloAsString()}$provSymBefore", Styler.colorByChallenge(this), null)
         val oddsOld = userOdds
 
-        printAttempt(name, aUo == 1.0)
+        printAttempt(name!!, aUo == 1.0)
         userOdds = wins / (attempts * 1.0)
         regenerateChallengeElo()
 

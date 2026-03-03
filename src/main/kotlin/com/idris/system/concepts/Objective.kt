@@ -5,7 +5,7 @@ import com.idris.system.extra.ObjectiveType
 
 abstract class Objective : Concept {
     lateinit var objectiveType: ObjectiveType
-    var minutes: Double = 0.0
+    var minutes: Double? = null
 
     constructor(
         name: String,

@@ -84,9 +84,6 @@ object Controller {
 
         var concept: Concept? = null
 
-        // println("\n${name}")
-        // println(bar(BAR_CHAR, WIDTH))
-
         transaction {
             concept = CONCEPT.conceptNamed(t, name).deEntify()
         }
@@ -124,8 +121,8 @@ object Controller {
                     if (challenge?.progressionName == "X") {  // challenge has no progression
                         CHALLENGES.update(challenge, cResult)
                     } else {                          // challenge has a progression
-                        val progression = PROGRESSION.getOneNamed(challenge!!.progressionName)?.deEntify()
-                        progression?.massLog(challenge.name, cResult)
+                        val progression = PROGRESSION.getOneNamed(challenge!!.progressionName!!)?.deEntify()
+                        progression?.massLog(challenge.name!!, cResult)
                     }
                 }
 

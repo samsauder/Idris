@@ -2,11 +2,13 @@ package com.idris.system.concepts
 
 import com.idris.database.entities.FOUNDATION
 import com.idris.database.entities.PROGRESSION
+import com.idris.system.extra.ConceptType
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 class Day : Concept {
     override val icon = "⚙"
+    override val ct = ConceptType.DAY
     var foundationNames: Array<String?> = emptyArray()
     var progressionNames: Array<String?> = emptyArray()
 
@@ -28,13 +30,11 @@ class Day : Concept {
         println()
         transaction {
             for (fname in foundationNames) {
-                // if (fname == "X") break  // if null  TODO remove comment
                 if (fname == null) break
                 val f = FOUNDATION.getOneNamed(fname)?.deEntify()  // get the Foundation with the given name
                 f?.printL()
             }
             for (pname in progressionNames) {
-                // if (pname == "X") break  // if null  TODO remove comment
                 if (pname == null) break
                 val p = PROGRESSION.getOneNamed(pname)?.deEntify()  // get the Progression with the given name
                 p?.printL()

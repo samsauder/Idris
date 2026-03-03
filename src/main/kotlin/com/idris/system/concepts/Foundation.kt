@@ -1,11 +1,13 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
 import com.idris.system.extra.Util
 
 
 class Foundation : Objective {
     override val icon = "◯"
+    override val ct = ConceptType.FOUNDATION
 
     constructor()
 
@@ -19,7 +21,7 @@ class Foundation : Objective {
     // 1.0 = done, -1 = error
     override fun update(won: Boolean) {
         println()
-        Util.printAttempt(name, true)
+        Util.printAttempt(name!!, true)
     }
 
     override fun print() {

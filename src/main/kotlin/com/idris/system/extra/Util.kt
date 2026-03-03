@@ -18,14 +18,10 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.Scanner
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-
-// TODO  get rid of all redundant functions
-// TODO  break up Util into smaller structures
 
 
 object Util {
@@ -103,6 +99,19 @@ object Util {
         return name
     }
 
+    // IMPROVED: same as inputName, but may return a null output
+    fun inputNm(t: ConceptType, desiredState: ConceptState): String? {
+        var name = inputString("NAME")
+        if (name == "" || name == "q") return null  // return nothing if nothing is input
+
+        while (inUndesiredState(name, t, desiredState)) {
+            println("${error()}  ${style(name, Styles.BOLD)} not $desiredState in the $t table.\n")
+            name = inputName(t, desiredState)
+        }
+        return name
+    }
+
+
     // Return the string ERROR in red
     fun error(): String{
         return style("ERROR", Styles.RED)
@@ -110,32 +119,11 @@ object Util {
 
     // Return true if a named concept should be PRESENT from its table but is ABSENT, false otherwise
     // Return true if a named concept should be ABSENT from its table but is PRESENT, false otherwise
-    // ARGS
-    // * n: target concept name
-    // * t: target concept type
-    // * s: desired concept state
     fun inUndesiredState(conceptName: String, conceptType: ConceptType, desiredConceptState: ConceptState): Boolean {
         return when (desiredConceptState) {
             ConceptState.PRESENT -> !isInDB(conceptName, conceptType)
             ConceptState.ABSENT -> isInDB(conceptName, conceptType)
         }
-    }
-
-    fun inputSkill() : String {
-        print("SKILL  ")
-        return scanner.next()
-    }
-
-    fun inputDescription() : String {
-        val s = Scanner(System.`in`)
-        print("DESCRIPTION  ")
-        return s.nextLine()
-    }
-
-    fun inputMinutes() : Double {
-        val s = Scanner(System.`in`)
-        print("MINUTES  ")
-        return s.nextInt().toDouble()
     }
 
     fun inputInt(prompt: String) : Int? {
@@ -151,12 +139,6 @@ object Util {
     fun inputBool(prompt: String): Boolean? {
         val v = inputInt(prompt)
         return if (v != 1 && v != 0) v == 1 else null
-    }
-
-    fun inputChallenge(i: Int) : String {
-        // val s = Scanner(System.`in`)
-        print("CHALLENGE$i  ")
-        return scanner.next()
     }
 
     fun inputProgression() : String {
@@ -206,12 +188,6 @@ object Util {
         return ints
     }
 
-    // Prints a prompt string a returns a double taken from stdin
-    fun inputBigDecimal(prompt: String): BigDecimal {
-        print("$prompt  ")
-        return scanner.nextBigDecimal()
-    }
-
     // Return an array of n valid Idris Concept names of the specified ConceptType taken from standard input
     fun inputConceptNames(type: ConceptType, n: Int) : Array<String?> {
         println("\n[$type Names]")
@@ -239,23 +215,29 @@ object Util {
         return entityNames
     }
 
-    // Fill the Concept with name, skill, and description from stdin
-    fun inputConceptCore(concept: Concept, ct: ConceptType): Concept {
-        val name = inputName(ct, ConceptState.ABSENT)
-        val skill: String = inputSkill()
-        val description = inputString("DESCRIPTION")
-        concept.name = name
-        concept.skillName = skill
-        concept.description = description
+
+    // IMPROVED: fill the Concept with name, skill, and description from stdin (otherwise keep them null)
+    fun inputConCor(concept: Concept, ct: ConceptType): Concept {
+        val name = inputNm(ct, ConceptState.ABSENT)
+        val skill = input("SKILL") as String?
+        val description = input("DESCRIPTION") as String?
+
+        if (name != "") concept.name = name
+        if (skill != "") concept.skillName = skill
+        if (description != "") concept.description = description
+
         return concept
     }
 
-    // Fill the Objective with name, skill, description, and minutes from stdin
-    fun inputObjectiveCore(objective: Objective, ct: ConceptType): Objective {
-        inputConceptCore(objective, ct)
-        objective.minutes = inputBigDecimal("MINUTES").toDouble()
+
+    // IMPROVED: Fill the Objective with name, skill, description, and minutes from stdin using inputConCor
+    fun inputObjCor(objective: Objective, ct: ConceptType): Objective {
+        inputConCor(objective, ct)
+        val minutes = input("MINUTES") as String?
+        if (minutes != "") objective.minutes = minutes!!.toDouble()
         return objective
     }
+
 
     // Return a concept of the specified ConceptType and name from its table (or null if not found)
     fun getConceptEntity(ct: ConceptType, name: String): CONCEPT? {

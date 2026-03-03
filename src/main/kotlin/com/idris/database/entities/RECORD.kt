@@ -13,11 +13,13 @@ object RECORDS : CONCEPTS("recordsT") {
     val date = varchar("date", 30)  // string representation of the date
 
     fun insert(r: Record) {
+        // TODO add completeness check
+
         transaction {
             RECORD.new {
-                this.name = r.name
-                this.skillName = r.skillName
-                this.description = r.description
+                this.name = r.name!!
+                this.skillName = r.skillName!!
+                this.description = r.description!!
                 this.objectiveName = r.objectiveName
                 this.won = r.won
                 this.date = r.date

@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.EloRater
 import com.idris.system.extra.Rater
 import com.idris.system.extra.Util
@@ -9,6 +10,7 @@ import com.idris.system.extra.Util
 
 class ChallengeNew : Objective {
     override val icon = "●"
+    override val ct = ConceptType.CHALLENGE
     private var rating = 0.0
     private var rater: Rater
 
@@ -22,7 +24,7 @@ class ChallengeNew : Objective {
 
     override fun update(won: Boolean) {
         rater.update(this, won)  // update the challenge rating for this ChallengeNew
-        Util.printAttempt(name, won)        // output a visual of the result to stdout
+        Util.printAttempt(name!!, won)        // output a visual of the result to stdout
     }
 
     override fun print() {

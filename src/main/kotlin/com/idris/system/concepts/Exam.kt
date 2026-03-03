@@ -1,5 +1,6 @@
 package com.idris.system.concepts
 
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styles
 import com.idris.system.extra.ObjectiveType
 import com.idris.system.extra.Styler.style
@@ -8,6 +9,7 @@ import com.idris.system.extra.Util
 
 class Exam : Objective {
     override val icon = "▼"
+    override val ct = ConceptType.EXAM
     var passed: Boolean = false
 
     constructor()
@@ -30,7 +32,7 @@ class Exam : Objective {
     override fun update(won: Boolean) {
         passed = won
         println()
-        Util.printAttempt(name, won)
+        Util.printAttempt(name!!, won)
     }
 
     override fun print() {

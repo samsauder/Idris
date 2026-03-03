@@ -1,16 +1,17 @@
 package com.idris.system.concepts
-import com.idris.database.entities.CHALLENGE
+
 import com.idris.database.entities.CHALLENGES
+import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Util.challengesFromNames
-import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 
 class Progression : Concept {
     override var icon = "➤"
-    lateinit var challengeNames: List<String>
+    override var ct = ConceptType.PROGRESSION
+    var challengeNames: List<String>? = null
     lateinit var challenges: Array<Challenge?>
 
     constructor()
@@ -56,7 +57,7 @@ class Progression : Concept {
     fun printSeq() {  // print the sequence of challenges for the current progression
         for (challenge in challenges) {
             if (challenge == null) continue
-            print(format(challenge.name, Styler.colorByChallenge(challenge), 20))
+            print(format(challenge.name!!, Styler.colorByChallenge(challenge), 20))
         }
     }
 

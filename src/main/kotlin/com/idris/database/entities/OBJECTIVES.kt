@@ -5,11 +5,4 @@ package com.idris.database.entities
 
 abstract class OBJECTIVES(tableName: String) : CONCEPTS(tableName) {
     val minutes = decimal("minutes",5, 2)
-
-    /*
-    abstract fun insert(name: String,
-                        skill: String,
-                        description: String?,
-                        minutes: Double)
-     */
 }
