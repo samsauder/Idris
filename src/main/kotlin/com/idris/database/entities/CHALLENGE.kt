@@ -2,6 +2,8 @@ package com.idris.database.entities
 
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Record
+import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Styles
 import com.idris.system.extra.Util.datetimeNow
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.eq
@@ -21,13 +23,15 @@ object CHALLENGES : OBJECTIVES("challengesT") {
 
 
     fun insert(c: Challenge) {
+        if (!c.isComplete()) return  // return if c is not complete
+
         transaction {
             CHALLENGE.new {
-                this.name = c.name
-                this.progressionName = c.progressionName
-                this.skillName = c.skillName
-                this.description = c.description
-                this.minutes = c.minutes.toBigDecimal()
+                this.name = c.name!!
+                this.progressionName = c.progressionName!!
+                this.skillName = c.skillName!!
+                this.description = c.description!!
+                this.minutes = c.minutes!!.toBigDecimal()
                 this.cElo = BigDecimal("0.0")
                 this.uElo = BigDecimal("0.0")
                 this.uOdds = BigDecimal("1.0")
@@ -35,13 +39,32 @@ object CHALLENGES : OBJECTIVES("challengesT") {
                 this.wins = 0
             }
         }
+
+        println("\nAdded ${style(c.name, Styles.BOLD)} to the CHALLENGES table.")
     }
+
+
+    fun modify(name: String, c: Challenge) {
+        transaction {
+            // overwrite each attribute in the CHALLENGE with non-empty attributes of c
+            CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq name) {
+                if (c.name != null) it.name = c.name!!
+                if (c.skillName != null) it.skillName = c.skillName!!
+                if (c.description != null) it.description = c.description!!
+                if (c.minutes != null) it.minutes = c.minutes!!.toBigDecimal()
+                if (c.progressionName != null) it.progressionName = c.progressionName!!
+            }
+        }
+
+        println("\nModified ${style(name, Styles.BOLD)} in the CHALLENGES table.")
+    }
+
 
     fun update(c: Challenge, result: Double) {
         c.update(result == 1.0)
 
         transaction {
-            CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq c.name) {
+            CHALLENGE.findSingleByAndUpdate(CHALLENGES.name eq c.name!!) {
                 it.cElo = BigDecimal.valueOf(c.challengeElo)
                 it.uElo = BigDecimal.valueOf(c.userElo)
                 it.uOdds = BigDecimal.valueOf(c.userOdds)

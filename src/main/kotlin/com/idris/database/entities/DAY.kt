@@ -35,11 +35,14 @@ object DAYS : IntIdTable("daysT") {
 
 
     fun insert(d: Day) {
+        // TODO add completeness check
+
         transaction {
             DAY.new {
-                this.name = d.name
-                this.skillName = d.skillName
-                this.description = d.description
+                this.name = d.name!!
+                this.skillName = d.skillName!!
+                this.description = d.description!!
+
                 this.f0 = d.foundationNames[0]
                 this.f1 = d.foundationNames[1]
                 this.f2 = d.foundationNames[2]
@@ -50,11 +53,39 @@ object DAYS : IntIdTable("daysT") {
                 this.f7 = d.foundationNames[7]
                 this.f8 = d.foundationNames[8]
                 this.f9 = d.foundationNames[9]
+
                 this.p0 = d.progressionNames[0]
                 this.p1 = d.progressionNames[1]
                 this.p2 = d.progressionNames[2]
                 this.p3 = d.progressionNames[3]
                 this.p4 = d.progressionNames[4]
+            }
+        }
+    }
+
+    fun modify(name: String, d: Day) {
+        transaction {
+            DAY.findSingleByAndUpdate(DAYS.name eq name) {
+                if (d.name != null) it.name = d.name!!
+                if (d.skillName != null) it.skillName = d.skillName!!
+                if (d.description != null) it.description = d.description!!
+
+                if (d.foundationNames[0] != null) it.f0 = d.foundationNames[0]!!
+                if (d.foundationNames[1] != null) it.f1 = d.foundationNames[1]!!
+                if (d.foundationNames[2] != null) it.f2 = d.foundationNames[2]!!
+                if (d.foundationNames[3] != null) it.f3 = d.foundationNames[3]!!
+                if (d.foundationNames[4] != null) it.f4 = d.foundationNames[4]!!
+                if (d.foundationNames[5] != null) it.f5 = d.foundationNames[5]!!
+                if (d.foundationNames[6] != null) it.f6 = d.foundationNames[6]!!
+                if (d.foundationNames[7] != null) it.f7 = d.foundationNames[7]!!
+                if (d.foundationNames[8] != null) it.f8 = d.foundationNames[8]!!
+                if (d.foundationNames[9] != null) it.f9 = d.foundationNames[9]!!
+
+                if (d.progressionNames[0] != null) it.p0 = d.progressionNames[0]!!
+                if (d.progressionNames[1] != null) it.p1 = d.progressionNames[1]!!
+                if (d.progressionNames[2] != null) it.p2 = d.progressionNames[2]!!
+                if (d.progressionNames[3] != null) it.p3 = d.progressionNames[3]!!
+                if (d.progressionNames[4] != null) it.p4 = d.progressionNames[4]!!
             }
         }
     }

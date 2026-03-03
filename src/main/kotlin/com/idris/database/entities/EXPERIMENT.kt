@@ -27,11 +27,13 @@ object EXPERIMENTS : IntIdTable("experimentsT") {
 
 
     fun insert(x: Experiment) {
+        // TODO add completeness check
+
         transaction {
             EXPERIMENT.new {
-                this.name = x.name
-                this.skillName = x.skillName
-                this.description = x.description
+                this.name = x.name!!
+                this.skillName = x.skillName!!
+                this.description = x.description!!
                 this.d1 = x.segment[0]!!
                 this.d2 = x.segment[1]!!
                 this.d3 = x.segment[2]!!
@@ -42,6 +44,30 @@ object EXPERIMENTS : IntIdTable("experimentsT") {
                 this.segCount = x.segCount
             }
         }
+
+        // message
+    }
+
+    fun modify(name: String, x: Experiment) {
+        transaction {
+            EXPERIMENT.findSingleByAndUpdate(EXPERIMENTS.name eq name) {
+                if (x.name != null) it.name = x.name!!
+                if (x.skillName != null) it.skillName = x.skillName!!
+                if (x.description != null) it.description = x.description!!
+
+                if (x.segment[0] != null) it.d1 = x.segment[0]!!
+                if (x.segment[1] != null) it.d2 = x.segment[1]!!
+                if (x.segment[2] != null) it.d3 = x.segment[2]!!
+                if (x.segment[3] != null) it.d4 = x.segment[3]!!
+                if (x.segment[4] != null) it.d5 = x.segment[4]!!
+                if (x.segment[5] != null) it.d6 = x.segment[5]!!
+                if (x.segment[6] != null) it.d7 = x.segment[6]!!
+
+                if (x.segCount != null) it.segCount = x.segCount
+            }
+        }
+
+        // message
     }
 }
 

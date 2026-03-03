@@ -1,6 +1,5 @@
 package com.idris.database.entities
 
-import com.idris.system.concepts.Concept
 import com.idris.system.concepts.Progression
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 import org.jetbrains.exposed.v1.core.dao.id.IntIdTable
@@ -26,38 +25,14 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
     val c8 = varchar("c8Name", 50)
     val c9 = varchar("c9Name", 50)
 
-    /*
-    // Insert a new PROGRESSION into PROGRESSIONS
-    fun insert(name: String,
-               skill: String,
-               description: String,
-               challenges: Array<String?>) {
-        transaction {
-            PROGRESSION.new {
-                this.name = name
-                this.skillName = skill
-                this.description = description
-                this.c0 = challenges[0] ?: "X"
-                this.c1 = challenges[1] ?: "X"
-                this.c2 = challenges[2] ?: "X"
-                this.c3 = challenges[3] ?: "X"
-                this.c4 = challenges[4] ?: "X"
-                this.c5 = challenges[5] ?: "X"
-                this.c6 = challenges[6] ?: "X"
-                this.c7 = challenges[7] ?: "X"
-                this.c8 = challenges[8] ?: "X"
-                this.c9 = challenges[9] ?: "X"
-            }
-        }
-    } */
-
-
     fun insert(p: Progression) {
+        // TODO add completeness check
+
         transaction {
             PROGRESSION.new {
-                this.name = p.name
-                this.skillName = p.skillName
-                this.description = p.description
+                this.name = p.name!!
+                this.skillName = p.skillName!!
+                this.description = p.description!!
                 this.c0 = (p.challenges[0]?.name ?: "X") as String
                 this.c1 = (p.challenges[1]?.name ?: "X") as String
                 this.c2 = (p.challenges[2]?.name ?: "X") as String
@@ -70,6 +45,30 @@ object PROGRESSIONS : IntIdTable("progressionsT") {
                 this.c9 = (p.challenges[9]?.name ?: "X") as String
             }
         }
+
+        // message
+    }
+
+    fun modify(name: String, p: Progression) {
+        transaction {
+            PROGRESSION.findSingleByAndUpdate(PROGRESSIONS.name eq name) {
+                if (p.name != null) it.name = p.name!!
+                if (p.description != null) it.description = p.description!!
+
+                if (p.challengeNames?.get(0) != null) it.c0 = p.challengeNames!![0] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(1) != null) it.c1 = p.challengeNames!![1] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(2) != null) it.c2 = p.challengeNames!![2] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(3) != null) it.c3 = p.challengeNames!![3] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(4) != null) it.c4 = p.challengeNames!![4] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(5) != null) it.c5 = p.challengeNames!![5] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(6) != null) it.c6 = p.challengeNames!![6] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(7) != null) it.c7 = p.challengeNames!![7] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(8) != null) it.c8 = p.challengeNames!![8] else return@findSingleByAndUpdate
+                if (p.challengeNames?.get(9) != null) it.c9 = p.challengeNames!![9] else return@findSingleByAndUpdate
+            }
+        }
+
+        // message
     }
 }
 
@@ -94,7 +93,6 @@ class PROGRESSION(id: EntityID<Int>) : CONCEPT(id) {
     var c7 by PROGRESSIONS.c7
     var c8 by PROGRESSIONS.c8
     var c9 by PROGRESSIONS.c9
-
 
     override fun deEntify() : Progression {
         val cN = listOf(c0, c1, c2, c3, c4, c5, c6, c7, c8, c9)
