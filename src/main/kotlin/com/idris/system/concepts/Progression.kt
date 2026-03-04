@@ -51,7 +51,7 @@ class Progression : Concept {
     }
 
     override fun print() {
-        TODO("Not yet implemented")
+        conceptCore(12)
     }
 
     fun printSeq() {  // print the sequence of challenges for the current progression
