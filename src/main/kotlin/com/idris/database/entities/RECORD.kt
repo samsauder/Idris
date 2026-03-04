@@ -20,9 +20,22 @@ object RECORDS : CONCEPTS("recordsT") {
                 this.name = r.name!!
                 this.skillName = r.skillName!!
                 this.description = r.description!!
-                this.objectiveName = r.objectiveName
-                this.won = r.won
-                this.date = r.date
+                this.objectiveName = r.objectiveName!!
+                this.won = r.won!!
+                this.date = r.date!!
+            }
+        }
+    }
+
+    fun modify(name: String, r: Record) {
+        transaction {
+            RECORD.findSingleByAndUpdate(RECORDS.name eq name) {
+                if (r.name != null) it.name = r.name!!
+                if (r.skillName != null) it.skillName = r.skillName!!
+                if (r.description != null) it.description = r.description!!
+                if (r.objectiveName != null) it.objectiveName = r.objectiveName!!
+                if (r.won != null) it.won = r.won!!
+                if (r.date != null) it.date = r.date!!
             }
         }
     }
