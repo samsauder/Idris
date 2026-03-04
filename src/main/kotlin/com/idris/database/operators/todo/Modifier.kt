@@ -4,7 +4,10 @@ import com.idris.database.entities.*
 import com.idris.system.concepts.*
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
+import com.idris.system.extra.Util.inp
 import com.idris.system.extra.Util.input
+import com.idris.system.extra.Util.inputB
+import com.idris.system.extra.Util.inputBool
 import com.idris.system.extra.Util.inputConCor
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputNm
@@ -52,5 +55,14 @@ object Modifier : Operator() {
         val p = inputConCor(Progression(), ConceptType.PROGRESSION) as Progression
         p.challengeNames = inputConceptNames(ConceptType.CHALLENGE, 10).toList() as List<String>?
         PROGRESSIONS.modify(nm, p)
+    }
+
+    override fun r() {  // modify a record
+        val nm = inputNm(ConceptType.RECORD, ConceptState.PRESENT) ?: return  // non-null or return
+        val r = inputConCor(Record(), ConceptType.RECORD) as Record
+        r.objectiveName = inp("COMPLETED OBJECTIVE")
+        r.won = inputB("RESULT")
+        r.date = inp("DATETIME")
+        RECORDS.modify(nm, r)
     }
 }
