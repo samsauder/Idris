@@ -16,7 +16,7 @@ object Flow {
         val d = Database(path)
         d.connect()
 
-        val version = "0.06"
+        val version = "0.1"
         val quote = "The excellence of the soul is understanding; for one who understands is conscious, devoted, and already godlike."
         Util.idrisBanner()  // print the name Idris (stylized)
         println("Version ${version}\n")
