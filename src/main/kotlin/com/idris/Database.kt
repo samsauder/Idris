@@ -1,4 +1,5 @@
 package com.idris
+
 import com.idris.database.entities.RECORDS
 import com.idris.database.entities.CHALLENGES
 import com.idris.database.entities.DAYS

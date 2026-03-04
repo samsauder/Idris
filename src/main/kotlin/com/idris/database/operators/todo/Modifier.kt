@@ -7,7 +7,6 @@ import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Util.inp
 import com.idris.system.extra.Util.input
 import com.idris.system.extra.Util.inputB
-import com.idris.system.extra.Util.inputBool
 import com.idris.system.extra.Util.inputConCor
 import com.idris.system.extra.Util.inputConceptNames
 import com.idris.system.extra.Util.inputNm
