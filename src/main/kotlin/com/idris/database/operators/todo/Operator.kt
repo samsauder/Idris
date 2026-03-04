@@ -4,12 +4,13 @@ import com.idris.database.operators.todo.Creator.t
 
 
 abstract class Operator {
-    abstract fun f();  // call the operation for Foundation
-    abstract fun c(datapath: String);  // call the operation for Challenge
-    abstract fun e();  // call the operation for Exam
-    abstract fun x();  // call the operation for Experiment
-    abstract fun d();  // call the operation for Day
+    abstract fun f() // call the operation for Foundation
+    abstract fun c(datapath: String)  // call the operation for Challenge
+    abstract fun e()  // call the operation for Exam
+    abstract fun x()  // call the operation for Experiment
+    abstract fun d()  // call the operation for Day
     abstract fun p(datapath: String);  // call the operation for Progression
+    abstract fun r()
 
     // Input an operation option and call its appropriate function
     fun choose(option: String, datapath: String) {
@@ -20,6 +21,7 @@ abstract class Operator {
             "-p" -> p(datapath)  // progression
             "-d" -> d()  // day
             "-x" -> x()  // experiment
+            "-r" -> r()  // record
             "-t" -> t()  // tile (2D progression)
             else -> println("ERROR: invalid command")
         }

@@ -54,7 +54,7 @@ object Creator : Operator() {
         PROGRESSIONS.insert(p)
     }
 
-    fun r() {
+    override fun r() {
         val r = inputConCor(Record(), ConceptType.RECORD) as Record
         r.objectiveName = inputString("OBJECTIVE")
         r.won = inputBool("RESULT")!!

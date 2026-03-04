@@ -141,6 +141,15 @@ object Util {
         return if (v != 1 && v != 0) v == 1 else null
     }
 
+    // Improved inputBool
+    fun inputB(prompt: String): Boolean? {
+        val vA = input(prompt) ?: return null  // value any
+        if (vA == "") return null
+        val v = vA.toString().toInt()
+        if (v != 1 && v != 0) return null              // return on input other than 1 and 0
+        return v == 1
+    }
+
     fun inputProgression() : String {
         val s = Scanner(System.`in`)
         print("PROGRESSION  ")
@@ -164,6 +173,14 @@ object Util {
     fun input(prompt: String): Any? {
         print("$prompt  ")
         return readlnOrNull()
+    }
+
+    // IMPROVED: input
+    fun inp(prompt: String): String? {
+        print("$prompt  ")
+        val v = readlnOrNull()
+        if (v == "") return null
+        return v
     }
 
     // Returns an array of Strings/nulls from stdin
@@ -222,9 +239,9 @@ object Util {
         val skill = input("SKILL") as String?
         val description = input("DESCRIPTION") as String?
 
-        if (name != "") concept.name = name
-        if (skill != "") concept.skillName = skill
-        if (description != "") concept.description = description
+        if (name != "" && name != null) concept.name = name
+        if (skill != "" && skill != null) concept.skillName = skill
+        if (description != "" && description != null) concept.description = description
 
         return concept
     }
@@ -234,7 +251,7 @@ object Util {
     fun inputObjCor(objective: Objective, ct: ConceptType): Objective {
         inputConCor(objective, ct)
         val minutes = input("MINUTES") as String?
-        if (minutes != "") objective.minutes = minutes!!.toDouble()
+        if (minutes != "" && minutes != null) objective.minutes = minutes.toDouble()
         return objective
     }
 

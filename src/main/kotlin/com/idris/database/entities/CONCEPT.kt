@@ -15,19 +15,39 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
         // Return the companion object associated with the given concept type
         fun companion(t: ConceptType): IntEntityClass<CONCEPT> {
             return when (t) {
-                ConceptType.FOUNDATION -> { FOUNDATION.Companion }
-                ConceptType.CHALLENGE -> { CHALLENGE.Companion }
-                ConceptType.EXAM -> { EXAM.Companion }
-                ConceptType.DAY -> { DAY.Companion }
-                ConceptType.PROGRESSION -> { PROGRESSION.Companion }
-                ConceptType.EXPERIMENT -> { EXPERIMENT.Companion }
-                ConceptType.RECORD -> { RECORD.Companion }
+                ConceptType.FOUNDATION -> {
+                    FOUNDATION.Companion
+                }
+
+                ConceptType.CHALLENGE -> {
+                    CHALLENGE.Companion
+                }
+
+                ConceptType.EXAM -> {
+                    EXAM.Companion
+                }
+
+                ConceptType.DAY -> {
+                    DAY.Companion
+                }
+
+                ConceptType.PROGRESSION -> {
+                    PROGRESSION.Companion
+                }
+
+                ConceptType.EXPERIMENT -> {
+                    EXPERIMENT.Companion
+                }
+
+                ConceptType.RECORD -> {
+                    RECORD.Companion
+                }
             }
         }
 
         // Get all entities of a given concept type
         fun getAll(t: ConceptType): SizedIterable<CONCEPT> {
-            return CONCEPT.companion(t).all()
+            return companion(t).all()
         }
 
         fun conceptNamed(t: ConceptType, name: String): CONCEPT {
