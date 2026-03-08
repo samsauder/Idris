@@ -12,6 +12,7 @@ import com.idris.system.concepts.Concept
 import com.idris.system.extra.ConceptState
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.ObjectiveType
+import com.idris.system.extra.Privilege
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Styles
 import com.idris.system.extra.Util
@@ -109,10 +110,10 @@ object Controller {
 
 
     @OptIn(ExperimentalTime::class)
-    fun log(ot: ObjectiveType) {
+    fun log(t: ConceptType) {
         transaction {
-            when(ot) {
-                ObjectiveType.CHALLENGE -> {  // log challenge
+            when(t) {
+                ConceptType.CHALLENGE -> {  // log challenge
                     val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
                     val cResult = Util.resultFromInput() ?: return@transaction  // return if null
                     println()  // TODO remove print statement once prints are found for exam and foundation log
@@ -126,19 +127,38 @@ object Controller {
                     }
                 }
 
-                ObjectiveType.EXAM -> {
+                ConceptType.EXAM -> {
                     val eName = inputName(ConceptType.EXAM, ConceptState.PRESENT)
                     val eResult = Util.resultFromInput() ?: return@transaction
                     val exam = EXAM.getOneNamed(eName)?.deEntify()
                     EXAMS.update(exam!!, eResult)
                 }
 
-                ObjectiveType.FOUNDATION -> {
+                ConceptType.FOUNDATION -> {
                     val fName = inputName(ConceptType.FOUNDATION, ConceptState.PRESENT)
                     val foundation = FOUNDATION.getOneNamed(fName)?.deEntify()
                     FOUNDATIONS.update(foundation!!)
                 }
+
+                else -> { return@transaction }  // not an objective
             }
         }
+    }
+
+
+    // Deduplicated log(ConceptType)
+    fun logNew() {
+        TODO("implement")
+    }
+
+
+    fun admin() {  // toggle ADMIN mode for this controller
+        if (mode == Privilege.USER) {
+            mode = Privilege.ADMIN
+        } else {
+            mode = Privilege.USER
+        }
+
+        println("Changed to $mode mode.")
     }
 }

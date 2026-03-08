@@ -11,11 +11,13 @@ import com.idris.database.entities.PROGRESSION
 import com.idris.database.entities.RECORD
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Concept
+import com.idris.system.concepts.ConceptSymbols
 import com.idris.system.concepts.Objective
 import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import org.jetbrains.exposed.v1.core.Op
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.LocalDate
@@ -38,29 +40,29 @@ object Util {
 
     // Define all Idris operations for the user
     fun describeOperations(style: String) {
-        printDef("create", OpInfo.CREATE_DESC, style)
-        printDef("delete", OpInfo.DELETE_DESC, style)
-        printDef("modify", OpInfo.MODIFY_DESC, style)
-        printDef("view", OpInfo.VIEW_DESC, style)
-        printDef("list", OpInfo.LIST_DESC, style)
-        printDef("log", OpInfo.LOG_DESC, style)
+        printDef(OperationSymbols.CREATE, OpInfo.CREATE_DESC, style)
+        printDef(OperationSymbols.DELETE, OpInfo.DELETE_DESC, style)
+        printDef(OperationSymbols.MODIFY, OpInfo.MODIFY_DESC, style)
+        printDef(OperationSymbols.VIEW, OpInfo.VIEW_DESC, style)
+        printDef(OperationSymbols.LIST, OpInfo.LIST_DESC, style)
+        printDef(OperationSymbols.LOG, OpInfo.LOG_DESC, style)
     }
 
     // Define all Idris entities for the user
     fun describeConcepts(style: String) {
-        printDef("x", ConInfo.X_DESC, style)
-        printDef("d", ConInfo.D_DESC, style)
-        printDef("f", ConInfo.F_DESC, style)
-        printDef("c", ConInfo.C_DESC, style)
-        printDef("e", ConInfo.E_DESC, style)
-        printDef("p", ConInfo.P_DESC, style)
+        printDef(ConceptSymbols.EXPERIMENT, ConInfo.X_DESC, style)
+        printDef(ConceptSymbols.DAY, ConInfo.D_DESC, style)
+        printDef(ConceptSymbols.FOUNDATION, ConInfo.F_DESC, style)
+        printDef(ConceptSymbols.CHALLENGE, ConInfo.C_DESC, style)
+        printDef(ConceptSymbols.EXAM, ConInfo.E_DESC, style)
+        printDef(ConceptSymbols.PROGRESSION, ConInfo.P_DESC, style)
         printDef("t", ConInfo.T_DESC, style)
-        printDef("r", ConInfo.R_DESC, style)
+        printDef(ConceptSymbols.RECORD, ConInfo.R_DESC, style)
     }
 
     // Prints a definition consisting of: a bolded string and its description
     private fun printDef(name: String, description: String, style: String) {
-        println("  ${format(name, style, 8)} |  $description")
+        println("  ${format(name, style, 3)} |  $description")
     }
 
     // Print a horizontal bar of the given char and width
@@ -82,6 +84,7 @@ object Util {
                 ConceptType.DAY -> DAY.getOneNamed(conceptName)
                 ConceptType.EXPERIMENT -> EXPERIMENT.getOneNamed(conceptName)
                 ConceptType.RECORD -> RECORD.getOneNamed(conceptName)
+                else -> { TODO("add tile eventually") }
             } != null
         }
         return exists
@@ -286,6 +289,7 @@ object Util {
                 }
                 // ConceptType.RECORD -> {}
                 ConceptType.RECORD -> RECORD.getOneNamed(name)!!
+                else -> { TODO("add tile eventually") }
             }
             cE = conceptEntity
         }
@@ -338,4 +342,47 @@ object Util {
         val resultS = inputString("RESULT  ")  // result string may be 1 or 0
         return if (resultS != "1" && resultS != "0") null else resultS.toDouble()
     }
+
+    // Turn an operation symbol into an operation type (null if no match)
+    fun toOpType(opSymbol: String): OperationType? {
+        return when(opSymbol) {
+            OperationSymbols.CREATE -> OperationType.CREATE
+            OperationSymbols.DELETE -> OperationType.DELETE
+            OperationSymbols.MODIFY -> OperationType.MODIFY
+
+            OperationSymbols.LOG ->    OperationType.LOG
+            OperationSymbols.LIST ->   OperationType.LIST
+            OperationSymbols.VIEW ->   OperationType.VIEW
+
+            OperationSymbols.ADMIN ->  OperationType.ADMIN
+            OperationSymbols.HELP ->   OperationType.HELP
+            else -> {null}
+        }
+    }
+
+    // Turn a concept symbol into a concept type (null if no match)
+    fun toConType(conSymbol: String): ConceptType? {
+        return when(conSymbol) {
+            ConceptSymbols.FOUNDATION ->  ConceptType.FOUNDATION
+            ConceptSymbols.CHALLENGE ->   ConceptType.CHALLENGE
+            ConceptSymbols.EXAM ->        ConceptType.EXAM
+            ConceptSymbols.PROGRESSION -> ConceptType.PROGRESSION
+            ConceptSymbols.DAY ->         ConceptType.DAY
+            ConceptSymbols.EXPERIMENT ->  ConceptType.EXPERIMENT
+            ConceptSymbols.RECORD ->      ConceptType.RECORD
+            ConceptSymbols.TILE ->        ConceptType.TILE
+            else -> {null}
+        }
+    }
+
+    // Get the Operation of the given valid Idris command
+    fun opSymbolOf(command: String): String {
+        return command.substring(0, OperationSymbols.LEN)
+    }
+
+    // Get the Concept of the given valid Idris command
+    fun conSymbolOf(command: String): String {
+        return command.substring(OperationSymbols.LEN)
+    }
+
 }

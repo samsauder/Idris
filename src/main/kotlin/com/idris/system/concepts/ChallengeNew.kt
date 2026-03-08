@@ -37,6 +37,6 @@ class ChallengeNew : Objective {
 }
 
 fun main() {
-    val c = ChallengeNew("thing", "t", "", 1.0, EloRater)
+    val c = ChallengeNew("OperationSymbols", "t", "", 1.0, EloRater)
     c.update(true)
 }

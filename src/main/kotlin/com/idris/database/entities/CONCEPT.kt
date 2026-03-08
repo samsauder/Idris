@@ -42,6 +42,8 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
                 ConceptType.RECORD -> {
                     RECORD.Companion
                 }
+
+                else -> { TODO("add tile eventually") }
             }
         }
 
@@ -59,6 +61,7 @@ abstract class CONCEPT(id: EntityID<Int>) : IntEntity(id) {
                 ConceptType.PROGRESSION -> { PROGRESSION.getOneNamed(name)!! }
                 ConceptType.EXPERIMENT -> { EXPERIMENT.getOneNamed(name)!! }
                 ConceptType.RECORD -> { RECORD.getOneNamed(name)!! }
+                else -> { TODO("add tile eventually") }
             }
         }
     }

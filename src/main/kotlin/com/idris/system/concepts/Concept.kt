@@ -53,6 +53,7 @@ abstract class Concept {
             ConceptType.DAY -> {TODO("implement for DAY")}
             ConceptType.EXPERIMENT -> {TODO("implement for EXPERIMENT")}
             ConceptType.RECORD -> {TODO("implement for RECORD")}
+            else -> { TODO("add tile eventually") }
         }
 
         return true
@@ -63,8 +64,8 @@ abstract class Concept {
     fun icon_name_skill(): String {
         val iconS = style("$icon", Styles.GREEN)               // icon (styled)
         val nameS = format(name!!, "", 20)           // name (styled)
-        val skillS = format(skillName!!, Styles.BOLD, 14)  // skill (styled)
-        return "$iconS  $nameS | $skillS"
+        val skillS = format(skillName!!, Styles.BOLD, 20)  // skill (styled)
+        return "$iconS  $nameS  $skillS"
     }
 
     fun conceptCore(labelWidth: Int) {
