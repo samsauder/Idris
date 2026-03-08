@@ -25,9 +25,9 @@ import kotlin.time.ExperimentalTime
 
 
 object Controller {
-    const val WIDTH = 140  // table width
+    const val WIDTH = 70  // table width
     const val BAR_CHAR = "―"
-
+    var mode = Privilege.USER
 
     fun help() {
         val ostyle = Styles.ITALIC  // styling for operation definitions
@@ -36,7 +36,7 @@ object Controller {
         val operation = style("operation", Styles.ITALIC)
         val concept = style("concept", Styles.BOLD)
 
-        val syntax = "SYNTAX   <$operation> <$concept>"
+        val syntax = "SYNTAX   [$operation][$concept]"
 
         println("\n${bar(BAR_CHAR, WIDTH)}")
         println(syntax)
