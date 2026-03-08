@@ -3,7 +3,7 @@ package com.idris.system.concepts
 import com.idris.database.entities.CHALLENGES
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler
-import com.idris.system.extra.Styler.format
+import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Util.challengesFromNames
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
@@ -62,15 +62,30 @@ class Progression : Concept {
     }
 
     fun printSeq() {  // print the sequence of challenges for the current progression
+        var i = 0
+        val nonNullCt = challenges.filterNotNull().count()
+
+        print("[ ")
+
         for (challenge in challenges) {
-            if (challenge == null) continue
-            print(format(challenge.name!!, Styler.colorByChallenge(challenge), 20))
+            if (challenge == null) break
+
+            val constraint = challenge.name!!.substringAfter(".")
+            val styledConstraint = style(constraint, Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
+
+            print("$styledConstraint")
+
+            if (i == nonNullCt - 1) break
+            print("   ")
+
+            i++
         }
+        print(" ]")
     }
 
     override fun printL() {
         print(icon_name_skill())
-        print("  ")
+        print("    ")
         printSeq()
         println()
     }
