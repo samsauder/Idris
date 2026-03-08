@@ -30,7 +30,7 @@ class Progression : Concept {
 
 
     // Log the result for the specified Challenge then:
-    // + log a win on all lower level ones
+    // + log the result of all lower level ones (may be win or loss)
     // + log a loss on all higher level ones
     fun massLog(targetChallenge: String, result: Double) {
         var seenIndex = -1  // index the target was seen at
@@ -45,9 +45,16 @@ class Progression : Concept {
                 }
             }
 
-            CHALLENGES.update(challenge, result)
+            if (i <= seenIndex || seenIndex == -1) {
+                CHALLENGES.update(challenge, result)  // log result on each challenge up to and including targetChallenge
+            } else {
+                CHALLENGES.update(challenge, 0.0)  // log loss on each challenge higher than targetChallenge
+            }
+
             i++
         }
+
+
     }
 
     override fun print() {
