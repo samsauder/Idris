@@ -153,12 +153,16 @@ object Controller {
 
 
     fun admin() {  // toggle ADMIN mode for this controller
+        val modeS: String  // styled mode
+
         if (mode == Privilege.USER) {
             mode = Privilege.ADMIN
+            modeS = style(mode.toString(), Styles.YELLOW)
         } else {
             mode = Privilege.USER
+            modeS = style(mode.toString(), Styles.GREEN)
         }
 
-        println("Changed to $mode mode.")
+        println("Changed to $modeS mode.")
     }
 }
