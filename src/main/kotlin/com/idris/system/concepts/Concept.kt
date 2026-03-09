@@ -59,12 +59,21 @@ abstract class Concept {
         return true
     }
 
+    // Return the styled icon
+    fun icon(): String {
+        return style(icon, Styles.GREEN)
+    }
+
+    // Return the styled skill
+    fun skill(): String {
+        return format(skillName!!, Styles.BOLD, 20)  // skill (styled)
+    }
 
     // Return a string composed of this Concept's icon, its formatted name, and its skill
     fun icon_name_skill(): String {
-        val iconS = style("$icon", Styles.GREEN)               // icon (styled)
+        val iconS = icon()
         val nameS = format(name!!, "", 20)           // name (styled)
-        val skillS = format(skillName!!, Styles.BOLD, 20)  // skill (styled)
+        val skillS = skill()
         return "$iconS  $nameS  $skillS"
     }
 

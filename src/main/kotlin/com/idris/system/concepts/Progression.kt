@@ -65,28 +65,51 @@ class Progression : Concept {
         var i = 0
         val nonNullCt = challenges.filterNotNull().count()
 
-        print("[ ")
+        val l = "["
+        val r = "]"
+
+        print("$l ")
+
+        var unit: String? = null
 
         for (challenge in challenges) {
             if (challenge == null) break
 
             val constraint = challenge.name!!.substringAfter(".")
-            val styledConstraint = style(constraint, Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
+            val value = constraint.substring(0, constraint.length - 1)                     // get constraint value
+            unit = constraint.substring(constraint.length - 1, constraint.length)  // get the constraint unit
 
-            print("$styledConstraint")
+            val styledConstraint = style("$value$unit", Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
+
+            print(styledConstraint)
 
             if (i == nonNullCt - 1) break
-            print("   ")
+            print(" --> ")
 
             i++
         }
-        print(" ]")
+        print(" $r")
     }
 
+    /*
     override fun printL() {
         print(icon_name_skill())
         print("    ")
         printSeq()
         println()
+    }*/
+
+    // prints the activity, the tier, and then the sequence
+    override fun printL() {
+        val i = icon()
+        val at = name!!.substringBefore(".")  // activity and tier (eg. Mixed and 1900)
+        val s = skill()
+
+        print("$i  $at::")
+        printSeq()
+        println()
     }
+
+
+
 }
