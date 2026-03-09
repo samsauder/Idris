@@ -91,14 +91,6 @@ class Progression : Concept {
         print(" $r")
     }
 
-    /*
-    override fun printL() {
-        print(icon_name_skill())
-        print("    ")
-        printSeq()
-        println()
-    }*/
-
     // prints the activity, the tier, and then the sequence
     override fun printL() {
         val i = icon()
@@ -109,7 +101,4 @@ class Progression : Concept {
         printSeq()
         println()
     }
-
-
-
 }

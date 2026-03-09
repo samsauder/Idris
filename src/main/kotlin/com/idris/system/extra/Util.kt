@@ -1,14 +1,6 @@
 package com.idris.system.extra
 
-import com.idris.database.entities.CHALLENGE
-import com.idris.database.entities.CHALLENGES
-import com.idris.database.entities.CONCEPT
-import com.idris.database.entities.DAY
-import com.idris.database.entities.EXAM
-import com.idris.database.entities.EXPERIMENT
-import com.idris.database.entities.FOUNDATION
-import com.idris.database.entities.PROGRESSION
-import com.idris.database.entities.RECORD
+import com.idris.database.entities.*
 import com.idris.system.concepts.Challenge
 import com.idris.system.concepts.Concept
 import com.idris.system.concepts.ConceptSymbols
@@ -17,11 +9,10 @@ import com.idris.system.extra.Styler.format
 import com.idris.system.extra.Styler.style
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import org.jetbrains.exposed.v1.core.Op
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import java.time.LocalDate
-import java.util.Scanner
+import java.util.*
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 

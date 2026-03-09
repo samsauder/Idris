@@ -1,21 +1,9 @@
 package com.idris.database.operators
 
-import com.idris.database.entities.CHALLENGE
-import com.idris.database.entities.CHALLENGES
-import com.idris.database.entities.CONCEPT
-import com.idris.database.entities.EXAM
-import com.idris.database.entities.EXAMS
-import com.idris.database.entities.FOUNDATION
-import com.idris.database.entities.FOUNDATIONS
-import com.idris.database.entities.PROGRESSION
+import com.idris.database.entities.*
 import com.idris.system.concepts.Concept
-import com.idris.system.extra.ConceptState
-import com.idris.system.extra.ConceptType
-import com.idris.system.extra.ObjectiveType
-import com.idris.system.extra.Privilege
+import com.idris.system.extra.*
 import com.idris.system.extra.Styler.style
-import com.idris.system.extra.Styles
-import com.idris.system.extra.Util
 import com.idris.system.extra.Util.bar
 import com.idris.system.extra.Util.getConceptEntity
 import com.idris.system.extra.Util.inputName
@@ -110,7 +98,7 @@ object Controller {
 
 
     @OptIn(ExperimentalTime::class)
-    fun log(t: ConceptType) {
+    fun log(t: ConceptType) {  // TODO refactor
         transaction {
             when(t) {
                 ConceptType.CHALLENGE -> {  // log challenge
@@ -143,12 +131,6 @@ object Controller {
                 else -> { return@transaction }  // not an objective
             }
         }
-    }
-
-
-    // Deduplicated log(ConceptType)
-    fun logNew() {
-        TODO("implement")
     }
 
 

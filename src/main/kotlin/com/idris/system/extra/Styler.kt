@@ -2,6 +2,7 @@ package com.idris.system.extra
 
 import com.idris.system.concepts.Challenge
 
+
 object Styler {
     // Format a string to a specific style and pad it with whitespace to meet the specified width
     // * input "" for style and null for padding if not wanted
