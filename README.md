@@ -1,5 +1,5 @@
 ### IDRIS
-*A control panel for your skills.*
+*A control panel for skill acquisition.*
 
 
 ---
