@@ -31,8 +31,8 @@ object Controller {
         println(syntax)
 
         println()
-        Util.describeOperations(ostyle)
-        println()
+        Util.describeOperations(ostyle, mode == Privilege.ADMIN)
+        println("\n")
         Util.describeConcepts(cstyle)
 
         println(bar("-", WIDTH))

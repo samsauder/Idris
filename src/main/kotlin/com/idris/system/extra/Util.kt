@@ -30,13 +30,22 @@ object Util {
     }
 
     // Define all Idris operations for the user
-    fun describeOperations(style: String) {
-        printDef(OperationSymbols.CREATE, OpInfo.CREATE_DESC, style)
-        printDef(OperationSymbols.DELETE, OpInfo.DELETE_DESC, style)
-        printDef(OperationSymbols.MODIFY, OpInfo.MODIFY_DESC, style)
+    fun describeOperations(style: String, isAdmin: Boolean) {
+        // show only the commands that the user is allowed to execute in the current mode
+
+        if (isAdmin) {
+            printDef(OperationSymbols.CREATE, OpInfo.CREATE_DESC, style)
+            printDef(OperationSymbols.DELETE, OpInfo.DELETE_DESC, style)
+            printDef(OperationSymbols.MODIFY, OpInfo.MODIFY_DESC, style)
+            println()
+        }
+
         printDef(OperationSymbols.VIEW, OpInfo.VIEW_DESC, style)
         printDef(OperationSymbols.LIST, OpInfo.LIST_DESC, style)
         printDef(OperationSymbols.LOG, OpInfo.LOG_DESC, style)
+        println()
+        printDef(OperationSymbols.ADMIN, OpInfo.ADMIN_DESC, style)
+        printDef(OperationSymbols.HELP, OpInfo.HELP_DESC, style)
     }
 
     // Define all Idris entities for the user

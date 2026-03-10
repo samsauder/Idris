@@ -10,4 +10,6 @@ object OpInfo {
     const val MODIFY_DESC = "Modify a concept."
     const val LOG_DESC    = "Log the result of a foundation, challenge, or exam."
     const val VIEW_DESC   = "View a concept."
+    const val ADMIN_DESC  = "Toggle admin mode."
+    const val HELP_DESC   = "Show the help menu."
 }
