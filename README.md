@@ -1,6 +1,6 @@
-### IDRIS
-*A control panel for skill acquisition.*
+<img src="https://github.com/samsauder/Idris/blob/main/src/main/resources/idris-1.0.0-banner.png" width="300">
 
+*A control panel for skill acquisition.*
 
 ---
 ##### BUILD A PERSONALIZED SKILL MODEL AS YOU LEARN
