@@ -24,18 +24,19 @@ object Flow {
         d.connect()
 
         val version = "1.0.0"
-        val quote = "The excellence of the soul is understanding\nfor one who understands\nis conscious, devoted, and already godlike."
-        Util.idrisBanner()  // print the name Idris (stylized)
-        println("Version ${version}\n")
+        // val quote = "The excellence of the soul is understanding\nfor one who understands\nis conscious, devoted, and already godlike."
 
-        print(style(quote, Styles.YELLOW))
-        println("  — Hermes Trismegistus\n\n")
+        Util.idrisBanner()  // print the name Idris (stylized)
+        println("Version ${version}\n\n")
+
+        // print(style(quote, Styles.YELLOW))
+        // println("  — Hermes Trismegistus\n\n")
 
         var input: String?
         var inputPrev: String? = ""  // last entered command
 
         while (true) {
-            print("$ ")
+            print("${style(">>", Styles.YELLOW)} ")
             input = readlnOrNull()
 
             if (input == OperationSymbols.QUIT) {         // QUIT
