@@ -1,7 +1,7 @@
 ### IDRIS
 *A control panel for your skills.*
 
-___
+---
 
 ##### BUILD A PERSONALIZED SKILL MODEL AS YOUR TRAIN
 
