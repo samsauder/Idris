@@ -25,17 +25,18 @@ object Controller {
         val operation = style("operation", Styles.ITALIC)
         val concept = style("concept", Styles.BOLD)
 
-        val syntax = "SYNTAX   [$operation][$concept]"
+        val syntax = "${style("COMMAND SYNTAX", Styles.BOLD)}    <$operation>[$concept]"
 
         println("\n${bar(BAR_CHAR, WIDTH)}")
-        println(syntax)
+        println("${syntax}\n")
+        println(style("Each command is 1-2 characters.", Styles.ITALIC))
+        println(bar("-", WIDTH))
 
-        println()
         Util.describeOperations(ostyle, mode == Privilege.ADMIN)
-        println("\n")
+        println()
         Util.describeConcepts(cstyle)
 
-        println(bar("-", WIDTH))
+        println(bar(BAR_CHAR, WIDTH))
 
         // COLORS
         val styled14minus = "14XX-"
@@ -44,7 +45,7 @@ object Controller {
         val styled17 = "${Styles.YELLOW}17XX${Styles.RESET}"
         val styled18plus = "${Styles.RED}18XX+${Styles.RESET}"
 
-        val colors = "ELO      $styled14minus  $styled15  $styled16  $styled17  $styled18plus"
+        val colors = "${style("RATINGS", Styles.BOLD)}    $styled14minus  $styled15  $styled16  $styled17  $styled18plus"
 
         println(colors)
         println(bar(BAR_CHAR, WIDTH))
