@@ -65,10 +65,10 @@ class Progression : Concept {
         var i = 0
         val nonNullCt = challenges.filterNotNull().count()
 
-        val l = "["
-        val r = "]"
+        val l = "("
+        val r = ")"
 
-        print("$l ")
+        print("$l")
 
         var unit: String? = null
 
@@ -79,7 +79,7 @@ class Progression : Concept {
             val value = constraint.substring(0, constraint.length - 1)                     // get constraint value
             unit = constraint.substring(constraint.length - 1, constraint.length)  // get the constraint unit
 
-            val styledConstraint = style("($value$unit)", Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
+            val styledConstraint = style("$value", Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
 
             print(styledConstraint)
 
@@ -88,7 +88,7 @@ class Progression : Concept {
             print(" ")
             i++
         }
-        print(" $r")
+        print("$r$unit")
     }
 
     // prints the activity, the tier, and then the sequence
