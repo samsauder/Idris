@@ -84,8 +84,8 @@ class Progression : Concept {
             print(styledConstraint)
 
             if (i == nonNullCt - 1) break
-            print(" --> ")
-
+            // print(" --> ")
+            print(" ")
             i++
         }
         print(" $r")
