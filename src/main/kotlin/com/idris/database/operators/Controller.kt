@@ -163,7 +163,6 @@ object Controller {
         val g = Styles.GREEN
         val y = Styles.YELLOW
 
-        println(bar(BAR_CHAR, WIDTH))
 
         var style: String? = null
 
@@ -176,7 +175,7 @@ object Controller {
         }
 
 
-        print("\n${style(level, style)}  ")
+        print("\n${style("[$level]", style)}  ")
 
 
         when (level[0]) {
@@ -188,7 +187,7 @@ object Controller {
         //println("(IDEAL TASK DIFFICULTY)")
         println()
 
-        println(bar("-", 40))
+        println(bar("=", 40))
 
         // attribute booleans
         val sCon = state.sleep
@@ -201,9 +200,9 @@ object Controller {
         println("food        |  ${styleIf(fCon.toString(), fCon,b)}")
         println("water       |  ${styleIf(wCon.toString(), wCon,b)}")
         println("cardio      |  ${styleIf(cCon.toString(), cCon, b)}")
-        println("supplements |  ${styleIf(suCon.toString(), suCon, b)}")
-        println("capacity    |  ${style((4 - state.load).toString(), b)} hrs")
-        println(bar("-", 40))
+        println("supplements |  ${styleIf(suCon.toString(), suCon, b)}\n")
+        println("capacity    |  ${style((4 - state.load).toString(), Styles.BLUE)} hrs")
+        println(bar("=", 40))
     }
 
 

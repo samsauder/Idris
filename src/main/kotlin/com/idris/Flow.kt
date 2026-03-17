@@ -36,7 +36,7 @@ object Flow {
         var inputPrev: String? = ""  // last entered command
 
         while (true) {
-            print("$ ")
+            print("${style("$", Styles.YELLOW)} ")
             input = readlnOrNull()
 
             if (input == OperationSymbols.QUIT) {         // QUIT
