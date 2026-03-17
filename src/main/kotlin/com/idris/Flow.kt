@@ -80,6 +80,7 @@ object Flow {
             OperationType.LOG ->    Controller.log(concept)        // LOG
             OperationType.LIST ->   Controller.list(concept)       // LIST
             OperationType.VIEW ->   Controller.view(concept)       // VIEW
+            OperationType.STATE -> Controller.state()                 // STATE
             else -> null
         }
         return true
