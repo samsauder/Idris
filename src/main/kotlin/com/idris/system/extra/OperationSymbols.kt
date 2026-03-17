@@ -12,7 +12,7 @@ object OperationSymbols {
     const val MODIFY = "m"
 
     // User
-    const val LOG = "g"     //
+    const val LOG = "g"
     const val LIST = "l"
     const val VIEW = "v"
     const val STATE = "s"
@@ -22,6 +22,6 @@ object OperationSymbols {
     const val QUIT = "q"
 
     val all = listOf(CREATE, DELETE, MODIFY,
-                     LOG, LIST, VIEW,
+                     LOG, LIST, VIEW, STATE,
                      ADMIN, HELP)
 }

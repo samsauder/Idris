@@ -36,7 +36,7 @@ object Flow {
         var inputPrev: String? = ""  // last entered command
 
         while (true) {
-            print("${style("$", Styles.YELLOW)} ")
+            print("$ ")
             input = readlnOrNull()
 
             if (input == OperationSymbols.QUIT) {         // QUIT
@@ -47,6 +47,10 @@ object Flow {
                 continue
             } else if (input == OperationSymbols.ADMIN) {  // ADMIN
                 Controller.admin()
+                println("\n")
+                continue
+            } else if (input == OperationSymbols.STATE) {
+                Controller.state()
                 println("\n")
                 continue
             } else if (input == "") {   // previously entered command

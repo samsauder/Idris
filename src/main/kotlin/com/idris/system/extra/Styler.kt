@@ -19,6 +19,12 @@ object Styler {
         return "$style$s$fin"
     }
 
+    // Return a styled version of s if the condition is met
+    // Precondition: style is in Styles
+    fun styleIf(s: String, condition: Boolean, style: String): String {
+        return if (condition) style("✓", style) else ""
+    }
+
     fun pad(s: String, width: Int): String {
         val middle = s.padEnd(width, ' ')
         return middle
