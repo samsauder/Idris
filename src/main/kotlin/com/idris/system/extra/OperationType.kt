@@ -5,6 +5,6 @@ package com.idris.system.extra
 
 enum class OperationType {
     CREATE, DELETE, MODIFY,
-    LOG, LIST, VIEW,
+    LOG, LIST, VIEW, STATE,
     ADMIN, HELP, QUIT
 }

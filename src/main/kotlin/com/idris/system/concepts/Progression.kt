@@ -65,8 +65,8 @@ class Progression : Concept {
         var i = 0
         val nonNullCt = challenges.filterNotNull().count()
 
-        val l = "("
-        val r = ")"
+        val l = "["
+        val r = "]"
 
         print("$l")
 

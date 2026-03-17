@@ -351,9 +351,11 @@ object Util {
             OperationSymbols.LOG ->    OperationType.LOG
             OperationSymbols.LIST ->   OperationType.LIST
             OperationSymbols.VIEW ->   OperationType.VIEW
+            OperationSymbols.STATE -> OperationType.STATE
 
             OperationSymbols.ADMIN ->  OperationType.ADMIN
             OperationSymbols.HELP ->   OperationType.HELP
+
             else -> {null}
         }
     }

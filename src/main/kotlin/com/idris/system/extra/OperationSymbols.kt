@@ -15,6 +15,7 @@ object OperationSymbols {
     const val LOG = "g"     //
     const val LIST = "l"
     const val VIEW = "v"
+    const val STATE = "s"
 
     const val ADMIN = "a"
     const val HELP = "h"
