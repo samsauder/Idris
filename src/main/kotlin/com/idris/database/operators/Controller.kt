@@ -9,6 +9,7 @@ import com.idris.system.extra.Util.getConceptEntity
 import com.idris.system.extra.Util.input
 import com.idris.system.extra.Util.inputName
 import com.idris.system.State
+import com.idris.system.extra.Styler.styleIf
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import kotlin.time.ExperimentalTime
 
@@ -141,13 +142,68 @@ object Controller {
     fun state() {
         // val state = get user's current state (either through stdin or the DB)
 
-        println("State is a binary string [xxxx] <y...>\n")
+        // TODO pull most recent state from STATES table
 
-        val bits = input("STATE  ") as String  // returns a space-separated binary string "xxxx y..."
+        // println("State is a binary string [xxxx] <y...>\n")
+
+        val bits = input("STATE") as String  // returns a space-separated binary string "xxxx y..."
+        val components = bits.split(" ")  // should be of the form xxxx y...
+
+        val supplementCt = 4  // depends on the user
+
+        if (components[0].length != 4 ||
+            (components.size > 1 && components[1].length != supplementCt)) {  // error
+            println("${Util.error()}  Invalid state.")
+            return
+        }
+
         val state = State(bits)  // constructs a state from the bits
         val level = state.level()
+        val b = Styles.BOLD
+        val g = Styles.GREEN
+        val y = Styles.YELLOW
 
-        println("\nSTATE  $level")
+        println(bar(BAR_CHAR, WIDTH))
+
+        var style: String? = null
+
+        if (level[0] == 'H') {
+            style = Styles.RED
+        } else if (level[0] == 'M') {
+            style = Styles.YELLOW
+        } else if (level[0] == 'L') {
+            style = Styles.GREEN
+        }
+
+
+        print("\n${style(level, style)}  ")
+
+
+        when (level[0]) {
+            'H' -> print(style("Intense", Styles.BOLD))
+            'M' -> print(style("Moderate", Styles.BOLD))
+            'L' -> print(style("Recovery", Styles.BOLD))
+        }
+
+        //println("(IDEAL TASK DIFFICULTY)")
+        println()
+
+        println(bar("-", 40))
+
+        // attribute booleans
+        val sCon = state.sleep
+        val fCon = state.food
+        val wCon = state.water
+        val cCon = state.cardio
+        val suCon = !state.supplements.contains(false) && !state.supplements.contains(null)
+
+        println("sleep       |  ${styleIf(sCon.toString(), sCon,b)}")
+        println("food        |  ${styleIf(fCon.toString(), fCon,b)}")
+        println("water       |  ${styleIf(wCon.toString(), wCon,b)}")
+        println("cardio      |  ${styleIf(cCon.toString(), cCon, b)}")
+        println("supplements |  ${styleIf(suCon.toString(), suCon, b)}")
+        println("capacity    |  ${style((4 - state.load).toString(), b)} hrs")
+        println(bar("-", 40))
     }
 
 
