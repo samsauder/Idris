@@ -6,7 +6,9 @@ import com.idris.system.extra.*
 import com.idris.system.extra.Styler.style
 import com.idris.system.extra.Util.bar
 import com.idris.system.extra.Util.getConceptEntity
+import com.idris.system.extra.Util.input
 import com.idris.system.extra.Util.inputName
+import com.idris.system.State
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import kotlin.time.ExperimentalTime
 
@@ -14,7 +16,7 @@ import kotlin.time.ExperimentalTime
 
 
 object Controller {
-    const val WIDTH = 70  // table width
+    const val WIDTH = 68  // table width
     const val BAR_CHAR = "―"
     var mode = Privilege.USER
 
@@ -132,6 +134,20 @@ object Controller {
                 else -> { return@transaction }  // not an objective
             }
         }
+    }
+
+
+    // Prompts the user for changes in state then prints the current state
+    fun state() {
+        // val state = get user's current state (either through stdin or the DB)
+
+        println("State is a binary string [xxxx] <y...>\n")
+
+        val bits = input("STATE  ") as String  // returns a space-separated binary string "xxxx y..."
+        val state = State(bits)  // constructs a state from the bits
+        val level = state.level()
+
+        println("\nSTATE  $level")
     }
 
 
