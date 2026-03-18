@@ -101,6 +101,12 @@ object Controller {
     }
 
 
+    // Call update n times
+    fun logMultiple(n: Int) {
+
+    }
+
+    // Log the specified concept n times
     @OptIn(ExperimentalTime::class)
     fun log(t: ConceptType) {  // TODO refactor
         transaction {
@@ -108,14 +114,25 @@ object Controller {
                 ConceptType.CHALLENGE -> {  // log challenge
                     val cName = inputName(ConceptType.CHALLENGE, ConceptState.PRESENT)
                     val cResult = Util.resultFromInput() ?: return@transaction  // return if null
+                    val a: Any? = input("#") // user input to get n
                     println()  // TODO remove print statement once prints are found for exam and foundation log
+
+                    var n = 1  // // # of duplicate challenge results to log
+
+                    if (a != null) {  // single challenge
+                        n = a.toString().toInt()
+                    }
+
                     val challenge = CHALLENGE.getOneNamed(cName)?.deEntify()
 
-                    if (challenge?.progressionName == "X") {  // challenge has no progression
-                        CHALLENGES.update(challenge, cResult)
-                    } else {                          // challenge has a progression
-                        val progression = PROGRESSION.getOneNamed(challenge!!.progressionName!!)?.deEntify()
-                        progression?.massLog(challenge.name!!, cResult)
+                    // update the challenge n times with the same result
+                    repeat(n) {
+                        if (challenge?.progressionName == "X") {  // challenge has no progression
+                            CHALLENGES.update(challenge, cResult)
+                        } else {                          // challenge has a progression
+                            val progression = PROGRESSION.getOneNamed(challenge!!.progressionName!!)?.deEntify()
+                            progression?.massLog(challenge.name!!, cResult)
+                        }
                     }
                 }
 
@@ -179,9 +196,9 @@ object Controller {
 
 
         when (level[0]) {
-            'H' -> print(style("Intense", Styles.BOLD))
-            'M' -> print(style("Moderate", Styles.BOLD))
-            'L' -> print(style("Recovery", Styles.BOLD))
+            'H' -> print("Ready for ${style("Intense", Styles.BOLD)} activities.")
+            'M' -> print("Ready for ${style("Moderate", Styles.BOLD)} activities.")
+            'L' -> print("Ready for ${style("Recovery", Styles.BOLD)} activities.")
         }
 
         //println("(IDEAL TASK DIFFICULTY)")
