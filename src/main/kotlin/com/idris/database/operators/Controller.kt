@@ -101,11 +101,6 @@ object Controller {
     }
 
 
-    // Call update n times
-    fun logMultiple(n: Int) {
-
-    }
-
     // Log the specified concept n times
     @OptIn(ExperimentalTime::class)
     fun log(t: ConceptType) {  // TODO refactor
