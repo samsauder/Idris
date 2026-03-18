@@ -3,7 +3,9 @@ package com.idris.system.concepts
 import com.idris.database.entities.CHALLENGES
 import com.idris.system.extra.ConceptType
 import com.idris.system.extra.Styler
+import com.idris.system.extra.Styler.pad
 import com.idris.system.extra.Styler.style
+import com.idris.system.extra.Styles
 import com.idris.system.extra.Util.challengesFromNames
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
@@ -65,8 +67,8 @@ class Progression : Concept {
         var i = 0
         val nonNullCt = challenges.filterNotNull().count()
 
-        val l = "["
-        val r = "]"
+        val l = "|"
+        val r = "|"
 
         print("$l")
 
@@ -79,7 +81,7 @@ class Progression : Concept {
             val value = constraint.substring(0, constraint.length - 1)                     // get constraint value
             unit = constraint.substring(constraint.length - 1, constraint.length)  // get the constraint unit
 
-            val styledConstraint = style("$value", Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
+            val styledConstraint = style("${Styles.BOLD}$value${Styles.RESET}", Styler.colorByChallenge(challenge))  // a number and a unit (like 3m)
 
             print(styledConstraint)
 
@@ -88,17 +90,20 @@ class Progression : Concept {
             print(" ")
             i++
         }
-        print("$r$unit")
+        print("$r $unit")
     }
 
     // prints the activity, the tier, and then the sequence
     override fun printL() {
         val i = icon()
-        val at = name!!.substringBefore(".")  // activity and tier (eg. Mixed and 1900)
+
+        val at = pad(name!!.substringBefore("."), 12)  // activity and tier (eg. Mixed and 1900)
         val s = skill()
 
-        print("$i  $at::")
+        print("$i  ")
+        print("$at")
         printSeq()
+
         println()
     }
 }
